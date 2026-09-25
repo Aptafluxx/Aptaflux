@@ -1,29 +1,26 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
+// Load the Inter font
+const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
-  title: "Aptaflux — Engineering scalable mobile, web, and AI solutions",
-  description:
-    "Aptaflux builds cross-platform apps, web dashboards, and custom AI tools for businesses that need to ship and scale with confidence.",
-  metadataBase: new URL("https://aptaflux.com"),
-  openGraph: {
-    title: "Aptaflux — Engineering scalable mobile, web, and AI solutions",
-    description:
-      "Cross-platform apps, web dashboards, and custom AI tools engineered for scale.",
-    type: "website",
+  title: "Aptaflux | Engineering Scalable Solutions",
+  description: "We build scalable cross-platform apps, web dashboards, and custom AI tools for businesses.",
+  icons: {
+    icon: '/logo.png',
   },
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en" className={GeistSans.variable}>
-      <body className="bg-canvas text-ink font-sans antialiased">
-        <div className="grain-overlay" aria-hidden="true" />
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.className} bg-slate-950 text-slate-50`}>
         {children}
       </body>
     </html>

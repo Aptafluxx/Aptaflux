@@ -1,47 +1,36 @@
-# Aptaflux — B2B Agency Landing Page
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Next.js (App Router, TypeScript) + Tailwind CSS + Framer Motion + Lucide React.
+## Getting Started
 
-## Setup
+First, run the development server:
 
 ```bash
-npm install
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open http://localhost:3000.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Deploy
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Push to a Git repo and import it in Vercel — zero config needed.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Wiring up the contact form
+## Learn More
 
-The form in `components/ContactForm.tsx` posts to a placeholder endpoint.
-Replace `FORM_ENDPOINT` near the top of that file with your real
-Formspree or Web3Forms endpoint:
+To learn more about Next.js, take a look at the following resources:
 
-- **Formspree**: `https://formspree.io/f/{your_form_id}`
-- **Web3Forms**: `https://api.web3forms.com/submit`, and add a hidden
-  input with your access key:
-  `<input type="hidden" name="access_key" value="YOUR_KEY" />`
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Structure
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-```
-app/
-  layout.tsx      Root layout, fonts, metadata
-  page.tsx         Assembles all sections
-  globals.css      Design tokens, base styles
-components/
-  NavBar.tsx       Sticky nav + mobile menu
-  Hero.tsx         Hero section
-  InfraBanner.tsx  Tech stack trust banner
-  Capabilities.tsx Core capabilities grid
-  CaseStudies.tsx  Case study alternating blocks
-  CaseStudyArt.tsx Bespoke SVG illustrations per case study
-  Process.tsx      4-step methodology timeline
-  ContactForm.tsx  Lead capture form
-  Footer.tsx       Footer
-  ui.tsx           Shared button/section primitives
-```
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

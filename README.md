@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aptaflux
 
-## Getting Started
+> Engineering digital products that move businesses forward.
 
-First, run the development server:
+Aptaflux is a technology agency focused on building modern **mobile applications, web platforms, AI-powered solutions, and custom digital experiences** for startups, businesses, and organizations.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Services
+
+- **Mobile App Development**
+- **Web Development**
+- **AI Integration**
+- **UI/UX & Product Design**
+- **Backend Development**
+- **API & Third-Party Integrations**
+- **Custom Software Solutions**
+
+## Tech Stack
+
+| Technology                                      | Purpose                     |
+| ----------------------------------------------- | --------------------------- |
+| [Next.js](https://nextjs.org/)                  | Web application framework   |
+| [TypeScript](https://www.typescriptlang.org/)   | Type-safe development       |
+| [Tailwind CSS](https://tailwindcss.com/)        | Styling                     |
+| [Framer Motion](https://www.framer.com/motion/) | Animations and interactions |
+| [Lucide React](https://lucide.dev/)             | Icons                       |
+| [Web3Forms](https://web3forms.com/)             | Contact form handling       |
+| [Vercel](https://vercel.com/)                   | Deployment and hosting      |
+
+## Features
+
+- Responsive, mobile-first design
+- Smooth animations and transitions
+- Reusable component architecture
+- SEO metadata
+- Web3Forms contact form integration
+- Production builds and Vercel deployment support
+
+## Project Structure
+
+```text
+.
+├── public/
+│   └── logo.png
+├── src/
+│   ├── app/
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── Capabilities.tsx
+│   │   ├── CaseStudies.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Process.tsx
+│   │   └── TrustBanner.tsx
+│   └── utils/
+│       └── animations.ts
+├── .gitignore
+├── eslint.config.mjs
+├── next.config.mjs
+├── package.json
+├── postcss.config.js
+├── postcss.config.mjs
+├── tailwind.config.js
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This repository is proprietary to Aptaflux. Unless explicitly authorized, the source code, design, branding, assets, and other materials contained in this repository may not be copied, modified, distributed, or commercially used.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Aptaflux** · Mobile · Web · AI · Software

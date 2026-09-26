@@ -38,7 +38,7 @@ export default function Contact() {
             <input
               type="hidden"
               name="access_key"
-              value="fa9de5d7-72c7-450c-8fc7-17ed7b609d8d"
+              value={process.env.WEB3FORMS_ACCESS_KEY}
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

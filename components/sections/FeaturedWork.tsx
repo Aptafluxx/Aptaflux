@@ -1,18 +1,10 @@
+import { artComponents } from "@/components/art";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Rule } from "@/components/ui/Rule";
 import { homeContent } from "@/content/home";
 import { work } from "@/content/work";
-import { DoctorHunt } from "@/components/art/DoctorHunt";
-import { DripsWater } from "@/components/art/DripsWater";
-import { TaskFlow } from "@/components/art/TaskFlow";
 import { durations, easing } from "@/lib/motion";
-import { Rule } from "@/components/ui/Rule";
-
-const artwork = {
-  "doctor-hunt": DoctorHunt,
-  "drips-water": DripsWater,
-  "task-flow": TaskFlow,
-} as const;
 
 export function FeaturedWork() {
   return (
@@ -23,7 +15,7 @@ export function FeaturedWork() {
         </h2>
         <div>
           {work.map((project, index) => {
-            const Artwork = artwork[project.art];
+            const Artwork = artComponents[project.cover];
             const imageOnRight = index % 2 === 1;
 
             return (
@@ -60,13 +52,13 @@ export function FeaturedWork() {
                   >
                     <p className="text-[17px] text-muted">{project.client}</p>
                     <h3 className="mt-2 font-display text-[clamp(2rem,4.5vw,4rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
-                      {project.title}
+                      {project.name}
                     </h3>
                     <p className="mt-3 text-[15px] text-muted">
                       {project.services.join(", ")}
                     </p>
                     <p className="mt-4 font-display text-[22px] leading-snug text-ember">
-                      {project.result}
+                      {project.results[0]?.label}
                     </p>
                   </div>
                 </Link>

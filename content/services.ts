@@ -1,4 +1,9 @@
 export const servicesContent = {
+  // TODO(copy): Replace the services page title with approved copy.
+  metadataTitle: "Services",
+  // TODO(copy): Replace the services page metadata description with approved copy.
+  metadataDescription:
+    "Explore Aptaflux services across digital product strategy, design and development.",
   ariaLabels: {
     // TODO(copy): Replace this section label with approved copy.
     services: "Services",

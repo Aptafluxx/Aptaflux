@@ -1,7 +1,6 @@
 "use client";
 
 import Lenis from "lenis";
-import { useReducedMotion } from "framer-motion";
 import { useEffect, type ReactNode } from "react";
 
 type LenisProviderProps = {
@@ -9,17 +8,29 @@ type LenisProviderProps = {
 };
 
 export function LenisProvider({ children }: LenisProviderProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   useEffect(() => {
-    if (shouldReduceMotion) {
-      return;
-    }
+    const motionPreference = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let lenis: Lenis | undefined;
 
-    const lenis = new Lenis({ autoRaf: true });
+    const syncLenis = () => {
+      if (motionPreference.matches) {
+        lenis?.destroy();
+        lenis = undefined;
+      } else if (!lenis) {
+        lenis = new Lenis({ autoRaf: true });
+      }
+    };
 
-    return () => lenis.destroy();
-  }, [shouldReduceMotion]);
+    syncLenis();
+    motionPreference.addEventListener("change", syncLenis);
+
+    return () => {
+      motionPreference.removeEventListener("change", syncLenis);
+      lenis?.destroy();
+    };
+  }, []);
 
   return children;
 }

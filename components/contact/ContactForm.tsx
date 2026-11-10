@@ -198,9 +198,18 @@ export function ContactForm() {
 
       <div aria-live="polite" className="min-h-6" role="status">
         {status === "error" ? (
-          <p className={errorClass} role="alert">
-            {contact.error}
-          </p>
+          <div className={errorClass} role="alert">
+            <p>{contact.error}</p>
+            <p className="mt-1">
+              {contact.errorContact}{" "}
+              <a
+                className="underline underline-offset-4 hover:text-text"
+                href={`mailto:${site.email}`}
+              >
+                {site.email}
+              </a>
+            </p>
+          </div>
         ) : null}
       </div>
 

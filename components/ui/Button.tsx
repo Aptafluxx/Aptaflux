@@ -6,6 +6,7 @@ type ButtonProps = {
   className?: string;
   disabled?: boolean;
   href?: string;
+  onClick?: () => void;
   type?: "button" | "submit";
   variant?: "primary" | "ghost";
 };
@@ -15,6 +16,7 @@ export function Button({
   className = "",
   disabled = false,
   href,
+  onClick,
   type = "button",
   variant = "primary",
 }: ButtonProps) {
@@ -27,14 +29,19 @@ export function Button({
 
   if (href) {
     return (
-      <Link className={classes} href={href}>
+      <Link className={classes} href={href} prefetch={false}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={classes} disabled={disabled} type={type}>
+    <button
+      className={classes}
+      disabled={disabled}
+      onClick={onClick}
+      type={type}
+    >
       {children}
     </button>
   );

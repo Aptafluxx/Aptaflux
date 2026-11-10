@@ -37,8 +37,13 @@ export type WorkProject = {
 };
 
 export const workPageContent = {
+  // TODO(copy): Replace the work page title with approved copy.
+  metadataTitle: "Work",
   // TODO(copy): Replace the work page introduction with approved copy.
   introduction: "A selection of ideas brought to life with ambitious teams.",
+  // TODO(copy): Replace the work page metadata description with approved copy.
+  metadataDescription:
+    "Explore selected digital products, platforms and brand experiences by Aptaflux.",
   ariaLabels: {
     // TODO(copy): Replace this accessibility label if needed.
     projects: "Selected projects",

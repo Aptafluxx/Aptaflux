@@ -94,6 +94,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 className="font-display text-2xl font-bold tracking-[-0.04em]"
                 href="/"
                 onClick={onClose}
+                prefetch={false}
               >
                 {site.brand}
               </Link>
@@ -115,6 +116,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   className="w-fit py-1 font-display text-[clamp(3.25rem,12vw,6.5rem)] leading-[1.05] tracking-[-0.04em] transition-colors hover:text-ember"
                   href={item.href}
                   onClick={onClose}
+                  prefetch={false}
                   style={{ transitionDelay: `${index * 40}ms` }}
                 >
                   {item.label}
@@ -126,6 +128,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               className="w-fit border-b border-ember pb-2 text-sm font-semibold text-ember"
               href="/contact"
               onClick={onClose}
+              prefetch={false}
             >
               {site.callToAction}
             </Link>

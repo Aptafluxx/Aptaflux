@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Rule } from "@/components/ui/Rule";
 import { ArtworkFrame } from "@/components/work/ArtworkFrame";
 import { work, workPageContent } from "@/content/work";
+import { createPageMetadata } from "@/lib/metadata";
 
 type WorkPageProps = {
   params: Promise<{
@@ -27,8 +28,18 @@ export async function generateMetadata(props: WorkPageProps): Promise<Metadata> 
   }
 
   return {
-    title: project.name,
-    description: project.summary,
+    ...createPageMetadata({
+      title: project.name,
+      description: project.summary,
+      path: `/work/${project.slug}`,
+    }),
+    openGraph: {
+      ...createPageMetadata({
+        title: project.name,
+        description: project.summary,
+      }).openGraph,
+      type: "article",
+    },
   };
 }
 

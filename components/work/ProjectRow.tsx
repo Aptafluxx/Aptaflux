@@ -54,6 +54,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
     <Link
       className="group relative block py-8 sm:py-10"
       href={`/work/${project.slug}`}
+      prefetch={false}
       onPointerEnter={(event) => {
         if (event.pointerType === "mouse" && !shouldReduceMotion) {
           setPortalRoot(document.body);

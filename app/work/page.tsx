@@ -5,10 +5,13 @@ import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Rule } from "@/components/ui/Rule";
 import { work, workPageContent } from "@/content/work";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Work",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: workPageContent.metadataTitle,
+  description: workPageContent.metadataDescription,
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (

@@ -1,19 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/content/site";
-import { MobileMenu } from "./MobileMenu";
+
+const MobileMenu = dynamic(
+  () => import("./MobileMenu").then((module) => module.MobileMenu),
+  { ssr: false },
+);
 
 export function Navbar() {
   const pathname = usePathname();
   const previousScrollY = useRef(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasOpenedMenu, setHasOpenedMenu] = useState(false);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+  const openMenu = () => {
+    setHasOpenedMenu(true);
+    setIsMenuOpen(true);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,6 +75,7 @@ export function Navbar() {
                         : "text-muted hover:text-text after:scale-x-0 hover:after:scale-x-100"
                     }`}
                     href={item.href}
+                    prefetch={false}
                   >
                     {item.label}
                   </Link>
@@ -78,7 +89,7 @@ export function Navbar() {
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? site.closeMenu : site.openMenu}
             className="py-3 text-sm font-semibold text-text min-[820px]:hidden"
-            onClick={() => setIsMenuOpen(true)}
+            onClick={openMenu}
             type="button"
           >
             {site.openMenu}
@@ -86,7 +97,9 @@ export function Navbar() {
         </Container>
       </header>
 
-      <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
+      {hasOpenedMenu ? (
+        <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
+      ) : null}
     </>
   );
 }

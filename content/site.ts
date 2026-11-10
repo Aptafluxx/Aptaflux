@@ -1,6 +1,21 @@
 export const site = {
   brand: "Aptaflux",
+  // TODO(copy): Replace this default metadata description with approved copy.
   description: "Aptaflux digital studio.",
+  metadata: {
+    // TODO(copy): Replace the not-found page title with approved copy.
+    notFoundTitle: "Page not found",
+    // TODO(copy): Replace the not-found page description with approved copy.
+    notFoundDescription: "The page you are looking for could not be found.",
+    // TODO(copy): Replace the error page title with approved copy.
+    errorTitle: "Something went wrong",
+    // TODO(copy): Replace the error page description with approved copy.
+    errorDescription: "An unexpected error occurred. Please try again.",
+    // TODO(copy): Replace this error support message with approved copy.
+    errorContact: "If the issue continues, email us at",
+    // TODO(copy): Replace the retry button label with approved copy.
+    retry: "Try again",
+  },
   navigation: [
     { href: "/work", label: "Work" },
     { href: "/services", label: "Services" },
@@ -15,6 +30,11 @@ export const site = {
   localTimeLabel: "Local time",
   email: "aptaflux@gmail.com",
   contact: {
+    // TODO(copy): Replace the contact page title with approved copy.
+    metadataTitle: "Contact",
+    // TODO(copy): Replace the contact page metadata description with approved copy.
+    metadataDescription:
+      "Contact Aptaflux to discuss a digital product, website or brand project.",
     // TODO(copy): Replace the contact page introduction with approved copy.
     introduction: "Tell us what you have in mind. We would love to hear about it.",
     // TODO(copy): Replace this response-time statement with approved copy.
@@ -73,6 +93,8 @@ export const site = {
     },
     // TODO(copy): Replace the generic request error with approved copy.
     error: "We could not send your inquiry. Please try again.",
+    // TODO(copy): Replace this email fallback message with approved copy.
+    errorContact: "If the issue continues, email us at",
     // TODO(copy): Replace the success confirmation with approved copy.
     success: "Thanks for reaching out. We will be in touch soon.",
     // TODO(copy): Replace this email subject with approved copy.

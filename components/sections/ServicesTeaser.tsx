@@ -16,6 +16,7 @@ export function ServicesTeaser() {
           <Link
             className="border-b border-ember pb-2 text-[17px] font-semibold text-ember transition-colors hover:text-text"
             href="/services"
+            prefetch={false}
           >
             {services.linkLabel}
           </Link>

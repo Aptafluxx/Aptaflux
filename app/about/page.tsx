@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Portrait } from "@/components/art/Portrait";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -6,10 +5,13 @@ import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Rule } from "@/components/ui/Rule";
 import { aboutContent } from "@/content/about";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "About",
-};
+export const metadata = createPageMetadata({
+  title: aboutContent.metadataTitle,
+  description: aboutContent.metadataDescription,
+  path: "/about",
+});
 
 export default function AboutPage() {
   const { founder } = aboutContent;

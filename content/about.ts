@@ -1,4 +1,9 @@
 export const aboutContent = {
+  // TODO(copy): Replace the about page title with approved copy.
+  metadataTitle: "About",
+  // TODO(copy): Replace the about page metadata description with approved copy.
+  metadataDescription:
+    "Learn about Aptaflux, our values and how we partner with ambitious teams.",
   // TODO(copy): Replace this manifesto statement with approved copy.
   manifesto:
     "We make the complex feel clear, building digital things that move people and businesses forward.",

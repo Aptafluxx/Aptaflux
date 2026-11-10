@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Rule } from "@/components/ui/Rule";
 import { servicesContent } from "@/content/services";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Services",
-};
+export const metadata = createPageMetadata({
+  title: servicesContent.metadataTitle,
+  description: servicesContent.metadataDescription,
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

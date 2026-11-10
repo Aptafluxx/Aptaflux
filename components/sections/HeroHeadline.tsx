@@ -1,5 +1,3 @@
-import { Reveal } from "@/components/ui/Reveal";
-
 type HeroHeadlineProps = {
   lines: readonly string[];
   mobileLines: readonly string[];
@@ -10,9 +8,12 @@ function HeadlineLines({ lines }: { lines: readonly string[] }) {
     <>
       {lines.map((line, index) => (
         <span key={`${line}-${index}`} className="block overflow-hidden pb-[0.08em]">
-          <Reveal className="block" delay={index * 0.12}>
+          <span
+            className="headline-line block"
+            style={{ animationDelay: `${index * 120}ms` }}
+          >
             {line}
-          </Reveal>
+          </span>
         </span>
       ))}
     </>

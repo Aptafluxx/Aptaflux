@@ -23,6 +23,7 @@ export function FeaturedWork() {
                 <Link
                   className="group grid grid-cols-1 items-start gap-5 py-8 min-[820px]:grid-cols-12 min-[820px]:items-end min-[820px]:gap-10 min-[820px]:py-10"
                   href={`/work/${project.slug}`}
+                  prefetch={false}
                 >
                   <div
                     className={`aspect-[4/3] rounded-[2px] bg-surface p-4 sm:p-6 ${

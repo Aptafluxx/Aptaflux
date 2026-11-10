@@ -1,6 +1,9 @@
 export const homeContent = {
   // TODO(copy): Replace the homepage metadata title if needed.
   metadataTitle: "Home",
+  // TODO(copy): Replace the homepage metadata description with approved copy.
+  metadataDescription:
+    "Aptaflux partners with ambitious teams to shape thoughtful digital products.",
   hero: {
     headline: [
       // TODO(copy): Replace this hero headline line with final homepage copy.

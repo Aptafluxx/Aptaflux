@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Container } from "@/components/ui/Container";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { site } from "@/content/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Contact",
-};
+export const metadata = createPageMetadata({
+  title: site.contact.metadataTitle,
+  description: site.contact.metadataDescription,
+  path: "/contact",
+});
 
 export default function ContactPage() {
   const { contact } = site;

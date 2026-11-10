@@ -35,6 +35,11 @@ settings. Set `NEXT_PUBLIC_SITE_URL` to the canonical HTTPS domain before
 deployment so metadata, sitemap, robots, and structured data use the correct
 origin.
 
+Indexing is disabled by default: `NEXT_PUBLIC_ALLOW_INDEXING=false` adds
+`noindex`/`nofollow`, blocks all crawlers in `robots.txt`, and keeps the sitemap
+empty. Set `NEXT_PUBLIC_ALLOW_INDEXING=true` in the deployment environment when
+you are ready to launch; this restores indexing and publishes the sitemap.
+
 For contact form delivery, configure `RESEND_API_KEY`, `CONTACT_TO`, and
 `CONTACT_FROM` in the Vercel project environment. Verify the sending domain in
 Resend and use an address on that verified domain for `CONTACT_FROM`. Add the

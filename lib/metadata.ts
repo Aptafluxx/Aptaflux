@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+export const allowIndexing = process.env.NEXT_PUBLIC_ALLOW_INDEXING === "true";
+
 type PageMetadataInput = {
   absoluteTitle?: boolean;
   title: string;
@@ -16,6 +18,10 @@ export function createPageMetadata({
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
+    robots: {
+      index: allowIndexing,
+      follow: allowIndexing,
+    },
     openGraph: {
       title,
       description,

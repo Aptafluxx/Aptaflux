@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { allowIndexing } from "@/lib/metadata";
 import { work } from "@/content/work";
 
 const siteUrl = new URL(
@@ -6,6 +7,10 @@ const siteUrl = new URL(
 );
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  if (!allowIndexing) {
+    return [];
+  }
+
   const staticRoutes = ["", "/work", "/services", "/about", "/contact"];
 
   return [

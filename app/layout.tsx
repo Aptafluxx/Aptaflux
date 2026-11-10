@@ -5,6 +5,7 @@ import { LenisProvider } from "@/components/providers/LenisProvider";
 import { PageTransition } from "@/components/providers/PageTransition";
 import { site } from "@/content/site";
 import { bodyFont, displayFont } from "@/lib/fonts";
+import { allowIndexing } from "@/lib/metadata";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,6 +17,10 @@ export const metadata: Metadata = {
     template: `%s | ${site.brand}`,
   },
   description: site.description,
+  robots: {
+    index: allowIndexing,
+    follow: allowIndexing,
+  },
   openGraph: {
     type: "website",
     siteName: site.brand,

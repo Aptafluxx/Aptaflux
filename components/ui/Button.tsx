@@ -4,14 +4,18 @@ import type { ReactNode } from "react";
 type ButtonProps = {
   children: ReactNode;
   className?: string;
-  href: string;
+  disabled?: boolean;
+  href?: string;
+  type?: "button" | "submit";
   variant?: "primary" | "ghost";
 };
 
 export function Button({
   children,
   className = "",
+  disabled = false,
   href,
+  type = "button",
   variant = "primary",
 }: ButtonProps) {
   const variantClass =
@@ -19,12 +23,19 @@ export function Button({
       ? "border-ember bg-ember text-bg hover:bg-transparent hover:text-ember"
       : "border-line text-text hover:border-ember hover:text-ember";
 
+  const classes = `inline-flex min-h-11 items-center justify-center rounded-[2px] border px-5 py-3 text-sm font-semibold transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60 ${variantClass} ${className}`;
+
+  if (href) {
+    return (
+      <Link className={classes} href={href}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <Link
-      className={`inline-flex min-h-11 items-center justify-center rounded-[2px] border px-5 py-3 text-sm font-semibold transition-colors duration-300 ${variantClass} ${className}`}
-      href={href}
-    >
+    <button className={classes} disabled={disabled} type={type}>
       {children}
-    </Link>
+    </button>
   );
 }

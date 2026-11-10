@@ -14,6 +14,80 @@ export const site = {
   socialNavigation: "Social links",
   localTimeLabel: "Local time",
   email: "aptaflux@gmail.com",
+  contact: {
+    // TODO(copy): Replace the contact page introduction with approved copy.
+    introduction: "Tell us what you have in mind. We would love to hear about it.",
+    // TODO(copy): Replace this response-time statement with approved copy.
+    responseTime: "We typically reply within two business days.",
+    // TODO(copy): Replace this time-zone note with approved copy.
+    timeZoneNote: "Working with teams across time zones.",
+    // TODO(copy): Replace this contact information heading with approved copy.
+    informationHeading: "Get in touch",
+    // TODO(copy): Replace this social navigation label with approved copy.
+    socialHeading: "Find us elsewhere",
+    // TODO(copy): Replace this contact information label with approved copy.
+    informationLabel: "Contact information",
+    // TODO(copy): Replace this contact form label with approved copy.
+    formLabel: "Project inquiry form",
+    // TODO(copy): Replace the contact form title with approved copy.
+    formTitle: "Start a conversation",
+    fields: {
+      // TODO(copy): Replace this form label with approved copy.
+      name: "Name",
+      // TODO(copy): Replace this form label with approved copy.
+      email: "Email",
+      // TODO(copy): Replace this form label with approved copy.
+      budget: "Budget range",
+      // TODO(copy): Replace this form label with approved copy.
+      details: "Project details",
+      // TODO(copy): Replace this form label with approved copy.
+      honeypot: "Leave this field empty",
+    },
+    budgetOptions: [
+      // TODO(copy): Replace this budget option if needed.
+      "Under $2k",
+      // TODO(copy): Replace this budget option if needed.
+      "$2k–$5k",
+      // TODO(copy): Replace this budget option if needed.
+      "$5k–$15k",
+      // TODO(copy): Replace this budget option if needed.
+      "$15k+",
+    ],
+    // TODO(copy): Replace the budget select prompt with approved copy.
+    budgetPlaceholder: "Choose a range",
+    // TODO(copy): Replace the submit button label with approved copy.
+    submit: "Send inquiry",
+    // TODO(copy): Replace the submitting button label with approved copy.
+    submitting: "Sending…",
+    // TODO(copy): Replace the retry button label with approved copy.
+    retry: "Try again",
+    validation: {
+      // TODO(copy): Replace this validation message with approved copy.
+      name: "Please enter your name.",
+      // TODO(copy): Replace this validation message with approved copy.
+      email: "Enter a valid email address.",
+      // TODO(copy): Replace this validation message with approved copy.
+      budget: "Choose a budget range.",
+      // TODO(copy): Replace this validation message with approved copy.
+      details: "Tell us a little more about your project.",
+    },
+    // TODO(copy): Replace the generic request error with approved copy.
+    error: "We could not send your inquiry. Please try again.",
+    // TODO(copy): Replace the success confirmation with approved copy.
+    success: "Thanks for reaching out. We will be in touch soon.",
+    // TODO(copy): Replace this email subject with approved copy.
+    emailSubject: "New Aptaflux project inquiry",
+    emailFields: {
+      // TODO(copy): Replace this email label with approved copy.
+      name: "Name",
+      // TODO(copy): Replace this email label with approved copy.
+      email: "Email",
+      // TODO(copy): Replace this email label with approved copy.
+      budget: "Budget",
+      // TODO(copy): Replace this email label with approved copy.
+      details: "Project details",
+    },
+  },
   socials: [
     { href: "https://www.linkedin.com", label: "LinkedIn" },
     { href: "https://x.com", label: "X" },

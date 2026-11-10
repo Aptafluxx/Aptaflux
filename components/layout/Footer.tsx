@@ -1,29 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { Container } from "@/components/ui/Container";
+import { LocalTime } from "@/components/ui/LocalTime";
 import { Rule } from "@/components/ui/Rule";
 import { site } from "@/content/site";
 
-function getLocalTime() {
-  return new Intl.DateTimeFormat(undefined, {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(new Date());
-}
-
 export function Footer() {
-  const [localTime, setLocalTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => setLocalTime(getLocalTime());
-    updateTime();
-    const intervalId = window.setInterval(updateTime, 60_000);
-
-    return () => window.clearInterval(intervalId);
-  }, []);
-
   return (
     <footer className="pb-8">
       <Container>
@@ -48,7 +28,7 @@ export function Footer() {
           </nav>
 
           <div className="flex flex-col gap-2 text-[15px] text-muted sm:flex-row sm:gap-6">
-            <span>{site.localTimeLabel}: {localTime || "—"}</span>
+            <span>{site.localTimeLabel}: <LocalTime /></span>
             <span>© {new Date().getFullYear()} {site.brand}</span>
           </div>
         </div>

@@ -4,16 +4,17 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { work } from "@/content/work";
 
 type WorkPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return work.map(({ slug }) => ({ slug }));
 }
 
-export function generateMetadata({ params }: WorkPageProps): Metadata {
+export async function generateMetadata(props: WorkPageProps): Promise<Metadata> {
+  const params = await props.params;
   const project = work.find(({ slug }) => slug === params.slug);
 
   return {
@@ -21,7 +22,8 @@ export function generateMetadata({ params }: WorkPageProps): Metadata {
   };
 }
 
-export default function ProjectPage({ params }: WorkPageProps) {
+export default async function ProjectPage(props: WorkPageProps) {
+  const params = await props.params;
   const project = work.find(({ slug }) => slug === params.slug);
 
   if (!project) {

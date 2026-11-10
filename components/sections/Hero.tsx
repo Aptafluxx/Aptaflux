@@ -11,7 +11,7 @@ export function Hero() {
     <section>
       <Container className="flex min-h-svh flex-col justify-end pb-12 pt-32 sm:pb-16">
         <div>
-          <HeroHeadline lines={hero.headline} />
+          <HeroHeadline lines={hero.headline} mobileLines={hero.mobileHeadline} />
           <p className="mt-6 max-w-[46ch] text-[17px] leading-relaxed text-muted sm:mt-8 sm:text-lg">
             {hero.subheadline}
           </p>

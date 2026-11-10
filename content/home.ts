@@ -8,6 +8,14 @@ export const homeContent = {
       // TODO(copy): Replace this hero headline line with final homepage copy.
       "moves you forward.",
     ],
+    mobileHeadline: [
+      // TODO(copy): Replace this hero headline line with final homepage copy.
+      "Build what",
+      // TODO(copy): Replace this hero headline line with final homepage copy.
+      "moves you",
+      // TODO(copy): Replace this hero headline line with final homepage copy.
+      "forward.",
+    ],
     // TODO(copy): Replace the hero subheadline with approved brand copy.
     subheadline:
       "We partner with ambitious teams to turn bold ideas into thoughtful digital products.",

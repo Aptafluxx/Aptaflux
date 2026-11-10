@@ -64,8 +64,8 @@ export function ProjectRow({ project }: ProjectRowProps) {
       onPointerMove={updatePreviewPosition}
       onPointerLeave={() => setIsPreviewVisible(false)}
     >
-      <Container className="grid gap-5 min-[820px]:grid-cols-12 min-[820px]:items-end">
-        <div className="min-w-0 min-[820px]:col-span-8">
+      <Container className="grid gap-5 min-[820px]:grid-cols-[minmax(0,1fr)_360px] min-[820px]:items-end">
+        <div className="min-w-0">
           <h2 className="font-display text-[clamp(40px,8vw,130px)] font-medium leading-[0.95] tracking-[-0.03em] transition-colors duration-300 group-hover:text-ember">
             {project.name}
           </h2>
@@ -73,7 +73,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
             <ArtworkFrame art={project.cover} />
           </div>
         </div>
-        <div className="flex flex-col gap-2 text-[15px] leading-relaxed text-muted min-[820px]:col-span-4 min-[820px]:items-end min-[820px]:text-right">
+        <div className="flex flex-col gap-2 text-right text-[15px] leading-relaxed text-muted">
           <p>{project.services.join(", ")}</p>
           <p>{project.year}</p>
         </div>

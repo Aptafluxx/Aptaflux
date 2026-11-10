@@ -14,14 +14,16 @@ export type WorkProject = {
   name: string;
   // TODO(copy): Replace the project client with approved copy.
   client: string;
-  // TODO(copy): Replace the project year with the correct year.
+  // TODO(verify): Replace the placeholder project year with the verified year.
   year: string;
-  // TODO(copy): Replace these services with approved copy.
+  // TODO(verify): Replace placeholder services with the verified services.
   services: string[];
-  // TODO(copy): Replace this stack with the project's actual technologies.
+  // TODO(verify): Replace placeholder technologies with the verified stack.
   stack: string[];
-  // TODO(copy): Replace this role with approved copy.
+  // TODO(verify): Replace the placeholder role with the verified project role.
   role: string;
+  // TODO(copy): Replace the project category with approved copy.
+  category: string;
   // TODO(copy): Replace this project summary with approved copy.
   summary: string;
   // TODO(copy): Replace this project challenge with approved copy.
@@ -74,26 +76,28 @@ export const work: WorkProject[] = [
     name: "Doctor Hunt",
     // TODO(copy): Replace this client name with the approved client name.
     client: "Doctor Hunt",
-    // TODO(copy): Replace with the correct project year.
+    // TODO(verify): Replace with the verified project year.
     year: "2025",
     services: [
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Product strategy",
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Experience design",
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Development",
     ],
     stack: [
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "Next.js",
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "TypeScript",
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "Node.js",
     ],
-    // TODO(copy): Replace with the approved project role.
+    // TODO(verify): Replace with the verified project role.
     role: "Product strategy, design and development",
+    // TODO(copy): Replace with the approved project category.
+    category: "Healthcare",
     // TODO(copy): Replace with the approved project summary.
     summary: "A simpler way for patients to find trusted care.",
     // TODO(copy): Replace with the approved project challenge.
@@ -109,7 +113,7 @@ export const work: WorkProject[] = [
       },
     ],
     cover: "DoctorHunt",
-    gallery: ["DoctorHunt", "DoctorHunt"],
+    gallery: [],
     next: "drips-water-app",
   },
   {
@@ -118,26 +122,28 @@ export const work: WorkProject[] = [
     name: "Drips Water App",
     // TODO(copy): Replace this client name with the approved client name.
     client: "Drips",
-    // TODO(copy): Replace with the correct project year.
+    // TODO(verify): Replace with the verified project year.
     year: "2025",
     services: [
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Brand identity",
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Product design",
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Development",
     ],
     stack: [
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "React Native",
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "TypeScript",
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "Firebase",
     ],
-    // TODO(copy): Replace with the approved project role.
+    // TODO(verify): Replace with the verified project role.
     role: "Brand, product design and development",
+    // TODO(copy): Replace with the approved project category.
+    category: "Lifestyle",
     // TODO(copy): Replace with the approved project summary.
     summary: "A refreshing digital home for everyday hydration.",
     // TODO(copy): Replace with the approved project challenge.
@@ -153,7 +159,7 @@ export const work: WorkProject[] = [
       },
     ],
     cover: "DripsWater",
-    gallery: ["DripsWater", "DripsWater"],
+    gallery: [],
     next: "task-flow",
   },
   {
@@ -162,26 +168,28 @@ export const work: WorkProject[] = [
     name: "Task Flow",
     // TODO(copy): Replace this client name with the approved client name.
     client: "Task Flow",
-    // TODO(copy): Replace with the correct project year.
+    // TODO(verify): Replace with the verified project year.
     year: "2026",
     services: [
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Product strategy",
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Experience design",
-      // TODO(copy): Replace with an approved service.
+      // TODO(verify): Replace with a verified service.
       "Development",
     ],
     stack: [
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "Next.js",
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "TypeScript",
-      // TODO(copy): Replace with a verified technology.
+      // TODO(verify): Replace with a verified technology.
       "PostgreSQL",
     ],
-    // TODO(copy): Replace with the approved project role.
+    // TODO(verify): Replace with the verified project role.
     role: "Product strategy, design and development",
+    // TODO(copy): Replace with the approved project category.
+    category: "Productivity",
     // TODO(copy): Replace with the approved project summary.
     summary: "A calmer workspace for teams to get things done.",
     // TODO(copy): Replace with the approved project challenge.
@@ -197,7 +205,7 @@ export const work: WorkProject[] = [
       },
     ],
     cover: "TaskFlow",
-    gallery: ["TaskFlow", "TaskFlow"],
+    gallery: [],
     next: "doctor-hunt",
   },
 ];

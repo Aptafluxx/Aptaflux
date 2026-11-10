@@ -14,7 +14,7 @@ export function PageHeader({ intro, title }: PageHeaderProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="flex min-h-[65vh] flex-col justify-end pb-20 pt-32 sm:pb-24">
+    <section className="flex min-h-[65vh] flex-col justify-end pb-20 pt-24 sm:pb-24 sm:pt-[120px]">
       <Container>
         <h1 className="font-display text-[clamp(3.5rem,12vw,12rem)] font-semibold leading-[0.88] tracking-[-0.03em]">
           {title.split("\n").map((line, index) => (

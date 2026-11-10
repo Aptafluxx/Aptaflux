@@ -137,7 +137,7 @@ export default async function ProjectPage(props: WorkPageProps) {
           </article>
         </section>
 
-        {project.gallery?.length ? (
+        {project.gallery && project.gallery.length > 0 ? (
           <section
             aria-label={workPageContent.ariaLabels.projectGallery}
             className="py-10 sm:py-14"

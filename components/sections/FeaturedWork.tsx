@@ -50,7 +50,7 @@ export function FeaturedWork() {
                         : "min-[820px]:col-span-5 min-[820px]:col-start-8"
                     }
                   >
-                    <p className="text-[17px] text-muted">{project.client}</p>
+                    <p className="text-[17px] text-muted">{project.category}</p>
                     <h3 className="mt-2 font-display text-[clamp(2rem,4.5vw,4rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
                       {project.name}
                     </h3>

@@ -22,10 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
-      <body>
+      <body className="flex min-h-svh flex-col">
         <LenisProvider>
           <Navbar />
-          <PageTransition>{children}</PageTransition>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </LenisProvider>
       </body>

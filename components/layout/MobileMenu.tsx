@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { durations, easing } from "@/lib/motion";
 import { site } from "@/content/site";
+import { Container } from "@/components/ui/Container";
 
 type MobileMenuProps = {
   isOpen: boolean;
@@ -76,7 +77,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <motion.div
           ref={menuRef}
           aria-label={site.mobileNavigation}
-          className="fixed inset-0 z-50 flex flex-col bg-bg px-6 pb-10 pt-6 sm:px-10"
+          className="fixed inset-0 z-50 bg-bg"
           initial={shouldReduceMotion ? false : { clipPath: "inset(0 0 100% 0)" }}
           animate={{ clipPath: "inset(0 0 0% 0)" }}
           exit={{ clipPath: shouldReduceMotion ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)" }}
@@ -87,46 +88,48 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           role="dialog"
           aria-modal="true"
         >
-          <div className="flex items-center justify-between border-b border-line pb-6">
-            <Link
-              className="font-display text-2xl font-bold tracking-[-0.04em]"
-              href="/"
-              onClick={onClose}
-            >
-              {site.brand}
-            </Link>
-            <button
-              aria-label={site.closeMenu}
-              className="py-2 text-sm font-semibold text-text"
-              onClick={onClose}
-              type="button"
-            >
-              {site.closeMenu}
-            </button>
-          </div>
-
-          <nav aria-label={site.mobileNavigation} className="flex flex-1 flex-col justify-center">
-            {site.navigation.map((item, index) => (
+          <Container className="flex min-h-svh flex-col pb-10 pt-6">
+            <div className="flex items-center justify-between border-b border-line pb-6">
               <Link
-                key={item.href}
-                aria-current={pathname === item.href ? "page" : undefined}
-                className="w-fit py-1 font-display text-[clamp(3.25rem,12vw,6.5rem)] leading-[1.05] tracking-[-0.04em] transition-colors hover:text-ember"
-                href={item.href}
+                className="font-display text-2xl font-bold tracking-[-0.04em]"
+                href="/"
                 onClick={onClose}
-                style={{ transitionDelay: `${index * 40}ms` }}
               >
-                {item.label}
+                {site.brand}
               </Link>
-            ))}
-          </nav>
+              <button
+                aria-label={site.closeMenu}
+                className="py-2 text-sm font-semibold text-text"
+                onClick={onClose}
+                type="button"
+              >
+                {site.closeMenu}
+              </button>
+            </div>
 
-          <Link
-            className="w-fit border-b border-ember pb-2 text-sm font-semibold text-ember"
-            href="/contact"
-            onClick={onClose}
-          >
-            {site.callToAction}
-          </Link>
+            <nav aria-label={site.mobileNavigation} className="flex flex-1 flex-col justify-center">
+              {site.navigation.map((item, index) => (
+                <Link
+                  key={item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  className="w-fit py-1 font-display text-[clamp(3.25rem,12vw,6.5rem)] leading-[1.05] tracking-[-0.04em] transition-colors hover:text-ember"
+                  href={item.href}
+                  onClick={onClose}
+                  style={{ transitionDelay: `${index * 40}ms` }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <Link
+              className="w-fit border-b border-ember pb-2 text-sm font-semibold text-ember"
+              href="/contact"
+              onClick={onClose}
+            >
+              {site.callToAction}
+            </Link>
+          </Container>
         </motion.div>
       ) : null}
     </AnimatePresence>

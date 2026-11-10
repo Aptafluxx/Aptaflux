@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Container } from "@/components/ui/Container";
 import { Rule } from "@/components/ui/Rule";
 import { site } from "@/content/site";
 
@@ -24,11 +25,11 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="px-6 pb-8 sm:px-10 lg:px-16">
-      <div className="mx-auto w-full max-w-[1600px]">
+    <footer className="pb-8">
+      <Container>
         <Rule />
         <div className="flex flex-col gap-8 py-8 md:flex-row md:items-center md:justify-between">
-          <a className="text-sm text-text transition-colors hover:text-ember" href={`mailto:${site.email}`}>
+          <a className="text-[17px] text-text transition-colors hover:text-ember" href={`mailto:${site.email}`}>
             {site.email}
           </a>
 
@@ -36,7 +37,7 @@ export function Footer() {
             {site.socials.map((social) => (
               <a
                 key={social.label}
-                className="text-sm text-muted transition-colors hover:text-ember"
+                className="text-[15px] text-muted transition-colors hover:text-ember"
                 href={social.href}
                 rel="noreferrer"
                 target="_blank"
@@ -46,12 +47,12 @@ export function Footer() {
             ))}
           </nav>
 
-          <div className="flex flex-col gap-2 text-sm text-muted sm:flex-row sm:gap-6">
+          <div className="flex flex-col gap-2 text-[15px] text-muted sm:flex-row sm:gap-6">
             <span>{site.localTimeLabel}: {localTime || "—"}</span>
             <span>© {new Date().getFullYear()} {site.brand}</span>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

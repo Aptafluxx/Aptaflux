@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 import { site } from "@/content/site";
 import { MobileMenu } from "./MobileMenu";
 
@@ -38,7 +39,7 @@ export function Navbar() {
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="mx-auto flex h-20 w-full max-w-[1600px] items-center justify-between px-6 sm:px-10 lg:px-16">
+        <Container className="flex h-20 items-center justify-between">
           <Link
             aria-label={site.brand}
             className="font-display text-2xl font-bold tracking-[-0.04em]"
@@ -47,31 +48,30 @@ export function Navbar() {
             {site.brand}
           </Link>
 
-          <nav aria-label="Main navigation" className="hidden items-center gap-8 min-[820px]:flex">
-            {site.navigation.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href === "/work" && pathname.startsWith("/work/"));
+          <div className="hidden items-center gap-8 min-[820px]:flex">
+            <nav aria-label="Main navigation" className="flex items-center gap-8">
+              {site.navigation.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.href === "/work" && pathname.startsWith("/work/"));
 
-              return (
-                <Link
-                  key={item.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`relative py-2 text-sm transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-ember after:transition-transform ${
-                    isActive
-                      ? "text-ember after:scale-x-100"
-                      : "text-muted hover:text-text after:scale-x-0 hover:after:scale-x-100"
-                  }`}
-                  href={item.href}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="hidden min-[820px]:block">
-            <Button href="/contact">{site.callToAction}</Button>
+                return (
+                  <Link
+                    key={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`relative py-2 text-[15px] transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-ember after:transition-transform ${
+                      isActive
+                        ? "text-ember after:scale-x-100"
+                        : "text-muted hover:text-text after:scale-x-0 hover:after:scale-x-100"
+                    }`}
+                    href={item.href}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <Button className="text-[15px]" href="/contact">{site.callToAction}</Button>
           </div>
 
           <button
@@ -83,7 +83,7 @@ export function Navbar() {
           >
             {site.openMenu}
           </button>
-        </div>
+        </Container>
       </header>
 
       <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />

@@ -13,6 +13,10 @@ export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
 
+  if (pathname === "/") {
+    return children;
+  }
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div

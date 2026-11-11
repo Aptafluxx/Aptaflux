@@ -6,25 +6,27 @@ type DeviceFrameProps = {
 };
 
 export function DeviceFrame({ children, device = "laptop" }: DeviceFrameProps) {
-  return (
-    <div className="aspect-[16/10] overflow-hidden rounded-lg bg-bg p-2.5">
-      <div
-        className={`relative h-full overflow-hidden rounded-md border border-line bg-surface ${
-          device === "phone" ? "mx-auto max-w-[46%] rounded-[1.25rem] p-1.5" : "p-2"
-        }`}
-      >
-        {device === "phone" ? (
-          <div className="absolute left-1/2 top-1 z-10 h-1 w-8 -translate-x-1/2 rounded-full bg-line" />
-        ) : (
-          <div className="mb-2 flex h-4 items-center gap-1 border-b border-line px-1">
-            <i className="h-1.5 w-1.5 rounded-full bg-ember" />
-            <i className="h-1.5 w-1.5 rounded-full bg-text/40" />
-            <i className="h-1.5 w-1.5 rounded-full bg-text/25" />
-            <span className="ml-2 h-1.5 w-1/3 rounded-full bg-text/10" />
-          </div>
-        )}
-        <div className="h-full overflow-hidden">{children}</div>
+  if (device === "phone") {
+    return (
+      <div className="absolute left-1/2 top-1/2 h-[80%] aspect-[9/16] -translate-x-1/2 -translate-y-1/2 rounded-[1.4rem] border-[6px] border-cream bg-bg p-1.5">
+        <span aria-hidden="true" className="absolute left-1/2 top-1.5 z-10 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-text/70" />
+        <div className="h-full overflow-hidden rounded-[1rem] bg-bg [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover">
+          {children}
+        </div>
       </div>
+    );
+  }
+
+  return (
+    <div className="absolute inset-x-[7.5%] top-[8%] bottom-[8%] flex flex-col items-center">
+      <div className="relative flex h-[88%] w-full items-stretch rounded-t-lg border-[6px] border-bg bg-bg px-1.5 pb-1.5 pt-4">
+        <span aria-hidden="true" className="absolute left-1/2 top-1.5 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-text/65" />
+        <div className="h-full w-full overflow-hidden rounded-sm bg-surface [&>svg]:h-full [&>svg]:w-full [&>svg]:object-cover">
+          {children}
+        </div>
+      </div>
+      <div aria-hidden="true" className="h-2 w-[106%] rounded-b-md bg-bg" />
+      <div aria-hidden="true" className="h-1 w-[24%] rounded-b-lg bg-surface" />
     </div>
   );
 }

@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
-import { reveal } from "@/lib/motion";
+import { useEffect, useRef } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 type RevealProps = {
   children: ReactNode;
@@ -11,18 +10,30 @@ type RevealProps = {
 };
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        element.dataset.revealed = "true";
+        observer.unobserve(element);
+      },
+      { rootMargin: "-80px 0px" },
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  const style = { "--reveal-delay": `${delay}s` } as CSSProperties;
 
   return (
-    <motion.div
-      className={className}
-      initial={shouldReduceMotion ? false : "hidden"}
-      variants={reveal}
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ delay }}
-    >
+    <div className={`scroll-reveal ${className ?? ""}`} ref={ref} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }

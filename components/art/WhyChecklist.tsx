@@ -1,15 +1,15 @@
 export function WhyChecklist() {
   return (
-    <svg aria-hidden="true" className="mt-8 h-auto w-full max-w-sm" fill="none" viewBox="0 0 380 205">
-      <g transform="rotate(-8 132 108)">
-        <rect x="34" y="46" width="270" height="138" rx="8" fill="var(--color-surface)" stroke="var(--color-line)" />
-        <path d="M58 82h16l6 6 11-13" stroke="var(--color-ember)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-        <path d="M104 83h155M58 119h16l6 6 11-13M104 120h128M58 156h16l6 6 11-13M104 157h149" stroke="var(--color-text)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" opacity=".72" />
+    <svg aria-hidden="true" className="mt-8 h-auto w-full max-w-[500px]" fill="none" viewBox="0 0 500 270">
+      <g transform="rotate(-8 175 146)">
+        <rect x="34" y="58" width="344" height="174" rx="12" fill="var(--color-cream)" />
+        <path d="M67 106h18l7 7 14-17" stroke="var(--color-ember)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+        <path d="M124 108h205M67 154h18l7 7 14-17M124 156h170M67 202h18l7 7 14-17M124 204h194" stroke="var(--color-bg)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
       </g>
-      <g transform="rotate(7 239 97)">
-        <rect x="111" y="30" width="240" height="128" rx="8" fill="var(--color-bg)" stroke="var(--color-line)" />
-        <path d="M137 70h14l5 5 10-12" stroke="var(--color-ember)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
-        <path d="M180 70h135M137 106h14l5 5 10-12M180 106h112M137 142h14l5 5 10-12M180 142h90" stroke="var(--color-text)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" opacity=".72" />
+      <g transform="rotate(7 318 109)">
+        <rect x="152" y="28" width="312" height="166" rx="12" fill="var(--color-surface)" />
+        <path d="M184 77h18l7 7 14-17" stroke="var(--color-ember)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
+        <path d="M241 79h187M184 125h18l7 7 14-17M241 127h156M184 173h18l7 7 14-17M241 175h174" stroke="var(--color-cream)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
       </g>
     </svg>
   );

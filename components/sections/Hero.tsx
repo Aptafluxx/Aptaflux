@@ -39,18 +39,18 @@ export function Hero() {
                 {hero.secondaryAction}
               </Button>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-2">
+            <ul className="mt-8 flex flex-wrap gap-2 lg:flex-nowrap">
               {hero.capabilities.map((capability, index) => {
                 const Icon = capabilityIcons[index];
 
                 return (
-                <li
-                  className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-2 text-small text-muted"
-                  key={capability}
-                >
-                  <Icon aria-hidden="true" className="text-ember" size={16} />
-                  {capability}
-                </li>
+                  <li
+                    className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-surface/70 px-3 py-2 text-small text-muted lg:px-2.5 lg:text-[14px]"
+                    key={capability}
+                  >
+                    <Icon aria-hidden="true" className="text-ember" size={16} />
+                    {capability}
+                  </li>
                 );
               })}
             </ul>

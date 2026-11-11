@@ -126,12 +126,26 @@ section[data-tone="ember"] {
   background-color: var(--color-surface);
 }
 
+.ui-icon-badge {
+  background-color: rgba(255, 91, 46, 0.14);
+  color: var(--color-ember);
+}
+
 section[data-tone="cream"] .ui-card {
   background-color: #fbf7ee;
 }
 
 section[data-tone="cream"] .ui-icon-badge {
+  background-color: rgba(191, 52, 16, 0.12);
   color: var(--color-ember-deep);
+}
+
+.scroll-reveal {
+  --reveal-delay: 0s;
+}
+
+.scroll-reveal[data-revealed="true"] {
+  animation: reveal-rise 600ms var(--ease-standard) var(--reveal-delay) both;
 }
 
 .dot-grid {
@@ -212,6 +226,15 @@ section[data-tone="cream"] .ui-icon-badge {
   }
 }
 
+@keyframes reveal-rise {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @keyframes tech-marquee {
   from {
     transform: translateX(0);
@@ -244,6 +267,10 @@ section[data-tone="cream"] .ui-icon-badge {
   .hero-art-phone,
   .hero-art-notification,
   .hero-art-chart {
+    animation: none;
+  }
+
+  .scroll-reveal[data-revealed="true"] {
     animation: none;
   }
 }

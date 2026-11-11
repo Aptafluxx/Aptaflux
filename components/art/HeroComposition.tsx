@@ -7,58 +7,59 @@ export function HeroComposition() {
       viewBox="0 0 760 640"
     >
       <g className="hero-art-float">
-        <rect x="68" y="106" width="510" height="390" rx="8" fill="var(--color-bg)" stroke="var(--color-line)" strokeWidth="2" />
-        <path d="M68 151h510" stroke="var(--color-line)" strokeWidth="2" />
-        <circle cx="92" cy="128" r="6" fill="var(--color-ember)" />
-        <circle cx="114" cy="128" r="6" fill="var(--color-text)" opacity=".55" />
-        <circle cx="136" cy="128" r="6" fill="var(--color-text)" opacity=".3" />
-        <rect x="105" y="190" width="214" height="18" rx="4" fill="var(--color-text)" />
-        <rect x="105" y="226" width="285" height="9" rx="4" fill="var(--color-muted)" />
-        <rect x="105" y="246" width="238" height="9" rx="4" fill="var(--color-muted)" />
-        <rect x="105" y="276" width="112" height="34" rx="4" fill="var(--color-ember)" />
-        <rect x="105" y="341" width="138" height="118" rx="6" fill="var(--color-surface)" />
-        <rect x="257" y="341" width="138" height="118" rx="6" fill="var(--color-surface)" />
-        <rect x="409" y="341" width="138" height="118" rx="6" fill="var(--color-surface)" />
-        <rect x="119" y="356" width="72" height="7" rx="3" fill="var(--color-text)" />
-        <rect x="119" y="374" width="102" height="5" rx="2" fill="var(--color-muted)" />
-        <rect x="271" y="356" width="72" height="7" rx="3" fill="var(--color-text)" />
-        <rect x="271" y="374" width="102" height="5" rx="2" fill="var(--color-muted)" />
-        <rect x="423" y="356" width="72" height="7" rx="3" fill="var(--color-text)" />
-        <rect x="423" y="374" width="102" height="5" rx="2" fill="var(--color-muted)" />
+        <rect x="48" y="106" width="560" height="390" rx="10" fill="var(--color-surface)" />
+        <path d="M58 156h540v330H58z" fill="var(--color-cream)" />
+        <path d="M48 116a10 10 0 0 1 10-10h540a10 10 0 0 1 10 10v40H48v-40Z" fill="var(--color-surface)" />
+        <circle cx="76" cy="133" r="6" fill="var(--color-ember)" />
+        <circle cx="98" cy="133" r="6" fill="var(--color-cream)" opacity=".8" />
+        <circle cx="120" cy="133" r="6" fill="var(--color-cream)" opacity=".45" />
+        <rect x="88" y="188" width="230" height="22" rx="5" fill="var(--color-bg)" />
+        <rect x="88" y="228" width="300" height="10" rx="5" fill="#778392" />
+        <rect x="88" y="250" width="252" height="10" rx="5" fill="#778392" />
+        <rect x="88" y="282" width="126" height="38" rx="5" fill="var(--color-ember)" />
+        <rect x="88" y="350" width="145" height="120" rx="7" fill="var(--color-surface)" />
+        <rect x="250" y="350" width="145" height="120" rx="7" fill="var(--color-surface)" />
+        <rect x="412" y="350" width="145" height="120" rx="7" fill="var(--color-surface)" />
+        <rect x="103" y="368" width="78" height="8" rx="4" fill="var(--color-cream)" />
+        <rect x="103" y="388" width="108" height="6" rx="3" fill="#aab3bd" />
+        <rect x="265" y="368" width="78" height="8" rx="4" fill="var(--color-cream)" />
+        <rect x="265" y="388" width="108" height="6" rx="3" fill="#aab3bd" />
+        <rect x="427" y="368" width="78" height="8" rx="4" fill="var(--color-cream)" />
+        <rect x="427" y="388" width="108" height="6" rx="3" fill="#aab3bd" />
       </g>
       <g className="hero-art-phone">
-        <rect x="454" y="220" width="206" height="356" rx="28" fill="var(--color-cream)" stroke="var(--color-line)" strokeWidth="3" />
-        <rect x="470" y="250" width="174" height="308" rx="18" fill="var(--color-bg)" />
-        <rect x="523" y="260" width="68" height="6" rx="3" fill="var(--color-line)" />
-        <rect x="486" y="288" width="94" height="12" rx="4" fill="var(--color-text)" />
-        <rect x="486" y="310" width="136" height="7" rx="3" fill="var(--color-muted)" />
-        <rect x="486" y="338" width="142" height="66" rx="6" fill="var(--color-surface)" />
-        <circle cx="504" cy="360" r="9" fill="var(--color-ember)" />
-        <rect x="522" y="354" width="81" height="6" rx="3" fill="var(--color-text)" />
-        <rect x="522" y="367" width="60" height="5" rx="2" fill="var(--color-muted)" />
-        <rect x="486" y="414" width="142" height="56" rx="6" fill="var(--color-surface)" />
-        <circle cx="504" cy="435" r="9" fill="var(--color-ember)" />
-        <rect x="522" y="429" width="81" height="6" rx="3" fill="var(--color-text)" />
-        <rect x="522" y="442" width="60" height="5" rx="2" fill="var(--color-muted)" />
-        <rect x="486" y="480" width="142" height="56" rx="6" fill="var(--color-surface)" />
-        <circle cx="504" cy="501" r="9" fill="var(--color-ember)" />
-        <rect x="522" y="495" width="81" height="6" rx="3" fill="var(--color-text)" />
-        <rect x="522" y="508" width="60" height="5" rx="2" fill="var(--color-muted)" />
+        <rect x="390" y="216" width="220" height="366" rx="30" fill="var(--color-cream)" />
+        <rect x="402" y="230" width="196" height="338" rx="21" fill="var(--color-bg)" />
+        <rect x="472" y="239" width="54" height="7" rx="3.5" fill="var(--color-surface)" />
+        <rect x="418" y="266" width="112" height="14" rx="4" fill="var(--color-cream)" />
+        <rect x="418" y="290" width="148" height="7" rx="3.5" fill="#aab3bd" />
+        <rect x="414" y="318" width="172" height="70" rx="8" fill="var(--color-surface)" />
+        <circle cx="435" cy="343" r="10" fill="var(--color-ember)" />
+        <rect x="454" y="337" width="108" height="7" rx="3.5" fill="var(--color-cream)" />
+        <rect x="454" y="353" width="76" height="6" rx="3" fill="#aab3bd" />
+        <rect x="414" y="400" width="172" height="70" rx="8" fill="var(--color-surface)" />
+        <circle cx="435" cy="425" r="10" fill="var(--color-ember)" />
+        <rect x="454" y="419" width="108" height="7" rx="3.5" fill="var(--color-cream)" />
+        <rect x="454" y="435" width="76" height="6" rx="3" fill="#aab3bd" />
+        <rect x="414" y="482" width="172" height="66" rx="8" fill="var(--color-surface)" />
+        <circle cx="435" cy="505" r="10" fill="var(--color-ember)" />
+        <rect x="454" y="499" width="108" height="7" rx="3.5" fill="var(--color-cream)" />
+        <rect x="454" y="515" width="76" height="6" rx="3" fill="#aab3bd" />
       </g>
       <g className="hero-art-notification">
-        <rect x="40" y="454" width="228" height="68" rx="8" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="2" />
-        <circle cx="70" cy="488" r="14" fill="var(--color-ember)" />
-        <path d="m64 488 4 4 8-9" stroke="var(--color-bg)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" />
-        <text x="94" y="484" fill="var(--color-text)" fontSize="13" fontWeight="600">New booking</text>
-        <text x="94" y="502" fill="var(--color-muted)" fontSize="12">confirmed</text>
+        <rect x="24" y="460" width="244" height="76" rx="10" fill="var(--color-cream)" />
+        <circle cx="58" cy="498" r="16" fill="var(--color-ember)" />
+        <path d="m51 498 5 5 10-11" stroke="var(--color-bg)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+        <text x="86" y="493" fill="var(--color-bg)" fontSize="14" fontWeight="700">New booking</text>
+        <text x="86" y="514" fill="var(--color-bg)" fontSize="13">confirmed</text>
       </g>
       <g className="hero-art-chart">
-        <rect x="522" y="60" width="174" height="106" rx="8" fill="var(--color-surface)" stroke="var(--color-line)" strokeWidth="2" />
-        <path d="m545 137 25-27 21 13 32-37 23 14" stroke="var(--color-ember)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
-        <path d="M544 145h130" stroke="var(--color-line)" strokeWidth="2" />
-        <circle cx="591" cy="84" r="4" fill="var(--color-text)" opacity=".75" />
-        <circle cx="606" cy="84" r="4" fill="var(--color-text)" opacity=".4" />
-        <circle cx="621" cy="84" r="4" fill="var(--color-text)" opacity=".2" />
+        <rect x="530" y="48" width="184" height="116" rx="10" fill="var(--color-cream)" />
+        <path d="m550 136 29-34 25 17 35-45 30 18" stroke="var(--color-ember)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="6" />
+        <path d="M550 146h143" stroke="var(--color-bg)" strokeOpacity=".15" strokeWidth="2" />
+        <circle cx="574" cy="72" r="4" fill="var(--color-bg)" opacity=".7" />
+        <circle cx="589" cy="72" r="4" fill="var(--color-bg)" opacity=".4" />
+        <circle cx="604" cy="72" r="4" fill="var(--color-bg)" opacity=".2" />
       </g>
     </svg>
   );

@@ -17,7 +17,7 @@ export function FeaturedWork() {
       title={content.title}
       tone="navy"
     >
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid auto-rows-fr gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {work
           .filter((project) => project.featured)
           .map((project, index) => {
@@ -32,23 +32,22 @@ export function FeaturedWork() {
                   prefetch={false}
                 >
                   <Card className="flex h-full flex-col p-5 sm:p-6">
-                    <div className="relative overflow-hidden rounded-md">
-                      <div className="transition-transform duration-300 ease-out group-hover:scale-[1.02]">
-                        <DeviceFrame device={project.slug === "drips-water-app" ? "phone" : "laptop"}>
-                          <Artwork />
-                        </DeviceFrame>
-                      </div>
+                    <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-surface">
+                      <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
+                      <DeviceFrame device={project.slug === "ember-fig" ? "laptop" : "phone"}>
+                        <Artwork />
+                      </DeviceFrame>
+                      {project.type === "portfolio" ? (
+                        <span className="absolute right-3 top-3 rounded-full border border-line bg-bg/90 px-2.5 py-1 text-small text-text">
+                          {content.portfolioBadge}
+                        </span>
+                      ) : null}
                       <span className="absolute bottom-3 right-3 translate-y-2 rounded-full bg-ember px-4 py-2 text-small font-semibold text-bg opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                         {content.projectLink}
                       </span>
                     </div>
-                    <div className="mt-5 flex min-h-7 items-start justify-between gap-3">
+                    <div className="mt-4">
                       <p className="text-small text-muted">{project.category}</p>
-                      {project.type === "portfolio" ? (
-                        <span className="shrink-0 rounded-full border border-line px-2.5 py-1 text-small text-muted">
-                          {content.portfolioBadge}
-                        </span>
-                      ) : null}
                     </div>
                     <h3 className="mt-2 font-body text-work-title font-bold tracking-[-0.02em] transition-colors group-hover:text-ember">
                       {project.name}

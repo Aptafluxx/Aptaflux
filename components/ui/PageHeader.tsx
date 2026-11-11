@@ -14,7 +14,7 @@ export function PageHeader({ intro, title }: PageHeaderProps) {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <Section className="pb-10 pt-14 md:pt-28">
+    <Section className="!pb-10 !pt-14 md:!pt-28">
         <h1 className="font-display text-display-lg font-semibold">
           {title.split("\n").map((line, index) => (
             <span key={`${line}-${index}`} className="block overflow-hidden pb-[0.08em]">

@@ -165,6 +165,25 @@ section[data-tone="cream"] .ui-icon-badge {
   animation-play-state: paused;
 }
 
+.tech-marquee-viewport {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 64px,
+    #000 calc(100% - 64px),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 64px,
+    #000 calc(100% - 64px),
+    transparent
+  );
+}
+
 .hero-art-float {
   animation: hero-float 6s ease-in-out infinite;
 }

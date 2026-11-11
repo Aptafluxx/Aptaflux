@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { WhyChecklist } from "@/components/art/WhyChecklist";
+import { AutomationFlow } from "@/components/art/AutomationFlow";
+import { CapabilityBrowser } from "@/components/art/CapabilityBrowser";
 import { ServiceAutomation } from "@/components/art/ServiceAutomation";
 import { ServiceConversion } from "@/components/art/ServiceConversion";
 import { ServicePlatform } from "@/components/art/ServicePlatform";
@@ -228,7 +230,7 @@ export function HomeSections() {
                   key={row.name}
                 >
                   <Card className="relative h-full overflow-hidden p-6">
-                    <div className={index === 0 ? "lg:max-w-[58%]" : ""}>
+                    <div className={index === 0 ? "max-w-[55%]" : ""}>
                       <IconBadge icon={capabilityIcons[index]} />
                       <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
                         {row.name}
@@ -238,17 +240,8 @@ export function HomeSections() {
                       </p>
                     </div>
                     {index === 0 ? (
-                      <div aria-hidden="true" className="absolute bottom-6 right-6 hidden w-[34%] rounded-md bg-bg p-3 lg:block">
-                        <div className="flex gap-2 border-b border-line pb-2">
-                          <i className="h-2 w-2 rounded-full bg-ember" />
-                          <i className="h-2 w-2 rounded-full bg-text/40" />
-                          <i className="h-2 w-2 rounded-full bg-text/20" />
-                        </div>
-                        <div className="mt-3 grid grid-cols-3 gap-2">
-                          <span className="h-8 rounded-sm bg-surface" />
-                          <span className="h-8 rounded-sm bg-ember/80" />
-                          <span className="h-8 rounded-sm bg-surface" />
-                        </div>
+                      <div aria-hidden="true" className="absolute bottom-6 right-6">
+                        <CapabilityBrowser />
                       </div>
                     ) : null}
                   </Card>
@@ -292,15 +285,8 @@ export function HomeSections() {
                     </p>
                   </div>
                 </div>
-                <div aria-hidden="true" className="flex min-w-[180px] items-center gap-2 rounded-md bg-bg p-4 sm:w-[34%]">
-                  <span className="rounded-sm bg-surface p-2 text-ember"><Workflow size={20} /></span>
-                  <span className="h-px flex-1 bg-line" />
-                  <span className="grid gap-2">
-                    <i className="h-3 w-8 rounded-sm bg-surface" />
-                    <i className="h-3 w-8 rounded-sm bg-ember" />
-                  </span>
-                  <span className="h-px flex-1 bg-line" />
-                  <span className="rounded-sm bg-surface p-2 text-ember"><Bot size={20} /></span>
+                <div aria-hidden="true" className="ml-auto">
+                  <AutomationFlow />
                 </div>
               </Card>
             </Reveal>
@@ -313,11 +299,14 @@ export function HomeSections() {
 
       <Section
         aria-label={technologies.title}
-        className="overflow-hidden py-14 md:py-20 lg:py-24"
+        className="overflow-hidden"
+        fullBleedContent
         title={technologies.title}
         tone="navy"
       >
-        <LazyMarquee />
+        <div className="tech-marquee-viewport">
+          <LazyMarquee />
+        </div>
       </Section>
 
       <FeaturedWork />

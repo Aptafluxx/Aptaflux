@@ -5,6 +5,7 @@ import { Rule } from "@/components/ui/Rule";
 type SectionProps = Omit<ComponentPropsWithoutRef<"section">, "children"> & {
   children: ReactNode;
   containerClassName?: string;
+  fullBleedContent?: boolean;
   eyebrow?: ReactNode;
   intro?: ReactNode;
   title?: ReactNode;
@@ -14,8 +15,9 @@ type SectionProps = Omit<ComponentPropsWithoutRef<"section">, "children"> & {
 
 export function Section({
   children,
-  className = "py-14 md:py-20 lg:py-24",
+  className = "",
   containerClassName = "",
+  fullBleedContent = false,
   eyebrow,
   intro,
   title,
@@ -25,7 +27,7 @@ export function Section({
 }: SectionProps) {
   return (
     <section
-      className={`bg-[var(--section-background)] text-text ${className}`}
+      className={`bg-[var(--section-background)] py-14 text-text md:py-20 lg:py-24 ${className}`}
       data-tone={tone}
       {...sectionProps}
     >
@@ -52,8 +54,9 @@ export function Section({
             {intro ? <div className="mt-4 max-w-[60ch] text-body text-muted">{intro}</div> : null}
           </div>
         ) : null}
-        {children}
+        {!fullBleedContent ? children : null}
       </Container>
+      {fullBleedContent ? children : null}
     </section>
   );
 }

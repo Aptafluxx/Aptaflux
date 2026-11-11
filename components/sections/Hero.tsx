@@ -13,9 +13,9 @@ export function Hero() {
   const titleParts = hero.title.split(/(digital opportunities\.)/i);
 
   return (
-    <Section className="relative overflow-hidden pt-[72px] pb-14 md:pt-24 md:pb-20 lg:pb-24" tone="navy">
+    <Section className="relative overflow-hidden !pt-28 md:!pt-32" tone="navy">
       <DotGrid className="dot-grid-hero" />
-      <Reveal className="relative z-10">
+      <Reveal className="relative z-10 pt-2.5">
         <div className="grid items-center gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6">
             <p className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-ember">

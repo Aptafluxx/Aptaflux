@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { contactSubmissionSchema } from "@/lib/contact-validation";
 import { site } from "@/content/site";
 
-type ContactField = "name" | "email" | "budget" | "details";
+type ContactField = "name" | "email" | "projectSize" | "details";
 type ContactStatus = "idle" | "sending" | "success" | "error";
 type FieldErrors = Partial<Record<ContactField, string>>;
 
@@ -17,7 +17,7 @@ function getFieldErrors(issues: { message: string; path: PropertyKey[] }[]) {
     if (
       (field === "name" ||
         field === "email" ||
-        field === "budget" ||
+        field === "projectSize" ||
         field === "details") &&
       !errors[field]
     ) {
@@ -31,15 +31,17 @@ function getFieldErrors(issues: { message: string; path: PropertyKey[] }[]) {
 export function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<ContactStatus>("idle");
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const { contact } = site;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const submission = contactSubmissionSchema.safeParse(
-      Object.fromEntries(formData.entries()),
-    );
+    const submission = contactSubmissionSchema.safeParse({
+      ...Object.fromEntries(formData.entries()),
+      services: selectedServices,
+    });
 
     if (!submission.success) {
       setFieldErrors(getFieldErrors(submission.error.issues));
@@ -48,13 +50,13 @@ export function ContactForm() {
         ({ path }) =>
           path[0] === "name" ||
           path[0] === "email" ||
-          path[0] === "budget" ||
+          path[0] === "projectSize" ||
           path[0] === "details",
       )?.path[0];
       if (
         firstInvalidField === "name" ||
         firstInvalidField === "email" ||
-        firstInvalidField === "budget" ||
+        firstInvalidField === "projectSize" ||
         firstInvalidField === "details"
       ) {
         document.getElementById(firstInvalidField)?.focus();
@@ -78,6 +80,7 @@ export function ContactForm() {
       }
 
       form.reset();
+      setSelectedServices([]);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -149,30 +152,62 @@ export function ContactForm() {
         ) : null}
       </div>
 
+      <fieldset>
+        <legend className="mb-3 text-small">{contact.fields.services}</legend>
+        <div className="flex flex-wrap gap-2">
+          {contact.servicesOptions.map((option) => {
+            const isSelected = selectedServices.includes(option);
+            return (
+              <button
+                aria-pressed={isSelected}
+                className={`min-h-10 rounded-full border px-4 py-2 text-small transition-colors ${
+                  isSelected
+                    ? "border-ember bg-ember text-bg"
+                    : "border-line text-muted hover:border-ember hover:text-text"
+                }`}
+                key={option}
+                onClick={() =>
+                  setSelectedServices((current) =>
+                    isSelected
+                      ? current.filter((value) => value !== option)
+                      : [...current, option],
+                  )
+                }
+                type="button"
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
+      </fieldset>
+
       <div>
-        <label className="mb-2 block text-small" htmlFor="budget">
-          {contact.fields.budget}
+        <label className="mb-2 block text-small" htmlFor="projectSize">
+          {contact.fields.projectSize}
         </label>
         <select
-          aria-describedby={fieldErrors.budget ? "budget-error" : undefined}
-          aria-invalid={Boolean(fieldErrors.budget)}
+          aria-describedby={
+            fieldErrors.projectSize ? "projectSize-error" : undefined
+          }
+          aria-invalid={Boolean(fieldErrors.projectSize)}
           className={inputClass}
           defaultValue=""
-          id="budget"
-          name="budget"
+          id="projectSize"
+          name="projectSize"
         >
-          <option className="bg-bg" disabled value="">
-            {contact.budgetPlaceholder}
+          <option className="bg-bg" value="">
+            {contact.projectSizePlaceholder}
           </option>
-          {contact.budgetOptions.map((option) => (
+          {contact.projectSizeOptions.map((option) => (
             <option className="bg-bg" key={option} value={option}>
               {option}
             </option>
           ))}
         </select>
-        {fieldErrors.budget ? (
-          <p className={errorClass} id="budget-error">
-            {fieldErrors.budget}
+        {fieldErrors.projectSize ? (
+          <p className={errorClass} id="projectSize-error">
+            {fieldErrors.projectSize}
           </p>
         ) : null}
       </div>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { ProjectRow } from "@/components/work/ProjectRow";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { Rule } from "@/components/ui/Rule";
 import { Section } from "@/components/ui/Section";
-import { work, workPageContent } from "@/content/work";
+import { WorkGrid } from "@/components/work/WorkGrid";
+import { homeContent } from "@/content/home";
+import { workPageContent } from "@/content/work";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -16,14 +16,18 @@ export const metadata: Metadata = createPageMetadata({
 export default function WorkPage() {
   return (
     <>
-      <PageHeader title="Work" intro={workPageContent.introduction} />
-      <Section aria-label={workPageContent.ariaLabels.projects} topRule>
-        {work.map((project) => (
-          <div key={project.slug}>
-            <ProjectRow project={project} />
-            <Rule />
-          </div>
-        ))}
+      <PageHeader
+        accent="work"
+        eyebrow={homeContent.work.eyebrow}
+        intro={workPageContent.introduction}
+        title="Our work"
+      />
+      <Section aria-label={workPageContent.ariaLabels.projects} tone="surface">
+        <WorkGrid />
+        {/* TODO(copy): Confirm this portfolio note with approved copy. */}
+        <p className="mt-10 border-t border-line pt-6 text-body leading-relaxed text-muted">
+          These are portfolio projects built to show our approach.
+        </p>
       </Section>
       <CtaBand />
     </>

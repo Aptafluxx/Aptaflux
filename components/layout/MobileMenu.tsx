@@ -3,8 +3,9 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { durations, easing } from "@/lib/motion";
+import { servicesContent } from "@/content/services";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 
@@ -18,6 +19,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const previousPathname = useRef(pathname);
   const shouldReduceMotion = useReducedMotion();
+  const [isServicesExpanded, setIsServicesExpanded] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
@@ -109,19 +111,67 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
 
             <nav aria-label={site.mobileNavigation} className="flex flex-1 flex-col justify-center">
-              {site.navigation.map((item, index) => (
-                <Link
-                  key={item.href}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                  className="w-fit py-1 font-body text-display-lg font-bold tracking-[-0.02em] transition-colors hover:text-ember"
-                  href={item.href}
-                  onClick={onClose}
-                  prefetch={false}
-                  style={{ transitionDelay: `${index * 40}ms` }}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {site.navigation.map((item, index) =>
+                item.href === "/services" ? (
+                  <div className="py-1" key={item.href}>
+                    <button
+                      aria-controls="mobile-services-menu"
+                      aria-expanded={isServicesExpanded}
+                      className="w-fit font-body text-display-lg font-bold tracking-[-0.02em] transition-colors hover:text-ember"
+                      onClick={() =>
+                        setIsServicesExpanded((expanded) => !expanded)
+                      }
+                      type="button"
+                    >
+                      {item.label}
+                    </button>
+                    {isServicesExpanded ? (
+                      <div
+                        className="mt-3 flex flex-col gap-2 border-l border-line pl-5"
+                        id="mobile-services-menu"
+                      >
+                        {servicesContent.services.map((service) => (
+                          <Link
+                            aria-current={
+                              pathname === `/services/${service.slug}`
+                                ? "page"
+                                : undefined
+                            }
+                            className="py-2 text-body text-muted transition-colors hover:text-text"
+                            href={`/services/${service.slug}`}
+                            key={service.slug}
+                            onClick={onClose}
+                            prefetch={false}
+                          >
+                            {service.name}
+                          </Link>
+                        ))}
+                        <Link
+                          aria-current={pathname === "/services" ? "page" : undefined}
+                          className="py-2 text-body font-semibold text-ember transition-colors hover:text-text"
+                          href="/services"
+                          onClick={onClose}
+                          prefetch={false}
+                        >
+                          All services
+                        </Link>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.href}
+                    aria-current={pathname === item.href ? "page" : undefined}
+                    className="w-fit py-1 font-body text-display-lg font-bold tracking-[-0.02em] transition-colors hover:text-ember"
+                    href={item.href}
+                    onClick={onClose}
+                    prefetch={false}
+                    style={{ transitionDelay: `${index * 40}ms` }}
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              )}
             </nav>
 
             <Link

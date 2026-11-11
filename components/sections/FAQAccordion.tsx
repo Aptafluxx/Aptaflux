@@ -22,7 +22,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
         const panelId = `home-faq-panel-${index}`;
 
         return (
-          <Card className="p-5 sm:p-6" key={item.question}>
+          <Card className="p-5 sm:p-6" key={`${item.question}-${index}`}>
             <h3>
               <button
                 aria-controls={panelId}

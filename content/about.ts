@@ -30,6 +30,14 @@ export const aboutContent = {
         "We work as one team, making progress visible and building toward what comes next.",
     },
   ],
+  howWeWork: {
+    // TODO(copy): Replace principle descriptions with approved copy.
+    principles: [
+      { title: "Scope first", text: "TODO(copy)" },
+      { title: "Weekly visibility", text: "TODO(copy)" },
+      { title: "Built to maintain", text: "TODO(copy)" },
+    ],
+  },
   founder: {
     // TODO(copy): Replace this founder note with approved copy.
     note:

@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 
 function getLocalTime() {
-  const formatter = new Intl.DateTimeFormat(undefined, {
+  const formatter = new Intl.DateTimeFormat("en-PK", {
+    timeZone: "Asia/Karachi",
     hour: "2-digit",
     minute: "2-digit",
     hour12: false,
   });
   const time = formatter.format(new Date());
-  const timeZone = formatter.resolvedOptions().timeZone;
 
-  return `${time} (${timeZone})`;
+  return `${time} (Asia/Karachi)`;
 }
 
 export function LocalTime() {

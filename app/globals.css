@@ -13,13 +13,7 @@
   --color-ember-deep: #bf3410;
   --color-cream: #f4ede0;
   --ease-standard: cubic-bezier(0.2, 0.7, 0.1, 1);
-  --text-body: 1rem;
-}
-
-@media (min-width: 768px) {
-  :root {
-    --text-body: 1.0625rem;
-  }
+  --text-body: 1.0625rem;
 }
 
 * {

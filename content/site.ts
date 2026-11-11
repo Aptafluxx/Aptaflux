@@ -39,9 +39,19 @@ export const site = {
     // TODO(copy): Replace the contact page introduction with approved copy.
     introduction: "Tell us what you have in mind. We would love to hear about it.",
     // TODO(copy): Replace this response-time statement with approved copy.
-    responseTime: "We typically reply within two business days.",
+    responseTime: "",
     // TODO(copy): Replace this time-zone note with approved copy.
     timeZoneNote: "Working with teams across time zones.",
+    remoteFirst: "Remote-first",
+    whatHappensNext: {
+      heading: "What happens next",
+      // TODO(copy): Replace the placeholder steps with approved copy.
+      steps: [
+        { title: "TODO(copy)", text: "TODO(copy)" },
+        { title: "TODO(copy)", text: "TODO(copy)" },
+        { title: "TODO(copy)", text: "TODO(copy)" },
+      ],
+    },
     // TODO(copy): Replace this contact information heading with approved copy.
     informationHeading: "Get in touch",
     // TODO(copy): Replace this social navigation label with approved copy.
@@ -58,24 +68,22 @@ export const site = {
       // TODO(copy): Replace this form label with approved copy.
       email: "Email",
       // TODO(copy): Replace this form label with approved copy.
-      budget: "Budget range",
+      services: "What do you need?",
+      projectSize: "Project size (optional)",
       // TODO(copy): Replace this form label with approved copy.
       details: "Project details",
       // TODO(copy): Replace this form label with approved copy.
       honeypot: "Leave this field empty",
     },
-    budgetOptions: [
-      // TODO(copy): Replace this budget option if needed.
-      "Under $2k",
-      // TODO(copy): Replace this budget option if needed.
-      "$2k–$5k",
-      // TODO(copy): Replace this budget option if needed.
-      "$5k–$15k",
-      // TODO(copy): Replace this budget option if needed.
-      "$15k+",
+    servicesOptions: [
+      "Website",
+      "Mobile app",
+      "UI/UX design",
+      "AI and automation",
+      "Not sure yet",
     ],
-    // TODO(copy): Replace the budget select prompt with approved copy.
-    budgetPlaceholder: "Choose a range",
+    projectSizeOptions: ["Not sure yet", "Small", "Medium", "Large"],
+    projectSizePlaceholder: "Select a size",
     // TODO(copy): Replace the submit button label with approved copy.
     submit: "Send inquiry",
     // TODO(copy): Replace the submitting button label with approved copy.
@@ -88,7 +96,7 @@ export const site = {
       // TODO(copy): Replace this validation message with approved copy.
       email: "Enter a valid email address.",
       // TODO(copy): Replace this validation message with approved copy.
-      budget: "Choose a budget range.",
+      projectSize: "Choose a project size.",
       // TODO(copy): Replace this validation message with approved copy.
       details: "Tell us a little more about your project.",
     },
@@ -106,7 +114,8 @@ export const site = {
       // TODO(copy): Replace this email label with approved copy.
       email: "Email",
       // TODO(copy): Replace this email label with approved copy.
-      budget: "Budget",
+      services: "Services",
+      projectSize: "Project size",
       // TODO(copy): Replace this email label with approved copy.
       details: "Project details",
     },
@@ -116,4 +125,5 @@ export const site = {
     { href: "https://www.instagram.com", label: "Instagram" },
     { href: "", label: "GitHub" },
   ],
+  whatsapp: { href: "", label: "WhatsApp" },
 } as const;

@@ -12,13 +12,15 @@ export const contactSubmissionSchema = z.object({
     .trim()
     .email(site.contact.validation.email)
     .max(254, site.contact.validation.email),
-  budget: z
+  services: z.array(z.enum(site.contact.servicesOptions)),
+  projectSize: z
     .string()
-    .min(1, site.contact.validation.budget)
+    .optional()
     .refine(
       (value) =>
-        site.contact.budgetOptions.some((option) => option === value),
-      site.contact.validation.budget,
+        !value ||
+        site.contact.projectSizeOptions.some((option) => option === value),
+      site.contact.validation.projectSize,
     ),
   details: z
     .string()

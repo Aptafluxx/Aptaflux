@@ -10,7 +10,7 @@ export const displayFont = Fraunces({
 
 export const bodyFont = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });

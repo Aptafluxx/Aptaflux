@@ -3,53 +3,87 @@
 import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import { Section } from "@/components/ui/Section";
+import { Rule } from "@/components/ui/Rule";
 import { easing, durations, reveal } from "@/lib/motion";
 
 type PageHeaderProps = {
+  accent?: string;
+  breadcrumb?: ReactNode;
+  eyebrow?: ReactNode;
   intro?: ReactNode;
   title: string;
+  visual?: ReactNode;
 };
 
-export function PageHeader({ intro, title }: PageHeaderProps) {
+export function PageHeader({
+  accent,
+  breadcrumb,
+  eyebrow,
+  intro,
+  title,
+  visual,
+}: PageHeaderProps) {
   const shouldReduceMotion = useReducedMotion();
+  const accentStart = accent
+    ? title.toLowerCase().indexOf(accent.toLowerCase())
+    : -1;
+  const accentEnd = accentStart + (accent?.length ?? 0);
 
   return (
-    <Section className="!pb-10 !pt-14 md:!pt-28">
-        <h1 className="font-display text-display-lg font-semibold">
-          {title.split("\n").map((line, index) => (
-            <span key={`${line}-${index}`} className="block overflow-hidden pb-[0.08em]">
-              <motion.span
-                className="block"
-                custom={index}
-                initial={shouldReduceMotion ? false : "hidden"}
-                animate="visible"
-                variants={reveal}
-                transition={{
-                  duration: shouldReduceMotion ? 0 : durations.medium,
-                  ease: easing,
-                  delay: shouldReduceMotion ? 0 : index * 0.08,
-                }}
-              >
-                {line}
-              </motion.span>
-            </span>
-          ))}
-        </h1>
-        {intro ? (
-          <motion.div
-            className="mt-6 max-w-xl text-body leading-relaxed text-muted sm:ml-auto sm:mt-8"
+    <Section className="!pb-12 !pt-28 md:!pb-16 md:!pt-36">
+      <div
+        className={
+          visual ? "grid items-start gap-10 lg:grid-cols-12 lg:gap-12" : ""
+        }
+      >
+        <div className={visual ? "lg:col-span-7" : ""}>
+          {breadcrumb ? <div className="mb-5">{breadcrumb}</div> : null}
+          {eyebrow ? (
+            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-ember">
+              {eyebrow}
+            </p>
+          ) : null}
+          <motion.h1
+            className="max-w-[18ch] font-body text-[clamp(2.25rem,4.5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.035em]"
             initial={shouldReduceMotion ? false : "hidden"}
             animate="visible"
             variants={reveal}
             transition={{
               duration: shouldReduceMotion ? 0 : durations.medium,
               ease: easing,
-              delay: shouldReduceMotion ? 0 : 0.2,
             }}
           >
-            {intro}
-          </motion.div>
-        ) : null}
+            {accentStart >= 0 ? (
+              <>
+                {title.slice(0, accentStart)}
+                <em className="font-display font-medium italic text-ember">
+                  {title.slice(accentStart, accentEnd)}
+                </em>
+                {title.slice(accentEnd)}
+              </>
+            ) : (
+              title
+            )}
+          </motion.h1>
+          {intro ? (
+            <motion.div
+              className="mt-6 max-w-[60ch] text-body leading-relaxed text-muted md:mt-8"
+              initial={shouldReduceMotion ? false : "hidden"}
+              animate="visible"
+              variants={reveal}
+              transition={{
+                duration: shouldReduceMotion ? 0 : durations.medium,
+                ease: easing,
+                delay: shouldReduceMotion ? 0 : 0.12,
+              }}
+            >
+              {intro}
+            </motion.div>
+          ) : null}
+        </div>
+        {visual ? <div className="lg:col-span-5">{visual}</div> : null}
+      </div>
+      <Rule className="mt-10 md:mt-12" />
     </Section>
   );
 }

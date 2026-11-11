@@ -78,7 +78,12 @@ export async function POST(request: Request) {
   const emailText = [
     `${emailFields.name}: ${submission.name}`,
     `${emailFields.email}: ${submission.email}`,
-    `${emailFields.budget}: ${submission.budget}`,
+    ...(submission.services.length > 0
+      ? [`${emailFields.services}: ${submission.services.join(", ")}`]
+      : []),
+    ...(submission.projectSize
+      ? [`${emailFields.projectSize}: ${submission.projectSize}`]
+      : []),
     "",
     `${emailFields.details}:`,
     submission.details,

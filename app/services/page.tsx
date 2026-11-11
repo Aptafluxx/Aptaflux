@@ -1,65 +1,88 @@
+import Link from "next/link";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { Reveal } from "@/components/ui/Reveal";
-import { Rule } from "@/components/ui/Rule";
 import { Section } from "@/components/ui/Section";
+import { homeContent } from "@/content/home";
 import { servicesContent } from "@/content/services";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
   title: servicesContent.metadataTitle,
-  description: servicesContent.metadataDescription,
+  description: homeContent.services.intro,
   path: "/services",
 });
 
 export default function ServicesPage() {
   return (
     <>
-      <PageHeader title="Services" />
-      <Section aria-label={servicesContent.ariaLabels.services} topRule>
+      <PageHeader title={servicesContent.metadataTitle} intro={homeContent.services.intro} />
+      <Section
+        aria-label={servicesContent.ariaLabels.services}
+        tone="surface"
+      >
+        <div className="grid gap-4 lg:grid-cols-3">
           {servicesContent.services.map((service) => (
-            <article className="py-6" key={service.name}>
-              <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12 min-[820px]:gap-0">
-                <h2 className="font-display text-h2 font-medium min-[820px]:col-span-5">
-                  {service.name}
-                </h2>
-                <div className="min-[820px]:col-start-7 min-[820px]:col-span-6">
-                  <p className="max-w-[55ch] text-body leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="mt-6 space-y-2 text-body leading-relaxed text-muted">
-                    {service.deliverables.map((deliverable) => (
-                      <li key={deliverable}>{deliverable}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <Rule className="mt-8 sm:mt-10" />
+            <article
+              className="flex h-full flex-col rounded-sm border border-line p-5 sm:p-6"
+              key={service.slug}
+            >
+              <p className="text-small font-semibold text-ember">{service.number}</p>
+              <h2 className="mt-3 font-display text-h2 font-semibold">
+                {service.name}
+              </h2>
+              <h3 className="mt-4 font-display text-h3 font-medium">
+                {service.promise}
+              </h3>
+              <p className="mt-4 text-body leading-relaxed text-muted">
+                {service.scope}
+              </p>
+              <ul className="mt-4 list-inside list-disc space-y-1 text-body text-muted">
+                {service.deliverables.map((deliverable) => (
+                  <li key={deliverable}>{deliverable}</li>
+                ))}
+              </ul>
+              <p className="mt-6 text-small text-muted">
+                {homeContent.services.startingScopeLabel}
+              </p>
+              <p className="mt-2 font-display text-h3 font-semibold">
+                {service.startingScope}
+              </p>
+              <Link
+                className="mt-6 text-small font-semibold text-ember transition-colors hover:text-text"
+                href={`/services/${service.slug}`}
+              >
+                {service.linkLabel}
+              </Link>
             </article>
           ))}
+        </div>
       </Section>
 
-      <Section>
-          <Reveal>
-            <h2 className="mb-8 font-display text-h2 font-semibold md:mb-10">
-              {servicesContent.howWeWork.heading}
+      <Section aria-label={homeContent.capabilities.eyebrow} tone="cream">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4">
+            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-ember-deep">
+              {homeContent.capabilities.eyebrow}
+            </p>
+            <h2 className="font-display text-h2 font-semibold">
+              {homeContent.capabilities.title}
             </h2>
-            <div className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
-              {servicesContent.howWeWork.steps.map((step) => (
-                <article key={step.number}>
-                  <p className="font-display text-display-lg leading-none text-ember">
-                    {step.number}
-                  </p>
-                  <h3 className="mt-5 font-display text-h3 font-medium">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 text-body leading-relaxed text-muted">
-                    {step.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </Reveal>
+            <p className="mt-6 max-w-[36ch] text-body leading-relaxed text-muted">
+              {homeContent.capabilities.closing}
+            </p>
+          </div>
+          <div className="lg:col-span-7 lg:col-start-6">
+            {servicesContent.capabilities.map((capability) => (
+              <div
+                className="grid gap-2 border-t border-line py-4 sm:grid-cols-2 sm:gap-6"
+                key={capability.name}
+              >
+                <h3 className="font-semibold">{capability.name}</h3>
+                <p className="text-body text-muted">{capability.benefit}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </Section>
       <CtaBand />
     </>

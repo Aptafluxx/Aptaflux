@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { FeaturedWork } from "@/components/sections/FeaturedWork";
 import { Hero } from "@/components/sections/Hero";
-import { ProofBar } from "@/components/sections/ProofBar";
-import { ServicesTeaser } from "@/components/sections/ServicesTeaser";
-import { Testimonial } from "@/components/sections/Testimonial";
+import { HomeSections } from "@/components/sections/HomeSections";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
 import { createPageMetadata } from "@/lib/metadata";
@@ -23,7 +20,9 @@ export default function HomePage() {
     name: site.brand,
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://aptaflux.com",
     email: site.email,
-    sameAs: site.socials.map(({ href }) => href),
+    sameAs: site.socials
+      .filter(({ href }) => href.length > 0)
+      .map(({ href }) => href),
   };
 
   return (
@@ -34,11 +33,25 @@ export default function HomePage() {
           __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c"),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: homeContent.faq.items.map(({ question, answer }) => ({
+              "@type": "Question",
+              name: question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: answer,
+              },
+            })),
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
       <Hero />
-      <ProofBar />
-      <FeaturedWork />
-      <ServicesTeaser />
-      <Testimonial />
+      <HomeSections />
       <CtaBand />
     </>
   );

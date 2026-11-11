@@ -1,72 +1,68 @@
-import { artComponents } from "@/components/art";
 import Link from "next/link";
+import { artComponents } from "@/components/art";
 import { Section } from "@/components/ui/Section";
-import { Rule } from "@/components/ui/Rule";
 import { homeContent } from "@/content/home";
 import { work } from "@/content/work";
-import { durations, easing } from "@/lib/motion";
 
 export function FeaturedWork() {
+  const content = homeContent.work;
+
   return (
-    <Section>
-        <h2 className="mb-8 font-display text-h2 font-semibold md:mb-10">
-          {homeContent.work.heading}
-        </h2>
-        <div>
-          {work.map((project, index) => {
+    <Section
+      aria-label={content.eyebrow}
+      eyebrow={content.eyebrow}
+      title={content.title}
+      tone="navy"
+    >
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {work
+          .filter((project) => project.featured)
+          .map((project) => {
             const Artwork = artComponents[project.cover];
-            const imageOnRight = index % 2 === 1;
 
             return (
-              <div key={project.slug}>
+              <article className="min-w-0" key={project.slug}>
                 <Link
-                  className="group grid grid-cols-1 items-start gap-5 py-8 min-[820px]:grid-cols-12 min-[820px]:items-end min-[820px]:gap-10"
+                  aria-label={`${content.projectLink}: ${project.name}`}
+                  className="group block"
                   href={`/work/${project.slug}`}
                   prefetch={false}
                 >
-                  <div
-                    className={`aspect-[4/3] rounded-[2px] bg-surface p-4 sm:p-6 ${
-                      imageOnRight
-                        ? "min-[820px]:order-2 min-[820px]:col-span-7 min-[820px]:col-start-6"
-                        : "min-[820px]:col-span-7"
-                    }`}
-                  >
-                    <div className="flex h-full items-center justify-center overflow-hidden">
-                      <div
-                        className="aspect-[3/2] w-full transition-transform group-hover:scale-[0.985]"
-                        style={{
-                          transitionDuration: `${durations.medium}s`,
-                          transitionTimingFunction: `cubic-bezier(${easing.join(",")})`,
-                        }}
+                  <div className="aspect-[4/3] overflow-hidden rounded-sm bg-surface p-4 sm:p-6">
+                    <Artwork />
+                  </div>
+                  <div className="mt-5 flex min-h-7 items-start justify-between gap-3">
+                    <p className="text-small text-muted">{project.category}</p>
+                    {project.type === "portfolio" ? (
+                      <span className="rounded-sm border border-line px-2 py-1 text-small text-muted">
+                        {content.portfolioBadge}
+                      </span>
+                    ) : null}
+                  </div>
+                  <h3 className="mt-2 font-display text-work-title font-semibold transition-colors group-hover:text-ember">
+                    {project.name}
+                  </h3>
+                  <p className="mt-2 text-body leading-relaxed text-muted">
+                    {project.summary}
+                  </p>
+                  <ul className="mt-4 flex flex-wrap gap-x-2 gap-y-1">
+                    {project.stack.map((tag) => (
+                      <li
+                        className="text-small text-muted after:content-['·'] after:pl-2 last:after:content-none"
+                        key={tag}
                       >
-                        <Artwork />
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className={
-                      imageOnRight
-                        ? "min-[820px]:order-1 min-[820px]:col-span-5 min-[820px]:col-start-1"
-                        : "min-[820px]:col-span-5 min-[820px]:col-start-8"
-                    }
-                  >
-                    <p className="text-body text-muted">{project.category}</p>
-                    <h3 className="mt-2 font-display text-work-title font-semibold">
-                      {project.name}
-                    </h3>
-                    <p className="mt-3 text-small text-muted">
-                      {project.services.join(", ")}
-                    </p>
-                    <p className="mt-4 font-display text-h3 leading-snug text-ember">
-                      {project.results[0]?.label}
-                    </p>
-                  </div>
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="mt-4 inline-block text-small font-semibold text-ember">
+                    {content.projectLink}
+                  </span>
                 </Link>
-                {index < work.length - 1 ? <Rule /> : null}
-              </div>
+              </article>
             );
           })}
-        </div>
+      </div>
     </Section>
   );
 }

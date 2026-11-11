@@ -59,10 +59,13 @@ export default async function ProjectPage(props: WorkPageProps) {
 
   const labels = workPageContent.projectLabels;
   const metadataItems = [
-    { label: labels.client, value: project.client },
+    {
+      label: labels.type,
+      value: project.type === "portfolio" ? labels.type : project.client,
+    },
+    { label: labels.category, value: project.category },
     { label: labels.services, value: project.services.join(", ") },
     { label: labels.stack, value: project.stack.join(", ") },
-    { label: labels.year, value: project.year },
   ];
   const storyItems = [
     { label: labels.challenge, text: project.challenge },
@@ -120,32 +123,23 @@ export default async function ProjectPage(props: WorkPageProps) {
             </div>
           </article>
         ))}
-        <article className="grid grid-cols-1 gap-5 py-6 min-[820px]:grid-cols-12 min-[820px]:gap-0">
-          <h2 className="font-display text-h3 font-medium min-[820px]:col-span-3">
-            {labels.results}
-          </h2>
-          <ul className="max-w-[60ch] space-y-6 min-[820px]:col-start-5 min-[820px]:col-span-7">
-            {project.results.map((result, index) => (
-              <li key={`${result.label}-${index}`}>
-                {result.value ? (
-                  <>
-                    <p className="font-display text-display-lg leading-none text-ember">
-                      {result.value}
-                    </p>
-                    <p className="mt-2 text-body leading-relaxed">
-                      {result.label}
-                    </p>
-                  </>
-                ) : (
-                  <p className="text-body leading-relaxed">{result.label}</p>
-                )}
-              </li>
-            ))}
-          </ul>
-          <div className="col-span-full mt-8 min-[820px]:mt-10">
-            <Rule />
-          </div>
-        </article>
+        {project.results.length > 0 ? (
+          <article className="grid grid-cols-1 gap-5 py-6 min-[820px]:grid-cols-12 min-[820px]:gap-0">
+            <h2 className="font-display text-h3 font-medium min-[820px]:col-span-3">
+              {labels.results}
+            </h2>
+            <ul className="max-w-[60ch] space-y-6 min-[820px]:col-start-5 min-[820px]:col-span-7">
+              {project.results.map((result, index) => (
+                <li key={`${result}-${index}`}>
+                  <p className="text-body leading-relaxed">{result}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="col-span-full mt-8 min-[820px]:mt-10">
+              <Rule />
+            </div>
+          </article>
+        ) : null}
       </Section>
 
       {project.gallery && project.gallery.length > 0 ? (

@@ -6,15 +6,18 @@ export function CtaBand() {
   const { cta } = homeContent;
 
   return (
-    <Section topRule className="py-14 md:py-16">
-        <div className="flex flex-col items-start gap-6 min-[820px]:items-end">
-          <h2 className="max-w-5xl font-display text-h2 font-semibold">
-            {cta.headline}
-          </h2>
-          <Button className="min-[820px]:self-end" href="/contact">
-            {cta.action}
-          </Button>
-        </div>
+    <Section
+      eyebrow={cta.eyebrow}
+      intro={cta.intro}
+      title={cta.title}
+      tone="ember"
+    >
+      <p className="font-display text-h3 font-semibold">{cta.invitation}</p>
+      <p className="mt-3 max-w-[48ch] text-body">{cta.detail}</p>
+      <Button className="mt-6" href="/contact" tone="ember">
+        {cta.action}
+      </Button>
+      <p className="mt-4 text-small">{cta.note}</p>
     </Section>
   );
 }

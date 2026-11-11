@@ -1,75 +1,50 @@
-export type WorkArtKey = "DoctorHunt" | "DripsWater" | "TaskFlow";
-type ProjectSlug = "doctor-hunt" | "drips-water-app" | "task-flow";
+export type WorkArtKey = "DoctorHunt" | "DripsWater" | "TaskFlow" | "EmberFig";
+export type ProjectSlug =
+  | "doctor-hunt"
+  | "ember-fig"
+  | "drips-water-app"
+  | "task-flow";
 
-type ProjectResult = {
-  // TODO(copy): Replace this placeholder with a client-approved result statement.
-  label: string;
-  // Add only a verified numeric metric; keep this undefined otherwise.
-  value?: string;
-};
+type ProjectType = "portfolio" | "client";
 
 export type WorkProject = {
   slug: ProjectSlug;
-  // TODO(copy): Replace the project name with approved copy.
   name: string;
-  // TODO(copy): Replace the project client with approved copy.
+  type: ProjectType;
+  featured: boolean;
   client: string;
-  // TODO(verify): Replace the placeholder project year with the verified year.
-  year: string;
-  // TODO(verify): Replace placeholder services with the verified services.
   services: string[];
-  // TODO(verify): Replace placeholder technologies with the verified stack.
   stack: string[];
-  // TODO(verify): Replace the placeholder role with the verified project role.
-  role: string;
-  // TODO(copy): Replace the project category with approved copy.
   category: string;
-  // TODO(copy): Replace this project summary with approved copy.
   summary: string;
-  // TODO(copy): Replace this project challenge with approved copy.
   challenge: string;
-  // TODO(copy): Replace this project approach with approved copy.
   approach: string;
-  results: ProjectResult[];
+  results: string[];
   cover: WorkArtKey;
   gallery?: WorkArtKey[];
   next: ProjectSlug;
 };
 
 export const workPageContent = {
-  // TODO(copy): Replace the work page title with approved copy.
   metadataTitle: "Work",
-  // TODO(copy): Replace the work page introduction with approved copy.
-  introduction: "A selection of ideas brought to life with ambitious teams.",
-  // TODO(copy): Replace the work page metadata description with approved copy.
+  introduction: "Real projects. Practical thinking. Purposeful execution.",
   metadataDescription:
-    "Explore selected digital products, platforms and brand experiences by Aptaflux.",
+    "Ideas turned into digital products by Aptaflux.",
   ariaLabels: {
-    // TODO(copy): Replace this accessibility label if needed.
     projects: "Selected projects",
-    // TODO(copy): Replace this accessibility label if needed.
     projectDetails: "Project details",
-    // TODO(copy): Replace this accessibility label if needed.
     projectStory: "Project story",
-    // TODO(copy): Replace this accessibility label if needed.
     projectGallery: "Project gallery",
   },
   projectLabels: {
-    // TODO(copy): Replace this metadata label if needed.
-    client: "Client",
-    // TODO(copy): Replace this metadata label if needed.
+    type: "Portfolio project",
+    category: "Category",
     services: "Services",
-    // TODO(copy): Replace this metadata label if needed.
-    stack: "Stack",
-    // TODO(copy): Replace this metadata label if needed.
-    year: "Year",
-    // TODO(copy): Replace this story label if needed.
+    stack: "Technologies",
+    projectLink: "Explore Project →",
     challenge: "Challenge",
-    // TODO(copy): Replace this story label if needed.
     approach: "Approach",
-    // TODO(copy): Replace this story label if needed.
     results: "Results",
-    // TODO(copy): Replace this navigation label if needed.
     nextProject: "Next project",
   },
 } as const;
@@ -77,138 +52,87 @@ export const workPageContent = {
 export const work: WorkProject[] = [
   {
     slug: "doctor-hunt",
-    // TODO(copy): Replace this project name with the approved project name.
     name: "Doctor Hunt",
-    // TODO(copy): Replace this client name with the approved client name.
-    client: "Doctor Hunt",
-    // TODO(verify): Replace with the verified project year.
-    year: "2025",
-    services: [
-      // TODO(verify): Replace with a verified service.
-      "Product strategy",
-      // TODO(verify): Replace with a verified service.
-      "Experience design",
-      // TODO(verify): Replace with a verified service.
-      "Development",
-    ],
-    stack: [
-      // TODO(verify): Replace with a verified technology.
-      "Next.js",
-      // TODO(verify): Replace with a verified technology.
-      "TypeScript",
-      // TODO(verify): Replace with a verified technology.
-      "Node.js",
-    ],
-    // TODO(verify): Replace with the verified project role.
-    role: "Product strategy, design and development",
-    // TODO(copy): Replace with the approved project category.
-    category: "Healthcare",
-    // TODO(copy): Replace with the approved project summary.
-    summary: "A simpler way for patients to find trusted care.",
-    // TODO(copy): Replace with the approved project challenge.
-    challenge:
-      "Patients needed a clearer way to discover the right care and understand their options.",
-    // TODO(copy): Replace with the approved project approach.
-    approach:
-      "We brought discovery, provider details and appointment planning into one straightforward experience.",
-    results: [
-      {
-        // TODO(copy): Replace with an approved project result.
-        label: "A more confident path from searching for care to booking a visit.",
-      },
-    ],
+    type: "portfolio",
+    featured: true,
+    client: "Portfolio project",
+    services: ["Mobile Development", "Firebase", "AI Integration"],
+    stack: ["Mobile Development", "Firebase", "AI Integration"],
+    category: "Healthcare platform",
+    summary:
+      "A healthcare experience connecting patients with doctors through appointment booking, pharmacy features, and AI-assisted symptom guidance.",
+    // TODO(copy): Replace with an approved project challenge.
+    challenge: "Project challenge to be added.",
+    // TODO(copy): Replace with an approved project approach.
+    approach: "Project approach to be added.",
+    // TODO(copy): Add verified project results only.
+    // TODO(copy): Replace with verified results when available.
+    results: ["Results to be added."],
     cover: "DoctorHunt",
+    gallery: [],
+    next: "ember-fig",
+  },
+  {
+    slug: "ember-fig",
+    name: "Ember & Fig",
+    type: "portfolio",
+    featured: true,
+    client: "Portfolio project",
+    services: ["Web Development", "Responsive Design", "UI/UX"],
+    stack: ["Web Development", "Responsive Design", "UI/UX"],
+    category: "Restaurant digital experience",
+    summary:
+      "An editorial-style restaurant website designed to present the brand, showcase its food, and make essential customer information accessible.",
+    // TODO(copy): Replace with an approved project challenge.
+    challenge: "Project challenge to be added.",
+    // TODO(copy): Replace with an approved project approach.
+    approach: "Project approach to be added.",
+    // TODO(copy): Add verified project results only.
+    // TODO(copy): Replace with verified results when available.
+    results: ["Results to be added."],
+    cover: "EmberFig",
     gallery: [],
     next: "drips-water-app",
   },
   {
     slug: "drips-water-app",
-    // TODO(copy): Replace this project name with the approved project name.
-    name: "Drips Water App",
-    // TODO(copy): Replace this client name with the approved client name.
-    client: "Drips",
-    // TODO(verify): Replace with the verified project year.
-    year: "2025",
-    services: [
-      // TODO(verify): Replace with a verified service.
-      "Brand identity",
-      // TODO(verify): Replace with a verified service.
-      "Product design",
-      // TODO(verify): Replace with a verified service.
-      "Development",
-    ],
-    stack: [
-      // TODO(verify): Replace with a verified technology.
-      "React Native",
-      // TODO(verify): Replace with a verified technology.
-      "TypeScript",
-      // TODO(verify): Replace with a verified technology.
-      "Firebase",
-    ],
-    // TODO(verify): Replace with the verified project role.
-    role: "Brand, product design and development",
-    // TODO(copy): Replace with the approved project category.
-    category: "Lifestyle",
-    // TODO(copy): Replace with the approved project summary.
-    summary: "A refreshing digital home for everyday hydration.",
-    // TODO(copy): Replace with the approved project challenge.
-    challenge:
-      "The brand needed a welcoming digital experience that made hydration feel simple and engaging.",
-    // TODO(copy): Replace with the approved project approach.
-    approach:
-      "We shaped a clear visual language and an easy-to-use mobile experience for daily routines.",
-    results: [
-      {
-        // TODO(copy): Replace with an approved project result.
-        label: "A cohesive product experience that makes everyday hydration feel intuitive.",
-      },
-    ],
+    name: "Drips Water",
+    type: "portfolio",
+    featured: true,
+    client: "Portfolio project",
+    services: ["Flutter", "Firebase", "Business Automation"],
+    stack: ["Flutter", "Firebase", "Business Automation"],
+    category: "Business management system",
+    summary:
+      "A digital water delivery solution combining customer-facing features, operational management, and role-based administration.",
+    // TODO(copy): Replace with an approved project challenge.
+    challenge: "Project challenge to be added.",
+    // TODO(copy): Replace with an approved project approach.
+    approach: "Project approach to be added.",
+    // TODO(copy): Add verified project results only.
+    // TODO(copy): Replace with verified results when available.
+    results: ["Results to be added."],
     cover: "DripsWater",
     gallery: [],
     next: "task-flow",
   },
   {
     slug: "task-flow",
-    // TODO(copy): Replace this project name with the approved project name.
     name: "Task Flow",
-    // TODO(copy): Replace this client name with the approved client name.
-    client: "Task Flow",
-    // TODO(verify): Replace with the verified project year.
-    year: "2026",
-    services: [
-      // TODO(verify): Replace with a verified service.
-      "Product strategy",
-      // TODO(verify): Replace with a verified service.
-      "Experience design",
-      // TODO(verify): Replace with a verified service.
-      "Development",
-    ],
-    stack: [
-      // TODO(verify): Replace with a verified technology.
-      "Next.js",
-      // TODO(verify): Replace with a verified technology.
-      "TypeScript",
-      // TODO(verify): Replace with a verified technology.
-      "PostgreSQL",
-    ],
-    // TODO(verify): Replace with the verified project role.
-    role: "Product strategy, design and development",
-    // TODO(copy): Replace with the approved project category.
+    type: "portfolio",
+    featured: false,
+    client: "Portfolio project",
+    services: ["Product strategy", "Experience design", "Development"],
+    stack: ["Next.js", "TypeScript", "PostgreSQL"],
     category: "Productivity",
-    // TODO(copy): Replace with the approved project summary.
     summary: "A calmer workspace for teams to get things done.",
-    // TODO(copy): Replace with the approved project challenge.
-    challenge:
-      "Teams needed one shared space to organize work without adding process overhead.",
-    // TODO(copy): Replace with the approved project approach.
-    approach:
-      "We designed a focused workspace that helps teams see priorities and keep work moving.",
-    results: [
-      {
-        // TODO(copy): Replace with an approved project result.
-        label: "A calmer way for teams to bring their plans and daily work together.",
-      },
-    ],
+    // TODO(copy): Replace with an approved project challenge.
+    challenge: "Project challenge to be added.",
+    // TODO(copy): Replace with an approved project approach.
+    approach: "Project approach to be added.",
+    // TODO(copy): Add verified project results only.
+    // TODO(copy): Replace with verified results when available.
+    results: ["Results to be added."],
     cover: "TaskFlow",
     gallery: [],
     next: "doctor-hunt",

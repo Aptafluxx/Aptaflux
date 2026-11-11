@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { allowIndexing } from "@/lib/metadata";
+import { servicesContent } from "@/content/services";
 import { work } from "@/content/work";
 
 const siteUrl = new URL(
@@ -19,6 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...work.map((project) => ({
       url: new URL(`/work/${project.slug}`, siteUrl).toString(),
+    })),
+    ...servicesContent.services.map((service) => ({
+      url: new URL(`/services/${service.slug}`, siteUrl).toString(),
     })),
   ];
 }

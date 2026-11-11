@@ -1,114 +1,248 @@
 export const homeContent = {
-  // TODO(copy): Replace the homepage metadata title if needed.
-  metadataTitle: "Home",
-  // TODO(copy): Replace the homepage metadata description with approved copy.
-  metadataDescription:
-    "Aptaflux partners with ambitious teams to shape thoughtful digital products.",
-  hero: {
-    headline: [
-      // TODO(copy): Replace this hero headline line with final homepage copy.
-      "Build what",
-      // TODO(copy): Replace this hero headline line with final homepage copy.
-      "moves you forward.",
-    ],
-    mobileHeadline: [
-      // TODO(copy): Replace this hero headline line with final homepage copy.
-      "Build what",
-      // TODO(copy): Replace this hero headline line with final homepage copy.
-      "moves you",
-      // TODO(copy): Replace this hero headline line with final homepage copy.
-      "forward.",
-    ],
-    // TODO(copy): Replace the hero subheadline with approved brand copy.
-    subheadline:
-      "We partner with ambitious teams to turn bold ideas into thoughtful digital products.",
-    // TODO(copy): Replace the primary call-to-action label if needed.
-    primaryAction: "Start a Project",
-    // TODO(copy): Replace the secondary call-to-action label if needed.
-    secondaryAction: "Explore Work",
-    // TODO(copy): Replace the scroll indicator's accessible label if needed.
-    scrollLabel: "Scroll to explore",
+  positioning: {
+    tagline: "Digital solutions. Measurable business progress.",
+    capabilities: "Websites · Mobile Applications · UI/UX · AI Integration",
   },
-  proof: {
-    // TODO(copy): Replace the proof bar introduction with approved copy.
-    heading: "Trusted by teams at",
-    clients: [
-      // TODO(copy): Replace this client placeholder with an approved client name.
-      "Northstar",
-      // TODO(copy): Replace this client placeholder with an approved client name.
-      "Fieldwork",
-      // TODO(copy): Replace this client placeholder with an approved client name.
-      "Common Ground",
+  metadataTitle: "Aptaflux",
+  metadataDescription:
+    "From high-converting websites to intelligent applications and AI-powered systems, we build solutions that help your business attract customers, work smarter, and grow confidently.",
+  hero: {
+    eyebrow: "DIGITAL PARTNER FOR AMBITIOUS BUSINESSES",
+    title: "We turn business challenges into digital opportunities.",
+    intro:
+      "From high-converting websites to intelligent applications and AI-powered systems, we build solutions that help your business attract customers, work smarter, and grow confidently.",
+    primaryAction: "Book a Discovery Call",
+    secondaryAction: "Explore Our Solutions",
+    capabilities: [
+      "Web Development",
+      "Mobile Apps",
+      "Product Design",
+      "AI & Automation",
+    ],
+  },
+  problem: {
+    eyebrow: "THE COST OF STANDING STILL",
+    title: "Growth introduces complexity.",
+    intro: "What worked when you started may now be slowing you down.",
+    points: [
+      {
+        title: "Customers aren't converting.",
+        text: "Your online presence doesn't communicate your value or make it easy for customers to take action",
+      },
+      {
+        title: "Your team is buried in manual work.",
+        text: "Repetitive inquiries, disconnected tools, and manual processes consume valuable time",
+      },
+      {
+        title: "Your technology can't scale with you.",
+        text: "Your business needs better systems, connected workflows, and a stronger digital foundation.",
+      },
+    ],
+    closing:
+      "These aren't just technology problems. They're business problems. That's where Aptaflux comes in.",
+  },
+  outcomes: {
+    eyebrow: "OUTCOMES OVER OUTPUTS",
+    title: "We don't just build digital products. We build better ways to do business.",
+    points: [
+      {
+        title: "Attract more customers",
+        text: "Digital experiences that communicate value and encourage action.",
+      },
+      {
+        title: "Save valuable time",
+        text: "Automation that removes repetitive tasks and unnecessary friction.",
+      },
+      {
+        title: "Improve customer experience",
+        text: "Intuitive applications and interfaces that make interactions easier.",
+      },
+      {
+        title: "Build for growth",
+        text: "Connected digital systems designed around your business operations.",
+      },
+    ],
+  },
+  services: {
+    eyebrow: "SOLUTIONS BUILT AROUND YOUR BUSINESS",
+    title: "Different challenges. One digital partner.",
+    intro:
+      "Whether you need to win more customers, simplify operations, or build a complete digital product, we bring the strategy, design, and technology together.",
+    solutions: [
+      {
+        slug: "conversion-engine",
+        number: "01 /",
+        name: "Conversion Engine",
+        promise: "Turn your online presence into a customer acquisition channel.",
+        scope:
+          "Websites, landing pages, SEO foundations, inquiry systems, and booking integrations.",
+        startingScope: "PKR 80,000–180,000",
+        linkLabel: "Explore Conversion Engine",
+      },
+      {
+        slug: "business-automation",
+        number: "02 /",
+        name: "Business Automation System",
+        promise: "Spend less time on repetitive tasks and more time growing your business.",
+        scope:
+          "AI assistants, workflow automation, API integrations, dashboards, and notifications.",
+        startingScope: "PKR 180,000–450,000",
+        linkLabel: "Explore Business Automation",
+      },
+      {
+        slug: "digital-platforms",
+        number: "03 /",
+        name: "Digital Operations Platform",
+        promise: "Bring your business operations into one connected digital ecosystem.",
+        scope:
+          "Mobile applications, web portals, admin dashboards, backend systems, and integrations.",
+        startingScope: "PKR 450,000–1,200,000+",
+        linkLabel: "Explore Digital Platforms",
+      },
+    ],
+    startingScopeLabel: "Starting scope",
+    unsure: "Not sure what your business needs?",
+    contactLink: "Let's figure it out together.",
+  },
+  capabilities: {
+    eyebrow: "WHAT WE BRING TO THE TABLE",
+    title: "Everything your digital vision needs. Under one roof.",
+    closing:
+      "We select the technology based on the problem, not the other way around.",
+    rows: [
+      { name: "Web development", benefit: "Establish credibility and generate inquiries" },
+      { name: "Mobile applications", benefit: "Deliver convenient customer experiences" },
+      { name: "UI/UX design", benefit: "Reduce friction and improve usability" },
+      { name: "AI integration", benefit: "Make workflows smarter and more efficient" },
+      { name: "API & backend development", benefit: "Connect systems and centralize information" },
+      { name: "Business automation", benefit: "Reduce repetitive operational work" },
     ],
   },
   work: {
-    // TODO(copy): Replace the featured work section heading if needed.
-    heading: "Featured work",
+    eyebrow: "IDEAS TURNED INTO DIGITAL PRODUCTS",
+    title: "Real projects. Practical thinking. Purposeful execution.",
+    projectLink: "Explore Project →",
+    portfolioBadge: "Portfolio project",
   },
-  services: {
-    // TODO(copy): Replace the services section heading if needed.
-    heading: "How we can help",
-    // TODO(copy): Replace the services link label if needed.
-    linkLabel: "All services",
-    rows: [
+  process: {
+    eyebrow: "FROM FIRST CONVERSATION TO LAUNCH",
+    title: "A clear process. No unnecessary complexity.",
+    steps: [
       {
-        // TODO(copy): Replace this service title with approved copy.
-        title: "Digital products",
-        // TODO(copy): Replace this service description with approved copy.
-        description:
-          "We shape clear, useful product experiences from first idea through launch.",
-        deliverables: [
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Product strategy",
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "UX and UI design",
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Prototyping",
-        ],
+        number: "01",
+        title: "Discover",
+        text: "We understand your business, challenges, customers, and goals.",
       },
       {
-        // TODO(copy): Replace this service title with approved copy.
-        title: "Web platforms",
-        // TODO(copy): Replace this service description with approved copy.
-        description:
-          "We create distinctive websites and platforms built to support what's next.",
-        deliverables: [
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Web design",
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Web development",
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Content systems",
-        ],
+        number: "02",
+        title: "Strategize",
+        text: "We define the right solution, deliverables, timeline, and success measures.",
       },
       {
-        // TODO(copy): Replace this service title with approved copy.
-        title: "Digital growth",
-        // TODO(copy): Replace this service description with approved copy.
-        description:
-          "We help teams make their digital presence work harder and reach further.",
-        deliverables: [
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Brand systems",
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Growth experiments",
-          // TODO(copy): Replace this deliverable placeholder with approved copy.
-          "Ongoing support",
-        ],
+        number: "03",
+        title: "Design & Build",
+        text: "We turn the agreed strategy into a functional, polished digital solution.",
+      },
+      {
+        number: "04",
+        title: "Launch & Optimize",
+        text: "We test, deploy, measure performance, and support continued improvements.",
       },
     ],
   },
-  testimonial: {
-    // TODO(copy): Replace this testimonial placeholder with an approved client quote.
-    quote:
-      "A thoughtful partner from the first conversation to the final details. The team helped us turn a complex idea into something people love using.",
-    // TODO(copy): Replace this testimonial attribution with an approved name and role.
-    attribution: "Jordan Lee, founder at Northstar",
+  why: {
+    eyebrow: "WHY WORK WITH US",
+    title: "Technology should solve problems, not create new ones.",
+    points: [
+      {
+        name: "Business-first thinking",
+        text: "We start with your goals before recommending technology.",
+      },
+      {
+        name: "Purposeful design",
+        text: "Every interface should make an interaction easier.",
+      },
+      {
+        name: "Connected solutions",
+        text: "We consider how your website, app, backend, and workflows work together.",
+      },
+      {
+        name: "Transparent delivery",
+        text: "Clear scope, milestones, communication, and expectations.",
+      },
+      {
+        name: "Long-term mindset",
+        text: "We build with maintenance, performance, and future growth in mind.",
+      },
+    ],
+  },
+  faq: {
+    eyebrow: "FAQ",
+    title: "How much does a project cost?",
+    items: [
+      {
+        question: "How much does a project cost?",
+        answer:
+          "Every project depends on its requirements and complexity. Our packages provide starting ranges, while your final proposal defines the exact deliverables and investment.",
+      },
+      {
+        question: "How long does a project take?",
+        answer:
+          "A focused website may take several weeks. Automation systems and custom applications generally require more time. We provide a timeline after discovery and scope definition.",
+      },
+      {
+        question: "Can I hire Aptaflux for just UI/UX design?",
+        answer:
+          "Yes. We can work on standalone interface design, UX audits, wireframes, prototypes, or design systems.",
+      },
+      {
+        question: "Can you improve an existing website or app?",
+        answer:
+          "Yes. We can audit an existing product, identify usability or technical issues, and recommend improvements before starting development.",
+      },
+      {
+        question: "Do you provide ongoing support?",
+        answer:
+          "Yes. Maintenance, monitoring, bug fixes, and agreed feature improvements can be arranged through a monthly support agreement.",
+      },
+      {
+        question: "Do you work with international clients?",
+        answer:
+          "Yes. Aptaflux can work remotely with businesses beyond Pakistan, with project scope, payment terms, and communication agreed in advance.",
+      },
+    ],
   },
   cta: {
-    // TODO(copy): Replace the call-to-action headline if needed.
-    headline: "Ready to build something iconic?",
-    // TODO(copy): Replace the call-to-action button label if needed.
+    eyebrow: "YOUR NEXT MOVE STARTS HERE",
+    title: "Ready to make your business work smarter?",
+    intro:
+      "Whether you're launching something new or improving what already exists, let's build a digital solution that moves your business forward.",
+    invitation: "Let's talk about your project.",
+    detail:
+      "Tell us what you're trying to achieve. We'll help identify the right solution.",
     action: "Start a Project",
+    note: "No pressure. Just a conversation about what's possible.",
+  },
+  footer: {
+    wordmark: "APTAFLUX.",
+    blurb: "Building digital solutions for businesses ready to move forward.",
+    explore: "Explore",
+    services: "Services",
+    contact: "Contact",
+    exploreLinks: [
+      { label: "Home", href: "/" },
+      { label: "Services", href: "/services" },
+      { label: "Our Work", href: "/work" },
+      { label: "About Us", href: "/about" },
+      { label: "Contact", href: "/contact" },
+    ],
+    serviceLinks: [
+      "Web Development",
+      "Mobile Applications",
+      "UI/UX Design",
+      "AI Integration",
+      "Business Automation",
+    ],
+    copyright: "© 2026 Aptaflux. All rights reserved.",
   },
 } as const;

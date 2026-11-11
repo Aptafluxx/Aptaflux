@@ -10,6 +10,8 @@
   --color-muted: rgba(244, 237, 224, 0.64);
   --color-line: rgba(244, 237, 224, 0.14);
   --color-ember: #ff5b2e;
+  --color-ember-deep: #bf3410;
+  --color-cream: #f4ede0;
   --text-body: 1rem;
 }
 
@@ -34,6 +36,34 @@ body {
   color: var(--color-text);
   font-family: var(--font-body), sans-serif;
   font-size: var(--text-body);
+}
+
+section[data-tone="navy"] {
+  --section-background: var(--color-bg);
+  --color-text: #f4ede0;
+  --color-muted: rgba(244, 237, 224, 0.64);
+  --color-line: rgba(244, 237, 224, 0.14);
+}
+
+section[data-tone="surface"] {
+  --section-background: var(--color-surface);
+  --color-text: #f4ede0;
+  --color-muted: rgba(244, 237, 224, 0.64);
+  --color-line: rgba(244, 237, 224, 0.14);
+}
+
+section[data-tone="cream"] {
+  --section-background: #f4ede0;
+  --color-text: #142130;
+  --color-muted: rgba(20, 33, 48, 0.66);
+  --color-line: rgba(20, 33, 48, 0.14);
+}
+
+section[data-tone="ember"] {
+  --section-background: #ff5b2e;
+  --color-text: #142130;
+  --color-muted: rgba(20, 33, 48, 0.72);
+  --color-line: rgba(20, 33, 48, 0.2);
 }
 
 .cursor-preview {
@@ -79,6 +109,16 @@ body {
 
 .scroll-indicator-line {
   animation: scroll-indicator 1s linear infinite;
+}
+
+.home-faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+.home-faq-panel[data-open="true"] {
+  grid-template-rows: 1fr;
 }
 
 .page-transition {
@@ -128,5 +168,9 @@ body {
 
   .scroll-indicator {
     display: none;
+  }
+
+  .home-faq-panel {
+    transition-duration: 0.01ms;
   }
 }

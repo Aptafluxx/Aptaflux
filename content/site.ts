@@ -28,6 +28,7 @@ export const site = {
   mobileNavigation: "Mobile navigation",
   socialNavigation: "Social links",
   localTimeLabel: "Local time",
+  // TODO: Switch to hello@aptaflux.com once the address is configured.
   email: "aptaflux@gmail.com",
   contact: {
     // TODO(copy): Replace the contact page title with approved copy.
@@ -112,7 +113,7 @@ export const site = {
   },
   socials: [
     { href: "https://www.linkedin.com", label: "LinkedIn" },
-    { href: "https://x.com", label: "X" },
     { href: "https://www.instagram.com", label: "Instagram" },
+    { href: "", label: "GitHub" },
   ],
 } as const;

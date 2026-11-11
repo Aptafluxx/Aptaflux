@@ -5,7 +5,7 @@ import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useState, type PointerEvent } from "react";
 import { ArtworkFrame } from "@/components/work/ArtworkFrame";
-import type { WorkProject } from "@/content/work";
+import { workPageContent, type WorkProject } from "@/content/work";
 import { durations, easing } from "@/lib/motion";
 
 type ProjectRowProps = {
@@ -66,16 +66,27 @@ export function ProjectRow({ project }: ProjectRowProps) {
     >
       <div className="grid gap-5 min-[820px]:grid-cols-[minmax(0,1fr)_360px] min-[820px]:items-end">
         <div className="min-w-0">
-          <h2 className="font-display text-project-title font-medium transition-colors duration-300 group-hover:text-ember">
+          <div className="flex flex-wrap items-center gap-3">
+            <h2 className="font-display text-project-title font-medium transition-colors duration-300 group-hover:text-ember">
             {project.name}
-          </h2>
+            </h2>
+            {project.type === "portfolio" ? (
+              <span className="rounded-sm border border-line px-2 py-1 text-small text-muted">
+                {workPageContent.projectLabels.type}
+              </span>
+            ) : null}
+          </div>
+          <p className="mt-2 text-small text-muted">{project.category}</p>
+          <p className="mt-3 max-w-[65ch] text-body leading-relaxed text-muted">
+            {project.summary}
+          </p>
           <div className="mt-5 min-[820px]:hidden">
             <ArtworkFrame art={project.cover} />
           </div>
         </div>
         <div className="flex flex-col gap-2 text-right text-small leading-relaxed text-muted">
-          <p>{project.services.join(", ")}</p>
-          <p>{project.year}</p>
+          <p>{project.stack.join(", ")}</p>
+          <p className="text-ember">{workPageContent.projectLabels.projectLink}</p>
         </div>
       </div>
       {preview}

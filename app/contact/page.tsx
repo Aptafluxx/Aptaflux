@@ -39,7 +39,7 @@ export default function ContactPage() {
             <div className="mt-10">
               <h3 className="text-small text-muted">{contact.socialHeading}</h3>
               <nav aria-label={site.socialNavigation} className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
-                {site.socials.map((social) => (
+                {site.socials.filter(({ href }) => href.length > 0).map((social) => (
                   <a
                     className="text-body transition-colors hover:text-ember"
                     href={social.href}

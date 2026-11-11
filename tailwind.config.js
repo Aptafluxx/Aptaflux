@@ -14,6 +14,9 @@ module.exports = {
         muted: "var(--color-muted)",
         line: "var(--color-line)",
         ember: "var(--color-ember)",
+        "ember-deep": "var(--color-ember-deep)",
+        navy: "#142130",
+        cream: "#f4ede0",
       },
       fontFamily: {
         display: ["var(--font-display)", "serif"],
@@ -24,6 +27,11 @@ module.exports = {
           "clamp(2.5rem, 5vw, 4.5rem)",
           { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "600" },
         ],
+        eyebrow: [
+          "0.8125rem",
+          { lineHeight: "1.25", letterSpacing: "0.12em" },
+        ],
+        "step-number": ["2rem", { lineHeight: "1" }],
         "display-lg": [
           "clamp(2.25rem, 4.2vw, 3.75rem)",
           { lineHeight: "1.05", letterSpacing: "-0.02em" },

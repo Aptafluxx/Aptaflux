@@ -8,7 +8,7 @@ export function Hero() {
   const { hero } = homeContent;
 
   return (
-    <Section tone="navy">
+    <Section className="py-18 lg:py-24" tone="navy">
       <Reveal>
         <div className="grid items-center gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7">

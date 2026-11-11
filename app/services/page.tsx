@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { ServiceAutomation } from "@/components/art/ServiceAutomation";
+import { ServiceConversion } from "@/components/art/ServiceConversion";
+import { ServicePlatform } from "@/components/art/ServicePlatform";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
@@ -13,6 +16,12 @@ export const metadata = createPageMetadata({
 });
 
 export default function ServicesPage() {
+  const serviceArt = {
+    "conversion-engine": ServiceConversion,
+    "business-automation": ServiceAutomation,
+    "digital-platforms": ServicePlatform,
+  } as const;
+
   return (
     <>
       <PageHeader title={servicesContent.metadataTitle} intro={homeContent.services.intro} />
@@ -21,40 +30,37 @@ export default function ServicesPage() {
         tone="surface"
       >
         <div className="grid gap-4 lg:grid-cols-3">
-          {servicesContent.services.map((service) => (
-            <article
-              className="flex h-full flex-col rounded-sm border border-line p-5 sm:p-6"
-              key={service.slug}
-            >
-              <p className="text-small font-semibold text-ember">{service.number}</p>
-              <h2 className="mt-3 font-display text-h2 font-semibold">
-                {service.name}
-              </h2>
-              <h3 className="mt-4 font-display text-h3 font-medium">
-                {service.promise}
-              </h3>
-              <p className="mt-4 text-body leading-relaxed text-muted">
-                {service.scope}
-              </p>
-              <ul className="mt-4 list-inside list-disc space-y-1 text-body text-muted">
-                {service.deliverables.map((deliverable) => (
-                  <li key={deliverable}>{deliverable}</li>
-                ))}
-              </ul>
-              <p className="mt-6 text-small text-muted">
-                {homeContent.services.startingScopeLabel}
-              </p>
-              <p className="mt-2 font-display text-h3 font-semibold">
-                {service.startingScope}
-              </p>
-              <Link
-                className="mt-6 text-small font-semibold text-ember transition-colors hover:text-text"
-                href={`/services/${service.slug}`}
+          {servicesContent.services.map((service) => {
+            const Illustration = serviceArt[service.slug];
+            return (
+              <article
+                className="flex h-full flex-col rounded-sm border border-line p-5 sm:p-6"
+                key={service.slug}
               >
-                {service.linkLabel}
-              </Link>
-            </article>
-          ))}
+                <Illustration className="mb-4" />
+                <p className="text-small font-semibold text-ember">{service.number}</p>
+                <h2 className="mt-3 font-display text-h2 font-semibold">
+                  {service.name}
+                </h2>
+                <h3 className="mt-4 font-display text-h3 font-medium">
+                  {service.promise}
+                </h3>
+                <p className="mt-4 text-body leading-relaxed text-muted">
+                  {service.scope}
+                </p>
+                <p className="mt-auto border-t border-line pt-5 text-small text-muted">
+                  <span className="font-semibold">{homeContent.services.bestForLabel}: </span>
+                  {service.bestFor}
+                </p>
+                <Link
+                  className="mt-6 text-small font-semibold text-ember transition-colors hover:text-text"
+                  href={`/services/${service.slug}`}
+                >
+                  {service.linkLabel}
+                </Link>
+              </article>
+            );
+          })}
         </div>
       </Section>
 

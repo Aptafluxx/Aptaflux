@@ -1,13 +1,29 @@
 import Link from "next/link";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { FeaturedWork } from "@/components/sections/FeaturedWork";
+import { ServiceAutomation } from "@/components/art/ServiceAutomation";
+import { ServiceConversion } from "@/components/art/ServiceConversion";
+import { ServicePlatform } from "@/components/art/ServicePlatform";
 import { Rule } from "@/components/ui/Rule";
 import { Section } from "@/components/ui/Section";
 import { homeContent } from "@/content/home";
 
 export function HomeSections() {
-  const { problem, outcomes, services, capabilities, process, why, faq } =
-    homeContent;
+  const {
+    problem,
+    outcomes,
+    services,
+    capabilities,
+    technologies,
+    process,
+    why,
+    faq,
+  } = homeContent;
+  const serviceArt = {
+    "conversion-engine": ServiceConversion,
+    "business-automation": ServiceAutomation,
+    "digital-platforms": ServicePlatform,
+  } as const;
 
   return (
     <>
@@ -33,7 +49,7 @@ export function HomeSections() {
         </div>
         <div className="mt-10">
           <Rule className="mb-6" />
-          <p className="max-w-[48ch] font-display text-display-lg font-medium">
+          <p className="max-w-[48ch] font-display text-h2 font-medium">
             {problem.closing}
           </p>
         </div>
@@ -67,37 +83,42 @@ export function HomeSections() {
         tone="surface"
       >
         <div className="grid gap-4 lg:grid-cols-3">
-          {services.solutions.map((solution) => (
-            <article
-              className="flex h-full flex-col rounded-sm border border-line p-5 sm:p-6"
-              key={solution.slug}
-            >
-              <p className="text-small font-semibold text-ember">
-                {solution.number}
-              </p>
-              <p className="mt-3 text-body font-semibold">{solution.name}</p>
-              <h3 className="mt-4 font-display text-h3 font-medium">
-                {solution.promise}
-              </h3>
-              <p className="mt-4 text-body leading-relaxed text-muted">
-                {solution.scope}
-              </p>
-              <div className="mt-6 border-t border-line pt-5">
-                <p className="text-small text-muted">
-                  {services.startingScopeLabel}
-                </p>
-                <p className="mt-2 font-display text-h3 font-semibold">
-                  {solution.startingScope}
-                </p>
-              </div>
-              <Link
-                className="mt-6 inline-block text-small font-semibold text-ember transition-colors hover:text-text"
-                href={`/services/${solution.slug}`}
+          {services.solutions.map((solution) => {
+            const Illustration = serviceArt[solution.slug];
+
+            return (
+              <article
+                className="flex h-full flex-col rounded-sm border border-line p-5 sm:p-6"
+                key={solution.slug}
               >
-                {solution.linkLabel}
-              </Link>
-            </article>
-          ))}
+                <Illustration className="mb-4" />
+                <p className="text-small font-semibold text-ember">
+                  {solution.number}
+                </p>
+                <p className="mt-3 text-body font-semibold">{solution.name}</p>
+                <h3 className="mt-4 font-display text-h3 font-medium">
+                  {solution.promise}
+                </h3>
+                <p className="mt-4 text-body leading-relaxed text-muted">
+                  {solution.scope}
+                </p>
+                <div className="mt-auto border-t border-line pt-5">
+                  <p className="text-small text-muted">
+                    {services.bestForLabel}
+                  </p>
+                  <p className="mt-2 text-body leading-relaxed">
+                    {solution.bestFor}
+                  </p>
+                </div>
+                <Link
+                  className="mt-6 inline-block text-small font-semibold text-ember transition-colors hover:text-text"
+                  href={`/services/${solution.slug}`}
+                >
+                  {solution.linkLabel}
+                </Link>
+              </article>
+            );
+          })}
         </div>
         <p className="mt-8 text-body">
           <span>{services.unsure} </span>
@@ -138,6 +159,22 @@ export function HomeSections() {
             ))}
           </div>
         </div>
+      </Section>
+
+      <Section aria-label={technologies.title} tone="cream">
+        <h2 className="mb-6 font-display text-h2 font-semibold">
+          {technologies.title}
+        </h2>
+        <ul className="flex flex-wrap items-center divide-x divide-line">
+          {technologies.names.map((name, index) => (
+            <li
+              className={`${index === 0 ? "pl-0" : "pl-4"} py-2 pr-4 font-display text-h3 font-medium`}
+              key={name}
+            >
+              {name}
+            </li>
+          ))}
+        </ul>
       </Section>
 
       <FeaturedWork />
@@ -186,16 +223,15 @@ export function HomeSections() {
         </div>
       </Section>
 
-      <Section
-        aria-label={faq.eyebrow}
-        tone="navy"
-      >
+      <Section aria-label={faq.eyebrow} tone="navy">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
             <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-ember">
               {faq.eyebrow}
             </p>
-            <h2 className="font-display text-h2 font-semibold">{faq.title}</h2>
+            <h2 className="font-display text-h2 font-semibold">
+              {faq.title}
+            </h2>
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
             <FAQAccordion items={faq.items} />

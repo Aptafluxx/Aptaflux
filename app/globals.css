@@ -62,7 +62,7 @@ section[data-tone="cream"] {
 section[data-tone="ember"] {
   --section-background: #ff5b2e;
   --color-text: #142130;
-  --color-muted: rgba(20, 33, 48, 0.72);
+  --color-muted: #142130;
   --color-line: rgba(20, 33, 48, 0.2);
 }
 

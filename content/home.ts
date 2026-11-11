@@ -76,8 +76,8 @@ export const homeContent = {
         promise: "Turn your online presence into a customer acquisition channel.",
         scope:
           "Websites, landing pages, SEO foundations, inquiry systems, and booking integrations.",
-        startingScope: "PKR 80,000–180,000",
-        linkLabel: "Explore Conversion Engine",
+        bestFor: "Businesses that want more inquiries and bookings from their website.",
+        linkLabel: "Explore Conversion Engine →",
       },
       {
         slug: "business-automation",
@@ -86,8 +86,8 @@ export const homeContent = {
         promise: "Spend less time on repetitive tasks and more time growing your business.",
         scope:
           "AI assistants, workflow automation, API integrations, dashboards, and notifications.",
-        startingScope: "PKR 180,000–450,000",
-        linkLabel: "Explore Business Automation",
+        bestFor: "Teams spending too much time on repetitive work.",
+        linkLabel: "Explore Business Automation →",
       },
       {
         slug: "digital-platforms",
@@ -96,11 +96,11 @@ export const homeContent = {
         promise: "Bring your business operations into one connected digital ecosystem.",
         scope:
           "Mobile applications, web portals, admin dashboards, backend systems, and integrations.",
-        startingScope: "PKR 450,000–1,200,000+",
-        linkLabel: "Explore Digital Platforms",
+        bestFor: "Businesses ready to run operations through their own app or portal.",
+        linkLabel: "Explore Digital Platforms →",
       },
     ],
-    startingScopeLabel: "Starting scope",
+    bestForLabel: "Best for",
     unsure: "Not sure what your business needs?",
     contactLink: "Let's figure it out together.",
   },
@@ -116,6 +116,17 @@ export const homeContent = {
       { name: "AI integration", benefit: "Make workflows smarter and more efficient" },
       { name: "API & backend development", benefit: "Connect systems and centralize information" },
       { name: "Business automation", benefit: "Reduce repetitive operational work" },
+    ],
+  },
+  technologies: {
+    title: "Technologies we work with",
+    names: [
+      "Flutter",
+      "Next.js",
+      "TypeScript",
+      "Firebase",
+      "Google Cloud",
+      "Node.js",
     ],
   },
   work: {
@@ -178,12 +189,12 @@ export const homeContent = {
   },
   faq: {
     eyebrow: "FAQ",
-    title: "How much does a project cost?",
+    title: "Questions before you start",
     items: [
       {
         question: "How much does a project cost?",
         answer:
-          "Every project depends on its requirements and complexity. Our packages provide starting ranges, while your final proposal defines the exact deliverables and investment.",
+          "Every project is different, so we scope it after a discovery call and send a clear proposal with deliverables and investment. There's no obligation.",
       },
       {
         question: "How long does a project take?",

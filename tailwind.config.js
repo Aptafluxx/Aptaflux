@@ -22,6 +22,9 @@ module.exports = {
         display: ["var(--font-display)", "serif"],
         body: ["var(--font-body)", "sans-serif"],
       },
+      spacing: {
+        18: "4.5rem",
+      },
       fontSize: {
         "display-xl": [
           "clamp(2.5rem, 5vw, 4.5rem)",

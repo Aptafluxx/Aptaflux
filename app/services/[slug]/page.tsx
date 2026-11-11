@@ -61,11 +61,11 @@ export default async function ServicePage(props: ServicePageProps) {
             </ul>
           </div>
           <div className="h-fit rounded-sm border border-line p-5 sm:p-6 lg:col-span-4 lg:col-start-9">
-            <p className="text-small text-muted">
-              {homeContent.services.startingScopeLabel}
+            <p className="text-small font-semibold">
+              {homeContent.services.bestForLabel}
             </p>
-            <p className="mt-3 font-display text-h2 font-semibold">
-              {service.startingScope}
+            <p className="mt-3 text-body leading-relaxed text-muted">
+              {service.bestFor}
             </p>
           </div>
         </div>

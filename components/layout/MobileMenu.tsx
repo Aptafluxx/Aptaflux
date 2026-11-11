@@ -91,7 +91,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <Container className="flex min-h-svh flex-col pb-10 pt-6">
             <div className="flex items-center justify-between border-b border-line pb-6">
               <Link
-                className="font-display text-2xl font-bold tracking-[-0.04em]"
+                className="font-display text-h3 font-bold tracking-[-0.04em]"
                 href="/"
                 onClick={onClose}
                 prefetch={false}
@@ -100,7 +100,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </Link>
               <button
                 aria-label={site.closeMenu}
-                className="py-2 text-sm font-semibold text-text"
+                className="py-2 text-small font-semibold text-text"
                 onClick={onClose}
                 type="button"
               >
@@ -113,7 +113,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <Link
                   key={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className="w-fit py-1 font-display text-[clamp(3.25rem,12vw,6.5rem)] leading-[1.05] tracking-[-0.04em] transition-colors hover:text-ember"
+                  className="w-fit py-1 font-display text-display-lg transition-colors hover:text-ember"
                   href={item.href}
                   onClick={onClose}
                   prefetch={false}
@@ -125,7 +125,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </nav>
 
             <Link
-              className="w-fit border-b border-ember pb-2 text-sm font-semibold text-ember"
+              className="w-fit border-b border-ember pb-2 text-small font-semibold text-ember"
               href="/contact"
               onClick={onClose}
               prefetch={false}

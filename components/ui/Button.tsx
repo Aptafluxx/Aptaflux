@@ -25,7 +25,7 @@ export function Button({
       ? "border-ember bg-ember text-bg hover:bg-transparent hover:text-ember"
       : "border-line text-text hover:border-ember hover:text-ember";
 
-  const classes = `inline-flex min-h-11 items-center justify-center rounded-[2px] border px-5 py-3 text-sm font-semibold transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60 ${variantClass} ${className}`;
+  const classes = `inline-flex min-h-11 items-center justify-center rounded-[2px] border px-5 py-3 text-small font-semibold transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60 ${variantClass} ${className}`;
 
   if (href) {
     return (

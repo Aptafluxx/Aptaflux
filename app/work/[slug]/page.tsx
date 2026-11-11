@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Rule } from "@/components/ui/Rule";
+import { Section } from "@/components/ui/Section";
 import { ArtworkFrame } from "@/components/work/ArtworkFrame";
 import { work, workPageContent } from "@/content/work";
 import { createPageMetadata } from "@/lib/metadata";
@@ -73,14 +73,13 @@ export default async function ProjectPage(props: WorkPageProps) {
     <>
       <PageHeader title={project.name} intro={project.summary} />
 
-      <Container>
-        <section
-          aria-label={workPageContent.ariaLabels.projectDetails}
-          className="grid grid-cols-2 border-y border-line min-[820px]:grid-cols-4"
-        >
+      <Section
+        aria-label={workPageContent.ariaLabels.projectDetails}
+      >
+        <div className="grid grid-cols-2 border-y border-line min-[820px]:grid-cols-4">
           {metadataItems.map((item, index) => (
             <div
-              className={`py-5 sm:py-7 ${
+              className={`py-4 sm:py-5 ${
                 index % 2 === 1 ? "border-l border-line pl-4 sm:pl-7" : ""
               } ${
                 index >= 2
@@ -93,94 +92,91 @@ export default async function ProjectPage(props: WorkPageProps) {
               }`}
               key={item.label}
             >
-              <p className="text-[15px] leading-relaxed text-muted">{item.label}</p>
-              <p className="mt-2 text-[17px] leading-relaxed">{item.value}</p>
+              <p className="text-small leading-relaxed text-muted">{item.label}</p>
+              <p className="mt-2 text-body leading-relaxed">{item.value}</p>
             </div>
           ))}
-        </section>
-
-        <div className="py-10 sm:py-14">
-          <ArtworkFrame
-            art={project.cover}
-            className="min-[820px]:aspect-[16/9]"
-          />
         </div>
+      </Section>
 
-        <section aria-label={workPageContent.ariaLabels.projectStory}>
-          {storyItems.map((item) => (
-            <article className="grid grid-cols-1 gap-5 py-8 sm:py-10 min-[820px]:grid-cols-12 min-[820px]:gap-0" key={item.label}>
-              <h2 className="font-display text-[28px] font-medium leading-tight min-[820px]:col-span-3">
-                {item.label}
-              </h2>
-              <p className="max-w-[60ch] text-[19px] leading-relaxed min-[820px]:col-start-5 min-[820px]:col-span-7">
-                {item.text}
-              </p>
-              <div className="col-span-full mt-8 min-[820px]:mt-10">
-                <Rule />
-              </div>
-            </article>
-          ))}
-          <article className="grid grid-cols-1 gap-5 py-8 sm:py-10 min-[820px]:grid-cols-12 min-[820px]:gap-0">
-            <h2 className="font-display text-[28px] font-medium leading-tight min-[820px]:col-span-3">
-              {labels.results}
+      <Section>
+        <ArtworkFrame
+          art={project.cover}
+          className="min-[820px]:aspect-[16/9]"
+        />
+      </Section>
+
+      <Section aria-label={workPageContent.ariaLabels.projectStory} topRule>
+        {storyItems.map((item) => (
+          <article className="grid grid-cols-1 gap-5 py-6 min-[820px]:grid-cols-12 min-[820px]:gap-0" key={item.label}>
+            <h2 className="font-display text-h3 font-medium min-[820px]:col-span-3">
+              {item.label}
             </h2>
-            <ul className="max-w-[60ch] space-y-6 min-[820px]:col-start-5 min-[820px]:col-span-7">
-              {project.results.map((result, index) => (
-                <li key={`${result.label}-${index}`}>
-                  {result.value ? (
-                    <>
-                      <p className="font-display text-[clamp(40px,6vw,56px)] leading-none text-ember">
-                        {result.value}
-                      </p>
-                      <p className="mt-2 text-[19px] leading-relaxed">
-                        {result.label}
-                      </p>
-                    </>
-                  ) : (
-                    <p className="text-[19px] leading-relaxed">{result.label}</p>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <p className="max-w-[60ch] text-body leading-relaxed min-[820px]:col-start-5 min-[820px]:col-span-7">
+              {item.text}
+            </p>
             <div className="col-span-full mt-8 min-[820px]:mt-10">
               <Rule />
             </div>
           </article>
-        </section>
+        ))}
+        <article className="grid grid-cols-1 gap-5 py-6 min-[820px]:grid-cols-12 min-[820px]:gap-0">
+          <h2 className="font-display text-h3 font-medium min-[820px]:col-span-3">
+            {labels.results}
+          </h2>
+          <ul className="max-w-[60ch] space-y-6 min-[820px]:col-start-5 min-[820px]:col-span-7">
+            {project.results.map((result, index) => (
+              <li key={`${result.label}-${index}`}>
+                {result.value ? (
+                  <>
+                    <p className="font-display text-display-lg leading-none text-ember">
+                      {result.value}
+                    </p>
+                    <p className="mt-2 text-body leading-relaxed">
+                      {result.label}
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-body leading-relaxed">{result.label}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className="col-span-full mt-8 min-[820px]:mt-10">
+            <Rule />
+          </div>
+        </article>
+      </Section>
 
-        {project.gallery && project.gallery.length > 0 ? (
-          <section
-            aria-label={workPageContent.ariaLabels.projectGallery}
-            className="py-10 sm:py-14"
-          >
-            <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12">
-              {project.gallery.slice(0, 3).map((art, index) => (
-                <ArtworkFrame
-                  art={art}
-                  className={
-                    index === 1
-                      ? "min-[820px]:col-span-5"
-                      : "min-[820px]:col-span-7"
-                  }
-                  key={`${art}-${index}`}
-                />
-              ))}
-            </div>
-          </section>
-        ) : null}
-      </Container>
+      {project.gallery && project.gallery.length > 0 ? (
+        <Section aria-label={workPageContent.ariaLabels.projectGallery}>
+          <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12">
+            {project.gallery.slice(0, 3).map((art, index) => (
+              <ArtworkFrame
+                art={art}
+                className={
+                  index === 1
+                    ? "min-[820px]:col-span-5"
+                    : "min-[820px]:col-span-7"
+                }
+                key={`${art}-${index}`}
+              />
+            ))}
+          </div>
+        </Section>
+      ) : null}
 
-      <Container>
+      <Section>
         <Link
-          className="group block border-y border-line py-8 sm:py-12"
+          className="group block border-y border-line py-6"
           href={`/work/${nextProject.slug}`}
         >
-          <p className="text-[15px] text-muted">{labels.nextProject}</p>
-          <p className="mt-3 font-display text-[clamp(48px,9vw,150px)] font-medium leading-[0.95] tracking-[-0.03em] transition-colors duration-300 group-hover:text-ember">
+          <p className="text-small text-muted">{labels.nextProject}</p>
+          <p className="mt-3 font-display text-display-lg font-medium transition-colors duration-300 group-hover:text-ember">
             {nextProject.name}
           </p>
         </Link>
-      </Container>
+      </Section>
       <CtaBand />
     </>
   );

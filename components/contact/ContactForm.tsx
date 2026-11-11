@@ -87,14 +87,14 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div aria-live="polite" className="border-y border-line py-8" role="status">
-        <p className="text-[19px] leading-relaxed">{contact.success}</p>
+        <p className="text-body leading-relaxed">{contact.success}</p>
       </div>
     );
   }
 
-  const errorClass = "mt-2 text-[15px] leading-relaxed text-ember";
+  const errorClass = "mt-2 text-small leading-relaxed text-ember";
   const inputClass =
-    "w-full border-0 border-b border-line bg-transparent px-0 py-3 text-[17px] text-text focus:border-ember";
+    "w-full border-0 border-b border-line bg-transparent px-0 py-3 text-body text-text focus:border-ember";
 
   return (
     <form className="space-y-7" noValidate onSubmit={handleSubmit}>
@@ -110,7 +110,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="mb-2 block text-[15px]" htmlFor="name">
+        <label className="mb-2 block text-small" htmlFor="name">
           {contact.fields.name}
         </label>
         <input
@@ -130,7 +130,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="mb-2 block text-[15px]" htmlFor="email">
+        <label className="mb-2 block text-small" htmlFor="email">
           {contact.fields.email}
         </label>
         <input
@@ -150,7 +150,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="mb-2 block text-[15px]" htmlFor="budget">
+        <label className="mb-2 block text-small" htmlFor="budget">
           {contact.fields.budget}
         </label>
         <select
@@ -178,7 +178,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="mb-2 block text-[15px]" htmlFor="details">
+        <label className="mb-2 block text-small" htmlFor="details">
           {contact.fields.details}
         </label>
         <textarea
@@ -216,7 +216,7 @@ export function ContactForm() {
       <Button
         disabled={status === "sending"}
         type="submit"
-        className="min-w-36 text-[17px]"
+        className="min-w-36 text-body"
       >
         {status === "sending"
           ? contact.submitting

@@ -4,7 +4,6 @@ import { motion, useReducedMotion, useSpring } from "framer-motion";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useState, type PointerEvent } from "react";
-import { Container } from "@/components/ui/Container";
 import { ArtworkFrame } from "@/components/work/ArtworkFrame";
 import type { WorkProject } from "@/content/work";
 import { durations, easing } from "@/lib/motion";
@@ -52,7 +51,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
 
   return (
     <Link
-      className="group relative block py-8 sm:py-10"
+      className="group relative block py-6 md:py-8"
       href={`/work/${project.slug}`}
       prefetch={false}
       onPointerEnter={(event) => {
@@ -65,20 +64,20 @@ export function ProjectRow({ project }: ProjectRowProps) {
       onPointerMove={updatePreviewPosition}
       onPointerLeave={() => setIsPreviewVisible(false)}
     >
-      <Container className="grid gap-5 min-[820px]:grid-cols-[minmax(0,1fr)_360px] min-[820px]:items-end">
+      <div className="grid gap-5 min-[820px]:grid-cols-[minmax(0,1fr)_360px] min-[820px]:items-end">
         <div className="min-w-0">
-          <h2 className="font-display text-[clamp(40px,8vw,130px)] font-medium leading-[0.95] tracking-[-0.03em] transition-colors duration-300 group-hover:text-ember">
+          <h2 className="font-display text-project-title font-medium transition-colors duration-300 group-hover:text-ember">
             {project.name}
           </h2>
           <div className="mt-5 min-[820px]:hidden">
             <ArtworkFrame art={project.cover} />
           </div>
         </div>
-        <div className="flex flex-col gap-2 text-right text-[15px] leading-relaxed text-muted">
+        <div className="flex flex-col gap-2 text-right text-small leading-relaxed text-muted">
           <p>{project.services.join(", ")}</p>
           <p>{project.year}</p>
         </div>
-      </Container>
+      </div>
       {preview}
     </Link>
   );

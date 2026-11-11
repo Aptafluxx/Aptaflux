@@ -1,6 +1,6 @@
 import { artComponents } from "@/components/art";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 import { Rule } from "@/components/ui/Rule";
 import { homeContent } from "@/content/home";
 import { work } from "@/content/work";
@@ -8,9 +8,8 @@ import { durations, easing } from "@/lib/motion";
 
 export function FeaturedWork() {
   return (
-    <section className="py-16 sm:py-24">
-      <Container>
-        <h2 className="mb-10 font-display text-[clamp(40px,6vw,96px)] font-semibold leading-[0.95] tracking-[-0.03em] sm:mb-14">
+    <Section>
+        <h2 className="mb-8 font-display text-h2 font-semibold md:mb-10">
           {homeContent.work.heading}
         </h2>
         <div>
@@ -21,7 +20,7 @@ export function FeaturedWork() {
             return (
               <div key={project.slug}>
                 <Link
-                  className="group grid grid-cols-1 items-start gap-5 py-8 min-[820px]:grid-cols-12 min-[820px]:items-end min-[820px]:gap-10 min-[820px]:py-10"
+                  className="group grid grid-cols-1 items-start gap-5 py-8 min-[820px]:grid-cols-12 min-[820px]:items-end min-[820px]:gap-10"
                   href={`/work/${project.slug}`}
                   prefetch={false}
                 >
@@ -51,14 +50,14 @@ export function FeaturedWork() {
                         : "min-[820px]:col-span-5 min-[820px]:col-start-8"
                     }
                   >
-                    <p className="text-[17px] text-muted">{project.category}</p>
-                    <h3 className="mt-2 font-display text-[clamp(2rem,4.5vw,4rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
+                    <p className="text-body text-muted">{project.category}</p>
+                    <h3 className="mt-2 font-display text-work-title font-semibold">
                       {project.name}
                     </h3>
-                    <p className="mt-3 text-[15px] text-muted">
+                    <p className="mt-3 text-small text-muted">
                       {project.services.join(", ")}
                     </p>
-                    <p className="mt-4 font-display text-[22px] leading-snug text-ember">
+                    <p className="mt-4 font-display text-h3 leading-snug text-ember">
                       {project.results[0]?.label}
                     </p>
                   </div>
@@ -68,7 +67,6 @@ export function FeaturedWork() {
             );
           })}
         </div>
-      </Container>
-    </section>
+    </Section>
   );
 }

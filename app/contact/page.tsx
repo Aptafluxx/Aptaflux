@@ -1,7 +1,7 @@
 import { ContactForm } from "@/components/contact/ContactForm";
-import { Container } from "@/components/ui/Container";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Section } from "@/components/ui/Section";
 import { site } from "@/content/site";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -17,19 +17,19 @@ export default function ContactPage() {
   return (
     <>
       <PageHeader title="Contact" intro={contact.introduction} />
-      <Container>
-        <div className="grid gap-14 pb-20 sm:pb-24 min-[900px]:grid-cols-2 min-[900px]:gap-16">
-          <section aria-label={contact.informationLabel}>
-            <h2 className="font-display text-[28px] font-medium leading-tight">
+      <Section topRule>
+        <div className="grid gap-10 min-[900px]:grid-cols-2 min-[900px]:gap-16">
+          <div aria-label={contact.informationLabel} role="region">
+            <h2 className="font-display text-h3 font-medium">
               {contact.informationHeading}
             </h2>
             <a
-              className="mt-6 inline-block break-all text-[19px] transition-colors hover:text-ember"
+              className="mt-6 inline-block break-all text-body transition-colors hover:text-ember"
               href={`mailto:${site.email}`}
             >
               {site.email}
             </a>
-            <div className="mt-8 space-y-3 text-[17px] leading-relaxed text-muted">
+            <div className="mt-8 space-y-3 text-body leading-relaxed text-muted">
               <p>{contact.responseTime}</p>
               <p>{contact.timeZoneNote}</p>
               <p>
@@ -37,11 +37,11 @@ export default function ContactPage() {
               </p>
             </div>
             <div className="mt-10">
-              <h3 className="text-[15px] text-muted">{contact.socialHeading}</h3>
+              <h3 className="text-small text-muted">{contact.socialHeading}</h3>
               <nav aria-label={site.socialNavigation} className="mt-4 flex flex-wrap gap-x-6 gap-y-3">
                 {site.socials.map((social) => (
                   <a
-                    className="text-[17px] transition-colors hover:text-ember"
+                    className="text-body transition-colors hover:text-ember"
                     href={social.href}
                     key={social.label}
                     rel="noreferrer"
@@ -52,16 +52,16 @@ export default function ContactPage() {
                 ))}
               </nav>
             </div>
-          </section>
+          </div>
 
-          <section aria-label={contact.formLabel}>
-            <h2 className="mb-8 font-display text-[28px] font-medium leading-tight">
+          <div aria-label={contact.formLabel} role="region">
+            <h2 className="mb-8 font-display text-h3 font-medium">
               {contact.formTitle}
             </h2>
             <ContactForm />
-          </section>
+          </div>
         </div>
-      </Container>
+      </Section>
     </>
   );
 }

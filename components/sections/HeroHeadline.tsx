@@ -22,7 +22,7 @@ function HeadlineLines({ lines }: { lines: readonly string[] }) {
 
 export function HeroHeadline({ lines, mobileLines }: HeroHeadlineProps) {
   return (
-    <h1 className="font-display text-[64px] font-semibold leading-[0.88] tracking-[-0.03em] min-[640px]:text-[clamp(2.5rem,9vw,12rem)] min-[1024px]:text-[clamp(3.5rem,12vw,12rem)]">
+    <h1 className="font-display text-display-xl">
       <span className="min-[640px]:hidden">
         <HeadlineLines lines={mobileLines} />
       </span>

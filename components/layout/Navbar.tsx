@@ -52,7 +52,7 @@ export function Navbar() {
         <Container className="flex h-20 items-center justify-between">
           <Link
             aria-label={site.brand}
-            className="font-display text-2xl font-bold tracking-[-0.04em]"
+            className="font-display text-h3 font-bold tracking-[-0.04em]"
             href="/"
           >
             {site.brand}
@@ -69,7 +69,7 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     aria-current={isActive ? "page" : undefined}
-                    className={`relative py-2 text-[15px] transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-ember after:transition-transform ${
+                    className={`relative py-2 text-small transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-ember after:transition-transform ${
                       isActive
                         ? "text-ember after:scale-x-100"
                         : "text-muted hover:text-text after:scale-x-0 hover:after:scale-x-100"
@@ -82,13 +82,13 @@ export function Navbar() {
                 );
               })}
             </nav>
-            <Button className="text-[15px]" href="/contact">{site.callToAction}</Button>
+            <Button className="text-small" href="/contact">{site.callToAction}</Button>
           </div>
 
           <button
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? site.closeMenu : site.openMenu}
-            className="py-3 text-sm font-semibold text-text min-[820px]:hidden"
+            className="py-3 text-small font-semibold text-text min-[820px]:hidden"
             onClick={openMenu}
             type="button"
           >

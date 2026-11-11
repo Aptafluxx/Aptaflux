@@ -10,6 +10,13 @@
   --color-muted: rgba(244, 237, 224, 0.64);
   --color-line: rgba(244, 237, 224, 0.14);
   --color-ember: #ff5b2e;
+  --text-body: 1rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --text-body: 1.0625rem;
+  }
 }
 
 * {
@@ -26,6 +33,7 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body), sans-serif;
+  font-size: var(--text-body);
 }
 
 .cursor-preview {
@@ -80,7 +88,7 @@ body {
 @keyframes headline-reveal {
   from {
     opacity: 0;
-    transform: translateY(36px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;

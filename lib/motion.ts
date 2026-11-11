@@ -9,7 +9,7 @@ export const durations = {
 } as const;
 
 export const reveal: Variants = {
-  hidden: { opacity: 0, y: 36 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,

@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
-      <body className="flex min-h-svh flex-col">
+      <body className="flex min-h-svh flex-col text-body">
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>

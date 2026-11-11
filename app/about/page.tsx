@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { Portrait } from "@/components/art/Portrait";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Rule } from "@/components/ui/Rule";
+import { Section } from "@/components/ui/Section";
 import { aboutContent } from "@/content/about";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -19,26 +19,25 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader title="About" />
-      <Container>
-        <section className="py-8 sm:py-12">
-          <p className="max-w-[22ch] font-display text-[clamp(32px,4.8vw,72px)] font-medium leading-[1.05] tracking-[-0.03em]">
+      <Section>
+          <p className="max-w-[22ch] font-display text-display-lg font-medium">
             {aboutContent.manifesto}
           </p>
-        </section>
+      </Section>
 
-        <section
+      <Section
           aria-label={aboutContent.ariaLabels.values}
-          className="py-8 sm:py-12"
+          topRule
         >
           {aboutContent.values.map((value) => (
             <article
-              className="grid grid-cols-1 gap-3 py-6 sm:grid-cols-2 sm:gap-8"
+              className="grid grid-cols-1 gap-3 py-5 sm:grid-cols-2 sm:gap-8"
               key={value.name}
             >
-              <h2 className="font-display text-[28px] font-medium leading-tight">
+              <h2 className="font-display text-h3 font-medium">
                 {value.name}
               </h2>
-              <p className="max-w-[55ch] text-[17px] leading-relaxed text-muted">
+              <p className="max-w-[55ch] text-body leading-relaxed text-muted">
                 {value.description}
               </p>
               <div className="col-span-full pt-4">
@@ -46,12 +45,12 @@ export default function AboutPage() {
               </div>
             </article>
           ))}
-        </section>
+      </Section>
 
-        <section
-          aria-label={aboutContent.ariaLabels.founder}
-          className="grid grid-cols-1 gap-8 py-12 sm:py-16 min-[820px]:grid-cols-12 min-[820px]:gap-0"
-        >
+      <Section
+        aria-label={aboutContent.ariaLabels.founder}
+      >
+        <div className="grid grid-cols-1 gap-8 min-[820px]:grid-cols-12 min-[820px]:gap-0">
           <div className="aspect-[4/5] overflow-hidden rounded-[2px] bg-surface min-[820px]:col-span-4">
             {founder.portraitImage ? (
               <Image
@@ -66,14 +65,14 @@ export default function AboutPage() {
             )}
           </div>
           <div className="min-[820px]:col-start-6 min-[820px]:col-span-6 min-[820px]:pt-8">
-            <p className="text-[19px] leading-relaxed">{founder.note}</p>
-            <p className="mt-8 font-display text-[24px] leading-tight">
+            <p className="text-body leading-relaxed">{founder.note}</p>
+            <p className="mt-8 font-display text-h3 leading-tight">
               {founder.name}
             </p>
-            <p className="mt-1 text-[15px] text-muted">{founder.role}</p>
+            <p className="mt-1 text-small text-muted">{founder.role}</p>
           </div>
-        </section>
-      </Container>
+        </div>
+      </Section>
       <CtaBand />
     </>
   );

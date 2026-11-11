@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Minus, Plus } from "lucide-react";
+import { Card } from "@/components/ui/Card";
 
 type FAQAccordionProps = {
   items: readonly {
@@ -20,20 +22,18 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
         const panelId = `home-faq-panel-${index}`;
 
         return (
-          <div className="border-t border-line" key={item.question}>
+          <Card className="p-5 sm:p-6" key={item.question}>
             <h3>
               <button
                 aria-controls={panelId}
                 aria-expanded={isOpen}
-                className="flex w-full items-center justify-between gap-5 py-5 text-left font-display text-h3 font-medium"
+                className="flex w-full items-center justify-between gap-5 text-left font-body text-h3 font-bold tracking-[-0.02em]"
                 id={buttonId}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 type="button"
               >
                 <span>{item.question}</span>
-                <span aria-hidden="true" className="text-ember">
-                  {isOpen ? "−" : "+"}
-                </span>
+                {isOpen ? <Minus aria-hidden="true" className="shrink-0 text-ember" /> : <Plus aria-hidden="true" className="shrink-0 text-ember" />}
               </button>
             </h3>
             <div
@@ -45,15 +45,14 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
               role="region"
             >
               <div className="min-h-0 overflow-hidden">
-                <p className="max-w-[65ch] pb-5 text-body leading-relaxed text-muted">
+                <p className="max-w-[65ch] pt-4 text-body leading-relaxed text-muted">
                   {item.answer}
                 </p>
               </div>
             </div>
-          </div>
+          </Card>
         );
       })}
-      <div className="border-t border-line" />
     </div>
   );
 }

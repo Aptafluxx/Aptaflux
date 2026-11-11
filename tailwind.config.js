@@ -31,7 +31,7 @@ module.exports = {
           { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "600" },
         ],
         eyebrow: [
-          "0.8125rem",
+          "0.75rem",
           { lineHeight: "1.25", letterSpacing: "0.12em" },
         ],
         "step-number": ["2rem", { lineHeight: "1" }],

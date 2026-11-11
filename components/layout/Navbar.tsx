@@ -52,7 +52,7 @@ export function Navbar() {
         <Container className="flex h-20 items-center justify-between">
           <Link
             aria-label={site.brand}
-            className="font-display text-h3 font-bold tracking-[-0.04em]"
+            className="font-body text-h3 font-bold tracking-[-0.04em]"
             href="/"
           >
             {site.brand}

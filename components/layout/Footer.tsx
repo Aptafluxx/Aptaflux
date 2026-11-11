@@ -15,7 +15,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
             <Link
-              className="font-display text-h3 font-semibold tracking-[-0.04em]"
+              className="font-body text-h3 font-bold tracking-[-0.04em]"
               href="/"
             >
               {footer.wordmark}

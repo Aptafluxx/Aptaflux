@@ -1,22 +1,34 @@
 import { HeroComposition } from "@/components/art/HeroComposition";
 import { Button } from "@/components/ui/Button";
+import { DotGrid } from "@/components/ui/DotGrid";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { homeContent } from "@/content/home";
+import { Bot, Globe, PenTool, Smartphone } from "lucide-react";
+
+const capabilityIcons = [Globe, Smartphone, PenTool, Bot] as const;
 
 export function Hero() {
   const { hero } = homeContent;
+  const titleParts = hero.title.split(/(digital opportunities\.)/i);
 
   return (
-    <Section className="py-18 lg:py-24" tone="navy">
-      <Reveal>
+    <Section className="relative overflow-hidden pt-[72px] pb-14 md:pt-24 md:pb-20 lg:pb-24" tone="navy">
+      <DotGrid className="dot-grid-hero" />
+      <Reveal className="relative z-10">
         <div className="grid items-center gap-10 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-7">
-            <p className="mb-5 text-eyebrow font-semibold uppercase tracking-wide text-ember">
+          <div className="md:col-span-6">
+            <p className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-ember">
               {hero.eyebrow}
             </p>
-            <h1 className="max-w-[14ch] font-display text-display-xl">
-              {hero.title}
+            <h1 className="max-w-[15ch] font-display text-display-xl">
+              {titleParts.map((part, index) =>
+                /digital opportunities\./i.test(part) ? (
+                  <em className="text-ember" key={index}>{part}</em>
+                ) : (
+                  <span key={index}>{part}</span>
+                ),
+              )}
             </h1>
             <p className="mt-6 max-w-[55ch] text-body leading-relaxed text-muted">
               {hero.intro}
@@ -27,18 +39,23 @@ export function Hero() {
                 {hero.secondaryAction}
               </Button>
             </div>
-            <ul className="mt-8 flex flex-wrap items-center divide-x divide-line">
-              {hero.capabilities.map((capability, index) => (
+            <ul className="mt-8 flex flex-wrap gap-2">
+              {hero.capabilities.map((capability, index) => {
+                const Icon = capabilityIcons[index];
+
+                return (
                 <li
-                  className={`${index === 0 ? "pl-0" : "pl-3"} pr-3 py-1 text-small text-muted`}
+                  className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-2 text-small text-muted"
                   key={capability}
                 >
+                  <Icon aria-hidden="true" className="text-ember" size={16} />
                   {capability}
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </div>
-          <div className="rounded-sm bg-surface p-3 sm:p-5 md:col-span-5">
+          <div className="relative min-w-0 md:col-span-6">
             <div className="aspect-[19/16]">
               <HeroComposition />
             </div>

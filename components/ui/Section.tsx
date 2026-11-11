@@ -47,7 +47,7 @@ export function Section({
               </p>
             ) : null}
             {title ? (
-              <h2 className="font-display text-h2 font-semibold">{title}</h2>
+              <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">{title}</h2>
             ) : null}
             {intro ? <div className="mt-4 max-w-[60ch] text-body text-muted">{intro}</div> : null}
           </div>

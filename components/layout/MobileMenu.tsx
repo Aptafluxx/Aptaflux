@@ -91,7 +91,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <Container className="flex min-h-svh flex-col pb-10 pt-6">
             <div className="flex items-center justify-between border-b border-line pb-6">
               <Link
-                className="font-display text-h3 font-bold tracking-[-0.04em]"
+                className="font-body text-h3 font-bold tracking-[-0.04em]"
                 href="/"
                 onClick={onClose}
                 prefetch={false}
@@ -113,7 +113,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <Link
                   key={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className="w-fit py-1 font-display text-display-lg transition-colors hover:text-ember"
+                  className="w-fit py-1 font-body text-display-lg font-bold tracking-[-0.02em] transition-colors hover:text-ember"
                   href={item.href}
                   onClick={onClose}
                   prefetch={false}

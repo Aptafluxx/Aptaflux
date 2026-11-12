@@ -10,7 +10,13 @@ import {
   Globe,
   PanelsTopLeft,
 } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import type { FocusEvent } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -27,7 +33,7 @@ const serviceIcons: LucideIcon[] = [Globe, Bot, PanelsTopLeft];
 
 export function Navbar() {
   const pathname = usePathname();
-  const headerRef = useRef<HTMLElement>(null);
+  const navbarCenterRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -171,6 +177,32 @@ export function Navbar() {
     };
   }, [closeServices, isServicesOpen]);
 
+  useLayoutEffect(() => {
+    if (!isServicesOpen) return;
+
+    const updatePanelPosition = () => {
+      const center = navbarCenterRef.current?.getBoundingClientRect();
+      const trigger = triggerRef.current?.getBoundingClientRect();
+      if (!center || !trigger || !panelRef.current) return;
+
+      panelRef.current.style.left = `${
+        trigger.left + trigger.width / 2 - center.left
+      }px`;
+    };
+
+    updatePanelPosition();
+    window.addEventListener("resize", updatePanelPosition);
+
+    const observer = new ResizeObserver(updatePanelPosition);
+    if (navbarCenterRef.current) observer.observe(navbarCenterRef.current);
+    if (triggerRef.current) observer.observe(triggerRef.current);
+
+    return () => {
+      window.removeEventListener("resize", updatePanelPosition);
+      observer.disconnect();
+    };
+  }, [isServicesOpen]);
+
   const handleFocusCapture = (event: FocusEvent<HTMLElement>) => {
     hasFocus.current = true;
     setIsVisible(true);
@@ -206,7 +238,6 @@ export function Navbar() {
   return (
     <>
       <header
-        ref={headerRef}
         className={`fixed inset-x-0 top-[calc(16px+env(safe-area-inset-top))] z-50 transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "navbar-hidden"
         } ${isScrolled ? "navbar-scrolled" : ""}`}
@@ -222,36 +253,40 @@ export function Navbar() {
             {site.brand}
           </Link>
 
-          <nav
-            aria-label="Main navigation"
-            className="glass hidden items-center gap-1 rounded-full p-1.5 min-[1024px]:flex"
+          <div
+            className="relative hidden w-fit min-[1024px]:block"
+            ref={navbarCenterRef}
           >
-            {site.navigation.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.href === "/services" &&
-                  pathname.startsWith("/services/")) ||
-                (item.href === "/work" && pathname.startsWith("/work/"));
+            <nav
+              aria-label="Main navigation"
+              className="glass flex w-fit items-center gap-1 rounded-full p-1.5"
+            >
+              {site.navigation.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.href === "/services" &&
+                    pathname.startsWith("/services/")) ||
+                  (item.href === "/work" && pathname.startsWith("/work/"));
 
-              if (item.href === "/services") {
-                return (
-                  <div
-                    className="relative"
-                    key={item.href}
-                    onMouseEnter={openOnIntent}
-                    onMouseLeave={closeAfterIntent}
-                    ref={triggerRef}
-                  >
-                    <div className="flex items-center">
+                if (item.href === "/services") {
+                  return (
+                    <div
+                      className={`services-trigger ${
+                        isActive ? "services-trigger-active" : ""
+                      } ${isServicesOpen ? "services-trigger-open" : ""}`}
+                      key={item.href}
+                      onMouseEnter={openOnIntent}
+                      onMouseLeave={closeAfterIntent}
+                      ref={triggerRef}
+                    >
                       <Link
                         aria-current={isActive ? "page" : undefined}
-                        className={`nav-link ${isActive ? "nav-link-active" : ""}`}
+                        className="services-trigger-link"
                         href={item.href}
                         onClick={closeServices}
                         prefetch={false}
                       >
                         {item.label}
-                        {isActive ? <span className="nav-active-dot" /> : null}
                       </Link>
                       <button
                         ref={servicesButtonRef}
@@ -259,7 +294,7 @@ export function Navbar() {
                         aria-expanded={isServicesOpen}
                         aria-controls="services-menu"
                         aria-haspopup="menu"
-                        className={`nav-chevron ${isServicesOpen ? "nav-link-active" : ""}`}
+                        className="services-trigger-chevron"
                         onClick={() => {
                           clearTimers();
                           setPinnedPath((pinned) =>
@@ -278,81 +313,79 @@ export function Navbar() {
                         />
                       </button>
                     </div>
-                    <div
-                      aria-hidden={!isServicesOpen}
-                      className={`services-panel-bridge absolute left-1/2 top-full z-50 pt-3 ${
-                        isServicesOpen ? "services-panel-open" : ""
-                      }`}
-                      inert={!isServicesOpen}
-                      onMouseEnter={openOnIntent}
-                      onMouseLeave={closeAfterIntent}
-                      ref={panelRef}
-                    >
-                      <div
-                        aria-label="Services"
-                        className="glass services-panel w-[min(440px,calc(100vw-2.5rem))] rounded-2xl p-3"
-                        id="services-menu"
-                        role="menu"
-                      >
-                        {servicesContent.services.map((service, index) => {
-                          const Icon =
-                            serviceIcons[index % serviceIcons.length];
-                          return (
-                            <Link
-                              aria-current={
-                                pathname === `/services/${service.slug}`
-                                  ? "page"
-                                  : undefined
-                              }
-                              className="service-menu-item group flex min-w-0 items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-cream/10 focus-visible:bg-cream/10"
-                              href={`/services/${service.slug}`}
-                              key={service.slug}
-                              onClick={closeServices}
-                              prefetch={false}
-                              role="menuitem"
-                            >
-                              <IconBadge icon={Icon} />
-                              <span className="min-w-0">
-                                <span className="block truncate text-small font-semibold text-cream">
-                                  {service.name}
-                                </span>
-                                <span className="block truncate text-[13px] leading-5 text-cream/80">
-                                  {service.promise}
-                                </span>
-                              </span>
-                            </Link>
-                          );
-                        })}
-                        <Link
-                          className="mt-1 flex min-h-11 items-center justify-between border-t border-line px-3 pt-2 text-small font-semibold text-cream transition-colors hover:text-ember focus-visible:text-ember"
-                          href="/services"
-                          onClick={closeServices}
-                          prefetch={false}
-                          role="menuitem"
-                        >
-                          View all services
-                          <ArrowRight aria-hidden="true" size={16} />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
+                  );
+                }
 
-              return (
+                return (
+                  <Link
+                    key={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`nav-link ${isActive ? "nav-link-active" : ""}`}
+                    href={item.href}
+                    prefetch={false}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <div
+              aria-hidden={!isServicesOpen}
+              className={`services-panel-bridge absolute top-full z-50 pt-3 ${
+                isServicesOpen ? "services-panel-open" : ""
+              }`}
+              inert={!isServicesOpen}
+              onMouseEnter={openOnIntent}
+              onMouseLeave={closeAfterIntent}
+              ref={panelRef}
+            >
+              <div
+                aria-label="Services"
+                className="glass services-panel w-[min(460px,calc(100vw-2.5rem))] rounded-2xl p-3"
+                id="services-menu"
+                role="menu"
+              >
+                {servicesContent.services.map((service, index) => {
+                  const Icon = serviceIcons[index % serviceIcons.length];
+                  return (
+                    <Link
+                      aria-current={
+                        pathname === `/services/${service.slug}`
+                          ? "page"
+                          : undefined
+                      }
+                      className="service-menu-item group flex min-w-0 items-center gap-3 rounded-xl px-3 py-3 transition-colors"
+                      href={`/services/${service.slug}`}
+                      key={service.slug}
+                      onClick={closeServices}
+                      prefetch={false}
+                      role="menuitem"
+                    >
+                      <IconBadge icon={Icon} />
+                      <span className="min-w-0">
+                        <span className="service-menu-title block text-small font-semibold text-cream">
+                          {service.name}
+                        </span>
+                        <span className="block text-[14px] leading-5 text-[rgba(244,237,224,0.78)]">
+                          {service.promise}
+                        </span>
+                      </span>
+                    </Link>
+                  );
+                })}
                 <Link
-                  key={item.href}
-                  aria-current={isActive ? "page" : undefined}
-                  className={`nav-link ${isActive ? "nav-link-active" : ""}`}
-                  href={item.href}
+                  className="mt-1 flex min-h-11 items-center justify-between border-t border-line px-3 pt-2 text-small font-semibold text-cream transition-colors hover:text-ember focus-visible:text-ember"
+                  href="/services"
+                  onClick={closeServices}
                   prefetch={false}
+                  role="menuitem"
                 >
-                  {item.label}
-                  {isActive ? <span className="nav-active-dot" /> : null}
+                  View all services
+                  <ArrowRight aria-hidden="true" size={16} />
                 </Link>
-              );
-            })}
-          </nav>
+              </div>
+            </div>
+          </div>
 
           <Link
             className="group hidden w-fit justify-self-end items-center gap-2 rounded-full bg-ember px-5 py-3 text-small font-semibold text-bg transition-transform duration-200 hover:-translate-y-px focus-visible:outline-offset-4 min-[1024px]:inline-flex"

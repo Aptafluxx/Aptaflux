@@ -18,19 +18,11 @@ const capabilities = [
   "Business Automation",
 ];
 
-const solutions = homeContent.footer.serviceLinks.map((label) => ({
-  label,
-  slug: label.toLowerCase().includes("conversion")
-    ? "conversion-engine"
-    : label.toLowerCase().includes("automation")
-      ? "business-automation"
-      : label.toLowerCase().includes("platform")
-        ? "digital-platforms"
-        : label
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/(^-|-$)/g, ""),
-}));
+const solutions = [
+  { label: "Conversion Engine", slug: "conversion-engine" },
+  { label: "Business Automation System", slug: "business-automation" },
+  { label: "Digital Operations Platform", slug: "digital-platforms" },
+];
 
 function scrollToTop() {
   window.scrollTo({
@@ -98,7 +90,7 @@ export function Footer() {
               <ArrowUpRight aria-hidden="true" size={20} />
             </a>
             <Link
-              className="mt-6 inline-flex h-12 items-center justify-center gap-3 rounded-full bg-[#F2794B] px-6 text-[15px] font-semibold text-[#0F1A27] transition-colors hover:bg-[#F4EDE0]"
+              className="mt-6 inline-flex h-12 items-center justify-center gap-3 rounded-full bg-[#FF5B2E] px-6 text-[15px] font-semibold text-[#0F1A27] transition-colors hover:bg-[#F4EDE0]"
               href="/contact"
             >
               Start a project
@@ -184,11 +176,26 @@ export function Footer() {
           </div>
         </div>
 
-        <div
-          aria-hidden="true"
-          className="mt-10 h-[0.82em] overflow-hidden text-center text-[clamp(72px,17vw,260px)] font-extrabold leading-[0.8] tracking-[-0.04em] text-[rgba(244,237,224,.05)] select-none lg:text-left"
-        >
-          Aptaflux
+        <div aria-hidden="true" className="mt-10 aspect-[5.5/1] overflow-hidden">
+          <svg
+            className="block h-auto w-full select-none"
+            preserveAspectRatio="none"
+            viewBox="0 0 1000 220"
+          >
+            <text
+              className="font-body"
+              fill="rgba(244,237,224,.06)"
+              fontSize="200"
+              fontWeight="800"
+              letterSpacing="-8"
+              textLength="1000"
+              lengthAdjust="spacingAndGlyphs"
+              x="0"
+              y="220"
+            >
+              Aptaflux
+            </text>
+          </svg>
         </div>
 
         <div className="mt-8 border-t border-[rgba(244,237,224,.10)] pt-5 text-[15px] text-[rgba(244,237,224,.78)]">

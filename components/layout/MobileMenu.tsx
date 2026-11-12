@@ -1,34 +1,69 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  Camera,
+  ChevronDown,
+  Globe,
+  Mail,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { durations, easing } from "@/lib/motion";
+import type { RefObject } from "react";
+import type { LucideIcon } from "lucide-react";
 import { servicesContent } from "@/content/services";
 import { site } from "@/content/site";
-import { Container } from "@/components/ui/Container";
 
 type MobileMenuProps = {
   isOpen: boolean;
+  menuToggleRef: RefObject<HTMLButtonElement | null>;
   onClose: () => void;
 };
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+const socialIcons: Partial<Record<string, LucideIcon>> = {
+  LinkedIn: BriefcaseBusiness,
+  Instagram: Camera,
+};
+
+export function MobileMenu({
+  isOpen,
+  menuToggleRef,
+  onClose,
+}: MobileMenuProps) {
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const previousPathname = useRef(pathname);
   const shouldReduceMotion = useReducedMotion();
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
+  const socialLinks = site.socials.flatMap((social) => {
+    const Icon = socialIcons[social.label];
+    return social.href && Icon ? [{ ...social, Icon }] : [];
+  });
 
   useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
+    if (!isOpen) return;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    menuRef.current?.querySelector<HTMLElement>("button, a")?.focus();
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const previousBodyStyles = {
+      left: body.style.left,
+      overflow: body.style.overflow,
+      position: body.style.position,
+      right: body.style.right,
+      top: body.style.top,
+      width: body.style.width,
+    };
+
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    menuRef.current?.querySelector<HTMLElement>("[data-first-row]")?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -36,35 +71,45 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         return;
       }
 
-      if (event.key !== "Tab" || !menuRef.current) {
-        return;
-      }
+      if (event.key !== "Tab" || !menuRef.current) return;
 
-      const focusableElements = menuRef.current.querySelectorAll<HTMLElement>(
-        "a[href], button:not([disabled])",
+      const panelElements = Array.from(
+        menuRef.current.querySelectorAll<HTMLElement>(
+          "a[href], button:not([disabled])",
+        ),
       );
-      const firstElement = focusableElements.item(0);
-      const lastElement = focusableElements.item(focusableElements.length - 1);
+      const toggle = menuToggleRef.current;
+      const firstPanelElement = panelElements[0];
+      const lastPanelElement = panelElements[panelElements.length - 1];
       const activeElement = document.activeElement;
 
-      if (!menuRef.current.contains(activeElement)) {
+      if (!menuRef.current.contains(activeElement) && activeElement !== toggle) {
         event.preventDefault();
-        (event.shiftKey ? lastElement : firstElement)?.focus();
-      } else if (event.shiftKey && activeElement === firstElement) {
+        (event.shiftKey ? toggle : firstPanelElement)?.focus();
+      } else if (activeElement === toggle) {
         event.preventDefault();
-        lastElement?.focus();
-      } else if (!event.shiftKey && activeElement === lastElement) {
+        (event.shiftKey ? lastPanelElement : firstPanelElement)?.focus();
+      } else if (event.shiftKey && activeElement === firstPanelElement) {
         event.preventDefault();
-        firstElement?.focus();
+        toggle?.focus();
+      } else if (!event.shiftKey && activeElement === lastPanelElement) {
+        event.preventDefault();
+        toggle?.focus();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      body.style.left = previousBodyStyles.left;
+      body.style.overflow = previousBodyStyles.overflow;
+      body.style.position = previousBodyStyles.position;
+      body.style.right = previousBodyStyles.right;
+      body.style.top = previousBodyStyles.top;
+      body.style.width = previousBodyStyles.width;
+      window.scrollTo(0, scrollY);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, menuToggleRef, onClose]);
 
   useEffect(() => {
     if (previousPathname.current !== pathname) {
@@ -73,119 +118,179 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     }
   }, [pathname, onClose]);
 
+  const isActive = (href: string) =>
+    pathname === href ||
+    (href === "/services" && pathname.startsWith("/services/")) ||
+    (href === "/work" && pathname.startsWith("/work/"));
+
   return (
-    <AnimatePresence>
-      {isOpen ? (
-        <motion.div
-          ref={menuRef}
-          aria-label={site.mobileNavigation}
-          className="fixed inset-0 z-50 bg-bg"
-          initial={shouldReduceMotion ? false : { clipPath: "inset(0 0 100% 0)" }}
-          animate={{ clipPath: "inset(0 0 0% 0)" }}
-          exit={{ clipPath: shouldReduceMotion ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)" }}
-          transition={{
-            duration: shouldReduceMotion ? 0 : durations.medium,
-            ease: easing,
-          }}
-          role="dialog"
-          aria-modal="true"
-        >
-          <Container className="flex min-h-svh flex-col pb-10 pt-[calc(16px+env(safe-area-inset-top))]">
-            <div className="flex items-center justify-between">
+    <>
+      <button
+        aria-hidden={!isOpen}
+        aria-label="Close site menu"
+        className={`mobile-menu-backdrop fixed inset-0 z-40 ${
+          isOpen ? "mobile-menu-backdrop-open" : ""
+        }`}
+        inert={!isOpen}
+        onClick={onClose}
+        tabIndex={-1}
+        type="button"
+      />
+      <div
+        ref={menuRef}
+        aria-hidden={!isOpen}
+        aria-label="Site menu"
+        aria-modal={isOpen}
+        className={`mobile-menu-panel fixed z-[45] ${
+          isOpen ? "mobile-menu-panel-open" : ""
+        }`}
+        id="mobile-menu-panel"
+        inert={!isOpen}
+        role="dialog"
+      >
+        <nav aria-label={site.mobileNavigation} className="flex flex-col gap-1">
+          {site.navigation.map((item) =>
+            item.href === "/services" ? (
+              <div key={item.href}>
+                <button
+                  aria-controls="mobile-services-menu"
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  aria-expanded={isServicesExpanded}
+                  className={`mobile-menu-row ${
+                    isActive(item.href) ? "mobile-menu-row-active" : ""
+                  }`}
+                  onClick={() =>
+                    setIsServicesExpanded((expanded) => !expanded)
+                  }
+                  type="button"
+                >
+                  {item.label}
+                  <ChevronDown
+                    aria-hidden="true"
+                    className={`transition-transform duration-200 ${
+                      isServicesExpanded ? "rotate-180" : ""
+                    }`}
+                    size={18}
+                  />
+                </button>
+                <motion.div
+                  aria-hidden={!isServicesExpanded}
+                  aria-label="Services"
+                  animate={{
+                    height: isServicesExpanded ? "auto" : 0,
+                    opacity: isServicesExpanded ? 1 : 0,
+                  }}
+                  className="overflow-hidden"
+                  id="mobile-services-menu"
+                  inert={!isServicesExpanded}
+                  initial={false}
+                  transition={{
+                    duration: shouldReduceMotion ? 0 : 0.2,
+                    ease: "easeOut",
+                  }}
+                >
+                  <div className="mobile-services-list">
+                    {servicesContent.services.map((service) => (
+                      <Link
+                        aria-current={
+                          pathname === `/services/${service.slug}`
+                            ? "page"
+                            : undefined
+                        }
+                        className="mobile-service-link"
+                        href={`/services/${service.slug}`}
+                        key={service.slug}
+                        onClick={onClose}
+                        prefetch={false}
+                      >
+                        <span className="mobile-service-title">
+                          {service.name}
+                        </span>
+                        <span className="mobile-service-promise">
+                          {service.promise}
+                        </span>
+                      </Link>
+                    ))}
+                    <Link
+                      aria-current={
+                        pathname === "/services" ? "page" : undefined
+                      }
+                      className="mobile-service-all"
+                      href="/services"
+                      onClick={onClose}
+                      prefetch={false}
+                    >
+                      View all services
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            ) : (
               <Link
-                aria-label={site.brand}
-                className="glass w-fit rounded-full px-5 py-2.5 font-body text-h3 font-bold tracking-[-0.04em] focus-visible:outline-offset-2 max-[380px]:px-3"
-                href="/"
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className={`mobile-menu-row ${
+                  isActive(item.href) ? "mobile-menu-row-active" : ""
+                }`}
+                data-first-row={item.href === "/work" ? "true" : undefined}
+                href={item.href}
+                key={item.href}
                 onClick={onClose}
                 prefetch={false}
               >
-                {site.brand}
+                {item.label}
               </Link>
-              <button
-                aria-label={site.closeMenu}
-                className="glass rounded-full px-5 py-2.5 text-small font-semibold text-cream transition-colors hover:bg-cream/10 focus-visible:outline-offset-2"
-                onClick={onClose}
-                type="button"
-              >
-                {site.closeMenu}
-              </button>
-            </div>
+            ),
+          )}
+        </nav>
 
-            <nav aria-label={site.mobileNavigation} className="flex flex-1 flex-col justify-center">
-              {site.navigation.map((item, index) =>
-                item.href === "/services" ? (
-                  <div className="py-1" key={item.href}>
-                    <button
-                      aria-controls="mobile-services-menu"
-                      aria-expanded={isServicesExpanded}
-                      className="w-fit font-body text-display-lg font-bold tracking-[-0.02em] transition-colors hover:text-ember"
-                      onClick={() =>
-                        setIsServicesExpanded((expanded) => !expanded)
-                      }
-                      type="button"
-                    >
-                      {item.label}
-                    </button>
-                    {isServicesExpanded ? (
-                      <div
-                        className="mt-3 flex flex-col gap-2 border-l border-line pl-5"
-                        id="mobile-services-menu"
-                      >
-                        {servicesContent.services.map((service) => (
-                          <Link
-                            aria-current={
-                              pathname === `/services/${service.slug}`
-                                ? "page"
-                                : undefined
-                            }
-                            className="py-2 text-body text-muted transition-colors hover:text-text"
-                            href={`/services/${service.slug}`}
-                            key={service.slug}
-                            onClick={onClose}
-                            prefetch={false}
-                          >
-                            {service.name}
-                          </Link>
-                        ))}
-                        <Link
-                          aria-current={pathname === "/services" ? "page" : undefined}
-                          className="py-2 text-body font-semibold text-ember transition-colors hover:text-text"
-                          href="/services"
-                          onClick={onClose}
-                          prefetch={false}
-                        >
-                          All services
-                        </Link>
-                      </div>
-                    ) : null}
-                  </div>
-                ) : (
-                  <Link
-                    key={item.href}
-                    aria-current={pathname === item.href ? "page" : undefined}
-                    className="w-fit py-1 font-body text-display-lg font-bold tracking-[-0.02em] transition-colors hover:text-ember"
-                    href={item.href}
-                    onClick={onClose}
-                    prefetch={false}
-                    style={{ transitionDelay: `${index * 40}ms` }}
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
+        <div className="mobile-menu-divider" />
+
+        <div className="mobile-menu-contact">
+          <a
+            className="mobile-menu-contact-row"
+            href={`mailto:${site.email}`}
+            onClick={onClose}
+          >
+            <Mail aria-hidden="true" size={18} />
+            {site.email}
+          </a>
+          <div className="mobile-menu-contact-row">
+            <Globe aria-hidden="true" size={18} />
+            {site.contact.remoteFirst}, {site.contact.timeZoneLabel}
+          </div>
+        </div>
+
+        <div className="mobile-menu-actions">
+          {socialLinks.length > 0 ? (
+            <nav aria-label={site.socialNavigation} className="flex gap-2">
+              {socialLinks.map(({ Icon, href, label }) => (
+                <a
+                  aria-label={label}
+                  className="mobile-menu-social"
+                  href={href}
+                  key={label}
+                  onClick={onClose}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <Icon aria-hidden="true" size={18} />
+                </a>
+              ))}
             </nav>
-
-            <Link
-              className="w-fit border-b border-ember pb-2 text-small font-semibold text-ember"
-              href="/contact"
-              onClick={onClose}
-              prefetch={false}
-            >
-              {site.callToAction}
-            </Link>
-          </Container>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
+          ) : null}
+          <Link
+            className={`mobile-menu-cta ${
+              socialLinks.length === 0 ? "mobile-menu-cta-full" : ""
+            }`}
+            href="/contact"
+            onClick={onClose}
+            prefetch={false}
+          >
+            {site.callToAction}
+            <ArrowRight aria-hidden="true" size={16} />
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }

@@ -8,7 +8,9 @@ import {
   Bot,
   ChevronDown,
   Globe,
+  Menu as MenuIcon,
   PanelsTopLeft,
+  X,
 } from "lucide-react";
 import {
   useCallback,
@@ -36,6 +38,7 @@ export function Navbar() {
   const navbarCenterRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -45,7 +48,6 @@ export function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [hasOpenedMenu, setHasOpenedMenu] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const [pinnedPath, setPinnedPath] = useState<string | null>(null);
   const isServicesOpen =
@@ -64,12 +66,25 @@ export function Navbar() {
     setPinnedPath(null);
   }, [clearTimers]);
 
-  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+    requestAnimationFrame(() => {
+      if (window.innerWidth < 1024) menuToggleRef.current?.focus();
+    });
+  }, []);
   const openMenu = () => {
-    setHasOpenedMenu(true);
     setIsMenuOpen(true);
     setIsVisible(true);
   };
+
+  useEffect(() => {
+    const closeOnDesktop = () => {
+      if (window.innerWidth >= 1024) closeMenu();
+    };
+
+    window.addEventListener("resize", closeOnDesktop);
+    return () => window.removeEventListener("resize", closeOnDesktop);
+  }, [closeMenu]);
 
   const openOnIntent = useCallback(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
@@ -244,7 +259,7 @@ export function Navbar() {
         onBlurCapture={handleBlurCapture}
         onFocusCapture={handleFocusCapture}
       >
-        <Container className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+        <Container className="grid min-h-[46px] grid-cols-[1fr_auto_1fr] items-center gap-2">
           <Link
             aria-label={site.brand}
             className="glass w-fit rounded-full px-5 py-2.5 font-body text-h3 font-bold tracking-[-0.04em] transition-colors hover:text-cream focus-visible:outline-offset-2 max-[380px]:px-3"
@@ -401,20 +416,25 @@ export function Navbar() {
           </Link>
 
           <button
+            ref={menuToggleRef}
             aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? site.closeMenu : site.openMenu}
-            className="glass col-start-3 w-fit justify-self-end rounded-full px-5 py-2.5 text-small font-semibold text-cream transition-colors hover:bg-cream/10 focus-visible:outline-offset-2 min-[1024px]:hidden"
-            onClick={openMenu}
+            aria-controls="mobile-menu-panel"
+            aria-label={isMenuOpen ? "Close site menu" : "Open site menu"}
+            className="mobile-menu-toggle glass col-start-3 inline-flex w-fit items-center justify-self-end gap-2 rounded-full px-5 py-2.5 text-small font-semibold text-cream transition-colors hover:bg-cream/10 min-[1024px]:hidden"
+            onClick={isMenuOpen ? closeMenu : openMenu}
             type="button"
           >
-            {site.openMenu}
+            {isMenuOpen ? site.closeMenu : site.openMenu}
+            {isMenuOpen ? <X aria-hidden="true" size={16} /> : <MenuIcon aria-hidden="true" size={16} />}
           </button>
         </Container>
       </header>
 
-      {hasOpenedMenu ? (
-        <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} />
-      ) : null}
+      <MobileMenu
+        isOpen={isMenuOpen}
+        menuToggleRef={menuToggleRef}
+        onClose={closeMenu}
+      />
     </>
   );
 }

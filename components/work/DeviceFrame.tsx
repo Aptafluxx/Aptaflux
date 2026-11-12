@@ -4,10 +4,17 @@ type DeviceFrameProps = {
   children?: ReactNode;
   device?: "laptop" | "phone";
   phoneKind?: "doctor" | "water";
+  phoneScreen?: "primary" | "secondary";
   phonePlacement?: "center" | "left" | "right";
 };
 
-function PhoneScreen({ kind }: { kind: "doctor" | "water" }) {
+function PhoneScreen({
+  kind,
+  screen,
+}: {
+  kind: "doctor" | "water";
+  screen: "primary" | "secondary";
+}) {
   return (
     <svg aria-hidden="true" className="h-full w-full" fill="none" viewBox="0 0 180 320">
       <rect width="180" height="320" fill="var(--color-bg)" />
@@ -63,6 +70,57 @@ function PhoneScreen({ kind }: { kind: "doctor" | "water" }) {
           <rect x="53" y="294" width="74" height="6" rx="3" fill="var(--color-bg)" />
         </>
       )}
+      {screen === "secondary" ? (
+        <g>
+          <rect x="7" y="58" width="166" height="255" rx="8" fill="var(--color-bg)" />
+          {kind === "doctor" ? (
+            <>
+              <rect x="16" y="71" width="82" height="8" rx="4" fill="var(--color-cream)" />
+              <rect x="16" y="86" width="112" height="5" rx="2.5" fill="var(--color-cream)" opacity=".55" />
+              <rect x="16" y="106" width="148" height="112" rx="7" fill="var(--color-surface)" />
+              <rect x="26" y="118" width="42" height="6" rx="3" fill="var(--color-cream)" opacity=".7" />
+              <g fill="var(--color-cream)" opacity=".45">
+                <rect x="26" y="136" width="17" height="17" rx="4" />
+                <rect x="51" y="136" width="17" height="17" rx="4" />
+                <rect x="76" y="136" width="17" height="17" rx="4" />
+                <rect x="101" y="136" width="17" height="17" rx="4" />
+                <rect x="126" y="136" width="17" height="17" rx="4" />
+                <rect x="26" y="161" width="17" height="17" rx="4" />
+                <rect x="51" y="161" width="17" height="17" rx="4" />
+                <rect x="76" y="161" width="17" height="17" rx="4" />
+                <rect x="101" y="161" width="17" height="17" rx="4" />
+                <rect x="126" y="161" width="17" height="17" rx="4" />
+              </g>
+              <rect x="51" y="161" width="17" height="17" rx="4" fill="var(--color-ember)" />
+              <rect x="16" y="230" width="148" height="48" rx="7" fill="var(--color-surface)" />
+              <circle cx="34" cy="254" r="9" fill="var(--color-ember)" />
+              <rect x="51" y="246" width="87" height="6" rx="3" fill="var(--color-cream)" />
+              <rect x="51" y="258" width="61" height="5" rx="2.5" fill="var(--color-cream)" opacity=".55" />
+              <rect x="16" y="287" width="148" height="18" rx="6" fill="var(--color-ember)" />
+            </>
+          ) : (
+            <>
+              <rect x="16" y="71" width="104" height="8" rx="4" fill="var(--color-cream)" />
+              <rect x="16" y="86" width="83" height="5" rx="2.5" fill="var(--color-cream)" opacity=".55" />
+              <rect x="16" y="105" width="148" height="70" rx="7" fill="var(--color-surface)" />
+              <path d="M28 148h118" stroke="var(--color-line)" strokeWidth="3" />
+              <path d="M36 148v-21m54 21v-30m53 30v-15" stroke="var(--color-ember)" strokeLinecap="round" strokeWidth="5" />
+              <circle cx="36" cy="127" r="5" fill="var(--color-ember)" />
+              <circle cx="90" cy="118" r="5" fill="var(--color-ember)" />
+              <circle cx="143" cy="133" r="5" fill="var(--color-ember)" />
+              <rect x="16" y="188" width="148" height="37" rx="7" fill="var(--color-surface)" />
+              <circle cx="35" cy="206" r="8" fill="var(--color-ember)" />
+              <rect x="51" y="199" width="91" height="6" rx="3" fill="var(--color-cream)" />
+              <rect x="51" y="211" width="66" height="5" rx="2.5" fill="var(--color-cream)" opacity=".55" />
+              <rect x="16" y="236" width="148" height="37" rx="7" fill="var(--color-surface)" />
+              <circle cx="35" cy="254" r="8" fill="var(--color-ember)" />
+              <rect x="51" y="247" width="91" height="6" rx="3" fill="var(--color-cream)" />
+              <rect x="51" y="259" width="66" height="5" rx="2.5" fill="var(--color-cream)" opacity=".55" />
+              <rect x="16" y="284" width="148" height="21" rx="6" fill="var(--color-ember)" />
+            </>
+          )}
+        </g>
+      ) : null}
     </svg>
   );
 }
@@ -71,23 +129,24 @@ export function DeviceFrame({
   children,
   device = "laptop",
   phoneKind = "doctor",
+  phoneScreen = "primary",
   phonePlacement = "center",
 }: DeviceFrameProps) {
   if (device === "phone") {
     const placementClass =
       phonePlacement === "left"
-        ? "left-[42%] -translate-x-[82%] z-10"
+        ? "left-[27%] rotate-[-4deg] z-10"
         : phonePlacement === "right"
-          ? "left-[58%] -translate-x-[18%] z-20"
+          ? "left-[48%] rotate-[4deg] z-20"
           : "left-1/2 -translate-x-1/2";
 
     return (
       <div
-        className={`absolute top-1/2 h-[75%] aspect-[9/16] -translate-y-1/2 rounded-[1.4rem] border-[6px] border-cream bg-bg p-1.5 ${placementClass}`}
+        className={`absolute top-1/2 h-[85%] aspect-[9/16] -translate-y-1/2 rounded-[1.4rem] border-[6px] border-cream bg-bg p-1.5 ${placementClass}`}
       >
         <span aria-hidden="true" className="absolute left-1/2 top-1.5 z-10 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-text/70" />
         <div className="h-full overflow-hidden rounded-[1rem] bg-bg">
-          <PhoneScreen kind={phoneKind} />
+          <PhoneScreen kind={phoneKind} screen={phoneScreen} />
         </div>
       </div>
     );

@@ -252,7 +252,7 @@ export default async function ServicePage(props: ServicePageProps) {
           </div>
         </div>
       </Section>
-      <CtaBand />
+      <CtaBand {...servicesContent.cta} />
     </>
   );
 }

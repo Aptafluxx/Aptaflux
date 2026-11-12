@@ -24,12 +24,11 @@ export default function WorkPage() {
       />
       <Section aria-label={workPageContent.ariaLabels.projects} tone="surface">
         <WorkGrid />
-        {/* TODO(copy): Confirm this portfolio note with approved copy. */}
         <p className="mt-10 border-t border-line pt-6 text-body leading-relaxed text-muted">
-          These are portfolio projects built to show our approach.
+          {workPageContent.projectLabels.portfolioNote}
         </p>
       </Section>
-      <CtaBand />
+      <CtaBand {...workPageContent.cta} />
     </>
   );
 }

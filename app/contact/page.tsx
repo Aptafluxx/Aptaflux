@@ -1,6 +1,5 @@
 import { Clock3, Globe2, Mail, Radio, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { CtaBand } from "@/components/sections/CtaBand";
 import { Card } from "@/components/ui/Card";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { LocalTime } from "@/components/ui/LocalTime";
@@ -68,10 +67,10 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-small font-semibold">Time zone</h3>
                   <p className="mt-2 text-body leading-relaxed text-muted">
-                    Asia/Karachi · <LocalTime />
+                    {contact.timeZoneLabel}
                   </p>
                   <p className="mt-1 text-small leading-relaxed text-muted">
-                    {contact.timeZoneNote}
+                    {contact.currentTimeLabel} <LocalTime />
                   </p>
                 </div>
               </Card>
@@ -162,7 +161,6 @@ export default function ContactPage() {
           </div>
         </div>
       </Section>
-      <CtaBand />
     </>
   );
 }

@@ -17,7 +17,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
 
   return (
     <>
-      <Section className="pb-10 pt-14 md:pt-28">
+      <Section className="pb-10 pt-[88px] md:pt-28">
           <h1 className="font-display text-display-lg font-semibold">
             {site.metadata.errorTitle}
           </h1>

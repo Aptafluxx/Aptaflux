@@ -11,7 +11,7 @@ function getLocalTime() {
   });
   const time = formatter.format(new Date());
 
-  return `${time} (Asia/Karachi)`;
+  return time;
 }
 
 export function LocalTime() {

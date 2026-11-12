@@ -90,10 +90,11 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           role="dialog"
           aria-modal="true"
         >
-          <Container className="flex min-h-svh flex-col pb-10 pt-6">
-            <div className="flex items-center justify-between border-b border-line pb-6">
+          <Container className="flex min-h-svh flex-col pb-10 pt-[calc(16px+env(safe-area-inset-top))]">
+            <div className="flex items-center justify-between">
               <Link
-                className="font-body text-h3 font-bold tracking-[-0.04em]"
+                aria-label={site.brand}
+                className="glass w-fit rounded-full px-5 py-2.5 font-body text-h3 font-bold tracking-[-0.04em] focus-visible:outline-offset-2 max-[380px]:px-3"
                 href="/"
                 onClick={onClose}
                 prefetch={false}
@@ -102,7 +103,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </Link>
               <button
                 aria-label={site.closeMenu}
-                className="py-2 text-small font-semibold text-text"
+                className="glass rounded-full px-5 py-2.5 text-small font-semibold text-cream transition-colors hover:bg-cream/10 focus-visible:outline-offset-2"
                 onClick={onClose}
                 type="button"
               >

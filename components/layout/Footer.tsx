@@ -87,7 +87,23 @@ export function Footer() {
         <Rule className="my-6" />
         <div className="flex flex-col gap-2 text-small text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>{footer.copyright}</p>
-          <span>{site.localTimeLabel}: <LocalTime /></span>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 sm:items-center">
+            <nav aria-label={footer.legalNavigation}>
+              <ul className="flex flex-wrap gap-x-5 gap-y-2">
+                {footer.legalLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      className="transition-colors hover:text-text"
+                      href={item.href}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <span>{site.localTimeLabel}: <LocalTime /></span>
+          </div>
         </div>
       </Section>
     </footer>

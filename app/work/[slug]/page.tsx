@@ -68,7 +68,7 @@ export default async function ProjectPage(props: WorkPageProps) {
     { label: labels.category, value: project.category },
     { label: labels.services, value: project.services.join(", ") },
     { label: labels.stack, value: project.stack.join(", ") },
-  ];
+  ].filter((item) => item.value.length > 0);
   const storyItems = [
     { label: labels.challenge, text: project.challenge, icon: Target },
     { label: labels.approach, text: project.approach, icon: Compass },
@@ -113,9 +113,26 @@ export default async function ProjectPage(props: WorkPageProps) {
       <Section aria-label="Project cover">
         <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#0F1A27] sm:aspect-[16/9]">
           <DotGrid className="opacity-80" />
-          <DeviceFrame device="laptop">
-            <Artwork />
-          </DeviceFrame>
+          {project.slug === "doctor-hunt" || project.slug === "drips-water-app" ? (
+            <>
+              <DeviceFrame
+                device="phone"
+                phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
+                phonePlacement="left"
+                phoneScreen="primary"
+              />
+              <DeviceFrame
+                device="phone"
+                phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
+                phonePlacement="right"
+                phoneScreen="secondary"
+              />
+            </>
+          ) : (
+            <DeviceFrame device="laptop">
+              <Artwork />
+            </DeviceFrame>
+          )}
         </div>
       </Section>
 
@@ -181,7 +198,7 @@ export default async function ProjectPage(props: WorkPageProps) {
           </p>
         </Link>
       </Section>
-      <CtaBand />
+      <CtaBand {...workPageContent.cta} />
     </>
   );
 }

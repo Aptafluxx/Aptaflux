@@ -3,9 +3,18 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+import {
+  ArrowRight,
+  Bot,
+  ChevronDown,
+  Globe,
+  PanelsTopLeft,
+} from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/Button";
+import type { FocusEvent } from "react";
+import type { LucideIcon } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { IconBadge } from "@/components/ui/IconBadge";
 import { servicesContent } from "@/content/services";
 import { site } from "@/content/site";
 
@@ -14,27 +23,89 @@ const MobileMenu = dynamic(
   { ssr: false },
 );
 
+const serviceIcons: LucideIcon[] = [Globe, Bot, PanelsTopLeft];
+
 export function Navbar() {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const servicesButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const previousScrollY = useRef(0);
+  const hasFocus = useRef(false);
+  const ignoreNextFocusOpen = useRef(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasOpenedMenu, setHasOpenedMenu] = useState(false);
-  const [servicesOpenPath, setServicesOpenPath] = useState<string | null>(null);
-  const isServicesOpen = servicesOpenPath === pathname;
-  const servicesButtonRef = useRef<HTMLButtonElement>(null);
-  const ignoreNextFocusOpen = useRef(false);
+  const [hoveredPath, setHoveredPath] = useState<string | null>(null);
+  const [pinnedPath, setPinnedPath] = useState<string | null>(null);
+  const isServicesOpen =
+    hoveredPath === pathname || pinnedPath === pathname;
+
+  const clearTimers = useCallback(() => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    hoverTimer.current = null;
+    closeTimer.current = null;
+  }, []);
+
+  const closeServices = useCallback(() => {
+    clearTimers();
+    setHoveredPath(null);
+    setPinnedPath(null);
+  }, [clearTimers]);
+
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
   const openMenu = () => {
     setHasOpenedMenu(true);
     setIsMenuOpen(true);
+    setIsVisible(true);
   };
+
+  const openOnIntent = useCallback(() => {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      return;
+    }
+
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => {
+      setHoveredPath(pathname);
+      setIsVisible(true);
+      hoverTimer.current = null;
+    }, 120);
+  }, [pathname]);
+
+  const closeAfterIntent = useCallback(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => {
+      const pointerInside =
+        triggerRef.current?.matches(":hover") ||
+        panelRef.current?.matches(":hover");
+      const focusInside =
+        triggerRef.current?.contains(document.activeElement) ||
+        panelRef.current?.contains(document.activeElement);
+
+      if (!pointerInside && !focusInside) setHoveredPath(null);
+      closeTimer.current = null;
+    }, 250);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 24);
 
-      if (currentScrollY < 80 || currentScrollY < previousScrollY.current) {
+      if (
+        currentScrollY < 80 ||
+        currentScrollY < previousScrollY.current ||
+        hasFocus.current ||
+        isServicesOpen ||
+        isMenuOpen
+      ) {
         setIsVisible(true);
       } else if (currentScrollY > previousScrollY.current) {
         setIsVisible(false);
@@ -45,144 +116,261 @@ export function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMenuOpen, isServicesOpen]);
+
+  useEffect(() => {
+    clearTimers();
+  }, [clearTimers, pathname]);
 
   useEffect(() => {
     if (!isServicesOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setServicesOpenPath(null);
+        closeServices();
         if (document.activeElement !== servicesButtonRef.current) {
           ignoreNextFocusOpen.current = true;
           servicesButtonRef.current?.focus();
         }
+        return;
+      }
+
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+      const items =
+        panelRef.current?.querySelectorAll<HTMLAnchorElement>(
+          '[role="menuitem"]',
+        );
+      if (!items?.length) return;
+
+      event.preventDefault();
+      const currentIndex = Array.from(items).indexOf(
+        document.activeElement as HTMLAnchorElement,
+      );
+      const nextIndex =
+        event.key === "ArrowDown"
+          ? (currentIndex + 1) % items.length
+          : (currentIndex <= 0 ? items.length : currentIndex) - 1;
+      items.item(nextIndex)?.focus();
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (
+        !triggerRef.current?.contains(target) &&
+        !panelRef.current?.contains(target)
+      ) {
+        setPinnedPath(null);
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isServicesOpen]);
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [closeServices, isServicesOpen]);
+
+  const handleFocusCapture = (event: FocusEvent<HTMLElement>) => {
+    hasFocus.current = true;
+    setIsVisible(true);
+    if (
+      event.target instanceof HTMLElement &&
+      event.target.matches(":focus-visible") &&
+      (triggerRef.current?.contains(event.target) ||
+        panelRef.current?.contains(event.target))
+    ) {
+      if (ignoreNextFocusOpen.current) {
+        ignoreNextFocusOpen.current = false;
+        return;
+      }
+      openOnIntent();
+    }
+  };
+
+  const handleBlurCapture = (event: FocusEvent<HTMLElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+      hasFocus.current = false;
+    }
+
+    if (
+      (triggerRef.current?.contains(event.target) ||
+        panelRef.current?.contains(event.target)) &&
+      !triggerRef.current?.contains(event.relatedTarget as Node | null) &&
+      !panelRef.current?.contains(event.relatedTarget as Node | null)
+    ) {
+      closeAfterIntent();
+    }
+  };
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-40 border-b border-line bg-bg transition-transform duration-300 ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+        ref={headerRef}
+        className={`fixed inset-x-0 top-[calc(16px+env(safe-area-inset-top))] z-50 transition-transform duration-300 ${
+          isVisible ? "translate-y-0" : "navbar-hidden"
+        } ${isScrolled ? "navbar-scrolled" : ""}`}
+        onBlurCapture={handleBlurCapture}
+        onFocusCapture={handleFocusCapture}
       >
-        <Container className="flex h-20 items-center justify-between">
+        <Container className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
           <Link
             aria-label={site.brand}
-            className="font-body text-h3 font-bold tracking-[-0.04em]"
+            className="glass w-fit rounded-full px-5 py-2.5 font-body text-h3 font-bold tracking-[-0.04em] transition-colors hover:text-cream focus-visible:outline-offset-2 max-[380px]:px-3"
             href="/"
           >
             {site.brand}
           </Link>
 
-          <div className="hidden items-center gap-8 min-[820px]:flex">
-            <nav aria-label="Main navigation" className="flex items-center gap-8">
-              {site.navigation.map((item) => {
-                if (item.href === "/services") {
-                  const isActive = pathname.startsWith("/services");
-                  return (
-                    <div
-                      className="relative"
-                      key={item.href}
-                      onBlur={(event) => {
-                        if (!event.currentTarget.contains(event.relatedTarget)) {
-                          setServicesOpenPath(null);
-                        }
-                      }}
-                      onMouseEnter={() => setServicesOpenPath(pathname)}
-                      onMouseLeave={(event) => {
-                        if (
-                          !event.currentTarget.contains(document.activeElement)
-                        ) {
-                          setServicesOpenPath(null);
-                        }
-                      }}
-                    >
+          <nav
+            aria-label="Main navigation"
+            className="glass hidden items-center gap-1 rounded-full p-1.5 min-[1024px]:flex"
+          >
+            {site.navigation.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href === "/services" &&
+                  pathname.startsWith("/services/")) ||
+                (item.href === "/work" && pathname.startsWith("/work/"));
+
+              if (item.href === "/services") {
+                return (
+                  <div
+                    className="relative"
+                    key={item.href}
+                    onMouseEnter={openOnIntent}
+                    onMouseLeave={closeAfterIntent}
+                    ref={triggerRef}
+                  >
+                    <div className="flex items-center">
+                      <Link
+                        aria-current={isActive ? "page" : undefined}
+                        className={`nav-link ${isActive ? "nav-link-active" : ""}`}
+                        href={item.href}
+                        onClick={closeServices}
+                        prefetch={false}
+                      >
+                        {item.label}
+                        {isActive ? <span className="nav-active-dot" /> : null}
+                      </Link>
                       <button
                         ref={servicesButtonRef}
-                        aria-controls="services-menu"
+                        aria-label="Toggle services menu"
                         aria-expanded={isServicesOpen}
-                        aria-haspopup="true"
-                        className={`relative py-2 text-small transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-ember after:transition-transform ${
-                          isActive
-                            ? "text-ember after:scale-x-100"
-                            : "text-muted hover:text-text after:scale-x-0 hover:after:scale-x-100"
-                        }`}
-                        onClick={() =>
-                          setServicesOpenPath(isServicesOpen ? null : pathname)
-                        }
-                        onFocus={() => {
-                          if (ignoreNextFocusOpen.current) {
-                            ignoreNextFocusOpen.current = false;
-                            return;
-                          }
-                          setServicesOpenPath(pathname);
+                        aria-controls="services-menu"
+                        aria-haspopup="menu"
+                        className={`nav-chevron ${isServicesOpen ? "nav-link-active" : ""}`}
+                        onClick={() => {
+                          clearTimers();
+                          setPinnedPath((pinned) =>
+                            pinned === pathname ? null : pathname,
+                          );
+                          setIsVisible(true);
                         }}
                         type="button"
                       >
-                        {item.label}
+                        <ChevronDown
+                          aria-hidden="true"
+                          className={`transition-transform duration-200 ${
+                            isServicesOpen ? "rotate-180" : ""
+                          }`}
+                          size={14}
+                        />
                       </button>
-                      {isServicesOpen ? (
-                        <div
-                          className="absolute left-1/2 top-full z-50 mt-3 w-72 -translate-x-1/2 rounded-lg border border-line bg-surface p-2 shadow-xl"
-                          id="services-menu"
-                        >
-                          {servicesContent.services.map((service) => (
+                    </div>
+                    <div
+                      aria-hidden={!isServicesOpen}
+                      className={`services-panel-bridge absolute left-1/2 top-full z-50 pt-3 ${
+                        isServicesOpen ? "services-panel-open" : ""
+                      }`}
+                      inert={!isServicesOpen}
+                      onMouseEnter={openOnIntent}
+                      onMouseLeave={closeAfterIntent}
+                      ref={panelRef}
+                    >
+                      <div
+                        aria-label="Services"
+                        className="glass services-panel w-[min(440px,calc(100vw-2.5rem))] rounded-2xl p-3"
+                        id="services-menu"
+                        role="menu"
+                      >
+                        {servicesContent.services.map((service, index) => {
+                          const Icon =
+                            serviceIcons[index % serviceIcons.length];
+                          return (
                             <Link
-                              className="block rounded-md px-4 py-3 text-small text-muted transition-colors hover:bg-bg hover:text-text focus-visible:bg-bg"
+                              aria-current={
+                                pathname === `/services/${service.slug}`
+                                  ? "page"
+                                  : undefined
+                              }
+                              className="service-menu-item group flex min-w-0 items-center gap-3 rounded-xl px-3 py-3 transition-colors hover:bg-cream/10 focus-visible:bg-cream/10"
                               href={`/services/${service.slug}`}
                               key={service.slug}
-                              onClick={() => setServicesOpenPath(null)}
+                              onClick={closeServices}
+                              prefetch={false}
+                              role="menuitem"
                             >
-                              {service.name}
+                              <IconBadge icon={Icon} />
+                              <span className="min-w-0">
+                                <span className="block truncate text-small font-semibold text-cream">
+                                  {service.name}
+                                </span>
+                                <span className="block truncate text-[13px] leading-5 text-cream/80">
+                                  {service.promise}
+                                </span>
+                              </span>
                             </Link>
-                          ))}
-                          <Link
-                            className="mt-1 block rounded-md border-t border-line px-4 py-3 text-small font-semibold text-ember transition-colors hover:text-text"
-                            href="/services"
-                            onClick={() => setServicesOpenPath(null)}
-                          >
-                            All services
-                          </Link>
-                        </div>
-                      ) : null}
+                          );
+                        })}
+                        <Link
+                          className="mt-1 flex min-h-11 items-center justify-between border-t border-line px-3 pt-2 text-small font-semibold text-cream transition-colors hover:text-ember focus-visible:text-ember"
+                          href="/services"
+                          onClick={closeServices}
+                          prefetch={false}
+                          role="menuitem"
+                        >
+                          View all services
+                          <ArrowRight aria-hidden="true" size={16} />
+                        </Link>
+                      </div>
                     </div>
-                  );
-                }
-
-                const isActive =
-                  pathname === item.href ||
-                  (item.href === "/work" && pathname.startsWith("/work/"));
-
-                return (
-                  <Link
-                    key={item.href}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`relative py-2 text-small transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-ember after:transition-transform ${
-                      isActive
-                        ? "text-ember after:scale-x-100"
-                        : "text-muted hover:text-text after:scale-x-0 hover:after:scale-x-100"
-                    }`}
-                    href={item.href}
-                    prefetch={false}
-                  >
-                    {item.label}
-                  </Link>
+                  </div>
                 );
-              })}
-            </nav>
-            <Button className="text-small" href="/contact">{site.callToAction}</Button>
-          </div>
+              }
+
+              return (
+                <Link
+                  key={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`nav-link ${isActive ? "nav-link-active" : ""}`}
+                  href={item.href}
+                  prefetch={false}
+                >
+                  {item.label}
+                  {isActive ? <span className="nav-active-dot" /> : null}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <Link
+            className="group hidden w-fit justify-self-end items-center gap-2 rounded-full bg-ember px-5 py-3 text-small font-semibold text-bg transition-transform duration-200 hover:-translate-y-px focus-visible:outline-offset-4 min-[1024px]:inline-flex"
+            href="/contact"
+            prefetch={false}
+          >
+            {site.callToAction}
+            <ArrowRight
+              aria-hidden="true"
+              className="transition-transform duration-200 group-hover:translate-x-0.5"
+              size={16}
+            />
+          </Link>
 
           <button
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? site.closeMenu : site.openMenu}
-            className="py-3 text-small font-semibold text-text min-[820px]:hidden"
+            className="glass col-start-3 w-fit justify-self-end rounded-full px-5 py-2.5 text-small font-semibold text-cream transition-colors hover:bg-cream/10 focus-visible:outline-offset-2 min-[1024px]:hidden"
             onClick={openMenu}
             type="button"
           >

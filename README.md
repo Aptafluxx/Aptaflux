@@ -14,19 +14,16 @@ npm run build
 The project uses the root-level `app/` directory, with shared UI in
 `components/`, site data in `content/`, and font/motion setup in `lib/`.
 
-## Editing content
+## Content to replace
 
-- `content/home.ts` — homepage headline, proof bar, featured section headings,
-  services teaser, testimonial, and CTA copy.
-- `content/work.ts` — work listing and case-study names, summaries, metadata,
-  story content, results, art keys, and project navigation.
-- `content/services.ts` — services, deliverables, and the three-step process.
-- `content/about.ts` — manifesto, values, and founder note/portrait settings.
-- `content/site.ts` — shared brand/navigation/social information and contact
-  page/form copy.
+The following content modules contain placeholder copy marked with
+`// PLACEHOLDER: replace later`. Review and replace it before launch:
 
-Placeholder copy is marked with `TODO(copy)`; values needing factual review use
-`TODO(verify)`.
+- `content/about.ts` — About story, principles, and page CTA.
+- `content/services.ts` — service deliverables, process descriptions, FAQs, and comparison content.
+- `content/work.ts` — portfolio project challenges, approaches, and outcomes.
+- `content/site.ts` — contact follow-up steps.
+- `content/legal.ts` — privacy policy and terms, which require legal review.
 
 ## Deploy
 
@@ -53,6 +50,8 @@ domain to Vercel and configure its DNS records before making it the canonical
 - `/services`
 - `/about`
 - `/contact`
+- `/privacy`
+- `/terms`
 
 ## License
 

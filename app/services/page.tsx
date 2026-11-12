@@ -55,7 +55,6 @@ export default function ServicesPage() {
 
   return (
     <>
-      {/* TODO(copy): Replace this composed heading with approved copy. */}
       <PageHeader
         accent="solutions"
         eyebrow={services.eyebrow}
@@ -110,6 +109,112 @@ export default function ServicesPage() {
               </Reveal>
             );
           })}
+        </div>
+      </Section>
+
+      <Section
+        aria-label={servicesContent.comparison.title}
+        title={servicesContent.comparison.title}
+        tone="cream"
+      >
+        <div className="hidden lg:block">
+          <table className="w-full table-fixed border-collapse text-left">
+            <thead>
+              <tr>
+                <th className="w-[16%] border-b border-line p-4 text-small font-semibold" />
+                {servicesContent.services.map((service) => (
+                  <th
+                    className="border-b border-line p-4 font-body text-h3 font-bold tracking-[-0.02em]"
+                    key={service.slug}
+                    scope="col"
+                  >
+                    {service.name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                {
+                  label: servicesContent.comparison.rowLabels[0],
+                  values: servicesContent.services.map((service) => service.bestFor),
+                },
+                {
+                  label: servicesContent.comparison.rowLabels[1],
+                  values: servicesContent.services.map((service) =>
+                    service.deliverables.join(", "),
+                  ),
+                },
+                {
+                  label: servicesContent.comparison.rowLabels[2],
+                  values: servicesContent.services.map((service) => service.goodFirstStep),
+                },
+              ].map((row) => (
+                <tr key={row.label}>
+                  <th className="border-b border-line p-4 text-small font-semibold" scope="row">
+                    {row.label}
+                  </th>
+                  {row.values.map((value, index) => (
+                    <td
+                      className="border-b border-line p-4 align-top text-body leading-relaxed text-muted"
+                      key={servicesContent.services[index].slug}
+                    >
+                      {value}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+              <tr>
+                <th className="p-4" scope="row" />
+                {servicesContent.services.map((service) => (
+                  <td className="p-4" key={service.slug}>
+                    <Link
+                      className="font-semibold text-ember underline-offset-4 hover:underline"
+                      href={`/services/${service.slug}`}
+                    >
+                      {servicesContent.comparison.linkLabel} →
+                    </Link>
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="grid gap-4 lg:hidden">
+          {servicesContent.services.map((service) => (
+            <Card className="p-5 sm:p-6" key={service.slug}>
+              <h3 className="font-body text-h3 font-bold tracking-[-0.02em]">
+                {service.name}
+              </h3>
+              {[
+                {
+                  label: servicesContent.comparison.rowLabels[0],
+                  value: service.bestFor,
+                },
+                {
+                  label: servicesContent.comparison.rowLabels[1],
+                  value: service.deliverables.join(", "),
+                },
+                {
+                  label: servicesContent.comparison.rowLabels[2],
+                  value: service.goodFirstStep,
+                },
+              ].map((row) => (
+                <div className="mt-4 border-t border-line pt-4" key={row.label}>
+                  <p className="text-small font-semibold">{row.label}</p>
+                  <p className="mt-2 text-body leading-relaxed text-muted">
+                    {row.value}
+                  </p>
+                </div>
+              ))}
+              <Link
+                className="mt-5 inline-block font-semibold text-ember underline-offset-4 hover:underline"
+                href={`/services/${service.slug}`}
+              >
+                {servicesContent.comparison.linkLabel} →
+              </Link>
+            </Card>
+          ))}
         </div>
       </Section>
 
@@ -204,7 +309,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </Section>
-      <CtaBand />
+      <CtaBand {...servicesContent.cta} />
     </>
   );
 }

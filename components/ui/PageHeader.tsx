@@ -11,6 +11,7 @@ type PageHeaderProps = {
   breadcrumb?: ReactNode;
   eyebrow?: ReactNode;
   intro?: ReactNode;
+  titleClassName?: string;
   title: string;
   visual?: ReactNode;
 };
@@ -20,6 +21,7 @@ export function PageHeader({
   breadcrumb,
   eyebrow,
   intro,
+  titleClassName,
   title,
   visual,
 }: PageHeaderProps) {
@@ -44,7 +46,7 @@ export function PageHeader({
             </p>
           ) : null}
           <motion.h1
-            className="max-w-[18ch] font-body text-[clamp(2.25rem,4.5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.035em]"
+            className={`${titleClassName ?? "max-w-[18ch]"} font-body text-[clamp(2.25rem,4.5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.035em]`}
             initial={shouldReduceMotion ? false : "hidden"}
             animate="visible"
             variants={reveal}

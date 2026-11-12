@@ -1,59 +1,60 @@
+// PLACEHOLDER: replace later
 export const aboutContent = {
-  // TODO(copy): Replace the about page title with approved copy.
   metadataTitle: "About",
-  // TODO(copy): Replace the about page metadata description with approved copy.
   metadataDescription:
-    "Learn about Aptaflux, our values and how we partner with ambitious teams.",
-  // TODO(copy): Replace this manifesto statement with approved copy.
-  manifesto:
-    "We make the complex feel clear, building digital things that move people and businesses forward.",
-  values: [
-    {
-      // TODO(copy): Replace this value name with approved copy.
-      name: "Clarity",
-      // TODO(copy): Replace this value description with approved copy.
-      description:
-        "We find the signal in the noise and make every decision purposeful.",
-    },
-    {
-      // TODO(copy): Replace this value name with approved copy.
-      name: "Care",
-      // TODO(copy): Replace this value description with approved copy.
-      description:
-        "We bring attention and thoughtfulness to the details that shape an experience.",
-    },
-    {
-      // TODO(copy): Replace this value name with approved copy.
-      name: "Momentum",
-      // TODO(copy): Replace this value description with approved copy.
-      description:
-        "We work as one team, making progress visible and building toward what comes next.",
-    },
-  ],
-  howWeWork: {
-    // TODO(copy): Replace principle descriptions with approved copy.
-    principles: [
-      { title: "Scope first", text: "TODO(copy)" },
-      { title: "Weekly visibility", text: "TODO(copy)" },
-      { title: "Built to maintain", text: "TODO(copy)" },
+    "Learn how Aptaflux helps businesses turn challenges into working digital products.",
+  heading: "Built to move your business ahead",
+  eyebrow: "ABOUT APTAFLUX",
+  ariaLabels: {
+    story: "Our story and beliefs",
+    howWeWork: "How we work",
+  },
+  story: {
+    title: "A digital partner focused on the work that matters",
+    paragraphs: [
+      "Aptaflux is a digital agency that helps businesses turn challenges into working digital products: websites, mobile apps and AI-powered systems. We start with the business problem, then choose the technology that solves it.",
+      "Strategy, design and engineering sit under one roof, so the people who shape your product are the people who build it. That keeps decisions consistent and delivery simple.",
+      "We work remotely with clients and keep scope, milestones and communication clear from the first conversation.",
     ],
   },
-  founder: {
-    // TODO(copy): Replace this founder note with approved copy.
-    note:
-      "I started Aptaflux to help ambitious teams turn important ideas into clear, useful digital experiences. We bring strategy, design and technology together to make work that lasts.",
-    // TODO(copy): Replace this founder name with approved copy.
-    name: "Saad",
-    // TODO(copy): Replace this founder role with approved copy.
-    role: "Founder",
-    portraitImage: undefined as string | undefined,
-    // TODO(copy): Replace this portrait description with approved copy.
-    portraitAlt: "Illustrated portrait placeholder",
+  beliefs: {
+    title: "What we believe",
+    principles: [
+      {
+        title: "Outcomes over outputs",
+        text: "We measure our work by what it changes for your business, not by how many screens we deliver.",
+      },
+      {
+        title: "Clarity over complexity",
+        text: "Plain language, clear scope and straightforward plans, so you always know what happens next.",
+      },
+      {
+        title: "Built to last",
+        text: "We build with maintenance, performance and future growth in mind.",
+      },
+    ],
   },
-  ariaLabels: {
-    // TODO(copy): Replace this section label with approved copy.
-    values: "Our values",
-    // TODO(copy): Replace this section label with approved copy.
-    founder: "A note from the founder",
+  howWeWork: {
+    principles: [
+      {
+        title: "Scope first",
+        text: "We agree on goals, deliverables and success measures before design or development begins.",
+      },
+      {
+        title: "Regular visibility",
+        text: "You see progress as it happens and always know what comes next.",
+      },
+      {
+        title: "Built to maintain",
+        text: "Clean, documented work that your team or ours can keep improving.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "YOUR NEXT MOVE STARTS HERE",
+    title: "Let's work together.",
+    text: "Tell us about your goals and we will help you find the right solution.",
+    buttonLabel: "Start a Project",
+    href: "/contact",
   },
 } as const;

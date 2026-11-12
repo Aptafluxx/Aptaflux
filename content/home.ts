@@ -254,6 +254,11 @@ export const homeContent = {
       "AI Integration",
       "Business Automation",
     ],
+    legalLinks: [
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+    ],
+    legalNavigation: "Legal",
     copyright: "© 2026 Aptaflux. All rights reserved.",
   },
 } as const;

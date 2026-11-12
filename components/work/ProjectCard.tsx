@@ -38,11 +38,13 @@ export function ProjectCard({
                     device="phone"
                     phonePlacement="left"
                     phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
+                    phoneScreen="primary"
                   />
                   <DeviceFrame
                     device="phone"
                     phonePlacement="right"
                     phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
+                    phoneScreen="secondary"
                   />
                 </>
               ) : (

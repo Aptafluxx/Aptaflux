@@ -12,7 +12,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [];
   }
 
-  const staticRoutes = ["", "/work", "/services", "/about", "/contact"];
+  const staticRoutes = [
+    "",
+    "/work",
+    "/services",
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
+  ];
 
   return [
     ...staticRoutes.map((route) => ({

@@ -2,6 +2,8 @@ export const site = {
   brand: "Aptaflux",
   description:
     "Aptaflux helps businesses turn challenges into websites, mobile apps and AI-powered systems.",
+  footerDescription:
+    "Building digital solutions for businesses ready to move forward.",
   metadata: {
     notFoundTitle: "Page not found",
     notFoundDescription: "The page you are looking for could not be found.",

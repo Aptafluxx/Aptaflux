@@ -231,7 +231,7 @@ export function MobileMenu({
                 className={`mobile-menu-row ${
                   isActive(item.href) ? "mobile-menu-row-active" : ""
                 }`}
-                data-first-row={item.href === "/work" ? "true" : undefined}
+                data-first-row={item.href === "/" ? "true" : undefined}
                 href={item.href}
                 key={item.href}
                 onClick={onClose}

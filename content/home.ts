@@ -240,13 +240,6 @@ export const homeContent = {
     explore: "Explore",
     services: "Services",
     contact: "Contact",
-    exploreLinks: [
-      { label: "Home", href: "/" },
-      { label: "Services", href: "/services" },
-      { label: "Our Work", href: "/work" },
-      { label: "About Us", href: "/about" },
-      { label: "Contact", href: "/contact" },
-    ],
     serviceLinks: [
       "Web Development",
       "Mobile Applications",

@@ -259,7 +259,7 @@ export function Navbar() {
         onBlurCapture={handleBlurCapture}
         onFocusCapture={handleFocusCapture}
       >
-        <Container className="grid min-h-[46px] grid-cols-[1fr_auto_1fr] items-center gap-2">
+        <Container className="grid min-h-[46px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2">
           <Link
             aria-label={site.brand}
             className="glass w-fit rounded-full px-5 py-2.5 font-body text-h3 font-bold tracking-[-0.04em] transition-colors hover:text-cream focus-visible:outline-offset-2 max-[380px]:px-3"
@@ -269,7 +269,7 @@ export function Navbar() {
           </Link>
 
           <div
-            className="relative hidden w-fit min-[1024px]:block"
+            className="relative hidden w-fit justify-self-center min-[1024px]:block"
             ref={navbarCenterRef}
           >
             <nav

@@ -11,6 +11,7 @@ export const site = {
     retry: "Try again",
   },
   navigation: [
+    { href: "/", label: "Home" },
     { href: "/work", label: "Work" },
     { href: "/services", label: "Services" },
     { href: "/about", label: "About" },

@@ -28,7 +28,7 @@ export function Footer() {
           <nav aria-label={footer.explore} className="lg:col-span-2">
             <h2 className="text-small font-semibold">{footer.explore}</h2>
             <ul className="mt-4 space-y-3">
-              {footer.exploreLinks.map((item) => (
+              {site.navigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     className="text-small text-muted transition-colors hover:text-text"

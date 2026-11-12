@@ -201,7 +201,7 @@ export function Footer() {
               lengthAdjust="spacing"
               textLength="1000"
               x="0"
-              y="205"
+              y="200"
             >
               Aptaflux
             </text>

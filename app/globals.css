@@ -774,3 +774,68 @@ section[data-tone="raised"] .ui-icon-badge {
     animation: none;
   }
 }
+
+/* Mobile menu: panel sits under the measured bar. No blur or fade on the panel itself. */
+.mobile-menu-panel {
+  position: fixed;
+  top: calc(var(--navbar-bottom, 72px) + 8px);
+  left: 12px;
+  right: 12px;
+  max-height: calc(100dvh - var(--navbar-bottom, 72px) - 20px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  backdrop-filter: none;
+  filter: none;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.mobile-menu-panel-open {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
+}
+
+.mobile-menu-backdrop {
+  background: rgba(6, 13, 16, 0.45);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.mobile-menu-backdrop-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease, visibility 0s;
+}
+
+@media (min-width: 520px) {
+  .mobile-menu-panel {
+    left: auto;
+    width: 480px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu-panel,
+  .mobile-menu-backdrop {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-panel,
+  .mobile-menu-panel-open,
+  .mobile-menu-backdrop,
+  .mobile-menu-backdrop-open {
+    transition: none;
+    transform: none;
+  }
+}

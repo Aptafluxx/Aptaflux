@@ -38,6 +38,7 @@ const serviceIcons: LucideIcon[] = [Globe, Bot, PanelsTopLeft];
 export function Navbar() {
   const pathname = usePathname();
   const navbarCenterRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const servicesButtonRef = useRef<HTMLButtonElement>(null);
   const menuToggleRef = useRef<HTMLButtonElement>(null);
@@ -220,6 +221,26 @@ export function Navbar() {
     };
   }, [isServicesOpen]);
 
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const update = () => {
+      const top = parseFloat(getComputedStyle(header).top) || 16;
+      document.documentElement.style.setProperty(
+        "--navbar-bottom",
+        `${Math.round(top + header.offsetHeight)}px`,
+      );
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(header);
+    window.addEventListener("resize", update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   const handleFocusCapture = (event: FocusEvent<HTMLElement>) => {
     hasFocus.current = true;
     setIsVisible(true);
@@ -255,6 +276,7 @@ export function Navbar() {
   return (
     <>
       <header
+        ref={headerRef}
         className={`fixed inset-x-0 top-[calc(16px+env(safe-area-inset-top))] z-50 transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "navbar-hidden"
         } ${isScrolled ? "navbar-scrolled" : ""}`}
@@ -264,10 +286,10 @@ export function Navbar() {
         <Container className="grid min-h-[46px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2">
           <Link
             aria-label={site.brand}
-            className="glass w-fit rounded-full px-4 py-2.5 transition-colors focus-visible:outline-offset-2 max-[380px]:px-3"
+            className="glass inline-flex h-11 w-fit items-center rounded-full px-3.5 transition-colors focus-visible:outline-offset-2"
             href="/"
           >
-            <Logo />
+            <Logo compact />
           </Link>
 
           <div
@@ -425,7 +447,7 @@ export function Navbar() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu-panel"
             aria-label={isMenuOpen ? "Close site menu" : "Open site menu"}
-            className="mobile-menu-toggle glass col-start-3 inline-flex w-fit items-center justify-self-end gap-2 rounded-full px-5 py-2.5 text-small font-semibold text-fg transition-colors hover:bg-bg-raised/10 min-[1024px]:hidden"
+            className="mobile-menu-toggle glass col-start-3 inline-flex h-11 w-fit items-center justify-self-end gap-2 rounded-full px-4 text-small font-semibold text-fg transition-colors hover:bg-bg-raised/10 min-[1024px]:hidden"
             onClick={isMenuOpen ? closeMenu : openMenu}
             type="button"
           >

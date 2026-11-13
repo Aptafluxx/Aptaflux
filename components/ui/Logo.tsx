@@ -1,10 +1,5 @@
 import type { SVGProps } from "react";
 
-type LogoProps = {
-  className?: string;
-  showWordmark?: boolean;
-};
-
 export function LogoMark(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -45,11 +40,22 @@ export function LogoWordmark(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function Logo({ className = "", showWordmark = true }: LogoProps) {
+export function Logo({
+  className = "",
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   return (
-    <span className={`inline-flex items-center gap-2 ${className}`}>
-      <LogoMark className="size-7 shrink-0 text-brand" />
-      {showWordmark ? <LogoWordmark className="h-7 w-[130px] text-current" /> : null}
+    <span
+      className={`inline-flex items-center ${compact ? "gap-2" : "gap-2.5"} ${className}`}
+    >
+      <LogoMark className={compact ? "h-6 w-auto" : "h-8 w-auto"} />
+      <LogoWordmark
+        className={compact ? "h-[18px] w-auto" : "h-[22px] w-auto"}
+      />
+      <span className="sr-only">Aptaflux</span>
     </span>
   );
 }

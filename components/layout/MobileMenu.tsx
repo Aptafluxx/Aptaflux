@@ -3,8 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
-  BriefcaseBusiness,
-  Camera,
   ChevronDown,
   Globe,
   Mail,
@@ -13,20 +11,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { RefObject } from "react";
-import type { LucideIcon } from "lucide-react";
 import { servicesContent } from "@/content/services";
 import { site } from "@/content/site";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { SocialIcon } from "@/components/ui/SocialIcon";
 
 type MobileMenuProps = {
   isOpen: boolean;
   menuToggleRef: RefObject<HTMLButtonElement | null>;
   onClose: () => void;
-};
-
-const socialIcons: Partial<Record<string, LucideIcon>> = {
-  LinkedIn: BriefcaseBusiness,
-  Instagram: Camera,
 };
 
 export function MobileMenu({
@@ -39,10 +32,7 @@ export function MobileMenu({
   const previousPathname = useRef(pathname);
   const shouldReduceMotion = useReducedMotion();
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
-  const socialLinks = site.socials.flatMap((social) => {
-    const Icon = socialIcons[social.label];
-    return social.href && Icon ? [{ ...social, Icon }] : [];
-  });
+  const socialLinks = site.socials.filter((social) => social.href);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -142,7 +132,7 @@ export function MobileMenu({
         aria-hidden={!isOpen}
         aria-label="Site menu"
         aria-modal={isOpen}
-        className={`mobile-menu-panel fixed z-[45] ${
+        className={`mobile-menu-panel fixed z-[45] bg-bg-raised text-fg ${
           isOpen ? "mobile-menu-panel-open" : ""
         }`}
         id="mobile-menu-panel"
@@ -265,7 +255,7 @@ export function MobileMenu({
           <ThemeToggle />
           {socialLinks.length > 0 ? (
             <nav aria-label={site.socialNavigation} className="flex gap-2">
-              {socialLinks.map(({ Icon, href, label }) => (
+              {socialLinks.map(({ href, label }) => (
                 <a
                   aria-label={label}
                   className="mobile-menu-social"
@@ -275,7 +265,7 @@ export function MobileMenu({
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <Icon aria-hidden="true" size={18} />
+                  <SocialIcon label={label} />
                 </a>
               ))}
             </nav>

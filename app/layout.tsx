@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { LenisProvider } from "@/components/providers/LenisProvider";
@@ -44,6 +43,8 @@ export const viewport: Viewport = {
   ],
 };
 
+const THEME_INIT = `(function(){try{var s=localStorage.getItem("theme");var t=s==="light"||s==="dark"?s:(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="dark"?"#060D10":"#F5F1E8")}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,9 +58,7 @@ export default function RootLayout({
     >
       <head>
         <meta name="theme-color" content="#F5F1E8" />
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`(() => { const stored = localStorage.getItem("theme"); const theme = stored === "light" || stored === "dark" ? stored : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"); document.documentElement.dataset.theme = theme; document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#060D10" : "#F5F1E8"); })()`}
-        </Script>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
       </head>
       <body className="flex min-h-svh flex-col text-body">
         <a className="skip-link" href="#main-content">

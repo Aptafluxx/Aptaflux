@@ -53,8 +53,7 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const [pinnedPath, setPinnedPath] = useState<string | null>(null);
-  const isServicesOpen =
-    hoveredPath === pathname || pinnedPath === pathname;
+  const isServicesOpen = hoveredPath === pathname || pinnedPath === pathname;
 
   const clearTimers = useCallback(() => {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
@@ -286,7 +285,7 @@ export function Navbar() {
         <Container className="grid min-h-[46px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2">
           <Link
             aria-label={site.brand}
-            className="glass inline-flex h-11 w-fit items-center rounded-full px-3.5 transition-colors focus-visible:outline-offset-2"
+            className="glass inline-flex h-11 w-fit items-center rounded-full px-0 transition-colors focus-visible:outline-offset-2"
             href="/"
           >
             <Logo compact />
@@ -452,7 +451,11 @@ export function Navbar() {
             type="button"
           >
             {isMenuOpen ? site.closeMenu : site.openMenu}
-            {isMenuOpen ? <X aria-hidden="true" size={16} /> : <MenuIcon aria-hidden="true" size={16} />}
+            {isMenuOpen ? (
+              <X aria-hidden="true" size={16} />
+            ) : (
+              <MenuIcon aria-hidden="true" size={16} />
+            )}
           </button>
         </Container>
       </header>

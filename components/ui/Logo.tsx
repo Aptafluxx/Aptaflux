@@ -5,6 +5,9 @@ export function LogoMark(props: SVGProps<SVGSVGElement>) {
     <svg
       aria-hidden="true"
       fill="none"
+      overflow="visible"
+      preserveAspectRatio="xMidYMid meet"
+      style={{ display: "block", overflow: "visible" }}
       viewBox="0 0 32 32"
       {...props}
     >
@@ -22,6 +25,8 @@ export function LogoWordmark(props: SVGProps<SVGSVGElement>) {
     <svg
       aria-hidden="true"
       fill="none"
+      preserveAspectRatio="xMidYMid meet"
+      style={{ display: "block" }}
       viewBox="0 0 148 32"
       {...props}
     >
@@ -49,11 +54,17 @@ export function Logo({
 }) {
   return (
     <span
-      className={`inline-flex items-center ${compact ? "gap-2" : "gap-2.5"} ${className}`}
+      className={`inline-flex items-center leading-none ${compact ? "gap-2" : "gap-2.5"} ${className}`}
     >
-      <LogoMark className={compact ? "h-6 w-auto" : "h-8 w-auto"} />
+      <LogoMark
+        className={`shrink-0 overflow-visible ${
+          compact ? "h-6 w-6" : "h-8 w-8"
+        }`}
+      />
       <LogoWordmark
-        className={compact ? "h-[18px] w-auto" : "h-[22px] w-auto"}
+        className={`shrink-0 ${
+          compact ? "h-[18px] w-auto" : "h-[22px] w-auto"
+        }`}
       />
       <span className="sr-only">Aptaflux</span>
     </span>

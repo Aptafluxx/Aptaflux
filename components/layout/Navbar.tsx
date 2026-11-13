@@ -23,6 +23,8 @@ import type { FocusEvent } from "react";
 import type { LucideIcon } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { IconBadge } from "@/components/ui/IconBadge";
+import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { servicesContent } from "@/content/services";
 import { site } from "@/content/site";
 
@@ -262,10 +264,10 @@ export function Navbar() {
         <Container className="grid min-h-[46px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2">
           <Link
             aria-label={site.brand}
-            className="glass w-fit rounded-full px-5 py-2.5 font-body text-h3 font-bold tracking-[-0.04em] transition-colors hover:text-cream focus-visible:outline-offset-2 max-[380px]:px-3"
+            className="glass w-fit rounded-full px-4 py-2.5 transition-colors focus-visible:outline-offset-2 max-[380px]:px-3"
             href="/"
           >
-            {site.brand}
+            <Logo />
           </Link>
 
           <div
@@ -378,10 +380,10 @@ export function Navbar() {
                     >
                       <IconBadge icon={Icon} />
                       <span className="min-w-0">
-                        <span className="service-menu-title block text-small font-semibold text-cream">
+                        <span className="service-menu-title block text-small font-semibold text-fg">
                           {service.name}
                         </span>
-                        <span className="block text-[14px] leading-5 text-[rgba(244,237,224,0.78)]">
+                        <span className="block text-[14px] leading-5 text-muted">
                           {service.promise}
                         </span>
                       </span>
@@ -389,7 +391,7 @@ export function Navbar() {
                   );
                 })}
                 <Link
-                  className="mt-1 flex min-h-11 items-center justify-between border-t border-line px-3 pt-2 text-small font-semibold text-cream transition-colors hover:text-ember focus-visible:text-ember"
+                  className="mt-1 flex min-h-11 items-center justify-between border-t border-line px-3 pt-2 text-small font-semibold text-fg transition-colors hover:text-brand focus-visible:text-brand"
                   href="/services"
                   onClick={closeServices}
                   prefetch={false}
@@ -402,25 +404,28 @@ export function Navbar() {
             </div>
           </div>
 
-          <Link
-            className="group hidden w-fit justify-self-end items-center gap-2 rounded-full bg-ember px-5 py-3 text-small font-semibold text-bg transition-transform duration-200 hover:-translate-y-px focus-visible:outline-offset-4 min-[1024px]:inline-flex"
-            href="/contact"
-            prefetch={false}
-          >
-            {site.callToAction}
-            <ArrowRight
-              aria-hidden="true"
-              className="transition-transform duration-200 group-hover:translate-x-0.5"
-              size={16}
-            />
-          </Link>
+          <div className="hidden items-center gap-2 justify-self-end min-[1024px]:flex">
+            <ThemeToggle />
+            <Link
+              className="group inline-flex w-fit items-center gap-2 rounded-full bg-brand px-5 py-3 text-small font-semibold text-brand-fg transition-transform duration-200 hover:-translate-y-px hover:bg-brand-hover focus-visible:outline-offset-4"
+              href="/contact"
+              prefetch={false}
+            >
+              {site.callToAction}
+              <ArrowRight
+                aria-hidden="true"
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+                size={16}
+              />
+            </Link>
+          </div>
 
           <button
             ref={menuToggleRef}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu-panel"
             aria-label={isMenuOpen ? "Close site menu" : "Open site menu"}
-            className="mobile-menu-toggle glass col-start-3 inline-flex w-fit items-center justify-self-end gap-2 rounded-full px-5 py-2.5 text-small font-semibold text-cream transition-colors hover:bg-cream/10 min-[1024px]:hidden"
+            className="mobile-menu-toggle glass col-start-3 inline-flex w-fit items-center justify-self-end gap-2 rounded-full px-5 py-2.5 text-small font-semibold text-fg transition-colors hover:bg-bg-raised/10 min-[1024px]:hidden"
             onClick={isMenuOpen ? closeMenu : openMenu}
             type="button"
           >

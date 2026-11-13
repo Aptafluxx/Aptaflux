@@ -99,7 +99,7 @@ export default async function ProjectPage(props: WorkPageProps) {
         title={project.name}
       />
 
-      <Section aria-label={workPageContent.ariaLabels.projectDetails} tone="surface">
+      <Section aria-label={workPageContent.ariaLabels.projectDetails} tone="alt">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {metadataItems.map((item) => (
             <div className="border-t border-line pt-4" key={item.label}>
@@ -111,7 +111,7 @@ export default async function ProjectPage(props: WorkPageProps) {
       </Section>
 
       <Section aria-label="Project cover">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#0F1A27] sm:aspect-[16/9]">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[rgb(var(--bg))] sm:aspect-[16/9]">
           <DotGrid className="opacity-80" />
           {project.slug === "doctor-hunt" || project.slug === "drips-water-app" ? (
             <>
@@ -136,7 +136,7 @@ export default async function ProjectPage(props: WorkPageProps) {
         </div>
       </Section>
 
-      <Section aria-label={workPageContent.ariaLabels.projectStory} tone="cream">
+      <Section aria-label={workPageContent.ariaLabels.projectStory} tone="raised">
         <div className="grid gap-4 md:grid-cols-3">
           {storyItems.map((item, index) => {
             const Icon = item.icon;
@@ -172,7 +172,7 @@ export default async function ProjectPage(props: WorkPageProps) {
               const GalleryArt = artComponents[art];
               return (
                 <div
-                  className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-surface p-4 sm:p-8 ${
+                  className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-card p-4 sm:p-8 ${
                     index === 1
                       ? "min-[820px]:col-span-5"
                       : "min-[820px]:col-span-7"
@@ -193,7 +193,7 @@ export default async function ProjectPage(props: WorkPageProps) {
           href={`/work/${nextProject.slug}`}
         >
           <p className="text-small text-muted">{labels.nextProject}</p>
-          <p className="mt-3 font-body text-display-lg font-bold tracking-[-0.02em] transition-colors duration-300 group-hover:text-ember">
+          <p className="mt-3 font-body text-display-lg font-bold tracking-[-0.02em] transition-colors duration-300 group-hover:text-brand">
             {nextProject.name}
           </p>
         </Link>

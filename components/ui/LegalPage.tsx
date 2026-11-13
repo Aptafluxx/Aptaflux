@@ -26,7 +26,7 @@ export function LegalPage({
         intro={description}
         title={title}
       />
-      <Section tone="surface">
+      <Section tone="alt">
         <article className="mx-auto max-w-[720px]">
           <p className="mb-8 text-small text-muted">{lastUpdated}</p>
           <div className="space-y-8">

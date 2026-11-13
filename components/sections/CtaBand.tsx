@@ -23,17 +23,23 @@ export function CtaBand({
 
   return (
     <Section
-      className="relative isolate overflow-hidden"
+      className="cta-band relative isolate overflow-hidden"
       containerClassName="relative z-10"
-      eyebrow={eyebrow ?? cta.eyebrow}
+      eyebrow={
+        <span className="cta-band-eyebrow">{eyebrow ?? cta.eyebrow}</span>
+      }
       intro={isCustom ? text : cta.intro}
       title={isCustom ? title : cta.title}
-      tone="ember"
+      tone="brand"
     >
       <div className="grid items-end gap-8 md:grid-cols-12">
         <div className="md:col-span-7">
           {isCustom ? (
-            <Button className="mt-2" href={href ?? "/contact"} tone="ember">
+            <Button
+              className="mt-2 !border-band-button-bg !bg-band-button-bg !text-band-button-fg hover:!-translate-y-px hover:!border-band-button-bg hover:!bg-band-button-bg hover:!text-band-button-fg"
+              href={href ?? "/contact"}
+              tone="brand"
+            >
               {buttonLabel ?? cta.action}
             </Button>
           ) : (
@@ -41,13 +47,19 @@ export function CtaBand({
               <p className="font-body text-h3 font-bold tracking-[-0.02em]">
                 {cta.invitation}
               </p>
-              <p className="mt-3 max-w-[48ch] text-body text-[#142130]">
+              <p className="cta-band-small-text mt-3 max-w-[48ch] text-body text-band-fg">
                 {cta.detail}
               </p>
-              <Button className="mt-6" href="/contact" tone="ember">
+              <Button
+                className="mt-6 !border-band-button-bg !bg-band-button-bg !text-band-button-fg hover:!-translate-y-px hover:!border-band-button-bg hover:!bg-band-button-bg hover:!text-band-button-fg"
+                href="/contact"
+                tone="brand"
+              >
                 {cta.action}
               </Button>
-              <p className="mt-4 text-small text-[#142130]">{cta.note}</p>
+              <p className="cta-band-small-text mt-4 text-small text-band-fg">
+                {cta.note}
+              </p>
             </>
           )}
         </div>

@@ -22,7 +22,7 @@ export default function AboutPage() {
         titleClassName="max-w-[22ch]"
       />
 
-      <Section aria-label={aboutContent.ariaLabels.story} tone="surface">
+      <Section aria-label={aboutContent.ariaLabels.story} tone="alt">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">
@@ -47,7 +47,7 @@ export default function AboutPage() {
               {aboutContent.beliefs.principles.map((principle, index) => (
                 <Reveal delay={index * 0.06} key={principle.title}>
                   <div className="grid gap-3 border-t border-line py-5 sm:grid-cols-[3rem_1fr] sm:gap-5">
-                    <p className="font-body text-small font-bold text-ember">
+                    <p className="font-body text-small font-bold text-brand">
                       0{index + 1}
                     </p>
                     <div>
@@ -69,13 +69,13 @@ export default function AboutPage() {
       <Section
         aria-label={aboutContent.ariaLabels.howWeWork}
         title={aboutContent.ariaLabels.howWeWork}
-        tone="navy"
+        tone="base"
       >
         <div>
           {aboutContent.howWeWork.principles.map((principle, index) => (
             <Reveal delay={index * 0.06} key={principle.title}>
               <div className="grid gap-3 border-t border-line py-5 sm:grid-cols-[4rem_1fr_1.2fr] sm:items-start sm:gap-6">
-                <p className="font-body text-small font-bold text-ember">
+                <p className="font-body text-small font-bold text-brand">
                   0{index + 1}
                 </p>
                 <h3 className="font-body text-h3 font-bold tracking-[-0.02em]">

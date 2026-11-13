@@ -11,7 +11,7 @@ export function FeaturedWork() {
       aria-label={content.eyebrow}
       eyebrow={content.eyebrow}
       title={content.title}
-      tone="navy"
+      tone="base"
     >
       <div className="grid auto-rows-fr gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {work

@@ -33,7 +33,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
                 type="button"
               >
                 <span>{item.question}</span>
-                {isOpen ? <Minus aria-hidden="true" className="shrink-0 text-ember" /> : <Plus aria-hidden="true" className="shrink-0 text-ember" />}
+                {isOpen ? <Minus aria-hidden="true" className="shrink-0 text-brand" /> : <Plus aria-hidden="true" className="shrink-0 text-brand" />}
               </button>
             </h3>
             <div

@@ -92,7 +92,7 @@ export default async function ServicePage(props: ServicePageProps) {
         <ul className="mt-2 space-y-2 text-body leading-relaxed text-muted">
           {service.deliverables.slice(0, 3).map((deliverable) => (
             <li className="flex gap-2" key={deliverable}>
-              <span aria-hidden="true" className="text-ember">•</span>
+              <span aria-hidden="true" className="text-brand">•</span>
               <span>{deliverable}</span>
             </li>
           ))}
@@ -138,7 +138,7 @@ export default async function ServicePage(props: ServicePageProps) {
         aria-label="What's included"
         eyebrow={service.name}
         title="What's included"
-        tone="surface"
+        tone="alt"
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {service.deliverables.map((deliverable, index) => {
@@ -161,17 +161,17 @@ export default async function ServicePage(props: ServicePageProps) {
         aria-label="How it works"
         eyebrow={homeContent.process.eyebrow}
         title="How it works"
-        tone="cream"
+        tone="raised"
       >
         <div className="relative grid gap-8 before:absolute before:left-5 before:top-5 before:h-[calc(100%-2.5rem)] before:w-px before:bg-line sm:grid-cols-2 sm:before:hidden lg:grid-cols-4">
           {homeContent.process.steps.map((step, index) => {
             const Icon = processIcons[index];
             return (
               <Reveal className="relative z-10" delay={index * 0.06} key={step.number}>
-                <p className="font-body text-small font-bold text-ember-deep">
+                <p className="font-body text-small font-bold text-brand">
                   {step.number}
                 </p>
-                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-cream text-ember-deep">
+                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-bg-raised text-brand">
                   <Icon aria-hidden="true" size={20} />
                 </div>
                 <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
@@ -194,7 +194,7 @@ export default async function ServicePage(props: ServicePageProps) {
         aria-label="Technology"
         eyebrow={service.name}
         title="Technology"
-        tone="navy"
+        tone="base"
       >
         <ul className="flex flex-wrap gap-3">
           {service.technologies.map((technology) => (
@@ -212,7 +212,7 @@ export default async function ServicePage(props: ServicePageProps) {
         aria-label="Related solutions"
         eyebrow="Related solutions"
         title="Related solutions"
-        tone="surface"
+        tone="alt"
       >
         <div className="grid gap-4 md:grid-cols-2">
           {relatedServices.map((related) => (
@@ -222,10 +222,10 @@ export default async function ServicePage(props: ServicePageProps) {
               key={related.slug}
             >
               <Card className="h-full p-5 sm:p-6">
-                <p className="text-small font-semibold text-ember">
+                <p className="text-small font-semibold text-brand">
                   {related.number}
                 </p>
-                <h3 className="mt-3 font-body text-h3 font-bold tracking-[-0.02em] transition-colors group-hover:text-ember">
+                <h3 className="mt-3 font-body text-h3 font-bold tracking-[-0.02em] transition-colors group-hover:text-brand">
                   {related.name}
                 </h3>
                 <p className="mt-3 text-body leading-relaxed text-muted">
@@ -237,10 +237,10 @@ export default async function ServicePage(props: ServicePageProps) {
         </div>
       </Section>
 
-      <Section aria-label="Frequently asked questions" tone="surface">
+      <Section aria-label="Frequently asked questions" tone="alt">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-ember">
+            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-brand">
               FAQ
             </p>
             <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">

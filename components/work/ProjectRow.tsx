@@ -67,7 +67,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
       <div className="grid gap-5 min-[820px]:grid-cols-[minmax(0,1fr)_360px] min-[820px]:items-end">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
-            <h2 className="font-display text-project-title font-medium transition-colors duration-300 group-hover:text-ember">
+            <h2 className="font-display text-project-title font-medium transition-colors duration-300 group-hover:text-brand">
             {project.name}
             </h2>
             {project.type === "portfolio" ? (
@@ -86,7 +86,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
         </div>
         <div className="flex flex-col gap-2 text-right text-small leading-relaxed text-muted">
           <p>{project.stack.join(", ")}</p>
-          <p className="text-ember">{workPageContent.projectLabels.projectLink}</p>
+          <p className="text-brand">{workPageContent.projectLabels.projectLink}</p>
         </div>
       </div>
       {preview}

@@ -11,7 +11,7 @@ export function ArtworkFrame({ art, className = "" }: ArtworkFrameProps) {
 
   return (
     <div
-      className={`relative aspect-[4/3] overflow-hidden rounded-[2px] bg-surface p-4 sm:p-8 ${className}`}
+      className={`relative aspect-[4/3] overflow-hidden rounded-[2px] bg-card p-4 sm:p-8 ${className}`}
     >
       <div className="h-full w-full">
         <Artwork />

@@ -62,7 +62,7 @@ export default function ServicesPage() {
         title="Solutions for ambitious businesses"
       />
 
-      <Section aria-label={servicesContent.ariaLabels.services} tone="surface">
+      <Section aria-label={servicesContent.ariaLabels.services} tone="alt">
         <div className="grid auto-rows-fr items-stretch gap-5 lg:grid-cols-3">
           {services.solutions.map((solution, index) => {
             const Illustration = serviceArt[solution.slug];
@@ -81,7 +81,7 @@ export default function ServicesPage() {
                     <div className="mb-6 flex h-44 items-center justify-center overflow-hidden rounded-md bg-bg px-4">
                       <Illustration className="!h-full max-h-44 w-full" />
                     </div>
-                    <p className="text-small font-semibold text-ember">
+                    <p className="text-small font-semibold text-brand">
                       {solution.number}
                     </p>
                     <p className="mt-2 text-body font-semibold">
@@ -101,7 +101,7 @@ export default function ServicesPage() {
                         {solution.bestFor}
                       </p>
                     </div>
-                    <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-ember transition-colors group-hover:text-text">
+                    <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-brand transition-colors group-hover:text-fg">
                       {solution.linkLabel}
                     </span>
                   </Card>
@@ -115,7 +115,7 @@ export default function ServicesPage() {
       <Section
         aria-label={servicesContent.comparison.title}
         title={servicesContent.comparison.title}
-        tone="cream"
+        tone="raised"
       >
         <div className="hidden lg:block">
           <table className="w-full table-fixed border-collapse text-left">
@@ -169,7 +169,7 @@ export default function ServicesPage() {
                 {servicesContent.services.map((service) => (
                   <td className="p-4" key={service.slug}>
                     <Link
-                      className="font-semibold text-ember underline-offset-4 hover:underline"
+                      className="font-semibold text-brand underline-offset-4 hover:underline"
                       href={`/services/${service.slug}`}
                     >
                       {servicesContent.comparison.linkLabel} →
@@ -208,7 +208,7 @@ export default function ServicesPage() {
                 </div>
               ))}
               <Link
-                className="mt-5 inline-block font-semibold text-ember underline-offset-4 hover:underline"
+                className="mt-5 inline-block font-semibold text-brand underline-offset-4 hover:underline"
                 href={`/services/${service.slug}`}
               >
                 {servicesContent.comparison.linkLabel} →
@@ -223,7 +223,7 @@ export default function ServicesPage() {
         eyebrow={capabilities.eyebrow}
         intro={capabilities.closing}
         title={capabilities.title}
-        tone="cream"
+        tone="raised"
       >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
           {capabilities.rows.map((capability, index) => {
@@ -253,17 +253,17 @@ export default function ServicesPage() {
         aria-label={homeContent.process.eyebrow}
         eyebrow={homeContent.process.eyebrow}
         title={homeContent.process.title}
-        tone="cream"
+        tone="raised"
       >
         <div className="relative grid gap-8 before:absolute before:left-5 before:top-5 before:h-[calc(100%-2.5rem)] before:w-px before:bg-line sm:grid-cols-2 sm:before:hidden lg:grid-cols-4">
           {homeContent.process.steps.map((step, index) => {
             const Icon = processIcons[index];
             return (
               <Reveal className="relative z-10" delay={index * 0.06} key={step.number}>
-                <p className="font-body text-small font-bold text-ember-deep">
+                <p className="font-body text-small font-bold text-brand">
                   {step.number}
                 </p>
-                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-cream text-ember-deep">
+                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-bg-raised text-brand">
                   <Icon aria-hidden="true" size={20} />
                 </div>
                 <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
@@ -287,17 +287,17 @@ export default function ServicesPage() {
         className="overflow-hidden"
         fullBleedContent
         title={homeContent.technologies.title}
-        tone="navy"
+        tone="base"
       >
         <div className="tech-marquee-viewport">
           <LazyMarquee />
         </div>
       </Section>
 
-      <Section aria-label={homeContent.faq.eyebrow} tone="surface">
+      <Section aria-label={homeContent.faq.eyebrow} tone="alt">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-ember">
+            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-brand">
               {homeContent.faq.eyebrow}
             </p>
             <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">

@@ -22,7 +22,7 @@ export default function WorkPage() {
         intro={workPageContent.introduction}
         title="Our work"
       />
-      <Section aria-label={workPageContent.ariaLabels.projects} tone="surface">
+      <Section aria-label={workPageContent.ariaLabels.projects} tone="alt">
         <WorkGrid />
         <p className="mt-10 border-t border-line pt-6 text-body leading-relaxed text-muted">
           {workPageContent.projectLabels.portfolioNote}

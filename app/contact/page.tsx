@@ -26,7 +26,7 @@ export default function ContactPage() {
         intro={contact.introduction}
         title="Let's talk about your project"
       />
-      <Section aria-label={contact.informationLabel} tone="surface">
+      <Section aria-label={contact.informationLabel} tone="alt">
         <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="space-y-4 lg:col-span-5">
             <h2 className="mb-5 font-body text-h2 font-bold tracking-[-0.02em]">
@@ -38,7 +38,7 @@ export default function ContactPage() {
                 <div className="min-w-0">
                   <h3 className="text-small font-semibold">Email</h3>
                   <a
-                    className="mt-2 inline-block break-all text-body text-muted transition-colors hover:text-ember"
+                    className="mt-2 inline-block break-all text-body text-muted transition-colors hover:text-brand"
                     href={`mailto:${site.email}`}
                   >
                     {site.email}
@@ -101,7 +101,7 @@ export default function ContactPage() {
                     >
                       {whatsapp.href ? (
                         <a
-                          className="text-body text-muted transition-colors hover:text-ember"
+                          className="text-body text-muted transition-colors hover:text-brand"
                           href={whatsapp.href}
                           rel="noreferrer"
                           target="_blank"
@@ -111,7 +111,7 @@ export default function ContactPage() {
                       ) : null}
                       {socials.map((social) => (
                         <a
-                          className="text-body text-muted transition-colors hover:text-ember"
+                          className="text-body text-muted transition-colors hover:text-brand"
                           href={social.href}
                           key={social.label}
                           rel="noreferrer"
@@ -136,7 +136,7 @@ export default function ContactPage() {
                     className="flex gap-4 border-t border-line pt-4"
                     key={`${step.title}-${index}`}
                   >
-                    <span className="font-body text-small font-bold text-ember">
+                    <span className="font-body text-small font-bold text-brand">
                       0{index + 1}
                     </span>
                     <div>

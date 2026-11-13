@@ -95,9 +95,9 @@ export function ContactForm() {
     );
   }
 
-  const errorClass = "mt-2 text-small leading-relaxed text-ember";
+  const errorClass = "mt-2 text-small leading-relaxed text-brand";
   const inputClass =
-    "w-full border-0 border-b border-line bg-transparent px-0 py-3 text-body text-text focus:border-ember";
+    "w-full border-0 border-b border-line bg-transparent px-0 py-3 text-body text-fg focus:border-brand";
 
   return (
     <form className="space-y-7" noValidate onSubmit={handleSubmit}>
@@ -162,8 +162,8 @@ export function ContactForm() {
                 aria-pressed={isSelected}
                 className={`min-h-10 rounded-full border px-4 py-2 text-small transition-colors ${
                   isSelected
-                    ? "border-ember bg-ember text-bg"
-                    : "border-line text-muted hover:border-ember hover:text-text"
+                    ? "border-brand bg-brand text-brand-fg"
+                    : "border-line text-muted hover:border-brand hover:text-fg"
                 }`}
                 key={option}
                 onClick={() =>
@@ -238,7 +238,7 @@ export function ContactForm() {
             <p className="mt-1">
               {contact.errorContact}{" "}
               <a
-                className="underline underline-offset-4 hover:text-text"
+                className="underline underline-offset-4 hover:text-fg"
                 href={`mailto:${site.email}`}
               >
                 {site.email}

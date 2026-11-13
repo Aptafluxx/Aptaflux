@@ -43,7 +43,7 @@ const FeaturedWork = dynamic(
     import("@/components/sections/FeaturedWork").then(
       (module) => module.FeaturedWork,
     ),
-  { loading: () => <div aria-hidden="true" className="min-h-24 bg-surface" /> },
+  { loading: () => <div aria-hidden="true" className="min-h-24 bg-card" /> },
 );
 
 const serviceArt = {
@@ -101,7 +101,7 @@ export function HomeSections() {
         eyebrow={problem.eyebrow}
         intro={problem.intro}
         title={problem.title}
-        tone="cream"
+        tone="raised"
       >
         <div className="grid gap-5 md:grid-cols-3">
           {problem.points.map((point, index) => (
@@ -109,7 +109,7 @@ export function HomeSections() {
               <Card className="h-full">
                 <div className="flex items-start justify-between gap-4">
                   <IconBadge icon={problemIcons[index]} />
-                  <span className="font-body text-small font-bold text-ember-deep">
+                  <span className="font-body text-small font-bold text-brand">
                     0{index + 1}
                   </span>
                 </div>
@@ -124,7 +124,7 @@ export function HomeSections() {
           ))}
         </div>
         <div className="mx-auto mt-14 max-w-4xl text-center">
-          <div className="mx-auto mb-6 h-1 w-14 rounded-full bg-ember" />
+          <div className="mx-auto mb-6 h-1 w-14 rounded-full bg-brand" />
           <p className="font-body text-h2 font-bold leading-tight tracking-[-0.02em]">
             {problem.closing}
           </p>
@@ -135,7 +135,7 @@ export function HomeSections() {
         aria-label={outcomes.eyebrow}
         eyebrow={outcomes.eyebrow}
         title={outcomes.title}
-        tone="navy"
+        tone="base"
       >
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {outcomes.points.map((point, index) => (
@@ -155,7 +155,7 @@ export function HomeSections() {
         eyebrow={services.eyebrow}
         intro={services.intro}
         title={services.title}
-        tone="surface"
+        tone="alt"
       >
         <div className="grid auto-rows-fr items-stretch gap-5 lg:grid-cols-3">
           {services.solutions.map((solution, index) => {
@@ -172,7 +172,7 @@ export function HomeSections() {
                     <div className="mb-6 flex h-[180px] items-center justify-center overflow-hidden rounded-md bg-bg px-4">
                       <Illustration className="!h-full max-h-[180px] w-full" />
                     </div>
-                    <p className="text-small font-semibold text-ember">
+                    <p className="text-small font-semibold text-brand">
                       {solution.number}
                     </p>
                     <p className="mt-2 text-body font-semibold">{solution.name}</p>
@@ -190,7 +190,7 @@ export function HomeSections() {
                         {solution.bestFor}
                       </p>
                     </div>
-                    <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-ember transition-colors group-hover:text-text">
+                    <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-brand transition-colors group-hover:text-fg">
                       {solution.linkLabel}
                     </span>
                   </Card>
@@ -202,7 +202,7 @@ export function HomeSections() {
         <p className="mt-8 text-body">
           <span>{services.unsure} </span>
           <Link
-            className="font-semibold text-ember underline decoration-ember underline-offset-4 transition-colors hover:text-text"
+            className="font-semibold text-brand underline decoration-brand underline-offset-4 transition-colors hover:text-fg"
             href="/contact"
           >
             {services.contactLink}
@@ -210,9 +210,9 @@ export function HomeSections() {
         </p>
       </Section>
 
-      <Section aria-label={capabilities.eyebrow} tone="cream">
+      <Section aria-label={capabilities.eyebrow} tone="raised">
         <div className="mb-8 max-w-3xl">
-          <p className="mb-4 text-[12px] font-semibold uppercase tracking-wide text-ember-deep">
+          <p className="mb-4 text-[12px] font-semibold uppercase tracking-wide text-brand">
             {capabilities.eyebrow}
           </p>
           <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">
@@ -302,7 +302,7 @@ export function HomeSections() {
         className="overflow-hidden"
         fullBleedContent
         title={technologies.title}
-        tone="navy"
+        tone="base"
       >
         <div className="tech-marquee-viewport">
           <LazyMarquee />
@@ -315,7 +315,7 @@ export function HomeSections() {
         aria-label={process.eyebrow}
         eyebrow={process.eyebrow}
         title={process.title}
-        tone="cream"
+        tone="raised"
       >
         <div className="relative grid gap-8 before:absolute before:left-5 before:top-5 before:h-[calc(100%-2.5rem)] before:w-px before:bg-line sm:grid-cols-2 sm:before:hidden lg:grid-cols-4">
           {process.steps.map((step, index) => {
@@ -323,10 +323,10 @@ export function HomeSections() {
 
             return (
               <Reveal               className="relative z-10" delay={index * 0.06} key={step.number}>
-                <p className="font-body text-small font-bold text-ember-deep">
+                <p className="font-body text-small font-bold text-brand">
                   {step.number}
                 </p>
-                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-cream text-ember-deep">
+                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-bg-raised text-brand">
                     <Icon aria-hidden="true" size={20} />
                 </div>
                 <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
@@ -342,10 +342,10 @@ export function HomeSections() {
         </div>
       </Section>
 
-      <Section aria-label={why.eyebrow} tone="navy">
+      <Section aria-label={why.eyebrow} tone="base">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-5">
-            <p className="mb-4 text-[12px] font-semibold uppercase tracking-wide text-ember">
+            <p className="mb-4 text-[12px] font-semibold uppercase tracking-wide text-brand">
               {why.eyebrow}
             </p>
             <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">
@@ -369,10 +369,10 @@ export function HomeSections() {
         </div>
       </Section>
 
-      <Section aria-label={faq.eyebrow} tone="surface">
+      <Section aria-label={faq.eyebrow} tone="alt">
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <p className="mb-4 text-[12px] font-semibold uppercase tracking-wide text-ember">
+            <p className="mb-4 text-[12px] font-semibold uppercase tracking-wide text-brand">
               {faq.eyebrow}
             </p>
             <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">

@@ -13,18 +13,18 @@ export function Hero() {
   const titleParts = hero.title.split(/(digital opportunities\.)/i);
 
   return (
-    <Section className="relative overflow-hidden !pt-28 md:!pt-32" tone="navy">
+    <Section className="relative overflow-hidden !pt-28 md:!pt-32" tone="base">
       <DotGrid className="dot-grid-hero" />
       <Reveal className="relative z-10 pt-2.5">
         <div className="grid items-center gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6">
-            <p className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-ember">
+            <p className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-brand">
               {hero.eyebrow}
             </p>
             <h1 className="max-w-[15ch] font-display text-display-xl">
               {titleParts.map((part, index) =>
                 /digital opportunities\./i.test(part) ? (
-                  <em className="text-ember" key={index}>{part}</em>
+                  <em className="text-brand" key={index}>{part}</em>
                 ) : (
                   <span key={index}>{part}</span>
                 ),
@@ -45,10 +45,10 @@ export function Hero() {
 
                 return (
                   <li
-                    className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-surface/70 px-3 py-2 text-small text-muted lg:px-2.5 lg:text-[14px]"
+                    className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-card/70 px-3 py-2 text-small text-muted lg:px-2.5 lg:text-[14px]"
                     key={capability}
                   >
-                    <Icon aria-hidden="true" className="text-ember" size={16} />
+                    <Icon aria-hidden="true" className="text-brand" size={16} />
                     {capability}
                   </li>
                 );

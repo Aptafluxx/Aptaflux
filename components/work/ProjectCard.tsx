@@ -29,7 +29,7 @@ export function ProjectCard({
         prefetch={false}
       >
         <Card className="flex h-full flex-col p-5 sm:p-6">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[#0F1A27]">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[rgb(var(--bg))]">
             <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
             <div className="absolute inset-0 transition-transform duration-300 ease-out group-hover:scale-[1.03]">
               {isMobile ? (
@@ -53,7 +53,7 @@ export function ProjectCard({
                 </DeviceFrame>
               )}
             </div>
-            <span className="absolute bottom-3 right-3 translate-y-2 rounded-full bg-ember px-4 py-2 text-small font-semibold text-bg opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            <span className="absolute bottom-3 right-3 translate-y-2 rounded-full bg-brand px-4 py-2 text-small font-semibold text-brand-fg opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
               View project
             </span>
           </div>
@@ -65,7 +65,7 @@ export function ProjectCard({
               </span>
             ) : null}
           </div>
-          <h2 className="mt-2 font-body text-work-title font-bold tracking-[-0.02em] transition-colors group-hover:text-ember">
+          <h2 className="mt-2 font-body text-work-title font-bold tracking-[-0.02em] transition-colors group-hover:text-brand">
             {project.name}
           </h2>
           <p className="mt-2 flex-1 text-body leading-relaxed text-muted">
@@ -81,7 +81,7 @@ export function ProjectCard({
               </li>
             ))}
           </ul>
-          <span className="mt-5 text-small font-semibold text-ember">
+          <span className="mt-5 text-small font-semibold text-brand">
             {homeContent.work.projectLink}
           </span>
         </Card>

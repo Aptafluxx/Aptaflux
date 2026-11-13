@@ -9,7 +9,7 @@ type SectionProps = Omit<ComponentPropsWithoutRef<"section">, "children"> & {
   eyebrow?: ReactNode;
   intro?: ReactNode;
   title?: ReactNode;
-  tone?: "navy" | "surface" | "cream" | "ember";
+  tone?: "base" | "alt" | "raised" | "brand";
   topRule?: boolean;
 };
 
@@ -21,13 +21,13 @@ export function Section({
   eyebrow,
   intro,
   title,
-  tone = "navy",
+  tone = "base",
   topRule = false,
   ...sectionProps
 }: SectionProps) {
   return (
     <section
-      className={`bg-[var(--section-background)] py-14 text-text md:py-20 lg:py-24 ${className}`}
+      className={`bg-[rgb(var(--section-background))] py-14 text-[rgb(var(--section-fg))] md:py-20 lg:py-24 ${className}`}
       data-tone={tone}
       {...sectionProps}
     >
@@ -38,11 +38,11 @@ export function Section({
             {eyebrow ? (
               <p
                 className={`mb-3 text-eyebrow font-semibold uppercase ${
-                  tone === "cream"
-                    ? "text-ember-deep"
-                    : tone === "ember"
-                      ? "text-bg"
-                      : "text-ember"
+                  tone === "raised"
+                    ? "text-brand"
+                    : tone === "brand"
+                      ? "text-brand-fg"
+                      : "text-brand"
                 }`}
               >
                 {eyebrow}
@@ -51,7 +51,7 @@ export function Section({
             {title ? (
               <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">{title}</h2>
             ) : null}
-            {intro ? <div className="mt-4 max-w-[60ch] text-body text-muted">{intro}</div> : null}
+            {intro ? <div className="mt-4 max-w-[60ch] text-body text-[rgb(var(--section-muted))]">{intro}</div> : null}
           </div>
         ) : null}
         {!fullBleedContent ? children : null}

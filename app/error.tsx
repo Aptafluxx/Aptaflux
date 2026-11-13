@@ -29,7 +29,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         <p className="mt-4 text-body text-muted">
           {site.metadata.errorContact}{" "}
           <a
-            className="text-text underline underline-offset-4 hover:text-ember"
+            className="text-fg underline underline-offset-4 hover:text-brand"
             href={`mailto:${site.email}`}
           >
             {site.email}

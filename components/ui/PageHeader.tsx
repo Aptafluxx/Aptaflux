@@ -41,7 +41,7 @@ export function PageHeader({
         <div className={visual ? "lg:col-span-7" : ""}>
           {breadcrumb ? <div className="mb-5">{breadcrumb}</div> : null}
           {eyebrow ? (
-            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-ember">
+            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-brand">
               {eyebrow}
             </p>
           ) : null}
@@ -58,7 +58,7 @@ export function PageHeader({
             {accentStart >= 0 ? (
               <>
                 {title.slice(0, accentStart)}
-                <em className="font-display font-medium italic text-ember">
+                <em className="font-display font-medium italic text-brand">
                   {title.slice(accentStart, accentEnd)}
                 </em>
                 {title.slice(accentEnd)}

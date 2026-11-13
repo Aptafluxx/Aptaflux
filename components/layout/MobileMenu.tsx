@@ -16,6 +16,7 @@ import type { RefObject } from "react";
 import type { LucideIcon } from "lucide-react";
 import { servicesContent } from "@/content/services";
 import { site } from "@/content/site";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 type MobileMenuProps = {
   isOpen: boolean;
@@ -261,6 +262,7 @@ export function MobileMenu({
         </div>
 
         <div className="mobile-menu-actions">
+          <ThemeToggle />
           {socialLinks.length > 0 ? (
             <nav aria-label={site.socialNavigation} className="flex gap-2">
               {socialLinks.map(({ Icon, href, label }) => (

@@ -15,12 +15,12 @@ export function Breadcrumbs({
     <nav aria-label="Breadcrumb">
       <ol className="flex flex-wrap items-center gap-2 text-small text-muted">
         <li>
-          <Link className="transition-colors hover:text-text" href={parentHref}>
+          <Link className="transition-colors hover:text-fg" href={parentHref}>
             {parent}
           </Link>
         </li>
         <li aria-hidden="true">/</li>
-        <li aria-current="page" className="text-text">
+        <li aria-current="page" className="text-fg">
           {current}
         </li>
       </ol>

@@ -5,6 +5,7 @@ import { ArrowRight, ArrowUp, ArrowUpRight } from "lucide-react";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
 import { LocalTime } from "@/components/ui/LocalTime";
+import { Logo } from "@/components/ui/Logo";
 
 const capabilities = [
   "Web Development",
@@ -79,30 +80,34 @@ export function Footer() {
   );
 
   return (
-    <footer className="border-t border-[rgba(244,237,224,.10)] bg-[#0F1A27] font-body text-[#F4EDE0]">
+    <footer
+      className="site-footer border-t border-line bg-band font-body text-band-fg"
+      data-theme="dark"
+    >
       <div className="mx-auto w-full max-w-7xl px-6 pb-6 pt-12 lg:pt-14">
         <div className="grid gap-y-12 lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-5">
             <Link
-              className="inline-block text-2xl font-bold leading-none tracking-[-0.04em]"
+              aria-label={site.brand}
+              className="inline-flex"
               href="/"
             >
-              Aptaflux
+              <Logo />
             </Link>
             <p className="mt-4 text-[17px] leading-relaxed lg:whitespace-nowrap">
               {site.footerDescription}
             </p>
             <a
-              className="group mt-5 inline-flex items-center gap-2 text-xl font-semibold text-[rgba(244,237,224,.78)] transition-colors hover:text-[#F4EDE0]"
+              className="group mt-5 inline-flex items-center gap-2 text-xl font-semibold text-band-fg/80 transition-colors hover:text-band-fg"
               href={`mailto:${site.email}`}
             >
-              <span className="underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-[#F2794B]">
+              <span className="underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-brand">
                 {site.email}
               </span>
               <ArrowUpRight aria-hidden="true" size={20} />
             </a>
             <Link
-              className="mt-6 inline-flex h-12 items-center justify-center gap-3 rounded-full bg-[#FF5B2E] px-6 text-[15px] font-semibold text-[#0F1A27] transition-colors hover:bg-[#F4EDE0]"
+              className="mt-6 inline-flex h-12 items-center justify-center gap-3 rounded-full bg-band-button-bg px-6 text-[15px] font-semibold text-band-button-fg transition-colors hover:bg-brand-hover"
               href="/contact"
             >
               Start a project
@@ -115,7 +120,7 @@ export function Footer() {
                     <a
                       key={social.label}
                       aria-label={social.label}
-                      className="flex size-10 items-center justify-center rounded-full border border-[rgba(244,237,224,.18)] text-[#F4EDE0] transition-colors hover:border-[#F2794B] hover:text-[#F2794B]"
+                      className="flex size-10 items-center justify-center rounded-full border border-band-fg/18 text-band-fg transition-colors hover:border-brand hover:text-brand"
                       href={social.href}
                       rel="noopener noreferrer"
                       target="_blank"
@@ -130,14 +135,14 @@ export function Footer() {
 
           <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:col-start-7 lg:col-span-6 lg:grid-cols-3">
             <nav aria-label="Footer company">
-              <h2 className="text-[13px] font-semibold text-[rgba(244,237,224,.60)]">
+              <h2 className="text-[13px] font-semibold text-band-fg/60">
                 Company
               </h2>
               <ul className="mt-4 space-y-2.5">
                 {companyLinks.map((item) => (
                   <li key={item.href}>
                     <Link
-                      className="text-[15px] text-[rgba(244,237,224,.78)] transition-colors hover:text-[#F4EDE0] hover:underline hover:decoration-[#F2794B] hover:underline-offset-4"
+                      className="text-[15px] text-band-fg/78 transition-colors hover:text-band-fg hover:underline hover:decoration-brand hover:underline-offset-4"
                       href={item.href}
                     >
                       {item.href === "/" ? "Home" : item.label}
@@ -148,14 +153,14 @@ export function Footer() {
             </nav>
 
             <nav aria-label="Footer solutions">
-              <h2 className="text-[13px] font-semibold text-[rgba(244,237,224,.60)]">
+              <h2 className="text-[13px] font-semibold text-band-fg/60">
                 Solutions
               </h2>
               <ul className="mt-4 space-y-2.5">
                 {solutions.map((solution) => (
                   <li key={solution.slug}>
                     <Link
-                      className="text-[15px] text-[rgba(244,237,224,.78)] transition-colors hover:text-[#F4EDE0] hover:underline hover:decoration-[#F2794B] hover:underline-offset-4"
+                      className="text-[15px] text-band-fg/78 transition-colors hover:text-band-fg hover:underline hover:decoration-brand hover:underline-offset-4"
                       href={`/services/${solution.slug}`}
                     >
                       {solution.label}
@@ -169,14 +174,14 @@ export function Footer() {
               aria-label="Footer capabilities"
               className="col-span-2 lg:col-span-1"
             >
-              <h2 className="text-[13px] font-semibold text-[rgba(244,237,224,.60)]">
+              <h2 className="text-[13px] font-semibold text-band-fg/60">
                 Capabilities
               </h2>
               <ul className="mt-4 space-y-2.5">
                 {capabilities.map((capability) => (
                   <li key={capability}>
                     <Link
-                      className="text-[15px] text-[rgba(244,237,224,.78)] transition-colors hover:text-[#F4EDE0] hover:underline hover:decoration-[#F2794B] hover:underline-offset-4"
+                      className="text-[15px] text-band-fg/78 transition-colors hover:text-band-fg hover:underline hover:decoration-brand hover:underline-offset-4"
                       href="/services"
                     >
                       {capability}
@@ -195,7 +200,7 @@ export function Footer() {
           <svg className="block h-auto w-full" viewBox="0 36 1000 179">
             <text
               className="font-body"
-              fill="rgba(244,237,224,.06)"
+              fill="rgb(var(--band-fg) / 0.06)"
               fontSize="220"
               fontWeight="800"
               lengthAdjust="spacing"
@@ -208,7 +213,7 @@ export function Footer() {
           </svg>
         </div>
 
-        <div className="mt-8 border-t border-[rgba(244,237,224,.10)] pt-5 text-[15px] text-[rgba(244,237,224,.78)]">
+        <div className="mt-8 border-t border-band-fg/14 pt-5 text-[15px] text-band-fg/78">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <p>© 2026 Aptaflux. All rights reserved.</p>
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-6">
@@ -217,7 +222,7 @@ export function Footer() {
                   {footer.legalLinks.map((item) => (
                     <li key={item.href}>
                       <Link
-                        className="transition-colors hover:text-[#F4EDE0] hover:underline hover:decoration-[#F2794B] hover:underline-offset-4"
+                        className="transition-colors hover:text-band-fg hover:underline hover:decoration-brand hover:underline-offset-4"
                         href={item.href}
                       >
                         {item.label}
@@ -232,7 +237,7 @@ export function Footer() {
                 </span>
                 <button
                   aria-label="Back to top"
-                  className="flex size-10 shrink-0 items-center justify-center rounded-full border border-[rgba(244,237,224,.18)] text-[#F4EDE0] transition-colors hover:border-[#F2794B] hover:text-[#F2794B]"
+                  className="flex size-10 shrink-0 items-center justify-center rounded-full border border-band-fg/18 text-band-fg transition-colors hover:border-brand hover:text-brand"
                   onClick={scrollToTop}
                   type="button"
                 >

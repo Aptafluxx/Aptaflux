@@ -53,8 +53,8 @@ export function WorkGrid() {
             aria-pressed={activeFilter === filter}
             className={`min-h-11 rounded-full border px-4 py-2 text-small transition-colors ${
               activeFilter === filter
-                ? "border-ember bg-ember text-bg"
-                : "border-line text-muted hover:border-ember hover:text-text"
+                ? "border-brand bg-brand text-brand-fg"
+                : "border-line text-muted hover:border-brand hover:text-fg"
             }`}
             key={filter}
             onClick={() => setActiveFilter(filter)}

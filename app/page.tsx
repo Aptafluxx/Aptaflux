@@ -51,8 +51,10 @@ export default function HomePage() {
         }}
       />
       <Hero />
-      <HomeSections />
-      <CtaBand />
+      <div className="home-page-panels">
+        <HomeSections />
+        <CtaBand />
+      </div>
     </>
   );
 }

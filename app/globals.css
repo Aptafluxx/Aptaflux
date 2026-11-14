@@ -536,6 +536,41 @@ section[data-tone="brand"] {
   border-top: 1px solid rgba(245, 241, 232, 0.1);
 }
 
+.home-page-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgb(var(--bg));
+  padding: 0.5rem;
+}
+
+.home-page-panels > section {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid rgb(var(--line) / 0.7);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.08);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .home-page-panels {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .home-page-panels > section {
+    border-radius: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home-page-panels {
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
 .cursor-preview {
   display: none;
 }

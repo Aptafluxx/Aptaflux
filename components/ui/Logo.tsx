@@ -27,7 +27,7 @@ export function LogoWordmark(props: SVGProps<SVGSVGElement>) {
       fill="none"
       preserveAspectRatio="xMidYMid meet"
       style={{ display: "block" }}
-      viewBox="0 0 148 32"
+      viewBox="-2 0 95 32"
       {...props}
     >
       <text

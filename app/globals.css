@@ -21,6 +21,13 @@
   --band-button-fg: 1 59 70;
   --logo-ink: 10 10 10;
   --logo-teal: 1 59 70;
+  --home-page-bg: #e4ddcb;
+  --home-panel: #faf8f2;
+  --home-panel-alt: #f1ecdf;
+  --home-panel-border: rgb(1 59 70 / 0.14);
+  --home-panel-shadow:
+    0 2px 6px rgb(1 59 70 / 0.06),
+    0 16px 36px rgb(1 59 70 / 0.1);
   --ease-standard: cubic-bezier(0.2, 0.7, 0.1, 1);
   --text-body: 1.0625rem;
 }
@@ -44,6 +51,13 @@
   --band-button-fg: 6 13 16;
   --logo-ink: 245 241 232;
   --logo-teal: 52 160 173;
+  --home-page-bg: #050c0f;
+  --home-panel: #0b181d;
+  --home-panel-alt: #0e1f25;
+  --home-panel-border: rgb(255 255 255 / 0.09);
+  --home-panel-shadow:
+    0 2px 6px rgb(0 0 0 / 0.3),
+    0 16px 36px rgb(0 0 0 / 0.5);
 }
 
 * {
@@ -539,36 +553,27 @@ section[data-tone="brand"] {
 .home-page-panels {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background: rgb(var(--bg));
-  padding: 0.5rem;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  background: var(--home-page-bg);
+  padding: clamp(0.75rem, 2vw, 1.5rem);
 }
 
 .home-page-panels > section {
   width: 100%;
   min-width: 0;
-  border: 1px solid rgb(var(--line) / 0.7);
-  border-radius: 1rem;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.08);
+  border: 1px solid var(--home-panel-border);
+  border-radius: clamp(1.5rem, 3vw, 2.5rem);
+  background-color: var(--home-panel);
   overflow: hidden;
+  box-shadow: var(--home-panel-shadow);
 }
 
-@media (min-width: 768px) {
-  .home-page-panels {
-    gap: 0.75rem;
-    padding: 0.75rem;
-  }
-
-  .home-page-panels > section {
-    border-radius: 1.25rem;
-  }
+.home-page-panels > section:nth-child(even) {
+  background-color: var(--home-panel-alt);
 }
 
-@media (min-width: 1280px) {
-  .home-page-panels {
-    gap: 1rem;
-    padding: 1rem;
-  }
+.home-page-panels > section.cta-band {
+  background-color: rgb(var(--band));
 }
 
 .cursor-preview {

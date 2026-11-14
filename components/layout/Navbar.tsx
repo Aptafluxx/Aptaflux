@@ -285,7 +285,7 @@ export function Navbar() {
         <Container className="grid min-h-[46px] grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2">
           <Link
             aria-label={site.brand}
-            className="glass inline-flex h-11 w-fit items-center rounded-full px-0 transition-colors focus-visible:outline-offset-2"
+            className="glass inline-flex h-11 w-fit items-center rounded-full px-3 transition-colors focus-visible:outline-offset-2"
             href="/"
           >
             <Logo compact />

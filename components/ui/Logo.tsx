@@ -54,10 +54,10 @@ export function Logo({
 }) {
   return (
     <span
-      className={`inline-flex items-center leading-none ${compact ? "gap-2" : "gap-2.5"} ${className}`}
+      className={`inline-flex items-center justify-center leading-none ${compact ? "gap-2" : "gap-2.5"} ${className}`}
     >
       <LogoMark
-        className={`shrink-0 overflow-visible ${
+        className={`shrink-0 object-contain overflow-visible ${
           compact ? "h-6 w-6" : "h-8 w-8"
         }`}
       />

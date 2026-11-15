@@ -41,9 +41,9 @@ export function PageHeader({
         <div className={visual ? "lg:col-span-7" : ""}>
           {breadcrumb ? <div className="mb-5">{breadcrumb}</div> : null}
           {eyebrow ? (
-            <p className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-brand">
+            <div className="mb-4 text-eyebrow font-semibold uppercase tracking-wide text-brand">
               {eyebrow}
-            </p>
+            </div>
           ) : null}
           <motion.h1
             className={`${titleClassName ?? "max-w-[18ch]"} font-body text-[clamp(2.25rem,4.5vw,3.5rem)] font-bold leading-[1.05] tracking-[-0.035em]`}

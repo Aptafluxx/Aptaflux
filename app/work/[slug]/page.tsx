@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { Compass, Target, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Compass, Target, TrendingUp } from "lucide-react";
 import { notFound } from "next/navigation";
 import { artComponents } from "@/components/art";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -62,7 +63,6 @@ export default async function ProjectPage(props: WorkPageProps) {
     throw new Error(`The next project "${project.next}" does not exist.`);
   }
 
-  const Artwork = artComponents[project.cover];
   const labels = workPageContent.projectLabels;
   const metadataItems = [
     { label: labels.category, value: project.category },
@@ -91,9 +91,16 @@ export default async function ProjectPage(props: WorkPageProps) {
           />
         }
         eyebrow={
-          <span className="inline-flex rounded-full border border-line px-3 py-1 text-small normal-case tracking-normal text-muted">
-            {labels.type}
-          </span>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex rounded-full border border-line px-3 py-1 text-small normal-case tracking-normal text-muted">
+              {labels.type}
+            </span>
+            {project.liveUrl ? (
+              <a className="inline-flex items-center gap-1 text-small font-semibold text-brand" href={project.liveUrl} rel="noopener noreferrer" target="_blank">
+                View live demo <ArrowUpRight aria-hidden="true" size={15} />
+              </a>
+            ) : null}
+          </div>
         }
         intro={project.summary}
         title={project.name}
@@ -113,24 +120,15 @@ export default async function ProjectPage(props: WorkPageProps) {
       <Section aria-label="Project cover">
         <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[rgb(var(--bg))] sm:aspect-[16/9]">
           <DotGrid className="opacity-80" />
-          {project.slug === "doctor-hunt" || project.slug === "drips-water-app" ? (
-            <>
-              <DeviceFrame
-                device="phone"
-                phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
-                phonePlacement="left"
-                phoneScreen="primary"
-              />
-              <DeviceFrame
-                device="phone"
-                phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
-                phonePlacement="right"
-                phoneScreen="secondary"
-              />
-            </>
+          {project.images?.cover ? (
+            <DeviceFrame device={project.kind === "mobile" ? "phone" : "laptop"}>
+              <Image alt={`${project.name} cover`} className="h-full w-full object-cover" fill priority sizes="(min-width: 1024px) 85vw, 95vw" src={project.images.cover} />
+            </DeviceFrame>
+          ) : project.cover === "ProjectCover" ? (
+            <artComponents.ProjectCover project={project} />
           ) : (
             <DeviceFrame device="laptop">
-              <Artwork />
+              <artComponents.EmberFig />
             </DeviceFrame>
           )}
         </div>
@@ -165,11 +163,10 @@ export default async function ProjectPage(props: WorkPageProps) {
         </div>
       </Section>
 
-      {project.gallery && project.gallery.length > 0 ? (
+      {project.images?.gallery && project.images.gallery.length > 0 ? (
         <Section aria-label={workPageContent.ariaLabels.projectGallery}>
           <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12">
-            {project.gallery.slice(0, 3).map((art, index) => {
-              const GalleryArt = artComponents[art];
+            {project.images.gallery.slice(0, 3).map((image, index) => {
               return (
                 <div
                   className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-card p-4 sm:p-8 ${
@@ -177,9 +174,9 @@ export default async function ProjectPage(props: WorkPageProps) {
                       ? "min-[820px]:col-span-5"
                       : "min-[820px]:col-span-7"
                   }`}
-                  key={`${art}-${index}`}
+                  key={`${image}-${index}`}
                 >
-                  <GalleryArt />
+                  <Image alt={`${project.name} gallery image ${index + 1}`} className="object-cover" fill sizes="(min-width: 820px) 50vw, 100vw" src={image} />
                 </div>
               );
             })}

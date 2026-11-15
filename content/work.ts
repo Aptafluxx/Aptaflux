@@ -1,9 +1,11 @@
-export type WorkArtKey = "DoctorHunt" | "DripsWater" | "TaskFlow" | "EmberFig";
+export type WorkArtKey = "EmberFig" | "ProjectCover";
 export type ProjectSlug =
-  | "doctor-hunt"
   | "ember-fig"
-  | "drips-water-app"
-  | "task-flow";
+  | "madang"
+  | "wristsync"
+  | "silver-cedar"
+  | "travel"
+  | "gymnestic";
 
 type ProjectType = "portfolio" | "client";
 
@@ -11,8 +13,10 @@ export type WorkProject = {
   slug: ProjectSlug;
   name: string;
   type: ProjectType;
-  featured: boolean;
   client: string;
+  featured: boolean;
+  kind: "website" | "mobile";
+  liveUrl?: string;
   services: string[];
   stack: string[];
   category: string;
@@ -21,7 +25,7 @@ export type WorkProject = {
   approach: string;
   results: string[];
   cover: WorkArtKey;
-  gallery?: WorkArtKey[];
+  images?: { cover?: string; gallery?: string[] };
   next: ProjectSlug;
 };
 
@@ -29,7 +33,7 @@ export const workPageContent = {
   metadataTitle: "Work",
   introduction: "Real projects. Practical thinking. Purposeful execution.",
   metadataDescription:
-    "Ideas turned into digital products by Aptaflux.",
+    "Websites and mobile apps by Aptaflux: restaurant, barbershop, travel, fitness, ordering and Bluetooth projects.",
   cta: {
     eyebrow: "LET'S BUILD SOMETHING",
     title: "Have a project in mind?",
@@ -57,97 +61,110 @@ export const workPageContent = {
   },
 } as const;
 
-// PLACEHOLDER: replace later
 export const work: WorkProject[] = [
-  {
-    slug: "doctor-hunt",
-    name: "Doctor Hunt",
-    type: "portfolio",
-    featured: true,
-    client: "Portfolio project",
-    services: ["Mobile app development", "Appointment booking", "AI-assisted guidance"],
-    stack: ["Firebase"],
-    category: "Healthcare platform",
-    summary:
-      "A healthcare experience connecting patients with doctors through appointment booking, pharmacy features, and AI-assisted symptom guidance.",
-    challenge:
-      "Finding the right doctor and booking a visit is fragmented: profiles, availability, pharmacy needs and early symptom questions live in different places.",
-    approach:
-      "A single mobile experience for doctor discovery, appointment booking, pharmacy features and AI-assisted symptom guidance, built with Firebase.",
-    results: [
-      "A complete patient journey from search to booking.",
-      "A portfolio project built to demonstrate our approach.",
-    ],
-    cover: "DoctorHunt",
-    gallery: [],
-    next: "ember-fig",
-  },
   {
     slug: "ember-fig",
     name: "Ember & Fig",
     type: "portfolio",
-    featured: true,
     client: "Portfolio project",
-    services: ["Website design", "Responsive design", "Restaurant branding"],
-    stack: [],
-    category: "Restaurant digital experience",
-    summary:
-      "An editorial-style restaurant website designed to present the brand, showcase its food, and make essential customer information accessible.",
-    challenge:
-      "A restaurant website must express the brand and give guests what they look for, such as the menu, hours and location, without friction.",
-    approach:
-      "An editorial layout with strong typography and image-led sections, fully responsive, with essential information one tap away.",
-    results: [
-      "A polished, responsive restaurant website.",
-      "A portfolio project built to demonstrate our approach.",
-    ],
+    featured: true,
+    kind: "website",
+    liveUrl: "https://ember-and-fig.vercel.app/",
+    category: "Restaurant website",
+    services: ["Web design", "Web development", "Reservation flow"],
+    stack: ["Next.js", "React", "TypeScript"],
+    summary: "A cinematic, editorial restaurant website with a seasonal menu and a reservation flow.",
+    challenge: "A live-fire restaurant needs its atmosphere to come through before guests arrive, along with a menu they can browse and a simple way to request a table.",
+    approach: "A cinematic, editorial landing page, a seasonal menu organized by course, a reservation form with validation and a clear confirmation, plus contact details and location. Metadata, sitemap and social previews are set up from the start.",
+    results: ["A complete four-page restaurant website (home, menu, reservations, contact), responsive from phone to desktop.", "A portfolio project. The reservation form is a front-end demonstration."],
     cover: "EmberFig",
-    gallery: [],
-    next: "drips-water-app",
+    next: "madang",
   },
   {
-    slug: "drips-water-app",
-    name: "Drips Water",
+    slug: "madang",
+    name: "Madang",
     type: "portfolio",
+    client: "Portfolio project",
     featured: true,
-    client: "Portfolio project",
-    services: ["Customer ordering", "Delivery operations", "Role-based administration"],
-    stack: ["Flutter", "Firebase"],
-    category: "Business management system",
-    summary:
-      "A digital water delivery solution combining customer-facing features, operational management, and role-based administration.",
-    challenge:
-      "Water delivery businesses juggle orders, deliveries and staff access across calls and spreadsheets.",
-    approach:
-      "A Flutter and Firebase solution combining customer ordering, operational management and role-based administration.",
-    results: [
-      "One connected system for customers, operations and administrators.",
-      "A portfolio project built to demonstrate our approach.",
-    ],
-    cover: "DripsWater",
-    gallery: [],
-    next: "task-flow",
+    kind: "mobile",
+    category: "Restaurant ordering app",
+    services: ["Mobile design", "Mobile development", "Authentication and data"],
+    stack: ["Flutter", "GetX", "Firebase Auth", "Cloud Firestore"],
+    summary: "A restaurant app for ordering food and booking tables.",
+    challenge: "Restaurant guests want to browse the menu, order, and reserve a table without calling or queuing.",
+    approach: "Email sign-in, onboarding and profiles, categories, recommendations and search, a cart with quantities, checkout with multiple payment options, order history and confirmation, and table browsing and booking. Local preferences and cached images keep it fast.",
+    results: ["A full ordering and table-booking journey for Android and iOS from one codebase, set up for signed Android release builds.", "A portfolio project. Ordering and table booking work end to end; payment is simulated because no payment gateway is connected."],
+    cover: "ProjectCover",
+    next: "wristsync",
   },
   {
-    slug: "task-flow",
-    name: "Task Flow",
+    slug: "wristsync",
+    name: "WristSync",
     type: "portfolio",
-    featured: false,
     client: "Portfolio project",
-    services: ["Product strategy", "Experience design", "Development"],
-    stack: ["Next.js", "TypeScript", "PostgreSQL"],
-    category: "Productivity",
-    summary: "A calmer workspace for teams to get things done.",
-    challenge:
-      "Teams lose time when tasks and plans are scattered across tools.",
-    approach:
-      "A calm workspace for planning and tracking work, designed around clarity and focus.",
-    results: [
-      "A simple, focused workspace for everyday team planning.",
-      "A portfolio project built to demonstrate our approach.",
-    ],
-    cover: "TaskFlow",
-    gallery: [],
-    next: "doctor-hunt",
+    featured: true,
+    kind: "mobile",
+    category: "Smartwatch companion app",
+    services: ["Mobile development", "Bluetooth integration"],
+    stack: ["Flutter", "GetX", "flutter_blue_plus", "Clean Architecture"],
+    summary: "A smartwatch companion app that handles the full Bluetooth pairing lifecycle.",
+    challenge: "Pairing a wearable is where companion apps usually fail: confusing permissions, flaky scans and unclear connection states.",
+    approach: "Permission handling for Android 12 and older versions, a live Bluetooth scan sorted by signal strength, device connection with fallback and disconnect monitoring, and two views of each device: name, connection and battery for users, and MAC address, packet size and services for diagnostics. The code is split into presentation, a persistent Bluetooth service and a shared design system.",
+    results: ["A complete pairing lifecycle from first launch to disconnect. Bluetooth scanning requires a physical Android device.", "A portfolio project built to demonstrate our approach."],
+    cover: "ProjectCover",
+    next: "silver-cedar",
+  },
+  {
+    slug: "silver-cedar",
+    name: "Silver & Cedar",
+    type: "portfolio",
+    client: "Portfolio project",
+    featured: false,
+    kind: "website",
+    liveUrl: "https://silver-and-cedar.vercel.app/",
+    category: "Barbershop website",
+    services: ["Web design", "Web development", "Booking experience"],
+    stack: ["Next.js", "React", "TypeScript"],
+    summary: "A premium barbershop website with transparent pricing and a booking flow.",
+    challenge: "A neighborhood barbershop that competes on craft needs a site as considered as the shop itself, one that makes booking a chair easy.",
+    approach: "An editorial brand identity, a clear service menu with transparent pricing, and a booking flow where guests choose a service, barber, date and time, with shop details and a contact form close by.",
+    results: ["A polished single-page experience that moves visitors from first impression to a booking request.", "A portfolio project. Booking and contact are front-end demonstrations, ready to connect to a booking platform or backend."],
+    cover: "ProjectCover",
+    next: "travel",
+  },
+  {
+    slug: "travel",
+    name: "Travel",
+    type: "portfolio",
+    client: "Portfolio project",
+    featured: false,
+    kind: "website",
+    liveUrl: "https://aptaflux-travel.vercel.app/",
+    category: "Travel website",
+    services: ["Web design", "Web development", "Booking-request flow"],
+    stack: ["Next.js", "React", "CSS"],
+    summary: "A travel website that takes visitors from inspiration to a booking request.",
+    challenge: "Travelers want inspiration and a clear next step: where to go, for how long, and roughly what it costs.",
+    approach: "A full-width hero with destination, date and traveler search; eight destinations filterable by mountain, coast, city and jungle, with trip lengths and starting prices; and a booking-request dialog with date validation, a guest selector and an estimated total, followed by a confirmation summary. Journal and newsletter sections support discovery.",
+    results: ["A complete discovery-to-request flow in one responsive site.", "A portfolio project. Requests are stored in the browser for demonstration; payments, availability and email would connect to booking services in production."],
+    cover: "ProjectCover",
+    next: "gymnestic",
+  },
+  {
+    slug: "gymnestic",
+    name: "Gymnestic",
+    type: "portfolio",
+    client: "Portfolio project",
+    featured: false,
+    kind: "mobile",
+    category: "Fitness app",
+    services: ["Mobile design", "Mobile development", "Authentication and data"],
+    stack: ["Flutter", "GetX", "Firebase Auth", "Cloud Firestore", "FL Chart"],
+    summary: "A fitness app that keeps training, goals and progress in one place.",
+    challenge: "Fitness apps lose people when tracking feels like work. Users need a clear plan for today and visible progress over time.",
+    approach: "A guided first-run flow, sign-up, login and password reset, a personalized dashboard of programs, daily goal checklists, progress charts, a profile, and articles on healthier habits, all in a dark design with red accents.",
+    results: ["A complete training companion in a single dark-mode experience, with accounts and data stored in Firebase.", "A portfolio project built to demonstrate our approach."],
+    cover: "ProjectCover",
+    next: "ember-fig",
   },
 ];

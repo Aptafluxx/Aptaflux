@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { artComponents } from "@/components/art";
 import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
@@ -17,8 +18,6 @@ export function ProjectCard({
   project,
   showPortfolioBadge = false,
 }: ProjectCardProps) {
-  const Artwork = artComponents[project.cover];
-  const isMobile = project.slug === "doctor-hunt" || project.slug === "drips-water-app";
 
   return (
     <Reveal className="h-full" delay={index * 0.06}>
@@ -32,24 +31,15 @@ export function ProjectCard({
           <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[rgb(var(--bg))]">
             <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
             <div className="absolute inset-0 transition-transform duration-300 ease-out group-hover:scale-[1.03]">
-              {isMobile ? (
-                <>
-                  <DeviceFrame
-                    device="phone"
-                    phonePlacement="left"
-                    phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
-                    phoneScreen="primary"
-                  />
-                  <DeviceFrame
-                    device="phone"
-                    phonePlacement="right"
-                    phoneKind={project.slug === "doctor-hunt" ? "doctor" : "water"}
-                    phoneScreen="secondary"
-                  />
-                </>
+              {project.images?.cover ? (
+                <DeviceFrame device={project.kind === "mobile" ? "phone" : "laptop"}>
+                  <Image alt="" className="h-full w-full object-cover" fill priority={index === 0} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" src={project.images.cover} />
+                </DeviceFrame>
+              ) : project.cover === "ProjectCover" ? (
+                <artComponents.ProjectCover project={project} />
               ) : (
                 <DeviceFrame device="laptop">
-                  <Artwork />
+                  <artComponents.EmberFig />
                 </DeviceFrame>
               )}
             </div>

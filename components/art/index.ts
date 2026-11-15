@@ -1,11 +1,7 @@
-import { DoctorHunt } from "./DoctorHunt";
-import { DripsWater } from "./DripsWater";
 import { EmberFig } from "./EmberFig";
-import { TaskFlow } from "./TaskFlow";
+import { ProjectCover } from "./ProjectCover";
 
 export const artComponents = {
-  DoctorHunt,
-  DripsWater,
   EmberFig,
-  TaskFlow,
+  ProjectCover,
 } as const;

@@ -43,7 +43,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
             animate={{ opacity: isPreviewVisible ? 1 : 0 }}
             transition={{ duration: durations.medium, ease: easing }}
           >
-            <ArtworkFrame art={project.cover} />
+            <ArtworkFrame project={project} />
           </motion.div>,
           portalRoot,
         )
@@ -81,7 +81,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
             {project.summary}
           </p>
           <div className="mt-5 min-[820px]:hidden">
-            <ArtworkFrame art={project.cover} />
+            <ArtworkFrame project={project} />
           </div>
         </div>
         <div className="flex flex-col gap-2 text-right text-small leading-relaxed text-muted">

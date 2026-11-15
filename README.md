@@ -25,6 +25,11 @@ The following content modules contain placeholder copy marked with
 - `content/site.ts` — contact follow-up steps.
 - `content/legal.ts` — privacy policy and terms, which require legal review.
 
+### Adding project images
+
+Real project images go in `public/work/<slug>/` (`cover.webp` plus gallery files).
+Enable them by setting `images` on the project in `content/work.ts`.
+
 ## Deploy
 
 Deploy the project to Vercel using the repository's standard Next.js build

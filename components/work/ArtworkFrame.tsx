@@ -1,20 +1,22 @@
 import { artComponents } from "@/components/art";
-import type { WorkArtKey } from "@/content/work";
+import type { WorkProject } from "@/content/work";
 
 type ArtworkFrameProps = {
-  art: WorkArtKey;
+  project: WorkProject;
   className?: string;
 };
 
-export function ArtworkFrame({ art, className = "" }: ArtworkFrameProps) {
-  const Artwork = artComponents[art];
-
+export function ArtworkFrame({ project, className = "" }: ArtworkFrameProps) {
   return (
     <div
       className={`relative aspect-[4/3] overflow-hidden rounded-[2px] bg-card p-4 sm:p-8 ${className}`}
     >
       <div className="h-full w-full">
-        <Artwork />
+        {project.cover === "ProjectCover" ? (
+          <artComponents.ProjectCover project={project} />
+        ) : (
+          <artComponents.EmberFig />
+        )}
       </div>
     </div>
   );

@@ -4,31 +4,16 @@ import { useMemo, useState } from "react";
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { work } from "@/content/work";
 
-const filters = ["All", "Web", "Mobile", "AI and automation"] as const;
+const filters = ["All", "Websites", "Mobile apps"] as const;
 type ProjectFilter = (typeof filters)[number];
 
 function matchesFilter(
   filter: Exclude<ProjectFilter, "All">,
   project: (typeof work)[number],
 ) {
-  if (filter === "Web") {
-    return (
-      project.stack.includes("Next.js") ||
-      project.services.some((service) =>
-        ["Web Development", "Responsive Design", "UI/UX"].includes(service),
-      )
-    );
-  }
-  if (filter === "Mobile") {
-    return (
-      project.stack.includes("Flutter") ||
-      project.services.includes("Mobile Development") ||
-      project.services.includes("Flutter")
-    );
-  }
-  return project.services.some((service) =>
-    ["AI Integration", "Business Automation"].includes(service),
-  );
+  return filter === "Websites"
+    ? project.kind === "website"
+    : project.kind === "mobile";
 }
 
 export function WorkGrid() {
@@ -60,7 +45,7 @@ export function WorkGrid() {
             onClick={() => setActiveFilter(filter)}
             type="button"
           >
-            {filter}
+            {filter} {filter === "All" ? work.length : work.filter((project) => matchesFilter(filter, project)).length}
           </button>
         ))}
       </div>

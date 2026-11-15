@@ -143,7 +143,7 @@ export const work: WorkProject[] = [
     next: "travel",
     images: {
       cover: "/work/silver-cedar/cover.webp",
-      mobile: "/work/travel/mobile.webp",
+      mobile: "/work/silver-cedar/mobile.webp",
       gallery: [
         "/work/silver-cedar/gallery-1.webp",
         "/work/silver-cedar/gallery-2.webp",

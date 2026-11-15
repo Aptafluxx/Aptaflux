@@ -128,7 +128,7 @@ export default async function ProjectPage(props: WorkPageProps) {
                 project.kind === "website" ? project.images?.mobile : undefined
               }
             >
-              <Image alt={`${project.name} cover`} className="h-full w-full object-cover" fill priority sizes="(min-width: 1024px) 85vw, 95vw" src={project.images.cover} />
+              <Image alt={`${project.name} cover`} className="h-full w-full object-cover object-top" fill priority sizes="(min-width: 1024px) 85vw, 95vw" src={project.images.cover} />
             </DeviceFrame>
           ) : project.cover === "ProjectCover" ? (
             <artComponents.ProjectCover project={project} />

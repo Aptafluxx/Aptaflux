@@ -41,7 +41,7 @@ export function ProjectCard({
                       : undefined
                   }
                 >
-                  <Image alt="" className="h-full w-full object-cover" fill priority={index === 0} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" src={project.images.cover} />
+                  <Image alt="" className="h-full w-full object-cover object-top" fill priority={index === 0} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" src={project.images.cover} />
                 </DeviceFrame>
               ) : project.cover === "ProjectCover" ? (
                 <artComponents.ProjectCover project={project} />

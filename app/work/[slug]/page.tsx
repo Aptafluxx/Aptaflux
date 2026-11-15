@@ -118,10 +118,16 @@ export default async function ProjectPage(props: WorkPageProps) {
       </Section>
 
       <Section aria-label="Project cover">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[rgb(var(--bg))] sm:aspect-[16/9]">
+        <div className="relative aspect-[16/10] overflow-visible rounded-lg bg-[rgb(var(--bg))] sm:aspect-[16/9]">
           <DotGrid className="opacity-80" />
           {project.images?.cover ? (
-            <DeviceFrame device={project.kind === "mobile" ? "phone" : "laptop"}>
+            <DeviceFrame
+              device={project.kind === "mobile" ? "phone" : "laptop"}
+              mobileAlt={`${project.name} on mobile`}
+              mobileImage={
+                project.kind === "website" ? project.images?.mobile : undefined
+              }
+            >
               <Image alt={`${project.name} cover`} className="h-full w-full object-cover" fill priority sizes="(min-width: 1024px) 85vw, 95vw" src={project.images.cover} />
             </DeviceFrame>
           ) : project.cover === "ProjectCover" ? (

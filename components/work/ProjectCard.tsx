@@ -28,11 +28,19 @@ export function ProjectCard({
         prefetch={false}
       >
         <Card className="flex h-full flex-col p-5 sm:p-6">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-[rgb(var(--bg))]">
+          <div className="relative aspect-[16/10] overflow-visible rounded-lg bg-[rgb(var(--bg))]">
             <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
             <div className="absolute inset-0 transition-transform duration-300 ease-out group-hover:scale-[1.03]">
               {project.images?.cover ? (
-                <DeviceFrame device={project.kind === "mobile" ? "phone" : "laptop"}>
+                <DeviceFrame
+                  device={project.kind === "mobile" ? "phone" : "laptop"}
+                  mobileAlt={`${project.name} on mobile`}
+                  mobileImage={
+                    project.kind === "website"
+                      ? project.images?.mobile
+                      : undefined
+                  }
+                >
                   <Image alt="" className="h-full w-full object-cover" fill priority={index === 0} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" src={project.images.cover} />
                 </DeviceFrame>
               ) : project.cover === "ProjectCover" ? (

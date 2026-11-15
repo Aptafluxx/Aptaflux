@@ -25,7 +25,7 @@ export type WorkProject = {
   approach: string;
   results: string[];
   cover: WorkArtKey;
-  images?: { cover?: string; gallery?: string[] };
+  images?: { cover?: string; mobile?: string; gallery?: string[] };
   next: ProjectSlug;
 };
 
@@ -79,6 +79,16 @@ export const work: WorkProject[] = [
     results: ["A complete four-page restaurant website (home, menu, reservations, contact), responsive from phone to desktop.", "A portfolio project. The reservation form is a front-end demonstration."],
     cover: "EmberFig",
     next: "madang",
+    images: {
+      cover: "/work/ember-fig/cover.webp",
+      mobile: "/work/ember-fig/mobile.webp",
+      gallery: [
+        "/work/ember-fig/gallery-1.webp",
+        "/work/ember-fig/gallery-2.webp",
+        "/work/ember-fig/gallery-3.webp",
+
+      ],
+    },
   },
   {
     slug: "madang",
@@ -131,6 +141,15 @@ export const work: WorkProject[] = [
     results: ["A polished single-page experience that moves visitors from first impression to a booking request.", "A portfolio project. Booking and contact are front-end demonstrations, ready to connect to a booking platform or backend."],
     cover: "ProjectCover",
     next: "travel",
+    images: {
+      cover: "/work/silver-cedar/cover.webp",
+      mobile: "/work/travel/mobile.webp",
+      gallery: [
+        "/work/silver-cedar/gallery-1.webp",
+        "/work/silver-cedar/gallery-2.webp",
+        "/work/silver-cedar/gallery-3.webp",
+      ],
+    },
   },
   {
     slug: "travel",
@@ -149,6 +168,15 @@ export const work: WorkProject[] = [
     results: ["A complete discovery-to-request flow in one responsive site.", "A portfolio project. Requests are stored in the browser for demonstration; payments, availability and email would connect to booking services in production."],
     cover: "ProjectCover",
     next: "gymnestic",
+    images: {
+      cover: "/work/travel/cover.webp",
+      mobile: "/work/travel/mobile.webp",
+      gallery: [
+        "/work/travel/gallery-1.webp",
+        "/work/travel/gallery-2.webp",
+        "/work/travel/gallery-3.webp",
+      ],
+    },
   },
   {
     slug: "gymnestic",

@@ -14,16 +14,27 @@ type ProjectCardProps = {
   project: WorkProject;
 };
 
-function ProjectCover({ project, priority = false }: { project: WorkProject; priority?: boolean }) {
+function ProjectCover({
+  project,
+  priority = false,
+}: {
+  project: WorkProject;
+  priority?: boolean;
+}) {
   return (
     <div className="relative aspect-[16/10] overflow-visible rounded-lg bg-[rgb(var(--bg))]">
-      <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
+      <div
+        aria-hidden="true"
+        className="dot-grid absolute inset-0 opacity-80"
+      />
       <div className="absolute inset-0 transition-transform duration-300 ease-out group-hover:scale-[1.03]">
         {project.images?.cover ? (
           <DeviceFrame
             device={project.kind === "mobile" ? "phone" : "laptop"}
             mobileAlt={`${project.name} on mobile`}
-            mobileImage={project.kind === "website" ? project.images.mobile : undefined}
+            mobileImage={
+              project.kind === "website" ? project.images.mobile : undefined
+            }
           >
             <Image
               alt={`${project.name} cover`}
@@ -59,7 +70,9 @@ export function ProjectCard({ index = 0, project }: ProjectCardProps) {
           <ProjectCover priority={index === 0} project={project} />
           <div className="mt-4 flex items-center justify-between gap-3">
             <CategoryLabel category={project.category} kind={project.kind} />
-            {project.year ? <p className="shrink-0 text-small text-muted">{project.year}</p> : null}
+            {project.year ? (
+              <p className="shrink-0 text-small text-muted">{project.year}</p>
+            ) : null}
           </div>
           <h2 className="mt-2 font-body text-work-title font-bold tracking-[-0.02em] transition-colors group-hover:text-brand">
             {project.name}
@@ -108,7 +121,9 @@ export function SpotlightProjectCard({ project }: { project: WorkProject }) {
           <h2 className="mt-5 font-body text-h2 font-bold tracking-[-0.03em] transition-colors group-hover:text-brand">
             {project.name}
           </h2>
-          <p className="mt-3 text-body leading-relaxed text-muted">{project.summary}</p>
+          <p className="mt-3 text-body leading-relaxed text-muted">
+            {project.summary}
+          </p>
           <ul className="mt-5 flex flex-wrap gap-2">
             {project.stack.map((tag) => (
               <li key={tag}>

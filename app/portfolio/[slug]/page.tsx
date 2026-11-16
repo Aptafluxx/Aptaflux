@@ -39,7 +39,9 @@ export async function generateStaticParams() {
   return work.map(({ slug }) => ({ slug }));
 }
 
-export async function generateMetadata(props: WorkPageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: WorkPageProps,
+): Promise<Metadata> {
   const { slug } = await props.params;
   const project = work.find((item) => item.slug === slug);
 
@@ -89,7 +91,11 @@ export default async function ProjectPage(props: WorkPageProps) {
   const storyItems = [
     { label: labels.challenge, text: project.challenge, icon: Target },
     { label: labels.approach, text: project.approach, icon: Compass },
-    { label: labels.results, text: project.results.join(" "), icon: TrendingUp },
+    {
+      label: labels.results,
+      text: project.results.join(" "),
+      icon: TrendingUp,
+    },
   ];
 
   return (
@@ -97,16 +103,28 @@ export default async function ProjectPage(props: WorkPageProps) {
       <section className="relative overflow-hidden border-b border-accent/25 bg-band/22 pb-14 pt-[calc(72px+40px)] md:pb-14 md:pt-[calc(var(--navbar-bottom,72px)+40px)]">
         <DotGrid className="opacity-60" />
         <Container className="relative z-10">
-          <Breadcrumbs current={project.name} parent="Portfolio" parentHref="/portfolio" />
+          <Breadcrumbs
+            current={project.name}
+            parent="Portfolio"
+            parentHref="/portfolio"
+          />
           <div className="mt-8 flex flex-wrap gap-2 text-small text-muted">
-            <span className="rounded-full border border-line px-3 py-1">{project.category}</span>
-            <span className="rounded-full border border-line px-3 py-1">{project.platform}</span>
-            <span className="rounded-full border border-line px-3 py-1">{labels.portfolioProject}</span>
+            <span className="rounded-full border border-line px-3 py-1">
+              {project.category}
+            </span>
+            <span className="rounded-full border border-line px-3 py-1">
+              {project.platform}
+            </span>
+            <span className="rounded-full border border-line px-3 py-1">
+              {labels.portfolioProject}
+            </span>
           </div>
           <h1 className="mt-6 max-w-4xl font-body text-display-xl font-extrabold tracking-[-0.04em]">
             {project.name}
           </h1>
-          <p className="mt-5 max-w-[62ch] text-body leading-relaxed text-muted">{project.summary}</p>
+          <p className="mt-5 max-w-[62ch] text-body leading-relaxed text-muted">
+            {project.summary}
+          </p>
           <div className="mt-7 flex flex-wrap gap-3">
             {project.liveUrl ? (
               <a
@@ -118,20 +136,27 @@ export default async function ProjectPage(props: WorkPageProps) {
                 {labels.liveDemo} <ArrowUpRight aria-hidden="true" size={16} />
               </a>
             ) : null}
-            <Button href="/portfolio" variant="ghost">{labels.allWork}</Button>
+            <Button href="/portfolio" variant="ghost">
+              {labels.allWork}
+            </Button>
           </div>
         </Container>
       </section>
 
       <Section aria-label={labels.projectCover} className="py-8 md:py-12">
         <div className="relative min-h-[360px] overflow-visible rounded-[24px] border border-accent/25 bg-band/35 p-4 sm:min-h-[480px] sm:p-8">
-          <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
+          <div
+            aria-hidden="true"
+            className="dot-grid absolute inset-0 opacity-80"
+          />
           {project.images?.cover ? (
             <DeviceFrame
               className={project.kind === "website" ? "!w-[78%]" : ""}
               device={project.kind === "mobile" ? "phone" : "laptop"}
               mobileAlt={`${project.name} on mobile`}
-              mobileImage={project.kind === "website" ? project.images.mobile : undefined}
+              mobileImage={
+                project.kind === "website" ? project.images.mobile : undefined
+              }
             >
               <Image
                 alt={`${project.name} cover`}
@@ -145,7 +170,9 @@ export default async function ProjectPage(props: WorkPageProps) {
           ) : project.cover === "ProjectCover" ? (
             <artComponents.ProjectCover project={project} />
           ) : (
-            <DeviceFrame device="laptop"><artComponents.EmberFig /></DeviceFrame>
+            <DeviceFrame device="laptop">
+              <artComponents.EmberFig />
+            </DeviceFrame>
           )}
         </div>
       </Section>
@@ -153,14 +180,24 @@ export default async function ProjectPage(props: WorkPageProps) {
       <Section aria-label={labels.projectOverview} tone="alt">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div>
-            <h2 className="font-body text-h2 font-bold tracking-[-0.03em]">{labels.projectOverview}</h2>
-            <p className="mt-5 max-w-[65ch] text-body leading-relaxed text-muted">{project.summary}</p>
-            <h3 className="mt-10 font-body text-h3 font-bold">{labels.servicesBehind}</h3>
+            <h2 className="font-body text-h2 font-bold tracking-[-0.03em]">
+              {labels.projectOverview}
+            </h2>
+            <p className="mt-5 max-w-[65ch] text-body leading-relaxed text-muted">
+              {project.summary}
+            </p>
+            <h3 className="mt-10 font-body text-h3 font-bold">
+              {labels.servicesBehind}
+            </h3>
             <div className="mt-4 flex flex-wrap gap-2">
               {project.services.map((service) => (
                 <Link
                   className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-2 text-small text-muted transition-colors hover:border-accent hover:text-accent"
-                  href={project.kind === "website" ? "/services/conversion-engine" : "/services/digital-platforms"}
+                  href={
+                    project.kind === "website"
+                      ? "/services/conversion-engine"
+                      : "/services/digital-platforms"
+                  }
                   key={service}
                 >
                   {service} <ArrowUpRight aria-hidden="true" size={14} />
@@ -171,9 +208,25 @@ export default async function ProjectPage(props: WorkPageProps) {
           <Card className="h-fit p-5 lg:sticky lg:top-24">
             <div className="space-y-5">
               {[
-                { label: labels.category, value: project.category, icon: Layers3 },
-                { label: labels.platform, value: project.platform, icon: Monitor },
-                ...(project.year ? [{ label: labels.year, value: project.year, icon: TrendingUp }] : []),
+                {
+                  label: labels.category,
+                  value: project.category,
+                  icon: Layers3,
+                },
+                {
+                  label: labels.platform,
+                  value: project.platform,
+                  icon: Monitor,
+                },
+                ...(project.year
+                  ? [
+                      {
+                        label: labels.year,
+                        value: project.year,
+                        icon: TrendingUp,
+                      },
+                    ]
+                  : []),
               ].map((item) => {
                 const Icon = item.icon;
                 return (
@@ -192,7 +245,10 @@ export default async function ProjectPage(props: WorkPageProps) {
                   <p className="text-small text-muted">{labels.stack}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {project.stack.map((technology) => (
-                      <TechnologyChip key={technology} technology={technology} />
+                      <TechnologyChip
+                        key={technology}
+                        technology={technology}
+                      />
                     ))}
                   </div>
                 </div>
@@ -202,8 +258,14 @@ export default async function ProjectPage(props: WorkPageProps) {
                   <IconBadge icon={ArrowUpRight} />
                   <div>
                     <p className="text-small text-muted">{labels.liveDemo}</p>
-                    <a className="mt-1 inline-flex items-center gap-1 text-body font-semibold text-brand" href={project.liveUrl} rel="noopener noreferrer" target="_blank">
-                      {labels.liveDemo} <ArrowUpRight aria-hidden="true" size={15} />
+                    <a
+                      className="mt-1 inline-flex items-center gap-1 text-body font-semibold text-brand"
+                      href={project.liveUrl}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {labels.liveDemo}{" "}
+                      <ArrowUpRight aria-hidden="true" size={15} />
                     </a>
                   </div>
                 </div>
@@ -244,13 +306,19 @@ export default async function ProjectPage(props: WorkPageProps) {
               <Reveal className="h-full" delay={index * 0.06} key={item.label}>
                 <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
                   <IconBadge icon={Icon} />
-                  <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">{item.label}</h2>
+                  <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">
+                    {item.label}
+                  </h2>
                   {index === 2 ? (
                     <ul className="mt-3 space-y-3 text-body leading-relaxed text-muted">
-                      {project.results.map((result, resultIndex) => <li key={`${result}-${resultIndex}`}>{result}</li>)}
+                      {project.results.map((result, resultIndex) => (
+                        <li key={`${result}-${resultIndex}`}>{result}</li>
+                      ))}
                     </ul>
                   ) : (
-                    <p className="mt-3 text-body leading-relaxed text-muted">{item.text}</p>
+                    <p className="mt-3 text-body leading-relaxed text-muted">
+                      {item.text}
+                    </p>
                   )}
                 </Card>
               </Reveal>
@@ -261,18 +329,33 @@ export default async function ProjectPage(props: WorkPageProps) {
 
       {galleryImages.length > 0 ? (
         <Section aria-label={workPageContent.ariaLabels.projectGallery}>
-          <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12">
-            {galleryImages
-              .slice(0, 3)
-              .map((image, index) => (
-                <GalleryImage
-                  alt={`${project.name} gallery image ${index + 1}`}
-                  className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-card p-4 sm:p-8 ${index === 1 ? "min-[820px]:col-span-5" : "min-[820px]:col-span-7"}`}
-                  image={image}
-                  key={`${image}-${index}`}
-                  sizes="(min-width: 820px) 50vw, 100vw"
-                />
-              ))}
+          <div className="mb-8 flex items-end justify-between gap-6">
+            <div>
+              <p className="text-eyebrow font-semibold uppercase tracking-[0.12em] text-brand">
+                {workPageContent.ariaLabels.projectGallery}
+              </p>
+              <h2 className="mt-3 font-body text-h2 font-bold tracking-[-0.03em]">
+                A closer look at the experience
+              </h2>
+            </div>
+            <span className="hidden shrink-0 text-small text-muted sm:block">
+              {galleryImages.length} screens
+            </span>
+          </div>
+          <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12 min-[820px]:grid-rows-2">
+            {galleryImages.slice(0, 3).map((image, index) => (
+              <GalleryImage
+                alt={`${project.name} gallery image ${index + 1}`}
+                className={`group relative min-h-[220px] overflow-hidden rounded-2xl border border-line bg-card p-4 shadow-sm transition-transform duration-300 hover:-translate-y-1 sm:p-8 ${
+                  index === 0
+                    ? "aspect-[4/3] min-[820px]:col-span-7 min-[820px]:row-span-2 min-[820px]:aspect-auto"
+                    : "aspect-[4/3] min-[820px]:col-span-5 min-[820px]:aspect-auto"
+                }`}
+                image={image}
+                key={`${image}-${index}`}
+                sizes="(min-width: 820px) 50vw, 100vw"
+              />
+            ))}
           </div>
         </Section>
       ) : null}
@@ -288,7 +371,10 @@ export default async function ProjectPage(props: WorkPageProps) {
             </div>
           ))}
         </div>
-        <Link className="mt-8 inline-flex text-small font-semibold text-brand" href="/portfolio">
+        <Link
+          className="mt-8 inline-flex text-small font-semibold text-brand"
+          href="/portfolio"
+        >
           {labels.backToAllWork} →
         </Link>
       </Section>
@@ -310,4 +396,3 @@ export default async function ProjectPage(props: WorkPageProps) {
     </>
   );
 }
-

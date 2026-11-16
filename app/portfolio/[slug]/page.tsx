@@ -24,8 +24,8 @@ import { IconBadge } from "@/components/ui/IconBadge";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { DeviceFrame } from "@/components/work/DeviceFrame";
-import { GalleryImage } from "@/components/work/GalleryImage";
 import { ProjectCard } from "@/components/work/ProjectCard";
+import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { TechnologyChip } from "@/components/work/ProjectMeta";
 import { site } from "@/content/site";
 import { work, workPageContent } from "@/content/work";
@@ -74,9 +74,19 @@ export default async function ProjectPage(props: WorkPageProps) {
   }
 
   const labels = workPageContent.projectLabels;
-  const galleryImages = (project.images?.gallery ?? []).filter((image) =>
-    existsSync(path.join(process.cwd(), "public", image)),
-  );
+  const galleryItems = (project.images?.gallery ?? []).reduce<
+    { src: string; title: string; text: string }[]
+  >((items, image, index) => {
+    if (!existsSync(path.join(process.cwd(), "public", image))) {
+      return items;
+    }
+    const caption = project.galleryCaptions?.[index];
+    if (!caption) {
+      return items;
+    }
+    items.push({ src: image, ...caption });
+    return items;
+  }, []);
   const sameKindProjects = work.filter(
     (item) => item.slug !== project.slug && item.kind === project.kind,
   );
@@ -327,37 +337,13 @@ export default async function ProjectPage(props: WorkPageProps) {
         </div>
       </Section>
 
-      {galleryImages.length > 0 ? (
-        <Section aria-label={workPageContent.ariaLabels.projectGallery}>
-          <div className="mb-8 flex items-end justify-between gap-6">
-            <div>
-              <p className="text-eyebrow font-semibold uppercase tracking-[0.12em] text-brand">
-                {workPageContent.ariaLabels.projectGallery}
-              </p>
-              <h2 className="mt-3 font-body text-h2 font-bold tracking-[-0.03em]">
-                A closer look at the experience
-              </h2>
-            </div>
-            <span className="hidden shrink-0 text-small text-muted sm:block">
-              {galleryImages.length} screens
-            </span>
-          </div>
-          <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12 min-[820px]:grid-rows-2">
-            {galleryImages.slice(0, 3).map((image, index) => (
-              <GalleryImage
-                alt={`${project.name} gallery image ${index + 1}`}
-                className={`group relative min-h-[220px] overflow-hidden rounded-2xl border border-line bg-card p-4 shadow-sm transition-transform duration-300 hover:-translate-y-1 sm:p-8 ${
-                  index === 0
-                    ? "aspect-[4/3] min-[820px]:col-span-7 min-[820px]:row-span-2 min-[820px]:aspect-auto"
-                    : "aspect-[4/3] min-[820px]:col-span-5 min-[820px]:aspect-auto"
-                }`}
-                image={image}
-                key={`${image}-${index}`}
-                sizes="(min-width: 820px) 50vw, 100vw"
-              />
-            ))}
-          </div>
-        </Section>
+      {galleryItems.length > 0 ? (
+        <ProjectGallery
+          items={galleryItems}
+          kind={project.kind}
+          liveUrl={project.liveUrl}
+          projectName={project.name}
+        />
       ) : null}
 
       <Section aria-label={labels.moreProjects}>

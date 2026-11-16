@@ -31,6 +31,7 @@ export type WorkProject = {
   features?: string[];
   cover: WorkArtKey;
   images?: { cover?: string; mobile?: string; gallery?: string[] };
+  galleryCaptions?: { title: string; text: string }[];
   next: ProjectSlug;
 };
 
@@ -133,9 +134,13 @@ export const work: WorkProject[] = [
         "/work/ember-fig/gallery-1.webp",
         "/work/ember-fig/gallery-2.webp",
         "/work/ember-fig/gallery-3.webp",
-
       ],
     },
+    galleryCaptions: [
+      { title: "Seasonal menu", text: "Dishes grouped by course and season." },
+      { title: "Reservation request", text: "A validated form with a clear confirmation." },
+      { title: "Contact and location", text: "Address, hours and map details in one place." },
+    ],
   },
   {
     slug: "madang",
@@ -166,6 +171,11 @@ export const work: WorkProject[] = [
     ],
     cover: "ProjectCover",
     next: "wristsync",
+    galleryCaptions: [
+      { title: "Cart", text: "Quantities and totals at a glance." },
+      { title: "Order confirmation", text: "Clear confirmation after checkout." },
+      { title: "Table booking", text: "Browse tables and reserve one." },
+    ],
   },
   {
     slug: "wristsync",
@@ -197,6 +207,11 @@ export const work: WorkProject[] = [
     ],
     cover: "ProjectCover",
     next: "silver-cedar",
+    galleryCaptions: [
+      { title: "Connected device", text: "Name, connection badge and battery." },
+      { title: "Diagnostics", text: "MAC address, packet size and services." },
+      { title: "Permissions", text: "Runtime Bluetooth permission prompt." },
+    ],
   },
   {
     slug: "silver-cedar",
@@ -234,6 +249,11 @@ export const work: WorkProject[] = [
         "/work/silver-cedar/gallery-3.webp",
       ],
     },
+    galleryCaptions: [
+      { title: "Services and pricing", text: "Transparent prices for every service." },
+      { title: "Booking dialog", text: "Pick a service, barber, date and time." },
+      { title: "Shop details", text: "Address, hours and a contact form." },
+    ],
   },
   {
     slug: "travel",
@@ -275,6 +295,11 @@ export const work: WorkProject[] = [
         "/work/travel/gallery-3.webp",
       ],
     },
+    galleryCaptions: [
+      { title: "Destination grid", text: "Eight destinations, filterable by category." },
+      { title: "Booking request", text: "Dates, travelers and an estimated total." },
+      { title: "Confirmation", text: "A reference number and trip summary." },
+    ],
   },
   {
     slug: "gymnestic",
@@ -307,5 +332,10 @@ export const work: WorkProject[] = [
     ],
     cover: "ProjectCover",
     next: "ember-fig",
+    galleryCaptions: [
+      { title: "Progress charts", text: "Weekly metrics and activity trends." },
+      { title: "Daily goals", text: "A checklist for today's training." },
+      { title: "Profile", text: "Bio, skills and progress overview." },
+    ],
   },
 ];

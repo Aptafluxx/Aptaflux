@@ -3,6 +3,7 @@ import Image from "next/image";
 
 type DeviceFrameProps = {
   children?: ReactNode;
+  className?: string;
   device?: "laptop" | "phone";
   mobileImage?: string;
   mobileAlt?: string;
@@ -10,13 +11,14 @@ type DeviceFrameProps = {
 
 export function DeviceFrame({
   children,
+  className = "",
   device = "laptop",
   mobileImage,
   mobileAlt,
 }: DeviceFrameProps) {
   if (device === "phone") {
     return (
-      <div className="absolute left-1/2 top-1/2 aspect-[9/19.5] h-[85%] -translate-x-1/2 -translate-y-1/2 rounded-[1.4rem] border-[3px] border-fg bg-bg md:border-[5px]">
+      <div className={`absolute left-1/2 top-1/2 aspect-[9/19.5] h-[85%] -translate-x-1/2 -translate-y-1/2 rounded-[1.4rem] border-[3px] border-fg bg-bg md:border-[5px] ${className}`}>
         <span
           aria-hidden="true"
           className="absolute left-1/2 top-1.5 z-10 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-fg/60"
@@ -29,7 +31,7 @@ export function DeviceFrame({
   }
 
   return (
-    <div className="absolute left-1/2 top-1/2 flex h-auto max-h-[92%] w-[85%] -translate-x-1/2 -translate-y-1/2 flex-col items-center">
+    <div className={`absolute left-1/2 top-1/2 flex h-auto max-h-[92%] w-[85%] -translate-x-1/2 -translate-y-1/2 flex-col items-center ${className}`}>
       <div className="relative w-full rounded-t-lg border-[6px] border-bg bg-bg px-1.5 pb-1.5 pt-4">
         <span
           aria-hidden="true"

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ProjectCard, SpotlightProjectCard } from "@/components/work/ProjectCard";
-import { work, workPageContent } from "@/content/work";
+import { work } from "@/content/work";
 
 const filters = ["All", "Websites", "Mobile apps"] as const;
 type ProjectFilter = (typeof filters)[number];

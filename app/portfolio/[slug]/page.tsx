@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
+  Check,
   Compass,
   Layers3,
   Monitor,
@@ -16,6 +19,7 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { DotGrid } from "@/components/ui/DotGrid";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
@@ -68,6 +72,9 @@ export default async function ProjectPage(props: WorkPageProps) {
   }
 
   const labels = workPageContent.projectLabels;
+  const galleryImages = (project.images?.gallery ?? []).filter((image) =>
+    existsSync(path.join(process.cwd(), "public", image)),
+  );
   const sameKindProjects = work.filter(
     (item) => item.slug !== project.slug && item.kind === project.kind,
   );
@@ -87,8 +94,9 @@ export default async function ProjectPage(props: WorkPageProps) {
 
   return (
     <>
-      <section className="pb-10 pt-[calc(72px+40px)] md:pb-16 md:pt-[calc(var(--navbar-bottom,72px)+48px)]">
-        <Container>
+      <section className="relative overflow-hidden border-b border-accent/25 bg-band/22 pb-14 pt-[calc(72px+40px)] md:pb-14 md:pt-[calc(var(--navbar-bottom,72px)+40px)]">
+        <DotGrid className="opacity-60" />
+        <Container className="relative z-10">
           <Breadcrumbs current={project.name} parent="Portfolio" parentHref="/portfolio" />
           <div className="mt-8 flex flex-wrap gap-2 text-small text-muted">
             <span className="rounded-full border border-line px-3 py-1">{project.category}</span>
@@ -115,11 +123,12 @@ export default async function ProjectPage(props: WorkPageProps) {
         </Container>
       </section>
 
-      <Section aria-label={labels.projectCover}>
-        <div className="relative aspect-[16/10] overflow-visible rounded-lg bg-[rgb(var(--bg))] sm:aspect-[16/9]">
+      <Section aria-label={labels.projectCover} className="py-8 md:py-12">
+        <div className="relative min-h-[360px] overflow-visible rounded-[24px] border border-accent/25 bg-band/35 p-4 sm:min-h-[480px] sm:p-8">
           <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
           {project.images?.cover ? (
             <DeviceFrame
+              className={project.kind === "website" ? "!w-[78%]" : ""}
               device={project.kind === "mobile" ? "phone" : "laptop"}
               mobileAlt={`${project.name} on mobile`}
               mobileImage={project.kind === "website" ? project.images.mobile : undefined}
@@ -150,11 +159,11 @@ export default async function ProjectPage(props: WorkPageProps) {
             <div className="mt-4 flex flex-wrap gap-2">
               {project.services.map((service) => (
                 <Link
-                  className="rounded-full border border-line px-3 py-2 text-small text-muted transition-colors hover:border-brand hover:text-brand"
+                  className="inline-flex items-center gap-1 rounded-full border border-line px-3 py-2 text-small text-muted transition-colors hover:border-accent hover:text-accent"
                   href={project.kind === "website" ? "/services/conversion-engine" : "/services/digital-platforms"}
                   key={service}
                 >
-                  {service}
+                  {service} <ArrowUpRight aria-hidden="true" size={14} />
                 </Link>
               ))}
             </div>
@@ -204,13 +213,36 @@ export default async function ProjectPage(props: WorkPageProps) {
         </div>
       </Section>
 
+      {project.features && project.features.length > 0 ? (
+        <Section aria-label={labels.keyFeatures}>
+          <div className="max-w-3xl">
+            <p className="text-eyebrow font-semibold uppercase tracking-[0.12em] text-brand">
+              {labels.whatWeBuilt}
+            </p>
+            <h2 className="mt-3 font-body text-h2 font-bold tracking-[-0.03em]">
+              {labels.keyFeatures}
+            </h2>
+          </div>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {project.features.map((feature) => (
+              <Card className="flex items-start gap-4 p-5" key={feature}>
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent">
+                  <Check aria-hidden="true" size={20} />
+                </span>
+                <p className="pt-1 text-[16px] leading-relaxed">{feature}</p>
+              </Card>
+            ))}
+          </div>
+        </Section>
+      ) : null}
+
       <Section aria-label={labels.projectStory} tone="raised">
         <div className="grid gap-4 md:grid-cols-3">
           {storyItems.map((item, index) => {
             const Icon = item.icon;
             return (
               <Reveal className="h-full" delay={index * 0.06} key={item.label}>
-                <Card className="h-full p-5 sm:p-6">
+                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
                   <IconBadge icon={Icon} />
                   <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">{item.label}</h2>
                   {index === 2 ? (
@@ -225,23 +257,12 @@ export default async function ProjectPage(props: WorkPageProps) {
             );
           })}
         </div>
-        {project.facts ? (
-          <div className="mt-8 flex flex-wrap gap-8 border-y border-line py-6">
-            {project.facts.map((fact) => (
-              <div key={fact.label}>
-                <p className="font-body text-h2 font-bold">{fact.value}</p>
-                <p className="text-small text-muted">{fact.label}</p>
-              </div>
-            ))}
-          </div>
-        ) : null}
       </Section>
 
-      {project.images?.gallery?.some((image) => image.trim().length > 0) ? (
+      {galleryImages.length > 0 ? (
         <Section aria-label={workPageContent.ariaLabels.projectGallery}>
           <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12">
-            {project.images.gallery
-              .filter((image) => image.trim().length > 0)
+            {galleryImages
               .slice(0, 3)
               .map((image, index) => (
                 <GalleryImage

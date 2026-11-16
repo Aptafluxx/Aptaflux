@@ -1,25 +1,33 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Compass, Target, TrendingUp } from "lucide-react";
+import {
+  ArrowUpRight,
+  Compass,
+  Layers3,
+  Monitor,
+  Target,
+  TrendingUp,
+} from "lucide-react";
 import { notFound } from "next/navigation";
 import { artComponents } from "@/components/art";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { Container } from "@/components/ui/Container";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { DeviceFrame } from "@/components/work/DeviceFrame";
-import { DotGrid } from "@/components/ui/DotGrid";
+import { GalleryImage } from "@/components/work/GalleryImage";
+import { ProjectCard } from "@/components/work/ProjectCard";
+import { site } from "@/content/site";
 import { work, workPageContent } from "@/content/work";
 import { createPageMetadata } from "@/lib/metadata";
 
 type WorkPageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -58,89 +66,146 @@ export default async function ProjectPage(props: WorkPageProps) {
     notFound();
   }
 
-  const nextProject = work.find((item) => item.slug === project.next);
-  if (!nextProject) {
-    throw new Error(`The next project "${project.next}" does not exist.`);
-  }
-
   const labels = workPageContent.projectLabels;
-  const metadataItems = [
-    { label: labels.category, value: project.category },
-    { label: labels.services, value: project.services.join(", ") },
-    { label: labels.stack, value: project.stack.join(", ") },
-  ].filter((item) => item.value.length > 0);
+  const sameKindProjects = work.filter(
+    (item) => item.slug !== project.slug && item.kind === project.kind,
+  );
+  const moreProjects = [
+    ...sameKindProjects,
+    ...work.filter(
+      (item) =>
+        item.slug !== project.slug &&
+        !sameKindProjects.some((sameKind) => sameKind.slug === item.slug),
+    ),
+  ].slice(0, 3);
   const storyItems = [
     { label: labels.challenge, text: project.challenge, icon: Target },
     { label: labels.approach, text: project.approach, icon: Compass },
-    {
-      label: labels.results,
-      text: project.results.join(" "),
-      icon: TrendingUp,
-    },
+    { label: labels.results, text: project.results.join(" "), icon: TrendingUp },
   ];
 
   return (
     <>
-      <PageHeader
-        accent={project.name.split(" ").at(-1)}
-        breadcrumb={
-          <Breadcrumbs
-            current={project.name}
-            parent="Work"
-            parentHref="/work"
-          />
-        }
-        eyebrow={
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex rounded-full border border-line px-3 py-1 text-small normal-case tracking-normal text-muted">
-              {labels.type}
-            </span>
+      <section className="pb-10 pt-28 md:pb-16 md:pt-36">
+        <Container>
+          <Breadcrumbs current={project.name} parent="Work" parentHref="/work" />
+          <div className="mt-8 flex flex-wrap gap-2 text-small text-muted">
+            <span className="rounded-full border border-line px-3 py-1">{project.category}</span>
+            <span className="rounded-full border border-line px-3 py-1">{project.platform}</span>
+            <span className="rounded-full border border-line px-3 py-1">{labels.portfolioProject}</span>
+          </div>
+          <h1 className="mt-6 max-w-4xl font-body text-display-xl font-extrabold tracking-[-0.04em]">
+            {project.name}
+          </h1>
+          <p className="mt-5 max-w-[62ch] text-body leading-relaxed text-muted">{project.summary}</p>
+          <div className="mt-7 flex flex-wrap gap-3">
             {project.liveUrl ? (
-              <a className="inline-flex items-center gap-1 text-small font-semibold text-brand" href={project.liveUrl} rel="noopener noreferrer" target="_blank">
-                View live demo <ArrowUpRight aria-hidden="true" size={15} />
+              <a
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-[2px] border border-brand bg-brand px-5 py-3 text-small font-semibold text-brand-fg transition-colors hover:bg-brand-hover"
+                href={project.liveUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {labels.liveDemo} <ArrowUpRight aria-hidden="true" size={16} />
               </a>
             ) : null}
+            <Button href="/work" variant="ghost">{labels.allWork}</Button>
           </div>
-        }
-        intro={project.summary}
-        title={project.name}
-      />
+        </Container>
+      </section>
 
-      <Section aria-label={workPageContent.ariaLabels.projectDetails} tone="alt">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {metadataItems.map((item) => (
-            <div className="border-t border-line pt-4" key={item.label}>
-              <p className="text-small leading-relaxed text-muted">{item.label}</p>
-              <p className="mt-2 text-body leading-relaxed">{item.value}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section aria-label="Project cover">
+      <Section aria-label={labels.projectCover}>
         <div className="relative aspect-[16/10] overflow-visible rounded-lg bg-[rgb(var(--bg))] sm:aspect-[16/9]">
-          <DotGrid className="opacity-80" />
+          <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
           {project.images?.cover ? (
             <DeviceFrame
               device={project.kind === "mobile" ? "phone" : "laptop"}
               mobileAlt={`${project.name} on mobile`}
-              mobileImage={
-                project.kind === "website" ? project.images?.mobile : undefined
-              }
+              mobileImage={project.kind === "website" ? project.images.mobile : undefined}
             >
-              <Image alt={`${project.name} cover`} className="h-full w-full object-cover object-top" fill priority sizes="(min-width: 1024px) 85vw, 95vw" src={project.images.cover} />
+              <Image
+                alt={`${project.name} cover`}
+                className="h-full w-full object-cover object-top"
+                fill
+                priority
+                sizes="(min-width: 1024px) 85vw, 95vw"
+                src={project.images.cover}
+              />
             </DeviceFrame>
           ) : project.cover === "ProjectCover" ? (
             <artComponents.ProjectCover project={project} />
           ) : (
-            <DeviceFrame device="laptop">
-              <artComponents.EmberFig />
-            </DeviceFrame>
+            <DeviceFrame device="laptop"><artComponents.EmberFig /></DeviceFrame>
           )}
         </div>
       </Section>
 
-      <Section aria-label={workPageContent.ariaLabels.projectStory} tone="raised">
+      <Section aria-label={labels.projectOverview} tone="alt">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px]">
+          <div>
+            <h2 className="font-body text-h2 font-bold tracking-[-0.03em]">{labels.projectOverview}</h2>
+            <p className="mt-5 max-w-[65ch] text-body leading-relaxed text-muted">{project.summary}</p>
+            <h3 className="mt-10 font-body text-h3 font-bold">{labels.servicesBehind}</h3>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.services.map((service) => (
+                <Link
+                  className="rounded-full border border-line px-3 py-2 text-small text-muted transition-colors hover:border-brand hover:text-brand"
+                  href={project.kind === "website" ? "/services/conversion-engine" : "/services/digital-platforms"}
+                  key={service}
+                >
+                  {service}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <Card className="h-fit p-5 lg:sticky lg:top-24">
+            <div className="space-y-5">
+              {[
+                { label: labels.category, value: project.category, icon: Layers3 },
+                { label: labels.platform, value: project.platform, icon: Monitor },
+                ...(project.year ? [{ label: labels.year, value: project.year, icon: TrendingUp }] : []),
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div className="flex gap-3" key={item.label}>
+                    <IconBadge icon={Icon} />
+                    <div>
+                      <p className="text-small text-muted">{item.label}</p>
+                      <p className="mt-1 text-body">{item.value}</p>
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="flex gap-3">
+                <IconBadge icon={Layers3} />
+                <div>
+                  <p className="text-small text-muted">{labels.stack}</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {project.stack.map((technology) => (
+                      <span className="rounded-full border border-line px-2.5 py-1 text-small text-muted" key={technology}>
+                        {technology}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              {project.liveUrl ? (
+                <div className="flex gap-3">
+                  <IconBadge icon={ArrowUpRight} />
+                  <div>
+                    <p className="text-small text-muted">{labels.liveDemo}</p>
+                    <a className="mt-1 inline-flex items-center gap-1 text-body font-semibold text-brand" href={project.liveUrl} rel="noopener noreferrer" target="_blank">
+                      {labels.liveDemo} <ArrowUpRight aria-hidden="true" size={15} />
+                    </a>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </Card>
+        </div>
+      </Section>
+
+      <Section aria-label={labels.projectStory} tone="raised">
         <div className="grid gap-4 md:grid-cols-3">
           {storyItems.map((item, index) => {
             const Icon = item.icon;
@@ -148,60 +213,71 @@ export default async function ProjectPage(props: WorkPageProps) {
               <Reveal className="h-full" delay={index * 0.06} key={item.label}>
                 <Card className="h-full p-5 sm:p-6">
                   <IconBadge icon={Icon} />
-                  <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">
-                    {item.label}
-                  </h2>
+                  <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">{item.label}</h2>
                   {index === 2 ? (
                     <ul className="mt-3 space-y-3 text-body leading-relaxed text-muted">
-                      {project.results.map((result, resultIndex) => (
-                        <li key={`${result}-${resultIndex}`}>{result}</li>
-                      ))}
+                      {project.results.map((result, resultIndex) => <li key={`${result}-${resultIndex}`}>{result}</li>)}
                     </ul>
                   ) : (
-                    <p className="mt-3 text-body leading-relaxed text-muted">
-                      {item.text}
-                    </p>
+                    <p className="mt-3 text-body leading-relaxed text-muted">{item.text}</p>
                   )}
                 </Card>
               </Reveal>
             );
           })}
         </div>
+        {project.facts ? (
+          <div className="mt-8 flex flex-wrap gap-8 border-y border-line py-6">
+            {project.facts.map((fact) => (
+              <div key={fact.label}>
+                <p className="font-body text-h2 font-bold">{fact.value}</p>
+                <p className="text-small text-muted">{fact.label}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </Section>
 
-      {project.images?.gallery && project.images.gallery.length > 0 ? (
+      {project.images?.gallery?.some((image) => image.trim().length > 0) ? (
         <Section aria-label={workPageContent.ariaLabels.projectGallery}>
           <div className="grid grid-cols-1 gap-5 min-[820px]:grid-cols-12">
-            {project.images.gallery.slice(0, 3).map((image, index) => {
-              return (
-                <div
-                  className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-card p-4 sm:p-8 ${
-                    index === 1
-                      ? "min-[820px]:col-span-5"
-                      : "min-[820px]:col-span-7"
-                  }`}
+            {project.images.gallery
+              .filter((image) => image.trim().length > 0)
+              .slice(0, 3)
+              .map((image, index) => (
+                <GalleryImage
+                  alt={`${project.name} gallery image ${index + 1}`}
+                  className={`relative aspect-[4/3] overflow-hidden rounded-lg bg-card p-4 sm:p-8 ${index === 1 ? "min-[820px]:col-span-5" : "min-[820px]:col-span-7"}`}
+                  image={image}
                   key={`${image}-${index}`}
-                >
-                  <Image alt={`${project.name} gallery image ${index + 1}`} className="object-cover" fill sizes="(min-width: 820px) 50vw, 100vw" src={image} />
-                </div>
-              );
-            })}
+                  sizes="(min-width: 820px) 50vw, 100vw"
+                />
+              ))}
           </div>
         </Section>
       ) : null}
 
-      <Section>
-        <Link
-          className="group block border-y border-line py-6"
-          href={`/work/${nextProject.slug}`}
-        >
-          <p className="text-small text-muted">{labels.nextProject}</p>
-          <p className="mt-3 font-body text-display-lg font-bold tracking-[-0.02em] transition-colors duration-300 group-hover:text-brand">
-            {nextProject.name}
-          </p>
+      <Section aria-label={labels.moreProjects}>
+        <h2 className="font-body text-h2 font-bold tracking-[-0.03em]">
+          {labels.moreProjects}
+        </h2>
+        <div className="mt-8 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {moreProjects.map((moreProject, index) => (
+            <div key={moreProject.slug}>
+              <ProjectCard index={index} project={moreProject} />
+            </div>
+          ))}
+        </div>
+        <Link className="mt-8 inline-flex text-small font-semibold text-brand" href="/work">
+          {labels.backToAllWork} →
         </Link>
       </Section>
-      <CtaBand {...workPageContent.cta} />
+      <CtaBand
+        {...workPageContent.cta}
+        steps={site.contact.whatHappensNext.steps}
+        stepsHeading={site.contact.whatHappensNext.heading}
+      />
     </>
   );
 }
+

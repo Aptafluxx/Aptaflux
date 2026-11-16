@@ -15,6 +15,10 @@ export type WorkProject = {
   type: ProjectType;
   client: string;
   featured: boolean;
+  year?: string;
+  platform: string;
+  spotlight?: boolean;
+  facts?: { value: string; label: string }[];
   kind: "website" | "mobile";
   liveUrl?: string;
   services: string[];
@@ -57,7 +61,27 @@ export const workPageContent = {
     approach: "Approach",
     results: "Outcome",
     nextProject: "Next project",
+    portfolioProject: "Portfolio project",
+    featuredProject: "Featured project",
+    readCaseStudy: "Read the case study →",
+    allWork: "All work",
+    projectOverview: "Project overview",
+    servicesBehind: "Services behind this project",
+    platform: "Platform",
+    year: "Year",
+    projectCover: "Project cover",
+    projectStory: "Project story",
+    liveDemo: "Live demo",
+    moreWebsites: "More Websites",
+    moreMobileApps: "More Mobile apps",
+    moreProjects: "More projects",
+    backToAllWork: "Back to all work",
     portfolioNote: "These are portfolio projects built to show our approach.",
+  },
+  pageHeading: {
+    badge: "Our work",
+    title: "Projects that show",
+    accent: "the work",
   },
 } as const;
 
@@ -68,6 +92,9 @@ export const work: WorkProject[] = [
     type: "portfolio",
     client: "Portfolio project",
     featured: true,
+    spotlight: true,
+    platform: "Web",
+    facts: [{ value: "4", label: "Pages" }],
     kind: "website",
     liveUrl: "https://ember-and-fig.vercel.app/",
     category: "Restaurant website",
@@ -96,6 +123,9 @@ export const work: WorkProject[] = [
     type: "portfolio",
     client: "Portfolio project",
     featured: true,
+    spotlight: true,
+    platform: "Android and iOS",
+    facts: [{ value: "2", label: "Platforms" }],
     kind: "mobile",
     category: "Restaurant ordering app",
     services: ["Mobile design", "Mobile development", "Authentication and data"],
@@ -113,6 +143,11 @@ export const work: WorkProject[] = [
     type: "portfolio",
     client: "Portfolio project",
     featured: true,
+    platform: "Android",
+    facts: [
+      { value: "3", label: "Architecture layers" },
+      { value: "2", label: "Device views" },
+    ],
     kind: "mobile",
     category: "Smartwatch companion app",
     services: ["Mobile development", "Bluetooth integration"],
@@ -130,6 +165,8 @@ export const work: WorkProject[] = [
     type: "portfolio",
     client: "Portfolio project",
     featured: false,
+    platform: "Web",
+    facts: [{ value: "4", label: "Service offerings" }],
     kind: "website",
     liveUrl: "https://silver-and-cedar.vercel.app/",
     category: "Barbershop website",
@@ -157,6 +194,11 @@ export const work: WorkProject[] = [
     type: "portfolio",
     client: "Portfolio project",
     featured: false,
+    platform: "Web",
+    facts: [
+      { value: "8", label: "Destinations" },
+      { value: "4", label: "Trip categories" },
+    ],
     kind: "website",
     liveUrl: "https://aptaflux-travel.vercel.app/",
     category: "Travel website",
@@ -184,6 +226,11 @@ export const work: WorkProject[] = [
     type: "portfolio",
     client: "Portfolio project",
     featured: false,
+    platform: "Android and iOS",
+    facts: [
+      { value: "8", label: "Feature modules" },
+      { value: "3", label: "Account flows" },
+    ],
     kind: "mobile",
     category: "Fitness app",
     services: ["Mobile design", "Mobile development", "Authentication and data"],

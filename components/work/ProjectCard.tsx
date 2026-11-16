@@ -69,16 +69,16 @@ export function ProjectCard({ index = 0, project }: ProjectCardProps) {
           </p>
           <div className="mt-auto pt-5">
             <AccentRule />
-            <ul className="mt-4 flex flex-wrap gap-2">
-            {project.stack.map((tag) => (
-              <li key={tag}>
-                <TechnologyChip technology={tag} />
-              </li>
-            ))}
+            <ul className="mt-5 flex flex-wrap gap-2 pb-5">
+              {project.stack.map((tag) => (
+                <li key={tag}>
+                  <TechnologyChip technology={tag} />
+                </li>
+              ))}
             </ul>
           </div>
           <AccentRule />
-          <span className="mt-4 text-small font-semibold text-brand">
+          <span className="mt-5 text-small font-semibold text-brand">
             {homeContent.work.projectLink}
           </span>
         </Card>

@@ -64,9 +64,6 @@ export function WorkGrid() {
           <ProjectCard index={index} key={project.slug} project={project} />
         ))}
       </div>
-      <p className="mt-10 border-t border-line pt-6 text-body leading-relaxed text-muted">
-        {workPageContent.projectLabels.portfolioNote}
-      </p>
     </>
   );
 }

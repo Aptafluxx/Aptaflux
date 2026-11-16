@@ -121,9 +121,11 @@ export function CtaBand({
           </div>
         ) : null}
       </div>
-      <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-20 z-0 hidden h-[340px] w-[440px] opacity-10 md:block">
-        <CtaShapes />
-      </div>
+      {!steps ? (
+        <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-20 z-0 hidden h-[340px] w-[440px] opacity-10 md:block">
+          <CtaShapes />
+        </div>
+      ) : null}
     </Section>
   );
 }

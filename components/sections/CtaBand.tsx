@@ -1,3 +1,4 @@
+import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { CtaShapes } from "@/components/art/CtaShapes";
 import { Section } from "@/components/ui/Section";
@@ -11,6 +12,10 @@ type CtaBandProps = {
   href?: string;
   steps?: readonly { title: string; text: string }[];
   stepsHeading?: string;
+  secondaryButtonLabel?: string;
+  secondaryHref?: string;
+  email?: string;
+  replyNote?: string;
 };
 
 export function CtaBand({
@@ -21,6 +26,10 @@ export function CtaBand({
   href,
   steps,
   stepsHeading,
+  secondaryButtonLabel,
+  secondaryHref,
+  email,
+  replyNote,
 }: CtaBandProps = {}) {
   const { cta } = homeContent;
   const isCustom = Boolean(eyebrow || title || text || buttonLabel || href);
@@ -46,8 +55,24 @@ export function CtaBand({
                 href={href ?? "/contact"}
                 tone="brand"
               >
-                {buttonLabel ?? cta.action}
+                {buttonLabel ?? cta.action} <ArrowRight aria-hidden="true" size={17} />
               </Button>
+              <Button
+                className="ml-2 !border-band-fg/40 !bg-transparent !text-band-fg hover:!border-band-fg hover:!bg-band-fg/10"
+                href={secondaryHref ?? "/services"}
+                variant="ghost"
+              >
+                {secondaryButtonLabel} <ArrowRight aria-hidden="true" size={17} />
+              </Button>
+              {email ? (
+                <div className="mt-6 flex flex-wrap items-center gap-3 text-small text-band-fg">
+                  <a className="inline-flex items-center gap-2 font-semibold" href={`mailto:${email}`}>
+                    <Mail aria-hidden="true" size={17} />
+                    {email}
+                  </a>
+                  <span>{replyNote}</span>
+                </div>
+              ) : null}
             </>
           ) : isCustom ? (
             <Button
@@ -79,15 +104,16 @@ export function CtaBand({
           )}
         </div>
         {steps ? (
-          <div className="md:col-span-5">
+          <div className="rounded-[20px] border border-band-fg/18 bg-band-fg/8 p-7 md:col-span-5">
             <h3 className="font-body text-h3 font-bold">{stepsHeading}</h3>
-            <ol className="mt-4 space-y-3">
+            <ol className="relative mt-5 space-y-5">
+              <span aria-hidden="true" className="absolute bottom-5 left-[17px] top-5 w-0.5 bg-band-fg/25" />
               {steps.map((step, index) => (
-                <li className="flex gap-4 border-t border-band-fg/30 pt-4" key={step.title}>
-                  <span className="font-body text-small font-bold text-band-fg">0{index + 1}</span>
-                  <div>
+                <li className="relative flex gap-4" key={step.title}>
+                  <span className="z-10 flex size-9 shrink-0 items-center justify-center rounded-full bg-accent font-body text-small font-bold text-brand-fg">0{index + 1}</span>
+                  <div className="pt-1">
                     <p className="font-semibold">{step.title}</p>
-                    <p className="mt-1 text-body leading-relaxed text-band-fg">{step.text}</p>
+                    <p className="mt-1 text-[15px] leading-relaxed text-band-fg">{step.text}</p>
                   </div>
                 </li>
               ))}
@@ -95,7 +121,7 @@ export function CtaBand({
           </div>
         ) : null}
       </div>
-      <div aria-hidden="true" className="pointer-events-none absolute -right-10 top-1/2 hidden h-[340px] w-[440px] -translate-y-1/2 md:block">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-20 z-0 hidden h-[340px] w-[440px] opacity-10 md:block">
         <CtaShapes />
       </div>
     </Section>

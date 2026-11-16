@@ -32,7 +32,7 @@ export function WorkGrid() {
             className={`min-h-11 rounded-full border px-4 py-2 text-small transition-colors ${
               activeFilter === filter
                 ? "border-brand bg-brand text-brand-fg"
-                : "border-line text-muted hover:border-brand hover:text-fg"
+                : "border-fg/30 text-fg/85 hover:border-brand hover:text-fg"
             }`}
             key={filter}
             onClick={() => setActiveFilter(filter)}

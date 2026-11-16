@@ -34,10 +34,11 @@ export type WorkProject = {
 };
 
 export const workPageContent = {
-  metadataTitle: "Work",
-  introduction: "Real projects. Practical thinking. Purposeful execution.",
+  metadataTitle: "Portfolio",
+  introduction:
+    "Websites and mobile apps we've designed and built, from restaurant reservations to Bluetooth wearables.",
   metadataDescription:
-    "Websites and mobile apps by Aptaflux: restaurant, barbershop, travel, fitness, ordering and Bluetooth projects.",
+    "Websites and mobile apps we've designed and built, from restaurant reservations to Bluetooth wearables.",
   cta: {
     eyebrow: "LET'S BUILD SOMETHING",
     title: "Have a project in mind?",
@@ -64,7 +65,7 @@ export const workPageContent = {
     portfolioProject: "Portfolio project",
     featuredProject: "Featured project",
     readCaseStudy: "Read the case study →",
-    allWork: "All work",
+    allWork: "All projects",
     projectOverview: "Project overview",
     servicesBehind: "Services behind this project",
     platform: "Platform",
@@ -75,13 +76,21 @@ export const workPageContent = {
     moreWebsites: "More Websites",
     moreMobileApps: "More Mobile apps",
     moreProjects: "More projects",
-    backToAllWork: "Back to all work",
-    portfolioNote: "These are portfolio projects built to show our approach.",
+    backToAllWork: "Back to all projects",
   },
   pageHeading: {
-    badge: "Our work",
-    title: "Projects that show",
-    accent: "the work",
+    badge: "Our portfolio",
+    title: "Projects that speak",
+    accent: "louder than words",
+  },
+  closing: {
+    eyebrow: "Let's build something",
+    title: "Have a project in mind?",
+    text: "Tell us what you want to build and we'll show you the best way to get there.",
+    primaryLabel: "Start a conversation",
+    secondaryLabel: "Explore services",
+    secondaryHref: "/services",
+    replyNote: "Reply by email · No obligation",
   },
 } as const;
 

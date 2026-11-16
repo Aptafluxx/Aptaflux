@@ -304,7 +304,7 @@ export function Navbar() {
                   pathname === item.href ||
                   (item.href === "/services" &&
                     pathname.startsWith("/services/")) ||
-                  (item.href === "/work" && pathname.startsWith("/work/"));
+                  (item.href === "/portfolio" && pathname.startsWith("/portfolio/"));
 
                 if (item.href === "/services") {
                   return (

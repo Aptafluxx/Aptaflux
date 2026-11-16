@@ -52,7 +52,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
   return (
     <Link
       className="group relative block py-6 md:py-8"
-      href={`/work/${project.slug}`}
+      href={`/portfolio/${project.slug}`}
       prefetch={false}
       onPointerEnter={(event) => {
         if (event.pointerType === "mouse" && !shouldReduceMotion) {

@@ -51,7 +51,7 @@ domain to Vercel and configure its DNS records before making it the canonical
 ## Routes
 
 - `/`
-- `/work` and `/work/[slug]`
+- `/portfolio` and `/portfolio/[slug]`
 - `/services`
 - `/about`
 - `/contact`

@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     "",
-    "/work",
+    "/portfolio",
     "/services",
     "/about",
     "/contact",
@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: new URL(route, siteUrl).toString(),
     })),
     ...work.map((project) => ({
-      url: new URL(`/work/${project.slug}`, siteUrl).toString(),
+      url: new URL(`/portfolio/${project.slug}`, siteUrl).toString(),
     })),
     ...servicesContent.services.map((service) => ({
       url: new URL(`/services/${service.slug}`, siteUrl).toString(),

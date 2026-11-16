@@ -10,13 +10,13 @@ import { createPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = createPageMetadata({
   title: workPageContent.metadataTitle,
   description: workPageContent.metadataDescription,
-  path: "/work",
+  path: "/portfolio",
 });
 
 export default function WorkPage() {
   return (
     <>
-      <section className="py-16 text-center md:py-24">
+      <section className="pb-16 pt-[calc(72px+40px)] text-center md:pb-24 md:pt-[calc(var(--navbar-bottom,72px)+48px)]">
         <Container>
           <span className="inline-flex rounded-full border border-line px-3 py-1 text-small font-semibold text-brand">
             {workPageContent.pageHeading.badge}
@@ -34,11 +34,21 @@ export default function WorkPage() {
       <Section aria-label={workPageContent.ariaLabels.projects} tone="alt">
         <WorkGrid />
       </Section>
-      <CtaBand
-        {...workPageContent.cta}
-        steps={site.contact.whatHappensNext.steps}
-        stepsHeading={site.contact.whatHappensNext.heading}
-      />
+      <div className="home-page-panels">
+        <CtaBand
+          eyebrow={workPageContent.closing.eyebrow}
+          title={workPageContent.closing.title}
+          text={workPageContent.closing.text}
+          buttonLabel={workPageContent.closing.primaryLabel}
+          href="/contact"
+          secondaryButtonLabel={workPageContent.closing.secondaryLabel}
+          secondaryHref={workPageContent.closing.secondaryHref}
+          email={site.email}
+          replyNote={workPageContent.closing.replyNote}
+          steps={site.contact.whatHappensNext.steps}
+          stepsHeading={site.contact.whatHappensNext.heading}
+        />
+      </div>
     </>
   );
 }

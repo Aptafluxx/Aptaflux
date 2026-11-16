@@ -2,8 +2,8 @@ import Link from "next/link";
 
 type BreadcrumbsProps = {
   current: string;
-  parent: "Services" | "Work";
-  parentHref: "/services" | "/work";
+  parent: "Services" | "Portfolio";
+  parentHref: "/services" | "/portfolio";
 };
 
 export function Breadcrumbs({

@@ -112,7 +112,7 @@ export function MobileMenu({
   const isActive = (href: string) =>
     pathname === href ||
     (href === "/services" && pathname.startsWith("/services/")) ||
-    (href === "/work" && pathname.startsWith("/work/"));
+    (href === "/portfolio" && pathname.startsWith("/portfolio/"));
 
   return (
     <>

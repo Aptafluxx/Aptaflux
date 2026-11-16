@@ -22,6 +22,7 @@ import { Section } from "@/components/ui/Section";
 import { DeviceFrame } from "@/components/work/DeviceFrame";
 import { GalleryImage } from "@/components/work/GalleryImage";
 import { ProjectCard } from "@/components/work/ProjectCard";
+import { TechnologyChip } from "@/components/work/ProjectMeta";
 import { site } from "@/content/site";
 import { work, workPageContent } from "@/content/work";
 import { createPageMetadata } from "@/lib/metadata";
@@ -39,14 +40,14 @@ export async function generateMetadata(props: WorkPageProps): Promise<Metadata> 
   const project = work.find((item) => item.slug === slug);
 
   if (!project) {
-    return { title: "Work" };
+    return { title: "Portfolio" };
   }
 
   return {
     ...createPageMetadata({
       title: project.name,
       description: project.summary,
-      path: `/work/${project.slug}`,
+      path: `/portfolio/${project.slug}`,
     }),
     openGraph: {
       ...createPageMetadata({
@@ -86,9 +87,9 @@ export default async function ProjectPage(props: WorkPageProps) {
 
   return (
     <>
-      <section className="pb-10 pt-28 md:pb-16 md:pt-36">
+      <section className="pb-10 pt-[calc(72px+40px)] md:pb-16 md:pt-[calc(var(--navbar-bottom,72px)+48px)]">
         <Container>
-          <Breadcrumbs current={project.name} parent="Work" parentHref="/work" />
+          <Breadcrumbs current={project.name} parent="Portfolio" parentHref="/portfolio" />
           <div className="mt-8 flex flex-wrap gap-2 text-small text-muted">
             <span className="rounded-full border border-line px-3 py-1">{project.category}</span>
             <span className="rounded-full border border-line px-3 py-1">{project.platform}</span>
@@ -109,7 +110,7 @@ export default async function ProjectPage(props: WorkPageProps) {
                 {labels.liveDemo} <ArrowUpRight aria-hidden="true" size={16} />
               </a>
             ) : null}
-            <Button href="/work" variant="ghost">{labels.allWork}</Button>
+            <Button href="/portfolio" variant="ghost">{labels.allWork}</Button>
           </div>
         </Container>
       </section>
@@ -182,9 +183,7 @@ export default async function ProjectPage(props: WorkPageProps) {
                   <p className="text-small text-muted">{labels.stack}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {project.stack.map((technology) => (
-                      <span className="rounded-full border border-line px-2.5 py-1 text-small text-muted" key={technology}>
-                        {technology}
-                      </span>
+                      <TechnologyChip key={technology} technology={technology} />
                     ))}
                   </div>
                 </div>
@@ -268,15 +267,25 @@ export default async function ProjectPage(props: WorkPageProps) {
             </div>
           ))}
         </div>
-        <Link className="mt-8 inline-flex text-small font-semibold text-brand" href="/work">
+        <Link className="mt-8 inline-flex text-small font-semibold text-brand" href="/portfolio">
           {labels.backToAllWork} →
         </Link>
       </Section>
-      <CtaBand
-        {...workPageContent.cta}
-        steps={site.contact.whatHappensNext.steps}
-        stepsHeading={site.contact.whatHappensNext.heading}
-      />
+      <div className="home-page-panels">
+        <CtaBand
+          eyebrow={workPageContent.closing.eyebrow}
+          title={workPageContent.closing.title}
+          text={workPageContent.closing.text}
+          buttonLabel={workPageContent.closing.primaryLabel}
+          href="/contact"
+          secondaryButtonLabel={workPageContent.closing.secondaryLabel}
+          secondaryHref={workPageContent.closing.secondaryHref}
+          email={site.email}
+          replyNote={workPageContent.closing.replyNote}
+          steps={site.contact.whatHappensNext.steps}
+          stepsHeading={site.contact.whatHappensNext.heading}
+        />
+      </div>
     </>
   );
 }

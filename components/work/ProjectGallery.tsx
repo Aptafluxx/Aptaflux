@@ -1,18 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  X,
-  ZoomIn,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, ZoomIn } from "lucide-react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Container } from "@/components/ui/Container";
+import { Lightbox } from "@/components/work/Lightbox";
 
 type GalleryItem = {
   src: string;
@@ -36,11 +30,9 @@ export function ProjectGallery({
   liveUrl,
 }: ProjectGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
   const [direction, setDirection] = useState(1);
   const [touchStart, setTouchStart] = useState<number | null>(null);
-  const openerRef = useRef<HTMLButtonElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
   const reducedMotion = useReducedMotion();
   const activeItem = items[activeIndex];
   const stageId = `project-gallery-stage-${projectName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
@@ -62,49 +54,6 @@ export function ProjectGallery({
       image.src = next.src;
     }
   }, [activeIndex, items]);
-
-  useEffect(() => {
-    if (!lightboxOpen) {
-      return;
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setLightboxOpen(false);
-      } else if (event.key === "ArrowLeft") {
-        move(-1);
-      } else if (event.key === "ArrowRight") {
-        move(1);
-      } else if (event.key === "Tab") {
-        const focusable = document.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
-        );
-        if (focusable.length === 0) {
-          return;
-        }
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault();
-          last.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault();
-          first.focus();
-        }
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
-      openerRef.current?.focus();
-    };
-  }, [lightboxOpen, move]);
 
   const tabItems = useMemo(() => items.map((item, index) => ({ ...item, index })), [items]);
   const motionProps = reducedMotion
@@ -132,8 +81,7 @@ export function ProjectGallery({
   };
 
   const openLightbox = () => {
-    openerRef.current = document.activeElement as HTMLButtonElement;
-    setLightboxOpen(true);
+    setZoomed(true);
   };
 
   return (
@@ -267,7 +215,6 @@ export function ProjectGallery({
                 aria-label="Enlarge screen"
                 className="project-gallery-zoom inline-flex items-center gap-1 text-small font-semibold text-fg transition-colors hover:text-accent focus-visible:text-accent"
                 onClick={openLightbox}
-                ref={openerRef}
                 type="button"
               >
                 <ZoomIn aria-hidden="true" size={15} />
@@ -284,40 +231,15 @@ export function ProjectGallery({
         </div>
       </Container>
 
-      <AnimatePresence>
-        {lightboxOpen ? (
-          <motion.div
-            animate={{ opacity: 1 }}
-            aria-label={`${projectName} screens`}
-            aria-modal="true"
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[rgb(6_13_16_/_0.88)] p-4 backdrop-blur-md"
-            exit={{ opacity: 0 }}
-            initial={{ opacity: 0 }}
-            onClick={(event) => {
-              if (event.target === event.currentTarget) setLightboxOpen(false);
-            }}
-            role="dialog"
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.18 }}
-          >
-            <button aria-label="Close lightbox" className="absolute right-4 top-4 flex size-11 items-center justify-center rounded-full border border-band-fg/30 text-band-fg hover:bg-band-fg/10" onClick={() => setLightboxOpen(false)} ref={closeRef} type="button">
-              <X aria-hidden="true" size={20} />
-            </button>
-            <div className="flex max-h-[92vh] max-w-[92vw] flex-col items-center gap-4">
-              <div className={`relative ${kind === "mobile" ? "h-[76vh] aspect-[9/19.5]" : "h-auto aspect-[16/10] w-[min(92vw,1100px)]"}`}>
-                <Image alt={`${projectName}: ${activeItem.title}`} className="object-contain" fill sizes="92vw" src={activeItem.src} />
-              </div>
-              <div className="flex w-full items-center justify-between gap-4 text-band-fg">
-                <p><strong>{activeItem.title}</strong> — {activeItem.text}</p>
-                <span className="shrink-0 text-small">{activeIndex + 1} / {items.length}</span>
-              </div>
-              <div className="flex gap-2">
-                <button aria-label="Previous screen" className="flex size-10 items-center justify-center rounded-full border border-band-fg/30 hover:bg-band-fg/10" onClick={() => move(-1)} type="button"><ChevronLeft size={18} /></button>
-                <button aria-label="Next screen" className="flex size-10 items-center justify-center rounded-full border border-band-fg/30 hover:bg-band-fg/10" onClick={() => move(1)} type="button"><ChevronRight size={18} /></button>
-              </div>
-            </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      {zoomed ? (
+        <Lightbox
+          items={items}
+          index={activeIndex}
+          projectName={projectName}
+          onClose={() => setZoomed(false)}
+          onIndexChange={setIndex}
+        />
+      ) : null}
     </section>
   );
 }

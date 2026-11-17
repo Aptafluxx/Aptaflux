@@ -607,9 +607,13 @@ section[data-tone="brand"] {
   background: rgb(var(--bg));
   padding: 0.75rem 1rem;
   color: rgb(var(--fg));
+  opacity: 0;
+  pointer-events: none;
 }
 
-.skip-link:focus {
+.skip-link:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -660,6 +664,43 @@ section[data-tone="raised"] .ui-icon-badge {
 .dot-grid {
   background-image: radial-gradient(circle, rgb(var(--fg) / 0.06) 1px, transparent 1px);
   background-size: 24px 24px;
+}
+
+.project-gallery-dot-grid {
+  background-image: radial-gradient(circle, rgb(var(--band-fg) / 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.project-gallery-zoom-touch {
+  display: none;
+}
+
+@media (hover: none) {
+  .project-gallery-zoom {
+    opacity: 1;
+  }
+
+  .project-gallery-zoom-pointer {
+    display: none;
+  }
+
+  .project-gallery-zoom-touch {
+    display: inline;
+  }
+}
+
+.project-gallery-tabs {
+  scroll-snap-type: x mandatory;
+}
+
+@media (max-width: 1023px) {
+  .project-gallery-tabs {
+    padding-left: 4px;
+    padding-right: 32px;
+    scroll-padding-inline: 16px;
+    -webkit-mask-image: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0) calc(100% - 32px), transparent 100%);
+    mask-image: linear-gradient(to right, rgb(0 0 0) 0%, rgb(0 0 0) calc(100% - 32px), transparent 100%);
+  }
 }
 
 .tech-marquee-track {

@@ -12,6 +12,7 @@ import {
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Container } from "@/components/ui/Container";
 
 type GalleryItem = {
   src: string;
@@ -137,18 +138,19 @@ export function ProjectGallery({
 
   return (
     <section aria-label="Project screens" className="py-16 md:py-24">
-      <div className="mb-8">
-        <p className="text-eyebrow font-semibold uppercase tracking-[0.12em] text-brand">Screens</p>
-        <h2 className="mt-3 font-body text-[clamp(1.75rem,3vw,2.5rem)] font-bold tracking-[-0.03em]">
-          Inside the project
-        </h2>
-        <p className="mt-3 text-body text-muted">Selected screens from {projectName}.</p>
-      </div>
+      <Container>
+        <div className="mb-8">
+          <p className="text-eyebrow font-semibold uppercase tracking-[0.12em] text-brand">Screens</p>
+          <h2 className="mt-3 font-body text-[clamp(1.75rem,3vw,2.5rem)] font-bold tracking-[-0.03em]">
+            Inside the project
+          </h2>
+          <p className="mt-3 text-body text-muted">Selected screens from {projectName}.</p>
+        </div>
 
-      <div className="grid gap-6 lg:grid-cols-12">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
         <div
           aria-orientation="vertical"
-          className="order-2 flex gap-3 overflow-x-auto pb-2 lg:order-1 lg:col-span-4 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0"
+          className="project-gallery-tabs order-2 flex min-w-0 gap-3 overflow-x-auto pb-2 lg:order-1 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0"
           role="tablist"
         >
           {tabItems.map((item) => {
@@ -157,10 +159,10 @@ export function ProjectGallery({
               <button
                 aria-controls={stageId}
                 aria-selected={isActive}
-                className={`relative flex min-w-[190px] snap-start items-start gap-3 rounded-xl border p-3 text-left transition-colors lg:w-full ${
+                className={`relative flex min-w-max shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full border px-[14px] py-2 text-left transition-colors lg:w-full lg:min-w-0 lg:items-start lg:gap-3 lg:rounded-xl lg:p-3 lg:whitespace-normal ${
                   isActive
-                    ? "border-accent/40 bg-card"
-                    : "border-transparent hover:border-line"
+                    ? "border-accent bg-accent text-brand-fg lg:border-accent/40 lg:bg-card lg:text-fg"
+                    : "border-line hover:border-accent/50 lg:border-transparent"
                 }`}
                 id={`${stageId}-tab-${item.index}`}
                 key={item.src}
@@ -170,23 +172,23 @@ export function ProjectGallery({
                 tabIndex={isActive ? 0 : -1}
                 type="button"
               >
-                {isActive ? <span className="absolute inset-y-2 left-0 w-[3px] rounded-full bg-accent" /> : null}
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-small font-bold text-accent">
+                {isActive ? <span className="absolute inset-y-2 left-0 hidden w-[3px] rounded-full bg-accent lg:block" /> : null}
+                <span className="flex size-auto shrink-0 items-center justify-center rounded-none bg-transparent text-small font-bold text-inherit lg:size-8 lg:rounded-full lg:bg-accent/15 lg:text-accent">
                   {String(item.index + 1).padStart(2, "0")}
                 </span>
                 <span className="min-w-0">
                   <span className="block text-[16px] font-bold">{item.title}</span>
-                  <span className="mt-1 block line-clamp-2 text-small leading-relaxed text-muted">{item.text}</span>
+                  <span className="mt-1 hidden line-clamp-2 text-small leading-relaxed text-muted lg:block">{item.text}</span>
                 </span>
               </button>
             );
           })}
         </div>
 
-        <div className="order-1 min-w-0 lg:order-2 lg:col-span-8">
+        <div className="order-1 min-w-0 lg:order-2">
           <div
             aria-labelledby={`${stageId}-tab-${activeIndex}`}
-            className="relative overflow-hidden rounded-[24px] border border-accent/25 bg-band/30 p-4 sm:p-7"
+            className="relative w-full max-w-full overflow-hidden rounded-[24px] border border-accent/25 bg-band p-3 lg:p-7"
             id={stageId}
             onTouchEnd={(event) => {
               if (touchStart === null) return;
@@ -198,10 +200,10 @@ export function ProjectGallery({
             role="tabpanel"
             tabIndex={0}
           >
-            <div aria-hidden="true" className="dot-grid absolute inset-0 opacity-80" />
+            <div aria-hidden="true" className="project-gallery-dot-grid absolute inset-0" />
             {kind === "website" ? (
-              <div className="relative z-10 overflow-hidden rounded-[14px] border border-fg/15 bg-bg shadow-xl">
-                <div className="flex h-9 items-center gap-1.5 border-b border-line bg-card px-3">
+              <div className="relative z-10 min-w-0 w-full max-w-full overflow-hidden rounded-[14px] border border-band-fg/15 bg-band-fg shadow-xl">
+                <div className="flex h-9 items-center gap-1.5 border-b border-band-fg/15 bg-band-fg px-3">
                   <span className="size-2 rounded-full bg-fg/30" />
                   <span className="size-2 rounded-full bg-fg/30" />
                   <span className="size-2 rounded-full bg-fg/30" />
@@ -209,10 +211,10 @@ export function ProjectGallery({
                     {liveUrl ? new URL(liveUrl).host : projectName}
                   </span>
                 </div>
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <div className="relative min-w-0 w-full max-w-full aspect-[16/10] overflow-hidden">
                   <AnimatePresence initial={false} mode="wait">
                     <motion.div
-                      className="absolute inset-0"
+                      className="absolute inset-0 min-w-0 w-full max-w-full"
                       key={activeItem.src}
                       transition={reducedMotion ? { duration: 0 } : transition}
                       {...motionProps}
@@ -226,15 +228,6 @@ export function ProjectGallery({
                       />
                     </motion.div>
                   </AnimatePresence>
-                  <button
-                    aria-label="Click to enlarge"
-                    className="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full bg-bg/90 px-3 py-2 text-small font-semibold opacity-0 shadow-lg transition-opacity hover:opacity-100 focus-visible:opacity-100"
-                    onClick={openLightbox}
-                    ref={openerRef}
-                    type="button"
-                  >
-                    <ZoomIn aria-hidden="true" size={15} /> Click to enlarge
-                  </button>
                 </div>
               </div>
             ) : (
@@ -261,8 +254,8 @@ export function ProjectGallery({
               </div>
             )}
           </div>
-          <div className="mt-5 flex items-center justify-between gap-4">
-            <p className="min-w-0 text-body">
+          <div className="mt-5 flex max-w-full flex-wrap items-center justify-between gap-4">
+            <p className="min-w-0 flex-1 text-body">
               <strong>{activeItem.title}</strong>
               <span className="text-muted"> — {activeItem.text}</span>
             </p>
@@ -270,25 +263,26 @@ export function ProjectGallery({
               <button aria-label="Previous screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent" onClick={() => move(-1)} type="button">
                 <ArrowLeft aria-hidden="true" size={17} />
               </button>
+              <button
+                aria-label="Enlarge screen"
+                className="project-gallery-zoom inline-flex items-center gap-1 text-small font-semibold text-fg transition-colors hover:text-accent focus-visible:text-accent"
+                onClick={openLightbox}
+                ref={openerRef}
+                type="button"
+              >
+                <ZoomIn aria-hidden="true" size={15} />
+                <span className="project-gallery-zoom-pointer">Click to enlarge</span>
+                <span className="project-gallery-zoom-touch">Tap to enlarge</span>
+              </button>
               <span className="hidden text-small text-muted sm:inline">{activeIndex + 1} / {items.length}</span>
               <button aria-label="Next screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent" onClick={() => move(1)} type="button">
                 <ArrowRight aria-hidden="true" size={17} />
               </button>
             </div>
           </div>
-          <div className="mt-4 flex justify-center gap-2 lg:hidden">
-            {items.map((item, index) => (
-              <button
-                aria-label={`Go to screen ${index + 1}`}
-                className={`size-2 rounded-full ${index === activeIndex ? "bg-accent" : "bg-line"}`}
-                key={item.src}
-                onClick={() => setIndex(index)}
-                type="button"
-              />
-            ))}
-          </div>
         </div>
-      </div>
+        </div>
+      </Container>
 
       <AnimatePresence>
         {lightboxOpen ? (

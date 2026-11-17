@@ -691,6 +691,12 @@ section[data-tone="raised"] .ui-icon-badge {
 
 .project-gallery-tabs {
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.project-gallery-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width: 1023px) {

@@ -202,18 +202,15 @@ export function ProjectGallery({
               </div>
             )}
           </div>
-          <div className="mt-5 flex max-w-full flex-wrap items-center justify-between gap-4">
-            <p className="min-w-0 flex-1 text-body">
+          <div className="mt-5 flex max-w-full flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-4">
+            <p className="min-w-0 w-full flex-none text-body lg:flex-1">
               <strong>{activeItem.title}</strong>
               <span className="text-muted"> — {activeItem.text}</span>
             </p>
-            <div className="flex shrink-0 items-center gap-2">
-              <button aria-label="Previous screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent" onClick={() => move(-1)} type="button">
-                <ArrowLeft aria-hidden="true" size={17} />
-              </button>
+            <div className="flex w-full items-center justify-between gap-3 lg:w-auto lg:shrink-0 lg:justify-start lg:gap-2">
               <button
                 aria-label="Enlarge screen"
-                className="project-gallery-zoom inline-flex items-center gap-1 text-small font-semibold text-fg transition-colors hover:text-accent focus-visible:text-accent"
+                className="project-gallery-zoom order-1 inline-flex items-center gap-1 text-small font-semibold text-fg transition-colors hover:text-accent focus-visible:text-accent lg:order-2"
                 onClick={openLightbox}
                 type="button"
               >
@@ -221,10 +218,15 @@ export function ProjectGallery({
                 <span className="project-gallery-zoom-pointer">Click to enlarge</span>
                 <span className="project-gallery-zoom-touch">Tap to enlarge</span>
               </button>
-              <span className="hidden text-small text-muted sm:inline">{activeIndex + 1} / {items.length}</span>
-              <button aria-label="Next screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent" onClick={() => move(1)} type="button">
+              <div className="order-2 flex items-center gap-2 lg:contents">
+                <button aria-label="Previous screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent lg:order-1" onClick={() => move(-1)} type="button">
+                <ArrowLeft aria-hidden="true" size={17} />
+                </button>
+                <span className="hidden text-small text-muted sm:inline lg:order-3">{activeIndex + 1} / {items.length}</span>
+                <button aria-label="Next screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent lg:order-4" onClick={() => move(1)} type="button">
                 <ArrowRight aria-hidden="true" size={17} />
-              </button>
+                </button>
+              </div>
             </div>
           </div>
         </div>

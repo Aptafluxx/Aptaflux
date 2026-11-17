@@ -28,6 +28,15 @@ export type WorkProject = {
   challenge: string;
   approach: string;
   results: string[];
+  story?: {
+    challenge: { headline: string; points: string[] };
+    approach: {
+      headline: string;
+      steps: { title: string; text: string }[];
+    };
+    outcome: { headline: string; points: string[] };
+    note?: string;
+  };
   features?: string[];
   cover: WorkArtKey;
   images?: { cover?: string; mobile?: string; gallery?: string[] };
@@ -117,6 +126,34 @@ export const work: WorkProject[] = [
     challenge: "A live-fire restaurant needs its atmosphere to come through before guests arrive, along with a menu they can browse and a simple way to request a table.",
     approach: "A cinematic, editorial landing page, a seasonal menu organized by course, a reservation form with validation and a clear confirmation, plus contact details and location. Metadata, sitemap and social previews are set up from the start.",
     results: ["A complete four-page restaurant website (home, menu, reservations, contact), responsive from phone to desktop.", "A portfolio project. The reservation form is a front-end demonstration."],
+    story: {
+      challenge: {
+        headline: "A restaurant's atmosphere has to show up before guests do.",
+        points: [
+          "Atmosphere must come through online",
+          "The menu needs to be easy to browse",
+          "Requesting a table should take seconds",
+        ],
+      },
+      approach: {
+        headline: "An editorial site built around the table.",
+        steps: [
+          { title: "Brand-first landing page", text: "Cinematic, editorial typography." },
+          { title: "Seasonal menu", text: "Dishes grouped by course and season." },
+          { title: "Reservation flow", text: "Validated form with a clear confirmation." },
+          { title: "Ready to be found", text: "SEO and social metadata, sitemap, robots." },
+        ],
+      },
+      outcome: {
+        headline: "A complete four-page restaurant website.",
+        points: [
+          "Home, menu, reservations and contact",
+          "Responsive from phone to desktop",
+          "Reveal animations and polished transitions",
+        ],
+      },
+      note: "Portfolio project. The reservation form is a front-end demonstration.",
+    },
     features: [
       "Cinematic landing page with editorial typography",
       "Seasonal menu organized by course",
@@ -159,6 +196,34 @@ export const work: WorkProject[] = [
     challenge: "Restaurant guests want to browse the menu, order, and reserve a table without calling or queuing.",
     approach: "Email sign-in, onboarding and profiles, categories, recommendations and search, a cart with quantities, checkout with multiple payment options, order history and confirmation, and table browsing and booking. Local preferences and cached images keep it fast.",
     results: ["A full ordering and table-booking journey for Android and iOS from one codebase, set up for signed Android release builds.", "A portfolio project. Ordering and table booking work end to end; payment is simulated because no payment gateway is connected."],
+    story: {
+      challenge: {
+        headline: "Guests want to order and book without calling or queuing.",
+        points: [
+          "Browse the menu and order",
+          "Reserve a table",
+          "Keep track of past orders",
+        ],
+      },
+      approach: {
+        headline: "One app for ordering and table booking.",
+        steps: [
+          { title: "Sign in and profile", text: "Firebase email sign-in and onboarding." },
+          { title: "Discover and order", text: "Categories, search, cart and checkout." },
+          { title: "Book a table", text: "Browse tables and reserve one." },
+          { title: "Stay informed", text: "Order history and confirmation." },
+        ],
+      },
+      outcome: {
+        headline: "A full ordering and table-booking journey.",
+        points: [
+          "Android and iOS from one codebase",
+          "Cached images and saved preferences",
+          "Set up for signed Android release builds",
+        ],
+      },
+      note: "Portfolio project. Ordering and table booking work end to end; payment is simulated because no payment gateway is connected.",
+    },
     features: [
       "Email and password sign-in with Firebase",
       "Onboarding and customer profile",
@@ -196,6 +261,34 @@ export const work: WorkProject[] = [
     challenge: "Pairing a wearable is where companion apps usually fail: confusing permissions, flaky scans and unclear connection states.",
     approach: "Permission handling for Android 12 and older versions, a live Bluetooth scan sorted by signal strength, device connection with fallback and disconnect monitoring, and two views of each device: name, connection and battery for users, and MAC address, packet size and services for diagnostics. The code is split into presentation, a persistent Bluetooth service and a shared design system.",
     results: ["A complete pairing lifecycle from first launch to disconnect. Bluetooth scanning requires a physical Android device.", "A portfolio project built to demonstrate our approach."],
+    story: {
+      challenge: {
+        headline: "Pairing a wearable is where companion apps fail.",
+        points: [
+          "Confusing permission prompts",
+          "Flaky Bluetooth scans",
+          "Unclear connection states",
+        ],
+      },
+      approach: {
+        headline: "A complete pairing lifecycle, built to be reliable.",
+        steps: [
+          { title: "Permissions", text: "Android 12+ and older versions." },
+          { title: "Live scan", text: "Devices sorted by signal strength." },
+          { title: "Connection", text: "GATT with fallback and disconnect monitoring." },
+          { title: "Two device views", text: "User info and system diagnostics." },
+        ],
+      },
+      outcome: {
+        headline: "From first launch to a clean disconnect.",
+        points: [
+          "Disconnect resets the app state safely",
+          "Clean Architecture in three layers",
+          "Shared design system of reusable components",
+        ],
+      },
+      note: "Portfolio project. Bluetooth scanning requires a physical Android device.",
+    },
     features: [
       "Splash and run-once onboarding",
       "Runtime permission handling for Android 12+ and older versions",
@@ -230,6 +323,34 @@ export const work: WorkProject[] = [
     challenge: "A neighborhood barbershop that competes on craft needs a site as considered as the shop itself, one that makes booking a chair easy.",
     approach: "An editorial brand identity, a clear service menu with transparent pricing, and a booking flow where guests choose a service, barber, date and time, with shop details and a contact form close by.",
     results: ["A polished single-page experience that moves visitors from first impression to a booking request.", "A portfolio project. Booking and contact are front-end demonstrations, ready to connect to a booking platform or backend."],
+    story: {
+      challenge: {
+        headline: "A neighborhood barbershop that competes on craft.",
+        points: [
+          "A brand as considered as the shop",
+          "Clear services and honest pricing",
+          "Booking a chair without friction",
+        ],
+      },
+      approach: {
+        headline: "An editorial identity with booking built in.",
+        steps: [
+          { title: "Brand identity", text: "Premium, Brooklyn-inspired styling." },
+          { title: "Service menu", text: "Haircut, beard trim, shave and bundles." },
+          { title: "Transparent pricing", text: "A clean, editorial price list." },
+          { title: "Booking dialog", text: "Pick service, barber, date and time." },
+        ],
+      },
+      outcome: {
+        headline: "One polished single-page experience.",
+        points: [
+          "From first impression to booking request",
+          "Shop details and a contact form",
+          "Responsive across devices",
+        ],
+      },
+      note: "Portfolio project. Booking and contact are front-end demonstrations, ready to connect to a booking platform or backend.",
+    },
     features: [
       "Hero with clear brand positioning and booking calls to action",
       "Service cards for haircut, beard trim, shave and bundles",
@@ -275,6 +396,34 @@ export const work: WorkProject[] = [
     challenge: "Travelers want inspiration and a clear next step: where to go, for how long, and roughly what it costs.",
     approach: "A full-width hero with destination, date and traveler search; eight destinations filterable by mountain, coast, city and jungle, with trip lengths and starting prices; and a booking-request dialog with date validation, a guest selector and an estimated total, followed by a confirmation summary. Journal and newsletter sections support discovery.",
     results: ["A complete discovery-to-request flow in one responsive site.", "A portfolio project. Requests are stored in the browser for demonstration; payments, availability and email would connect to booking services in production."],
+    story: {
+      challenge: {
+        headline: "Travelers want inspiration and a clear next step.",
+        points: [
+          "Where to go",
+          "For how long",
+          "Roughly what it costs",
+        ],
+      },
+      approach: {
+        headline: "From search to a booking request in one flow.",
+        steps: [
+          { title: "Search hero", text: "Destination, date and traveler search." },
+          { title: "Curated destinations", text: "Eight trips across four categories." },
+          { title: "Booking request", text: "Dates, guests and an estimated total." },
+          { title: "Confirmation", text: "A reference number and trip summary." },
+        ],
+      },
+      outcome: {
+        headline: "Discovery and request in a single site.",
+        points: [
+          "Filtering with date-range validation",
+          "Journal and newsletter for inspiration",
+          "Reveal animations with reduced-motion support",
+        ],
+      },
+      note: "Portfolio project. Requests are stored in the browser for demonstration; payments, availability and email would connect to booking services in production.",
+    },
     features: [
       "Full-width hero with destination, date and traveler search",
       "Eight curated destinations across mountain, coast, city and jungle",
@@ -320,6 +469,34 @@ export const work: WorkProject[] = [
     challenge: "Fitness apps lose people when tracking feels like work. Users need a clear plan for today and visible progress over time.",
     approach: "A guided first-run flow, sign-up, login and password reset, a personalized dashboard of programs, daily goal checklists, progress charts, a profile, and articles on healthier habits, all in a dark design with red accents.",
     results: ["A complete training companion in a single dark-mode experience, with accounts and data stored in Firebase.", "A portfolio project built to demonstrate our approach."],
+    story: {
+      challenge: {
+        headline: "Tracking fitness shouldn't feel like work.",
+        points: [
+          "A clear plan for today",
+          "Visible progress over time",
+          "Habits that stick",
+        ],
+      },
+      approach: {
+        headline: "Plan, track and learn in one dark-mode app.",
+        steps: [
+          { title: "Guided onboarding", text: "A first-run flow for new users." },
+          { title: "Daily plan", text: "Programs and goal checklists." },
+          { title: "Progress insights", text: "Charts and weekly metrics." },
+          { title: "Learn and improve", text: "Articles on healthier habits." },
+        ],
+      },
+      outcome: {
+        headline: "A training companion in a single app.",
+        points: [
+          "Login, sign-up and password reset",
+          "Accounts and data stored in Firebase",
+          "A custom dark design with red accents",
+        ],
+      },
+      note: "Portfolio project built to demonstrate our approach.",
+    },
     features: [
       "Guided onboarding for first-time users",
       "Sign-up, login and password reset with Firebase",

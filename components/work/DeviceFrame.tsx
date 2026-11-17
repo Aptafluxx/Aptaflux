@@ -31,7 +31,7 @@ export function DeviceFrame({
   }
 
   return (
-    <div className={`absolute left-1/2 top-1/2 flex h-auto max-h-[92%] w-[85%] -translate-x-1/2 -translate-y-1/2 flex-col items-center ${className}`}>
+    <div className={`absolute left-1/2 top-1/2 flex h-auto max-h-[92%] w-[min(85cqw,calc((92cqh_-_31px)*1.6))] -translate-x-1/2 -translate-y-1/2 flex-col items-center ${className}`}>
       <div className="relative w-full rounded-t-lg border-[6px] border-bg bg-bg px-1.5 pb-1.5 pt-4">
         <span
           aria-hidden="true"

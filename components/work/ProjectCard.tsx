@@ -22,7 +22,7 @@ function ProjectCover({
   priority?: boolean;
 }) {
   return (
-    <div className="relative aspect-[16/10] overflow-visible rounded-lg bg-[rgb(var(--bg))]">
+    <div className="relative aspect-[16/10] overflow-visible rounded-lg bg-[rgb(var(--bg))] [container-type:size]">
       <div
         aria-hidden="true"
         className="dot-grid absolute inset-0 opacity-80"

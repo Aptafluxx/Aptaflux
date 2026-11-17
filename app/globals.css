@@ -671,6 +671,11 @@ section[data-tone="raised"] .ui-icon-badge {
   background-size: 24px 24px;
 }
 
+.project-cover-dot-grid {
+  background-image: radial-gradient(circle, rgb(var(--band-fg) / 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 .project-gallery-zoom-touch {
   display: none;
 }

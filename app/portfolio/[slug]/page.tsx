@@ -6,7 +6,9 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   Check,
+  CircleAlert,
   Compass,
+  Info,
   Layers3,
   Monitor,
   Target,
@@ -154,14 +156,13 @@ export default async function ProjectPage(props: WorkPageProps) {
       </section>
 
       <Section aria-label={labels.projectCover} className="py-8 md:py-12">
-        <div className="relative min-h-[360px] overflow-visible rounded-[24px] border border-accent/25 bg-band/35 p-4 sm:min-h-[480px] sm:p-8">
+        <div className="relative mx-auto w-full max-w-5xl aspect-[16/9] overflow-hidden rounded-[24px] border border-accent/25 bg-band p-4 [container-type:size] sm:p-8">
           <div
             aria-hidden="true"
-            className="dot-grid absolute inset-0 opacity-80"
+            className="project-cover-dot-grid absolute inset-0"
           />
           {project.images?.cover ? (
             <DeviceFrame
-              className={project.kind === "website" ? "!w-[78%]" : ""}
               device={project.kind === "mobile" ? "phone" : "laptop"}
               mobileAlt={`${project.name} on mobile`}
               mobileImage={
@@ -309,32 +310,128 @@ export default async function ProjectPage(props: WorkPageProps) {
       ) : null}
 
       <Section aria-label={labels.projectStory} tone="raised">
-        <div className="grid gap-4 md:grid-cols-3">
-          {storyItems.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <Reveal className="h-full" delay={index * 0.06} key={item.label}>
-                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
-                  <IconBadge icon={Icon} />
-                  <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">
+        {project.story ? (
+          <>
+            <div className="relative mb-8 grid gap-3 md:grid-cols-3">
+              <div
+                aria-hidden="true"
+                className="absolute left-[16.666%] right-[16.666%] top-5 hidden h-0.5 bg-accent/30 md:block"
+              />
+              {[
+                { number: "01", label: labels.challenge },
+                { number: "02", label: labels.approach },
+                { number: "03", label: labels.results },
+              ].map((item) => (
+                <div
+                  className="relative z-10 flex items-center gap-3"
+                  key={item.number}
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-[rgb(var(--section-background))] text-small font-bold text-accent">
+                    {item.number}
+                  </span>
+                  <span className="font-body text-[16px] font-bold">
                     {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              <Reveal className="h-full" delay={0}>
+                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                  <IconBadge icon={Target} />
+                  <h2 className="mt-5 line-clamp-2 text-[20px] font-bold leading-tight">
+                    {project.story.challenge.headline}
                   </h2>
-                  {index === 2 ? (
-                    <ul className="mt-3 space-y-3 text-body leading-relaxed text-muted">
-                      {project.results.map((result, resultIndex) => (
-                        <li key={`${result}-${resultIndex}`}>{result}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="mt-3 text-body leading-relaxed text-muted">
-                      {item.text}
-                    </p>
-                  )}
+                  <ul className="mt-4 space-y-3">
+                    {project.story.challenge.points.map((point) => (
+                      <li className="flex items-start gap-2 text-[15px] leading-relaxed" key={point}>
+                        <CircleAlert aria-hidden="true" className="mt-0.5 shrink-0 text-accent/70" size={17} />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </Card>
               </Reveal>
-            );
-          })}
-        </div>
+              <Reveal className="h-full" delay={0.06}>
+                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                  <IconBadge icon={Compass} />
+                  <h2 className="mt-5 line-clamp-2 text-[20px] font-bold leading-tight">
+                    {project.story.approach.headline}
+                  </h2>
+                  <ol className="mt-4 space-y-4">
+                    {project.story.approach.steps.map((step, index) => (
+                      <li className="flex items-start gap-3" key={step.title}>
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent/15 text-small font-bold text-accent">
+                          {index + 1}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-[15px] font-bold">{step.title}</span>
+                          <span className="mt-0.5 block text-[14px] leading-relaxed text-muted">
+                            {step.text}
+                          </span>
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </Card>
+              </Reveal>
+              <Reveal className="h-full" delay={0.12}>
+                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                  <IconBadge icon={TrendingUp} />
+                  <h2 className="mt-5 line-clamp-2 text-[20px] font-bold leading-tight">
+                    {project.story.outcome.headline}
+                  </h2>
+                  <ul className="mt-4 space-y-3">
+                    {project.story.outcome.points.map((point) => (
+                      <li className="flex items-start gap-2 text-[15px] leading-relaxed" key={point}>
+                        <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-accent text-brand-fg">
+                          <Check aria-hidden="true" size={13} strokeWidth={2.5} />
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </Reveal>
+            </div>
+            {project.story.note ? (
+              <div className="mt-6 flex gap-3 rounded-2xl border border-accent/30 bg-accent/10 p-4">
+                <Info aria-hidden="true" className="mt-0.5 shrink-0 text-accent" size={20} />
+                <p className="text-[14px] leading-relaxed">
+                  <strong className="font-bold">About this project</strong>{" "}
+                  {project.story.note}
+                </p>
+              </div>
+            ) : null}
+          </>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-3">
+            {storyItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <Reveal className="h-full" delay={index * 0.06} key={item.label}>
+                  <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                    <IconBadge icon={Icon} />
+                    <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">
+                      {item.label}
+                    </h2>
+                    {index === 2 ? (
+                      <ul className="mt-3 space-y-3 text-body leading-relaxed text-muted">
+                        {project.results.map((result, resultIndex) => (
+                          <li key={`${result}-${resultIndex}`}>{result}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mt-3 text-body leading-relaxed text-muted">
+                        {item.text}
+                      </p>
+                    )}
+                  </Card>
+                </Reveal>
+              );
+            })}
+          </div>
+        )}
       </Section>
 
       {galleryItems.length > 0 ? (

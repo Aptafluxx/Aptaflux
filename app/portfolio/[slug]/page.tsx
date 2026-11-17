@@ -8,7 +8,6 @@ import {
   Check,
   CircleAlert,
   Compass,
-  Info,
   Layers3,
   Monitor,
   Target,
@@ -394,15 +393,6 @@ export default async function ProjectPage(props: WorkPageProps) {
                 </Card>
               </Reveal>
             </div>
-            {project.story.note ? (
-              <div className="mt-6 flex gap-3 rounded-2xl border border-accent/30 bg-accent/10 p-4">
-                <Info aria-hidden="true" className="mt-0.5 shrink-0 text-accent" size={20} />
-                <p className="text-[14px] leading-relaxed">
-                  <strong className="font-bold">About this project</strong>{" "}
-                  {project.story.note}
-                </p>
-              </div>
-            ) : null}
           </>
         ) : (
           <div className="grid gap-4 md:grid-cols-3">

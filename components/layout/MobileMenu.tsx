@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   ChevronDown,
-  Globe,
   Mail,
 } from "lucide-react";
 import Link from "next/link";
@@ -245,10 +244,6 @@ export function MobileMenu({
             <Mail aria-hidden="true" size={18} />
             {site.email}
           </a>
-          <div className="mobile-menu-contact-row">
-            <Globe aria-hidden="true" size={18} />
-            {site.contact.remoteFirst}, {site.contact.timeZoneLabel}
-          </div>
         </div>
 
         <div className="mobile-menu-actions">

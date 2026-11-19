@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Check, Copy, Mail, UsersRound } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { IconBadge } from "@/components/ui/IconBadge";
-import { LocalTime } from "@/components/ui/LocalTime";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { site } from "@/content/site";
 
@@ -97,9 +96,6 @@ export function ContactInformation() {
             {contact.replyText}
           </p>
         </div>
-        <p className="mt-5 text-small text-muted">
-          {contact.localTimeLabel} <LocalTime />
-        </p>
       </Card>
 
       <div>

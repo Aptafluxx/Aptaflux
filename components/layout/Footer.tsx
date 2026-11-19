@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight, ArrowUp, ArrowUpRight } from "lucide-react";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
-import { LocalTime } from "@/components/ui/LocalTime";
 import { Logo } from "@/components/ui/Logo";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 
@@ -173,9 +172,9 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-band-fg/14 pt-5 text-[15px] text-band-fg/78">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <p>© 2026 Aptaflux. All rights reserved.</p>
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
               <nav aria-label={footer.legalNavigation}>
                 <ul className="flex flex-wrap gap-x-5 gap-y-2">
                   {footer.legalLinks.map((item) => (
@@ -190,19 +189,14 @@ export function Footer() {
                   ))}
                 </ul>
               </nav>
-              <div className="flex items-center justify-between gap-6">
-                <span className="whitespace-nowrap">
-                  Pakistan (PKT) · <LocalTime />
-                </span>
-                <button
-                  aria-label="Back to top"
-                  className="flex size-10 shrink-0 items-center justify-center rounded-full border border-band-fg/18 text-band-fg transition-colors hover:border-brand hover:text-brand"
-                  onClick={scrollToTop}
-                  type="button"
-                >
-                  <ArrowUp aria-hidden="true" size={18} />
-                </button>
-              </div>
+              <button
+                aria-label="Back to top"
+                className="flex size-10 shrink-0 items-center justify-center rounded-full border border-band-fg/18 text-band-fg transition-colors hover:border-brand hover:text-brand"
+                onClick={scrollToTop}
+                type="button"
+              >
+                <ArrowUp aria-hidden="true" size={18} />
+              </button>
             </div>
           </div>
         </div>

@@ -24,7 +24,6 @@ export const site = {
   closeMenu: "Close",
   mobileNavigation: "Mobile navigation",
   socialNavigation: "Social links",
-  localTimeLabel: "Local time",
   email: "aptaflux@gmail.com",
   contact: {
     metadataTitle: "Contact",
@@ -37,9 +36,6 @@ export const site = {
     },
     introduction:
       "Tell us what you have in mind and we'll get back to you by email.",
-    timeZoneLabel: "Pakistan (PKT)",
-    localTimeLabel: "Pakistan (PKT) · now",
-    remoteFirst: "Remote-first",
     whatHappensNext: {
       heading: "What happens next",
       steps: [

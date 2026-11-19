@@ -23,6 +23,8 @@ module.exports = {
         "band-fg": "rgb(var(--band-fg) / <alpha-value>)",
         "band-button-bg": "rgb(var(--band-button-bg) / <alpha-value>)",
         "band-button-fg": "rgb(var(--band-button-fg) / <alpha-value>)",
+        input: "rgb(var(--input) / <alpha-value>)",
+        error: "rgb(var(--error) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "serif"],

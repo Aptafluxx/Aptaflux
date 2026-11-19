@@ -26,6 +26,6 @@ export const contactSubmissionSchema = z.object({
     .string()
     .trim()
     .min(10, site.contact.validation.details)
-    .max(5000, site.contact.validation.details),
+    .max(site.contact.detailsMaxLength, site.contact.validation.details),
   website: z.string().max(500).optional(),
 });

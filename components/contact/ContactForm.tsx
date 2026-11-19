@@ -1,6 +1,13 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import {
+  ArrowRight,
+  Check,
+  ChevronDown,
+  CircleCheck,
+  Mail,
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { contactSubmissionSchema } from "@/lib/contact-validation";
 import { site } from "@/content/site";
@@ -32,6 +39,7 @@ export function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<ContactStatus>("idle");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [detailsLength, setDetailsLength] = useState(0);
   const { contact } = site;
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -81,6 +89,7 @@ export function ContactForm() {
 
       form.reset();
       setSelectedServices([]);
+      setDetailsLength(0);
       setStatus("success");
     } catch {
       setStatus("error");
@@ -89,18 +98,39 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div aria-live="polite" className="border-y border-line py-8" role="status">
-        <p className="text-body leading-relaxed">{contact.success}</p>
+      <div
+        aria-live="polite"
+        className="flex flex-col items-center py-10 text-center"
+        role="status"
+      >
+        <span className="flex size-16 items-center justify-center rounded-full bg-accent/15 text-accent">
+          <CircleCheck aria-hidden="true" size={34} strokeWidth={1.8} />
+        </span>
+        <h3 className="mt-5 font-body text-h3 font-extrabold">
+          {contact.successTitle}
+        </h3>
+        <p className="mt-2 text-body text-muted">{contact.successText}</p>
+        <Button
+          className="mt-6 !min-h-11 !rounded-full"
+          onClick={() => setStatus("idle")}
+          variant="ghost"
+        >
+          {contact.sendAnother}
+        </Button>
       </div>
     );
   }
 
-  const errorClass = "mt-2 text-small leading-relaxed text-brand";
-  const inputClass =
-    "w-full border-0 border-b border-line bg-transparent px-0 py-3 text-body text-fg focus:border-brand";
+  const errorClass = "mt-2 text-small leading-relaxed text-error";
+  const inputClass = "contact-field w-full";
 
   return (
-    <form className="space-y-7" noValidate onSubmit={handleSubmit}>
+    <form
+      aria-label={contact.formLabel}
+      className="mt-6 space-y-5"
+      noValidate
+      onSubmit={handleSubmit}
+    >
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="website">{contact.fields.honeypot}</label>
         <input
@@ -112,58 +142,83 @@ export function ContactForm() {
         />
       </div>
 
-      <div>
-        <label className="mb-2 block text-small" htmlFor="name">
-          {contact.fields.name}
-        </label>
-        <input
-          aria-describedby={fieldErrors.name ? "name-error" : undefined}
-          aria-invalid={Boolean(fieldErrors.name)}
-          autoComplete="name"
-          className={inputClass}
-          id="name"
-          name="name"
-          type="text"
-        />
-        {fieldErrors.name ? (
-          <p className={errorClass} id="name-error">
-            {fieldErrors.name}
-          </p>
-        ) : null}
+      <div className="grid gap-5 md:grid-cols-2">
+        <div>
+          <label
+            className="mb-2 block text-[14px] font-semibold"
+            htmlFor="name"
+          >
+            {contact.fields.name}{" "}
+            <span aria-hidden="true" className="text-accent">
+              {contact.requiredMark}
+            </span>
+          </label>
+          <input
+            aria-describedby={fieldErrors.name ? "name-error" : undefined}
+            aria-invalid={Boolean(fieldErrors.name)}
+            aria-required="true"
+            autoComplete="name"
+            className={inputClass}
+            id="name"
+            name="name"
+            type="text"
+          />
+          {fieldErrors.name ? (
+            <p className={errorClass} id="name-error">
+              {fieldErrors.name}
+            </p>
+          ) : null}
+        </div>
+
+        <div>
+          <label
+            className="mb-2 block text-[14px] font-semibold"
+            htmlFor="email"
+          >
+            {contact.fields.email}{" "}
+            <span aria-hidden="true" className="text-accent">
+              {contact.requiredMark}
+            </span>
+          </label>
+          <input
+            aria-describedby={fieldErrors.email ? "email-error" : undefined}
+            aria-invalid={Boolean(fieldErrors.email)}
+            aria-required="true"
+            autoComplete="email"
+            className={inputClass}
+            id="email"
+            name="email"
+            type="email"
+          />
+          {fieldErrors.email ? (
+            <p className={errorClass} id="email-error">
+              {fieldErrors.email}
+            </p>
+          ) : null}
+        </div>
       </div>
 
-      <div>
-        <label className="mb-2 block text-small" htmlFor="email">
-          {contact.fields.email}
-        </label>
-        <input
-          aria-describedby={fieldErrors.email ? "email-error" : undefined}
-          aria-invalid={Boolean(fieldErrors.email)}
-          autoComplete="email"
-          className={inputClass}
-          id="email"
-          name="email"
-          type="email"
-        />
-        {fieldErrors.email ? (
-          <p className={errorClass} id="email-error">
-            {fieldErrors.email}
-          </p>
-        ) : null}
-      </div>
-
-      <fieldset>
-        <legend className="mb-3 text-small">{contact.fields.services}</legend>
+      <fieldset
+        aria-labelledby="services-legend"
+        className="min-w-0"
+        role="group"
+      >
+        <legend
+          className="mb-3 text-[14px] font-semibold"
+          id="services-legend"
+        >
+          {contact.fields.services}
+        </legend>
         <div className="flex flex-wrap gap-2">
           {contact.servicesOptions.map((option) => {
             const isSelected = selectedServices.includes(option);
             return (
               <button
                 aria-pressed={isSelected}
-                className={`min-h-10 rounded-full border px-4 py-2 text-small transition-colors ${
+                className={`inline-flex h-11 items-center gap-2 rounded-full border px-4 text-small transition-colors ${
                   isSelected
-                    ? "border-brand bg-brand text-brand-fg"
-                    : "border-line text-muted hover:border-brand hover:text-fg"
+                    ? "border-accent bg-accent text-brand-fg"
+                    : "border-fg/[0.32] text-fg/90 hover:border-accent"
                 }`}
                 key={option}
                 onClick={() =>
@@ -175,6 +230,9 @@ export function ContactForm() {
                 }
                 type="button"
               >
+                {isSelected ? (
+                  <Check aria-hidden="true" size={16} strokeWidth={2.5} />
+                ) : null}
                 {option}
               </button>
             );
@@ -183,28 +241,38 @@ export function ContactForm() {
       </fieldset>
 
       <div>
-        <label className="mb-2 block text-small" htmlFor="projectSize">
+        <label
+          className="mb-2 block text-[14px] font-semibold"
+          htmlFor="projectSize"
+        >
           {contact.fields.projectSize}
         </label>
-        <select
-          aria-describedby={
-            fieldErrors.projectSize ? "projectSize-error" : undefined
-          }
-          aria-invalid={Boolean(fieldErrors.projectSize)}
-          className={inputClass}
-          defaultValue=""
-          id="projectSize"
-          name="projectSize"
-        >
-          <option className="bg-bg" value="">
-            {contact.projectSizePlaceholder}
-          </option>
-          {contact.projectSizeOptions.map((option) => (
-            <option className="bg-bg" key={option} value={option}>
-              {option}
+        <div className="relative">
+          <select
+            aria-describedby={
+              fieldErrors.projectSize ? "projectSize-error" : undefined
+            }
+            aria-invalid={Boolean(fieldErrors.projectSize)}
+            className={`${inputClass} appearance-none pr-11`}
+            defaultValue=""
+            id="projectSize"
+            name="projectSize"
+          >
+            <option className="bg-input" value="">
+              {contact.projectSizePlaceholder}
             </option>
-          ))}
-        </select>
+            {contact.projectSizeOptions.map((option) => (
+              <option className="bg-input" key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            aria-hidden="true"
+            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted"
+            size={18}
+          />
+        </div>
         {fieldErrors.projectSize ? (
           <p className={errorClass} id="projectSize-error">
             {fieldErrors.projectSize}
@@ -213,17 +281,35 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label className="mb-2 block text-small" htmlFor="details">
-          {contact.fields.details}
+        <label className="mb-2 block text-[14px] font-semibold" htmlFor="details">
+          {contact.fields.details}{" "}
+          <span aria-hidden="true" className="text-accent">
+            {contact.requiredMark}
+          </span>
         </label>
-        <textarea
-          aria-describedby={fieldErrors.details ? "details-error" : undefined}
-          aria-invalid={Boolean(fieldErrors.details)}
-          className={`${inputClass} min-h-32 resize-y`}
-          id="details"
-          name="details"
-          rows={4}
-        />
+        <div className="relative">
+          <textarea
+            aria-describedby={`details-count${fieldErrors.details ? " details-error" : ""}`}
+            aria-invalid={Boolean(fieldErrors.details)}
+            aria-required="true"
+            className="contact-field contact-textarea w-full"
+            id="details"
+            name="details"
+            onChange={(event) =>
+              setDetailsLength(event.currentTarget.value.length)
+            }
+            rows={4}
+          />
+          <p
+            aria-label={contact.detailsCounterLabel}
+            aria-live="polite"
+            className="absolute bottom-3 right-4 text-small text-muted"
+            id="details-count"
+            role="status"
+          >
+            {detailsLength} / {contact.detailsMaxLength}
+          </p>
+        </div>
         {fieldErrors.details ? (
           <p className={errorClass} id="details-error">
             {fieldErrors.details}
@@ -248,17 +334,24 @@ export function ContactForm() {
         ) : null}
       </div>
 
-      <Button
-        disabled={status === "sending"}
-        type="submit"
-        className="min-w-36 text-body"
-      >
-        {status === "sending"
-          ? contact.submitting
-          : status === "error"
-            ? contact.retry
-            : contact.submit}
-      </Button>
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
+        <Button
+          className="!h-[52px] !min-h-[52px] w-full !rounded-full text-body md:w-auto"
+          disabled={status === "sending"}
+          type="submit"
+        >
+          {status === "sending"
+            ? contact.submitting
+            : status === "error"
+              ? contact.retry
+              : contact.submit}
+          <ArrowRight aria-hidden="true" size={18} />
+        </Button>
+        <p className="flex items-center justify-center gap-2 text-small text-muted md:justify-start">
+          <Mail aria-hidden="true" size={17} />
+          {contact.trustText}
+        </p>
+      </div>
     </form>
   );
 }

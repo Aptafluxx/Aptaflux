@@ -30,14 +30,18 @@ export const site = {
     metadataTitle: "Contact",
     metadataDescription:
       "Contact Aptaflux to discuss a digital product, website or brand project.",
-    introduction: "Tell us what you have in mind. We would love to hear about it.",
-    responseTime: "",
+    header: {
+      badge: "Contact",
+      titleLineOne: "Let's talk about",
+      titleLineTwo: "your project.",
+    },
+    introduction:
+      "Tell us what you have in mind and we'll get back to you by email.",
     timeZoneLabel: "Pakistan (PKT)",
-    currentTimeLabel: "Now",
+    localTimeLabel: "Pakistan (PKT) · now",
     remoteFirst: "Remote-first",
     whatHappensNext: {
       heading: "What happens next",
-      // PLACEHOLDER: replace later
       steps: [
         {
           title: "We read your message",
@@ -53,11 +57,24 @@ export const site = {
         },
       ],
     },
-    informationHeading: "Get in touch",
-    socialHeading: "Find us elsewhere",
+    emailHeading: "Email",
+    copyEmail: "Copy email address",
+    emailCopied: "Email copied",
+    copyEmailError: "Unable to copy email address.",
+    socialHeading: "Follow us",
+    replyHeading: "Reply",
+    replyText: "We reply by email, usually within a few working days.",
     informationLabel: "Contact information",
     formLabel: "Project inquiry form",
     formTitle: "Start a conversation",
+    requiredFieldsNote: "Fields marked * are required.",
+    requiredMark: "*",
+    detailsMaxLength: 5000,
+    detailsCounterLabel: "Project details character count",
+    trustText: "We reply by email · No obligation",
+    successTitle: "Message sent",
+    successText: "Thanks, we'll reply by email.",
+    sendAnother: "Send another message",
     fields: {
       name: "Name",
       email: "Email",
@@ -86,7 +103,6 @@ export const site = {
     },
     error: "We could not send your inquiry. Please try again.",
     errorContact: "If the issue continues, email us at",
-    success: "Thanks for reaching out. We will be in touch soon.",
     emailSubject: "New Aptaflux project inquiry",
     emailFields: {
       name: "Name",

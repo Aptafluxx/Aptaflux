@@ -311,10 +311,10 @@ export default async function ProjectPage(props: WorkPageProps) {
       <Section aria-label={labels.projectStory} tone="raised">
         {project.story ? (
           <>
-            <div className="relative mb-8 grid gap-3 md:grid-cols-3">
+            <div className="relative mb-8 grid gap-3 md:grid-cols-3 lg:mb-6 lg:gap-4">
               <div
                 aria-hidden="true"
-                className="absolute left-[16.666%] right-[16.666%] top-5 hidden h-0.5 bg-accent/30 md:block"
+                className="absolute left-[16.666%] right-[16.666%] top-5 hidden h-0.5 bg-accent/30 md:block lg:hidden"
               />
               {[
                 { number: "01", label: labels.challenge },
@@ -322,21 +322,27 @@ export default async function ProjectPage(props: WorkPageProps) {
                 { number: "03", label: labels.results },
               ].map((item) => (
                 <div
-                  className="relative z-10 flex items-center gap-3"
+                  className="relative z-10 flex min-w-0 items-center gap-3"
                   key={item.number}
                 >
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-[rgb(var(--section-background))] text-small font-bold text-accent">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full border border-accent/30 bg-[rgb(var(--section-background))] text-small font-bold text-accent lg:border-accent/40 lg:bg-card lg:text-[13px]">
                     {item.number}
                   </span>
-                  <span className="font-body text-[16px] font-bold">
+                  <span className="font-body text-[16px] font-bold lg:shrink-0 lg:whitespace-nowrap lg:text-[15px] lg:font-semibold">
                     {item.label}
                   </span>
+                  {item.number !== "03" ? (
+                    <span
+                      aria-hidden="true"
+                      className="hidden h-px min-w-0 flex-1 bg-accent/30 lg:block lg:-mr-4"
+                    />
+                  ) : null}
                 </div>
               ))}
             </div>
             <div className="grid gap-4 md:grid-cols-3">
               <Reveal className="h-full" delay={0}>
-                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                <Card className="h-full border-accent/30 border-t-4 border-t-accent p-5 sm:p-6">
                   <IconBadge icon={Target} />
                   <h2 className="mt-5 line-clamp-2 text-[20px] font-bold leading-tight">
                     {project.story.challenge.headline}
@@ -352,7 +358,7 @@ export default async function ProjectPage(props: WorkPageProps) {
                 </Card>
               </Reveal>
               <Reveal className="h-full" delay={0.06}>
-                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                <Card className="h-full border-accent/30 border-t-4 border-t-accent p-5 sm:p-6">
                   <IconBadge icon={Compass} />
                   <h2 className="mt-5 line-clamp-2 text-[20px] font-bold leading-tight">
                     {project.story.approach.headline}
@@ -375,7 +381,7 @@ export default async function ProjectPage(props: WorkPageProps) {
                 </Card>
               </Reveal>
               <Reveal className="h-full" delay={0.12}>
-                <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                <Card className="h-full border-accent/30 border-t-4 border-t-accent p-5 sm:p-6">
                   <IconBadge icon={TrendingUp} />
                   <h2 className="mt-5 line-clamp-2 text-[20px] font-bold leading-tight">
                     {project.story.outcome.headline}
@@ -400,7 +406,7 @@ export default async function ProjectPage(props: WorkPageProps) {
               const Icon = item.icon;
               return (
                 <Reveal className="h-full" delay={index * 0.06} key={item.label}>
-                  <Card className="h-full border-accent/30 border-t-4 p-5 sm:p-6">
+                  <Card className="h-full border-accent/30 border-t-4 border-t-accent p-5 sm:p-6">
                     <IconBadge icon={Icon} />
                     <h2 className="mt-5 font-body text-h3 font-bold tracking-[-0.02em]">
                       {item.label}

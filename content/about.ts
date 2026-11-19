@@ -1,60 +1,114 @@
-// PLACEHOLDER: replace later
 export const aboutContent = {
   metadataTitle: "About",
   metadataDescription:
-    "Learn how Aptaflux helps businesses turn challenges into working digital products.",
-  heading: "Built to move your business ahead",
-  eyebrow: "ABOUT APTAFLUX",
-  ariaLabels: {
-    story: "Our story and beliefs",
-    howWeWork: "How we work",
+    "Aptaflux is a digital agency that designs and builds websites and mobile apps. Learn how we work.",
+  header: {
+    badge: "About Aptaflux",
+    titleLineOne: "Websites and apps for",
+    titleLineTwo: "businesses ready to ",
+    titleAccent: "move ahead",
+    titleEnding: ".",
+    introduction:
+      "Aptaflux is a digital agency that designs and builds websites and mobile apps, from restaurant booking to Bluetooth wearables.",
+    primaryLabel: "See our portfolio",
+    primaryHref: "/portfolio",
+    secondaryLabel: "Start a project",
+    secondaryHref: "/contact",
   },
   story: {
-    title: "A digital partner focused on the work that matters",
+    eyebrow: "Our story",
+    title: "Design and engineering, handled together.",
     paragraphs: [
-      "Aptaflux is a digital agency that helps businesses turn challenges into working digital products: websites, mobile apps and AI-powered systems. We start with the business problem, then choose the technology that solves it.",
-      "Strategy, design and engineering sit under one roof, so the people who shape your product are the people who build it. That keeps decisions consistent and delivery simple.",
-      "We work remotely with clients and keep scope, milestones and communication clear from the first conversation.",
+      "We start with the business problem, then choose the technology that solves it, not the other way around.",
+      "We build mobile apps with Flutter and websites with Next.js, backed by Firebase. Every project in our portfolio was designed and built end to end. We work remotely from Pakistan and keep scope, milestones and communication clear from the first conversation.",
     ],
   },
-  beliefs: {
+  glance: {
+    heading: "At a glance",
+    projectLabel: "Portfolio projects",
+    website: "website",
+    websites: "websites",
+    mobileApp: "mobile app",
+    mobileApps: "mobile apps",
+    solutions: {
+      value: "3",
+      label: "Solutions",
+      sub: "Conversion, automation, platforms",
+    },
+    toolkit: {
+      value: "Flutter · Next.js · Firebase",
+      label: "Core toolkit",
+    },
+  },
+  services: {
+    eyebrow: "What we do",
+    title: "Three ways we help",
+    linkLabel: "Learn more",
+  },
+  principles: {
+    eyebrow: "Our principles",
     title: "What we believe",
-    principles: [
+    items: [
       {
         title: "Outcomes over outputs",
-        text: "We measure our work by what it changes for your business, not by how many screens we deliver.",
+        text: "We judge our work by what it changes for your business, not by how many screens we deliver.",
       },
       {
         title: "Clarity over complexity",
-        text: "Plain language, clear scope and straightforward plans, so you always know what happens next.",
+        text: "Plain language, clear scope and simple plans, so you always know what happens next.",
       },
       {
         title: "Built to last",
-        text: "We build with maintenance, performance and future growth in mind.",
+        text: "Maintainable code, solid performance and room to grow.",
       },
     ],
   },
-  howWeWork: {
-    principles: [
+  process: {
+    eyebrow: "Our process",
+    title: "How we work",
+    steps: [
       {
-        title: "Scope first",
-        text: "We agree on goals, deliverables and success measures before design or development begins.",
+        number: "01",
+        title: "Discover",
+        text: "We learn your business, customers and goals.",
       },
       {
-        title: "Regular visibility",
-        text: "You see progress as it happens and always know what comes next.",
+        number: "02",
+        title: "Strategize",
+        text: "We define the solution, scope and timeline.",
       },
       {
-        title: "Built to maintain",
-        text: "Clean, documented work that your team or ours can keep improving.",
+        number: "03",
+        title: "Design & Build",
+        text: "We design and build in clear milestones.",
+      },
+      {
+        number: "04",
+        title: "Launch & Improve",
+        text: "We launch, measure and keep improving.",
       },
     ],
   },
-  cta: {
-    eyebrow: "YOUR NEXT MOVE STARTS HERE",
-    title: "Let's work together.",
-    text: "Tell us about your goals and we will help you find the right solution.",
-    buttonLabel: "Start a Project",
-    href: "/contact",
+  toolkit: {
+    eyebrow: "Our toolkit",
+    title: "Tools we build with",
+    groups: [
+      { title: "Mobile", technologies: ["Flutter", "Dart", "GetX"] },
+      { title: "Web", technologies: ["Next.js", "React", "TypeScript"] },
+      {
+        title: "Data",
+        technologies: ["Firebase Auth", "Cloud Firestore"],
+      },
+      {
+        title: "Hardware",
+        technologies: ["Bluetooth Low Energy"],
+      },
+    ],
+  },
+  selectedWork: {
+    eyebrow: "Selected work",
+    title: "Recent projects",
+    linkLabel: "View all projects",
+    href: "/portfolio",
   },
 } as const;

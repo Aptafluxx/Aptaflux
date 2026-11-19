@@ -2,17 +2,13 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   Bot,
-  Code2,
   Clock,
-  Compass,
   Globe,
   Layers,
   Link2,
   MousePointerClick,
   PenTool,
   Repeat,
-  Rocket,
-  Search,
   Server,
   Smartphone,
   Smile,
@@ -31,6 +27,7 @@ import { ServiceAutomation } from "@/components/art/ServiceAutomation";
 import { ServiceConversion } from "@/components/art/ServiceConversion";
 import { ServicePlatform } from "@/components/art/ServicePlatform";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
+import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { Card } from "@/components/ui/Card";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { LazyMarquee } from "@/components/ui/LazyMarquee";
@@ -56,8 +53,6 @@ const problemIcons = [MousePointerClick, Clock, Layers] as const;
 const outcomeIcons = [Users, Timer, Smile, TrendingUp] as const;
 const capabilityIcons = [Globe, Smartphone, PenTool, Bot, Server, Workflow] as const;
 const whyIcons = [Target, PenTool, Link2, Eye, Repeat] as const;
-const processIcons = [Search, Compass, Code2, Rocket] as const;
-
 function IconCard({
   icon: Icon,
   title,
@@ -313,29 +308,7 @@ export function HomeSections() {
         title={process.title}
         tone="raised"
       >
-        <div className="relative grid gap-8 before:absolute before:left-5 before:top-5 before:h-[calc(100%-2.5rem)] before:w-px before:bg-line sm:grid-cols-2 sm:before:hidden lg:grid-cols-4">
-          {process.steps.map((step, index) => {
-            const Icon = processIcons[index];
-
-            return (
-              <Reveal               className="relative z-10" delay={index * 0.06} key={step.number}>
-                <p className="font-body text-small font-bold text-brand">
-                  {step.number}
-                </p>
-                <div className="mt-3 flex h-11 w-11 items-center justify-center rounded-full border border-line bg-bg-raised text-brand">
-                    <Icon aria-hidden="true" size={20} />
-                </div>
-                <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-body leading-relaxed text-muted">
-                  {step.text}
-                </p>
-              </Reveal>
-            );
-          })}
-          <div aria-hidden="true" className="absolute left-[8%] right-[8%] top-[3.625rem] z-0 hidden h-px bg-line lg:block" />
-        </div>
+        <ProcessSteps steps={process.steps} />
       </Section>
 
       <Section aria-label={why.eyebrow} tone="base">

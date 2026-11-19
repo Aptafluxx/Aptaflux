@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { Container } from "@/components/ui/Container";
+import { CenteredPageHeader } from "@/components/ui/CenteredPageHeader";
 import { Section } from "@/components/ui/Section";
 import { WorkGrid } from "@/components/work/WorkGrid";
 import { site } from "@/content/site";
@@ -16,21 +16,12 @@ export const metadata: Metadata = createPageMetadata({
 export default function WorkPage() {
   return (
     <>
-      <section className="pb-16 pt-[calc(72px+40px)] text-center md:pb-24 md:pt-[calc(var(--navbar-bottom,72px)+48px)]">
-        <Container>
-          <span className="inline-flex rounded-full border border-line px-3 py-1 text-small font-semibold text-brand">
-            {workPageContent.pageHeading.badge}
-          </span>
-          <h1 className="mx-auto mt-6 max-w-3xl font-body text-display-xl font-extrabold tracking-[-0.04em]">
-            {workPageContent.pageHeading.title}
-            <br />
-            <span className="text-brand">{workPageContent.pageHeading.accent}</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-[52ch] text-body leading-relaxed text-muted">
-            {workPageContent.introduction}
-          </p>
-        </Container>
-      </section>
+      <CenteredPageHeader
+        badge={workPageContent.pageHeading.badge}
+        titleLineOne={workPageContent.pageHeading.title}
+        titleLineTwo={workPageContent.pageHeading.accent}
+        introduction={workPageContent.introduction}
+      />
       <Section aria-label={workPageContent.ariaLabels.projects} tone="alt">
         <WorkGrid />
       </Section>

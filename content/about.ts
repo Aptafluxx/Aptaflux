@@ -4,23 +4,17 @@ export const aboutContent = {
     "Aptaflux is a digital agency that designs and builds websites and mobile apps. Learn how we work.",
   header: {
     badge: "About Aptaflux",
-    titleLineOne: "Websites and apps for",
-    titleLineTwo: "businesses ready to ",
-    titleAccent: "move ahead",
-    titleEnding: ".",
+    titleLineOne: "Websites and apps for businesses",
+    titleLineTwo: "ready to move ahead.",
     introduction:
       "Aptaflux is a digital agency that designs and builds websites and mobile apps, from restaurant booking to Bluetooth wearables.",
-    primaryLabel: "See our portfolio",
-    primaryHref: "/portfolio",
-    secondaryLabel: "Start a project",
-    secondaryHref: "/contact",
   },
   story: {
     eyebrow: "Our story",
     title: "Design and engineering, handled together.",
     paragraphs: [
       "We start with the business problem, then choose the technology that solves it, not the other way around.",
-      "We build mobile apps with Flutter and websites with Next.js, backed by Firebase. Every project in our portfolio was designed and built end to end. We work remotely from Pakistan and keep scope, milestones and communication clear from the first conversation.",
+      "Every project in our portfolio was designed and built end to end. We keep scope, milestones and communication clear from the first conversation.",
     ],
   },
   glance: {

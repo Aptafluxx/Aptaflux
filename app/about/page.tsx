@@ -7,7 +7,6 @@ import {
   Database,
   Globe,
   Layers3,
-  MapPin,
   MessageSquareText,
   Smartphone,
   Target,
@@ -19,10 +18,8 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { TechnologyChip } from "@/components/work/ProjectMeta";
-import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Container } from "@/components/ui/Container";
-import { DotGrid } from "@/components/ui/DotGrid";
+import { CenteredPageHeader } from "@/components/ui/CenteredPageHeader";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
@@ -47,7 +44,7 @@ const serviceIcons: Record<
   "digital-platforms": Smartphone,
 };
 
-const glanceIcons = [BriefcaseBusiness, Layers3, Code2, MapPin] as const;
+const glanceIcons = [BriefcaseBusiness, Layers3, Code2] as const;
 const principleIcons = [Target, MessageSquareText, Wrench] as const;
 const toolkitIcons = [Smartphone, Globe, Database, Bluetooth] as const;
 
@@ -79,37 +76,12 @@ export default function AboutPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-accent/25 bg-band/22 pb-14 pt-[calc(var(--navbar-bottom,72px)+40px)] md:pb-14">
-        <DotGrid className="opacity-60" />
-        <Container className="relative z-10">
-          <span className="inline-flex rounded-full border border-line px-3 py-1 text-small font-semibold text-brand">
-            {aboutContent.header.badge}
-          </span>
-          <h1 className="mt-6 max-w-4xl font-body text-display-xl font-extrabold tracking-[-0.04em]">
-            {aboutContent.header.titleLineOne}
-            <br />
-            {aboutContent.header.titleLineTwo}
-            <span className="text-accent">
-              {aboutContent.header.titleAccent}
-            </span>
-            {aboutContent.header.titleEnding}
-          </h1>
-          <p className="mt-5 max-w-[62ch] text-body leading-relaxed text-muted">
-            {aboutContent.header.introduction}
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button href={aboutContent.header.primaryHref}>
-              {aboutContent.header.primaryLabel}
-            </Button>
-            <Button
-              href={aboutContent.header.secondaryHref}
-              variant="ghost"
-            >
-              {aboutContent.header.secondaryLabel}
-            </Button>
-          </div>
-        </Container>
-      </section>
+      <CenteredPageHeader
+        badge={aboutContent.header.badge}
+        titleLineOne={aboutContent.header.titleLineOne}
+        titleLineTwo={aboutContent.header.titleLineTwo}
+        introduction={aboutContent.header.introduction}
+      />
 
       <Section aria-label={aboutContent.story.eyebrow} tone="base">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">

@@ -98,6 +98,7 @@ export function HomeSections() {
     <>
       <Section
         aria-label={problem.eyebrow}
+        className="pb-8 md:pb-12 lg:pb-14"
         eyebrow={problem.eyebrow}
         intro={problem.intro}
         title={problem.title}
@@ -122,12 +123,6 @@ export function HomeSections() {
               </Card>
             </Reveal>
           ))}
-        </div>
-        <div className="mx-auto mt-14 max-w-4xl text-center">
-          <div className="mx-auto mb-6 h-1 w-14 rounded-full bg-brand" />
-          <p className="font-body text-h2 font-bold leading-tight tracking-[-0.02em]">
-            {problem.closing}
-          </p>
         </div>
       </Section>
 
@@ -210,7 +205,11 @@ export function HomeSections() {
         </p>
       </Section>
 
-      <Section aria-label={capabilities.eyebrow} tone="raised">
+      <Section
+        aria-label={capabilities.eyebrow}
+        className="pb-8 md:pb-12 lg:pb-14"
+        tone="raised"
+      >
         <div className="mb-8 max-w-3xl">
           <p className="mb-4 text-[12px] font-semibold uppercase tracking-wide text-brand">
             {capabilities.eyebrow}
@@ -292,9 +291,6 @@ export function HomeSections() {
             </Reveal>
           ))}
         </div>
-        <p className="mt-10 border-t border-line pt-6 font-body text-h3 font-bold tracking-[-0.02em]">
-          {capabilities.closing}
-        </p>
       </Section>
 
       <Section

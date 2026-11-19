@@ -221,7 +221,6 @@ export default function ServicesPage() {
       <Section
         aria-label={capabilities.eyebrow}
         eyebrow={capabilities.eyebrow}
-        intro={capabilities.closing}
         title={capabilities.title}
         tone="raised"
       >

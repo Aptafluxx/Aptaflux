@@ -38,8 +38,6 @@ export const homeContent = {
         text: "Your business needs better systems, connected workflows, and a stronger digital foundation.",
       },
     ],
-    closing:
-      "These aren't just technology problems. They're business problems. That's where Aptaflux comes in.",
   },
   outcomes: {
     eyebrow: "OUTCOMES OVER OUTPUTS",
@@ -107,8 +105,6 @@ export const homeContent = {
   capabilities: {
     eyebrow: "WHAT WE BRING TO THE TABLE",
     title: "Everything your digital vision needs. Under one roof.",
-    closing:
-      "We select the technology based on the problem, not the other way around.",
     rows: [
       { name: "Web development", benefit: "Establish credibility and generate inquiries" },
       { name: "Mobile applications", benefit: "Deliver convenient customer experiences" },

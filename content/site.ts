@@ -59,7 +59,7 @@ export const site = {
     copyEmailError: "Unable to copy email address.",
     socialHeading: "Follow us",
     replyHeading: "Reply",
-    replyText: "We reply by email, usually within a few working days.",
+    replyText: "We reply by email, within one working day",
     informationLabel: "Contact information",
     formLabel: "Project inquiry form",
     formTitle: "Start a conversation",

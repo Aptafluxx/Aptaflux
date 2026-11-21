@@ -24,7 +24,7 @@ export default function ContactPage() {
       />
       <Section aria-label={contact.informationLabel} tone="base">
         <div className="grid items-start gap-10 lg:grid-cols-12">
-          <div className="order-2 space-y-8 lg:order-1 lg:col-span-5">
+          <div className="order-2 space-y-8 lg:sticky lg:top-[calc(var(--navbar-bottom,72px)+24px)] lg:order-1 lg:col-span-5 lg:self-start">
             <ContactInformation />
           </div>
 

@@ -317,24 +317,22 @@ export function ContactForm() {
         ) : null}
       </div>
 
-      <div aria-live="polite" className="min-h-6" role="status">
-        {status === "error" ? (
-          <div className={errorClass} role="alert">
-            <p>{contact.error}</p>
-            <p className="mt-1">
-              {contact.errorContact}{" "}
-              <a
-                className="underline underline-offset-4 hover:text-fg"
-                href={`mailto:${site.email}`}
-              >
-                {site.email}
-              </a>
-            </p>
-          </div>
-        ) : null}
-      </div>
+      {status === "error" ? (
+        <div aria-live="polite" className={errorClass} role="alert">
+          <p>{contact.error}</p>
+          <p className="mt-1">
+            {contact.errorContact}{" "}
+            <a
+              className="underline underline-offset-4 hover:text-fg"
+              href={`mailto:${site.email}`}
+            >
+              {site.email}
+            </a>
+          </p>
+        </div>
+      ) : null}
 
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
+      <div className="!mt-6 flex flex-col gap-4 md:flex-row md:items-center md:gap-6">
         <Button
           className="!h-[52px] !min-h-[52px] w-full !rounded-full text-body md:w-auto"
           disabled={status === "sending"}

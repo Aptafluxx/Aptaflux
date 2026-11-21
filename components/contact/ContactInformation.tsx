@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy, Mail, UsersRound } from "lucide-react";
+import { Check, Clock, Copy, Mail, UsersRound } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { IconBadge } from "@/components/ui/IconBadge";
 import { SocialIcon } from "@/components/ui/SocialIcon";
@@ -35,12 +35,12 @@ export function ContactInformation() {
           <IconBadge icon={Mail} />
           <div className="min-w-0 flex-1">
             <h2 className="text-small font-semibold">{contact.emailHeading}</h2>
-            <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <div className="mt-1 flex min-w-0 flex-nowrap items-center gap-x-3">
               <a
-                className="break-all text-[20px] font-semibold leading-tight text-fg transition-colors hover:text-accent"
+                className="min-w-0 text-[17px] font-semibold leading-tight text-fg transition-colors hover:text-accent sm:text-[20px]"
                 href={`mailto:${site.email}`}
               >
-                {site.email}
+                <span className="block truncate">{site.email}</span>
               </a>
               <button
                 aria-label={contact.copyEmail}
@@ -90,11 +90,14 @@ export function ContactInformation() {
 
         <div className="my-5 border-t border-accent/25" />
 
-        <div>
-          <h2 className="text-small font-semibold">{contact.replyHeading}</h2>
-          <p className="mt-2 text-body leading-relaxed text-muted">
-            {contact.replyText}
-          </p>
+        <div className="flex items-center gap-4">
+          <IconBadge icon={Clock} />
+          <div className="min-w-0">
+            <h2 className="text-small font-semibold">{contact.replyHeading}</h2>
+            <p className="mt-2 text-body leading-relaxed text-muted">
+              {contact.replyText}
+            </p>
+          </div>
         </div>
       </Card>
 

@@ -11,6 +11,7 @@ type PageHeaderProps = {
   breadcrumb?: ReactNode;
   eyebrow?: ReactNode;
   intro?: ReactNode;
+  showRule?: boolean;
   titleClassName?: string;
   title: string;
   visual?: ReactNode;
@@ -21,6 +22,7 @@ export function PageHeader({
   breadcrumb,
   eyebrow,
   intro,
+  showRule = true,
   titleClassName,
   title,
   visual,
@@ -85,7 +87,7 @@ export function PageHeader({
         </div>
         {visual ? <div className="lg:col-span-5">{visual}</div> : null}
       </div>
-      <Rule className="mt-10 md:mt-12" />
+      {showRule ? <Rule className="mt-10 md:mt-12" /> : null}
     </Section>
   );
 }

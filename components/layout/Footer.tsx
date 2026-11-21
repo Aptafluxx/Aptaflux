@@ -8,11 +8,11 @@ import { Logo } from "@/components/ui/Logo";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 
 const capabilities = [
-  "Web Development",
-  "Mobile Applications",
-  "UI/UX Design",
-  "AI Integration",
-  "Business Automation",
+  "Web development",
+  "Mobile applications",
+  "UI/UX design",
+  "AI integration",
+  "Business automation",
 ];
 
 const solutions = [
@@ -153,7 +153,7 @@ export function Footer() {
 
         <div
           aria-hidden="true"
-          className="mt-4 select-none overflow-hidden lg:mt-6"
+          className="mt-8 select-none overflow-hidden lg:mt-8"
         >
           <svg className="block h-auto w-full" viewBox="0 36 1000 179">
             <text

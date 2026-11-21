@@ -1,7 +1,6 @@
-// PLACEHOLDER: replace later
 export const privacyContent = {
   eyebrow: "LEGAL",
-  title: "Privacy Policy",
+  title: "Privacy policy",
   description: "How Aptaflux handles information submitted through this website.",
   lastUpdated: "Last updated: November 2026",
   sections: [
@@ -20,7 +19,19 @@ export const privacyContent = {
     {
       title: "Who processes it",
       paragraphs: [
-        "We use email delivery and website hosting providers to receive, store and deliver information submitted through the site. These providers process information as needed to provide their services.",
+        "We use Resend for email delivery and Vercel for website hosting. They process information as needed to provide their services. These providers may process or store information outside Pakistan, including in the United States.",
+      ],
+    },
+    {
+      title: "Technical data and preferences",
+      paragraphs: [
+        "Our hosting providers may log technical data such as IP addresses for operational and security purposes. Your theme preference is stored in your browser. This site does not currently use analytics; if we add analytics, we will update this policy.",
+      ],
+    },
+    {
+      title: "How we share information",
+      paragraphs: [
+        "We share inquiry information with the service providers described above only as needed to operate the site and respond to you. We don't sell your information.",
       ],
     },
     {
@@ -32,7 +43,13 @@ export const privacyContent = {
     {
       title: "Your choices",
       paragraphs: [
-        "You can ask us about the personal information you have sent or request that we update or delete it by contacting us using the email address listed on this site.",
+        {
+          before:
+            "You can ask us about the personal information you have sent or request that we update or delete it by emailing ",
+          linkLabel: "aptaflux@gmail.com",
+          href: "mailto:aptaflux@gmail.com",
+          after: ".",
+        },
       ],
     },
     {
@@ -44,7 +61,12 @@ export const privacyContent = {
     {
       title: "Contact",
       paragraphs: [
-        "For questions about this policy or your information, contact us using the email address listed on this site.",
+        {
+          before: "For questions about this policy or your information, email ",
+          linkLabel: "aptaflux@gmail.com",
+          href: "mailto:aptaflux@gmail.com",
+          after: ".",
+        },
       ],
     },
   ],
@@ -52,14 +74,14 @@ export const privacyContent = {
 
 export const termsContent = {
   eyebrow: "LEGAL",
-  title: "Terms of Use",
+  title: "Terms of use",
   description: "Terms for using the Aptaflux website.",
   lastUpdated: "Last updated: November 2026",
   sections: [
     {
       title: "Use of this website",
       paragraphs: [
-        "You may use this website for lawful purposes and in a way that does not interfere with the site's operation or other people's use of it.",
+        "You may use this website for lawful purposes and in a way that does not interfere with the site's operation or other people's use of it. These terms cover use of this website only; any services we provide are subject to a separate written agreement that sets out their scope and terms.",
       ],
     },
     {
@@ -71,7 +93,13 @@ export const termsContent = {
     {
       title: "Our content and portfolio projects",
       paragraphs: [
-        "Website content and portfolio projects are provided for general information to illustrate our work and approach. Project descriptions do not promise a particular result for your business.",
+        "Website content and portfolio projects are provided for general information to illustrate our work and approach. Portfolio projects are samples, and project descriptions do not promise a particular result for your business.",
+      ],
+    },
+    {
+      title: "External links",
+      paragraphs: [
+        "This website may link to external websites, including live project demos and social profiles. Those sites are not under our control, and we are not responsible for their content or practices.",
       ],
     },
     {
@@ -93,9 +121,18 @@ export const termsContent = {
       ],
     },
     {
+      title: "Governing law",
+      paragraphs: ["These terms are governed by the laws of Pakistan."],
+    },
+    {
       title: "Contact",
       paragraphs: [
-        "For questions about these terms, contact us using the email address listed on this site.",
+        {
+          before: "For questions about these terms, email ",
+          linkLabel: "aptaflux@gmail.com",
+          href: "mailto:aptaflux@gmail.com",
+          after: ".",
+        },
       ],
     },
   ],

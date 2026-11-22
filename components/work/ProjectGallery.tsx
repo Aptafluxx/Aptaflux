@@ -95,61 +95,89 @@ export function ProjectGallery({
           <p className="mt-3 text-body text-muted">Selected screens from {projectName}.</p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-        <div
-          aria-orientation="vertical"
-          className="project-gallery-tabs order-2 flex min-w-0 gap-3 overflow-x-auto pb-2 lg:order-1 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0"
-          role="tablist"
-        >
-          {tabItems.map((item) => {
-            const isActive = item.index === activeIndex;
-            return (
-              <button
-                aria-controls={stageId}
-                aria-selected={isActive}
-                className={`relative flex min-w-max shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full border px-[14px] py-2 text-left transition-colors lg:w-full lg:min-w-0 lg:items-start lg:gap-3 lg:rounded-xl lg:p-3 lg:whitespace-normal ${
-                  isActive
-                    ? "border-accent bg-accent text-brand-fg lg:border-accent/40 lg:bg-card lg:text-fg"
-                    : "border-line hover:border-accent/50 lg:border-transparent"
-                }`}
-                id={`${stageId}-tab-${item.index}`}
-                key={item.src}
-                onClick={() => setIndex(item.index)}
-                onKeyDown={handleTabKeyDown}
-                role="tab"
-                tabIndex={isActive ? 0 : -1}
-                type="button"
-              >
-                {isActive ? <span className="absolute inset-y-2 left-0 hidden w-[3px] rounded-full bg-accent lg:block" /> : null}
-                <span className="flex size-auto shrink-0 items-center justify-center rounded-none bg-transparent text-small font-bold text-inherit lg:size-8 lg:rounded-full lg:bg-accent/15 lg:text-accent">
-                  {String(item.index + 1).padStart(2, "0")}
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-[16px] font-bold">{item.title}</span>
-                  <span className="mt-1 hidden line-clamp-2 text-small leading-relaxed text-muted lg:block">{item.text}</span>
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        {kind === "mobile" ? (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {items.map((item, index) => (
+              <figure className="min-w-0" key={item.src}>
+                <button
+                  aria-label={`Open ${item.title}, screen ${index + 1} of ${items.length}`}
+                  className="relative block aspect-[390/844] w-full overflow-hidden rounded-2xl border border-line bg-card transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  onClick={() => {
+                    setIndex(index);
+                    openLightbox();
+                  }}
+                  type="button"
+                >
+                  <Image
+                    alt={`${projectName}: ${item.title}`}
+                    className="object-cover"
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 23vw, (min-width: 640px) 30vw, 45vw"
+                    src={item.src}
+                  />
+                </button>
+                <figcaption className="mt-2 text-small font-semibold text-fg">
+                  {item.title}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+            <div
+              aria-orientation="vertical"
+              className="project-gallery-tabs order-2 flex min-w-0 gap-3 overflow-x-auto pb-2 lg:order-1 lg:block lg:space-y-3 lg:overflow-visible lg:pb-0"
+              role="tablist"
+            >
+              {tabItems.map((item) => {
+                const isActive = item.index === activeIndex;
+                return (
+                  <button
+                    aria-controls={stageId}
+                    aria-selected={isActive}
+                    className={`relative flex min-w-max shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full border px-[14px] py-2 text-left transition-colors lg:w-full lg:min-w-0 lg:items-start lg:gap-3 lg:rounded-xl lg:p-3 lg:whitespace-normal ${
+                      isActive
+                        ? "border-accent bg-accent text-brand-fg lg:border-accent/40 lg:bg-card lg:text-fg"
+                        : "border-line hover:border-accent/50 lg:border-transparent"
+                    }`}
+                    id={`${stageId}-tab-${item.index}`}
+                    key={item.src}
+                    onClick={() => setIndex(item.index)}
+                    onKeyDown={handleTabKeyDown}
+                    role="tab"
+                    tabIndex={isActive ? 0 : -1}
+                    type="button"
+                  >
+                    {isActive ? <span className="absolute inset-y-2 left-0 hidden w-[3px] rounded-full bg-accent lg:block" /> : null}
+                    <span className="flex size-auto shrink-0 items-center justify-center rounded-none bg-transparent text-small font-bold text-inherit lg:size-8 lg:rounded-full lg:bg-accent/15 lg:text-accent">
+                      {String(item.index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-[16px] font-bold">{item.title}</span>
+                      <span className="mt-1 hidden line-clamp-2 text-small leading-relaxed text-muted lg:block">{item.text}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-        <div className="order-1 min-w-0 lg:order-2">
-          <div
-            aria-labelledby={`${stageId}-tab-${activeIndex}`}
-            className="relative w-full max-w-full overflow-hidden rounded-[24px] border border-accent/25 bg-band p-3 lg:p-7"
-            id={stageId}
-            onTouchEnd={(event) => {
-              if (touchStart === null) return;
-              const distance = event.changedTouches[0].clientX - touchStart;
-              if (Math.abs(distance) > 40) move(distance > 0 ? -1 : 1);
-              setTouchStart(null);
-            }}
-            onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
-            role="tabpanel"
-            tabIndex={0}
-          >
-            <div aria-hidden="true" className="project-gallery-dot-grid absolute inset-0" />
-            {kind === "website" ? (
+            <div className="order-1 min-w-0 lg:order-2">
+              <div
+                aria-labelledby={`${stageId}-tab-${activeIndex}`}
+                className="relative w-full max-w-full overflow-hidden rounded-[24px] border border-accent/25 bg-band p-3 lg:p-7"
+                id={stageId}
+                onTouchEnd={(event) => {
+                  if (touchStart === null) return;
+                  const distance = event.changedTouches[0].clientX - touchStart;
+                  if (Math.abs(distance) > 40) move(distance > 0 ? -1 : 1);
+                  setTouchStart(null);
+                }}
+                onTouchStart={(event) => setTouchStart(event.touches[0].clientX)}
+                role="tabpanel"
+                tabIndex={0}
+              >
+                <div aria-hidden="true" className="project-gallery-dot-grid absolute inset-0" />
               <div className="relative z-10 min-w-0 w-full max-w-full overflow-hidden rounded-[14px] border border-band-fg/15 bg-band-fg shadow-xl">
                 <div className="flex h-9 items-center gap-1.5 border-b border-band-fg/15 bg-band-fg px-3">
                   <span className="size-2 rounded-full bg-fg/30" />
@@ -178,59 +206,39 @@ export function ProjectGallery({
                   </AnimatePresence>
                 </div>
               </div>
-            ) : (
-              <div className="relative z-10 flex min-h-[360px] items-center justify-center gap-5 py-5 sm:min-h-[460px]">
-                {items.map((item, index) => (
+              </div>
+              <div className="mt-5 flex max-w-full flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-4">
+                <p className="min-w-0 w-full flex-none text-body lg:flex-1">
+                  <strong>{activeItem.title}</strong>
+                  {activeItem.text ? (
+                    <span className="text-muted"> — {activeItem.text}</span>
+                  ) : null}
+                </p>
+                <div className="flex w-full items-center justify-between gap-3 lg:w-auto lg:shrink-0 lg:justify-start lg:gap-2">
                   <button
-                    aria-label={`${item.title}${index === activeIndex ? ", active" : ""}`}
-                    className={`relative h-[330px] aspect-[9/19.5] shrink-0 overflow-hidden rounded-[28px] border-4 border-fg bg-bg transition-[transform,opacity,box-shadow] sm:h-[420px] ${
-                      index === activeIndex ? "z-10 opacity-100 shadow-2xl" : "scale-[.88] opacity-60"
-                    }`}
-                    key={item.src}
-                    onClick={() => (index === activeIndex ? openLightbox() : setIndex(index))}
+                    aria-label="Enlarge screen"
+                    className="project-gallery-zoom order-1 inline-flex items-center gap-1 text-small font-semibold text-fg transition-colors hover:text-accent focus-visible:text-accent lg:order-2"
+                    onClick={openLightbox}
                     type="button"
                   >
-                    <Image
-                      alt={`${projectName}: ${item.title}`}
-                      className="object-cover object-top"
-                      fill
-                      sizes="(min-width:1024px) 18vw, 45vw"
-                      src={item.src}
-                    />
+                    <ZoomIn aria-hidden="true" size={15} />
+                    <span className="project-gallery-zoom-pointer">Click to enlarge</span>
+                    <span className="project-gallery-zoom-touch">Tap to enlarge</span>
                   </button>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="mt-5 flex max-w-full flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-4">
-            <p className="min-w-0 w-full flex-none text-body lg:flex-1">
-              <strong>{activeItem.title}</strong>
-              <span className="text-muted"> — {activeItem.text}</span>
-            </p>
-            <div className="flex w-full items-center justify-between gap-3 lg:w-auto lg:shrink-0 lg:justify-start lg:gap-2">
-              <button
-                aria-label="Enlarge screen"
-                className="project-gallery-zoom order-1 inline-flex items-center gap-1 text-small font-semibold text-fg transition-colors hover:text-accent focus-visible:text-accent lg:order-2"
-                onClick={openLightbox}
-                type="button"
-              >
-                <ZoomIn aria-hidden="true" size={15} />
-                <span className="project-gallery-zoom-pointer">Click to enlarge</span>
-                <span className="project-gallery-zoom-touch">Tap to enlarge</span>
-              </button>
-              <div className="order-2 flex items-center gap-2 lg:contents">
-                <button aria-label="Previous screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent lg:order-1" onClick={() => move(-1)} type="button">
-                <ArrowLeft aria-hidden="true" size={17} />
-                </button>
-                <span className="hidden text-small text-muted sm:inline lg:order-3">{activeIndex + 1} / {items.length}</span>
-                <button aria-label="Next screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent lg:order-4" onClick={() => move(1)} type="button">
-                <ArrowRight aria-hidden="true" size={17} />
-                </button>
+                  <div className="order-2 flex items-center gap-2 lg:contents">
+                    <button aria-label="Previous screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent lg:order-1" onClick={() => move(-1)} type="button">
+                      <ArrowLeft aria-hidden="true" size={17} />
+                    </button>
+                    <span className="hidden text-small text-muted sm:inline lg:order-3">{activeIndex + 1} / {items.length}</span>
+                    <button aria-label="Next screen" className="flex size-10 items-center justify-center rounded-full border border-line transition-colors hover:border-accent hover:text-accent lg:order-4" onClick={() => move(1)} type="button">
+                      <ArrowRight aria-hidden="true" size={17} />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        </div>
+        )}
       </Container>
 
       {zoomed ? (

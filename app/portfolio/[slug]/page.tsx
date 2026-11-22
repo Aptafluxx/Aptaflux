@@ -81,10 +81,10 @@ export default async function ProjectPage(props: WorkPageProps) {
     if (!existsSync(path.join(process.cwd(), "public", image))) {
       return items;
     }
-    const caption = project.galleryCaptions?.[index];
-    if (!caption) {
-      return items;
-    }
+    const caption = project.galleryCaptions?.[index] ?? {
+      title: `Screen ${String(index + 1).padStart(2, "0")}`,
+      text: "",
+    };
     items.push({ src: image, ...caption });
     return items;
   }, []);

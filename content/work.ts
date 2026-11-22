@@ -236,6 +236,20 @@ export const work: WorkProject[] = [
     ],
     cover: "ProjectCover",
     next: "wristsync",
+    images: {
+      cover: "/work/madang/screen-01.webp",
+      gallery: [
+        "/work/madang/screen-01.webp",
+        "/work/madang/screen-02.webp",
+        "/work/madang/screen-03.webp",
+        "/work/madang/screen-04.webp",
+        "/work/madang/screen-05.webp",
+        "/work/madang/screen-06.webp",
+        "/work/madang/screen-07.webp",
+        "/work/madang/screen-08.webp",
+        "/work/madang/screen-09.webp",
+      ],
+    },
     galleryCaptions: [
       { title: "Cart", text: "Quantities and totals at a glance." },
       { title: "Order confirmation", text: "Clear confirmation after checkout." },
@@ -300,6 +314,21 @@ export const work: WorkProject[] = [
     ],
     cover: "ProjectCover",
     next: "silver-cedar",
+    images: {
+      cover: "/work/wrist-sync/screen-01.webp",
+      gallery: [
+        "/work/wrist-sync/screen-01.webp",
+        "/work/wrist-sync/screen-02.webp",
+        "/work/wrist-sync/screen-03.webp",
+        "/work/wrist-sync/screen-04.webp",
+        "/work/wrist-sync/screen-05.webp",
+        "/work/wrist-sync/screen-06.webp",
+        "/work/wrist-sync/screen-07.webp",
+        "/work/wrist-sync/screen-08.webp",
+        "/work/wrist-sync/screen-09.webp",
+        "/work/wrist-sync/screen-10.webp",
+      ],
+    },
     galleryCaptions: [
       { title: "Connected device", text: "Name, connection badge and battery." },
       { title: "Diagnostics", text: "MAC address, packet size and services." },
@@ -509,6 +538,19 @@ export const work: WorkProject[] = [
     ],
     cover: "ProjectCover",
     next: "ember-fig",
+    images: {
+      cover: "/work/gymnestic/screen-01.webp",
+      gallery: [
+        "/work/gymnestic/screen-01.webp",
+        "/work/gymnestic/screen-02.webp",
+        "/work/gymnestic/screen-03.webp",
+        "/work/gymnestic/screen-04.webp",
+        "/work/gymnestic/screen-05.webp",
+        "/work/gymnestic/screen-06.webp",
+        "/work/gymnestic/screen-07.webp",
+        "/work/gymnestic/screen-08.webp",
+      ],
+    },
     galleryCaptions: [
       { title: "Progress charts", text: "Weekly metrics and activity trends." },
       { title: "Daily goals", text: "A checklist for today's training." },

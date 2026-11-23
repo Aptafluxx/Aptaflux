@@ -251,9 +251,42 @@ export const work: WorkProject[] = [
       ],
     },
     galleryCaptions: [
-      { title: "Cart", text: "Quantities and totals at a glance." },
-      { title: "Order confirmation", text: "Clear confirmation after checkout." },
-      { title: "Table booking", text: "Browse tables and reserve one." },
+      {
+        title: "Restaurant home",
+        text: "Promotions, food and table shortcuts, categories, and recommendations.",
+      },
+      {
+        title: "Browse the menu",
+        text: "Search dishes and browse food cards by category.",
+      },
+      {
+        title: "Choose a table",
+        text: "Compare available table sizes, seating, and prices.",
+      },
+      {
+        title: "Search results",
+        text: "Find a dish by name and review its price and rating.",
+      },
+      {
+        title: "Dish details",
+        text: "Choose a meal, adjust its quantity, and add it to the cart.",
+      },
+      {
+        title: "Table options",
+        text: "Set a reservation duration and choose additional items.",
+      },
+      {
+        title: "Review your cart",
+        text: "Check food, table, extras, and the order total before continuing.",
+      },
+      {
+        title: "Account and preferences",
+        text: "Manage payment, cart, language, notifications, and account details.",
+      },
+      {
+        title: "Recent orders",
+        text: "Review past orders, their table details, and current status.",
+      },
     ],
   },
   {
@@ -330,9 +363,46 @@ export const work: WorkProject[] = [
       ],
     },
     galleryCaptions: [
-      { title: "Connected device", text: "Name, connection badge and battery." },
-      { title: "Diagnostics", text: "MAC address, packet size and services." },
-      { title: "Permissions", text: "Runtime Bluetooth permission prompt." },
+      {
+        title: "WristSync home",
+        text: "Connection status, watch shortcuts, featured faces, and setup tips.",
+      },
+      {
+        title: "Featured watch faces",
+        text: "Preview watch-face styles and pairing-related features.",
+      },
+      {
+        title: "Watch face gallery",
+        text: "Browse five face designs, including Midnight, Aurora, and Orbit.",
+      },
+      {
+        title: "Appearance settings",
+        text: "Choose system, light, or dark appearance for the app.",
+      },
+      {
+        title: "No watches paired",
+        text: "An empty collection prompts the user to add a Bluetooth watch.",
+      },
+      {
+        title: "Choose a watch type",
+        text: "Select a WristSync, Huawei, or other Bluetooth watch to scan for.",
+      },
+      {
+        title: "Nearby device scan",
+        text: "View a discovered WAVE ELITE watch and its signal strength.",
+      },
+      {
+        title: "Connected watch details",
+        text: "Check connection and battery status, open diagnostics, or disconnect.",
+      },
+      {
+        title: "Paired watch collection",
+        text: "View the connected WAVE ELITE watch and open its details.",
+      },
+      {
+        title: "WristSync launch screen",
+        text: "The app splash screen shown while WristSync starts.",
+      },
     ],
   },
   {
@@ -552,9 +622,38 @@ export const work: WorkProject[] = [
       ],
     },
     galleryCaptions: [
-      { title: "Progress charts", text: "Weekly metrics and activity trends." },
-      { title: "Daily goals", text: "A checklist for today's training." },
-      { title: "Profile", text: "Bio, skills and progress overview." },
+      {
+        title: "Fitness dashboard",
+        text: "Review activity metrics and choose a training program.",
+      },
+      {
+        title: "Welcome onboarding",
+        text: "An introductory training message with a prompt to continue.",
+      },
+      {
+        title: "Create an account",
+        text: "Enter a name, email, and password to sign up.",
+      },
+      {
+        title: "Daily training goals",
+        text: "Track workout tasks and calorie targets for a training program.",
+      },
+      {
+        title: "Fitness articles",
+        text: "Browse recommended stories on training, health, and nutrition.",
+      },
+      {
+        title: "Article detail",
+        text: "Read a fitness story, save it, and see community reactions.",
+      },
+      {
+        title: "Profile and skills",
+        text: "Review profile information, skill tags, and completion progress.",
+      },
+      {
+        title: "Building progress",
+        text: "Track activity completion, calories, and weekly monitoring metrics.",
+      },
     ],
   },
 ];

@@ -143,7 +143,7 @@ export function ProjectGallery({
           <div className="rounded-3xl bg-[rgb(var(--bg-alt))] p-4 sm:p-6">
             <div
               aria-label={`${projectName} screenshots`}
-              className="flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-2 touch-pan-y [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               onScroll={updateCarouselPosition}
               ref={carouselRef}
               role="region"

@@ -9,7 +9,8 @@ import type { SyntheticEvent } from "react";
 export type LightboxItem = {
   src: string;
   title: string;
-  text: string;
+  text?: string;
+  description?: string;
 };
 
 type LightboxProps = {
@@ -21,7 +22,7 @@ type LightboxProps = {
 };
 
 const iconButton =
-  "flex size-11 items-center justify-center rounded-full border border-white/30 bg-black/40 text-white transition-colors hover:border-white/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "flex size-11 items-center justify-center rounded-full border border-band-fg/30 bg-band-fg/20 text-band-fg transition-colors hover:border-band-fg/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 export function Lightbox({
   items,
@@ -32,6 +33,7 @@ export function Lightbox({
 }: LightboxProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
+  const touchStartX = useRef<number | null>(null);
   const count = items.length;
   const item = items[index];
 
@@ -86,6 +88,11 @@ export function Lightbox({
   if (typeof document === "undefined" || !item) return null;
 
   const stop = (event: SyntheticEvent) => event.stopPropagation();
+  const captionTitle = /^screen\s+\d+$/i.test(item.title)
+    ? undefined
+    : item.title;
+  const description = item.description ?? item.text;
+  const alt = [captionTitle, description].filter(Boolean).join(". ");
 
   return createPortal(
     <div
@@ -93,7 +100,7 @@ export function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={`${projectName} screens`}
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-4 bg-black/85 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-4 bg-band/95 p-4 text-band-fg backdrop-blur-sm"
       onClick={(event) => {
         stop(event);
         onClose();
@@ -113,27 +120,43 @@ export function Lightbox({
       </button>
 
       <div
-        className="relative h-[72vh] w-[92vw] max-w-6xl"
+        className="relative h-[72vh] w-[92vw] max-w-6xl touch-pan-y"
         onClick={stop}
+        onTouchEnd={(event) => {
+          const startX = touchStartX.current;
+          touchStartX.current = null;
+          if (startX === null) return;
+          const distance = event.changedTouches[0].clientX - startX;
+          if (Math.abs(distance) < 40) return;
+          stop(event);
+          onIndexChange((index + (distance < 0 ? 1 : -1) + count) % count);
+        }}
+        onTouchStart={(event) => {
+          touchStartX.current = event.touches[0].clientX;
+        }}
       >
         <Image
           key={item.src}
           src={item.src}
-          alt={`${projectName}: ${item.title}`}
+          alt={alt}
           fill
           sizes="92vw"
           className="object-contain"
+          loading="eager"
         />
       </div>
 
       <div
-        className="flex w-[92vw] max-w-6xl items-center justify-between gap-4 text-white"
+        className="flex w-[92vw] max-w-6xl items-center justify-between gap-4"
         onClick={stop}
       >
-        <p className="min-w-0 text-[15px]">
-          <strong>{item.title}</strong>
-          <span className="opacity-80"> — {item.text}</span>
-        </p>
+        {captionTitle || description ? (
+          <p className="min-w-0 text-[15px]">
+            {captionTitle ? <strong>{captionTitle}</strong> : null}
+            {captionTitle && description ? <span> — </span> : null}
+            {description ? <span className="opacity-80">{description}</span> : null}
+          </p>
+        ) : null}
         <div className="flex shrink-0 items-center gap-3">
           <button
             type="button"

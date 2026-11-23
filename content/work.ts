@@ -40,7 +40,7 @@ export type WorkProject = {
   features?: string[];
   cover: WorkArtKey;
   images?: { cover?: string; mobile?: string; gallery?: string[] };
-  galleryCaptions?: { title: string; text: string }[];
+  galleryCaptions?: { title: string; text: string; description?: string }[];
   next: ProjectSlug;
 };
 

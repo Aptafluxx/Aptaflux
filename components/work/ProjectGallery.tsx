@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, ZoomIn } from "lucide-react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Lightbox } from "@/components/work/Lightbox";
 
@@ -12,6 +12,7 @@ type GalleryItem = {
   src: string;
   title: string;
   text: string;
+  description?: string;
 };
 
 type ProjectGalleryProps = {
@@ -33,6 +34,11 @@ export function ProjectGallery({
   const [zoomed, setZoomed] = useState(false);
   const [direction, setDirection] = useState(1);
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [carouselPosition, setCarouselPosition] = useState({
+    scrollLeft: 0,
+    maxScroll: 0,
+  });
+  const carouselRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
   const activeItem = items[activeIndex];
   const stageId = `project-gallery-stage-${projectName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
@@ -84,6 +90,44 @@ export function ProjectGallery({
     setZoomed(true);
   };
 
+  const updateCarouselPosition = useCallback(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const nextPosition = {
+      scrollLeft: carousel.scrollLeft,
+      maxScroll: Math.max(0, carousel.scrollWidth - carousel.clientWidth),
+    };
+    setCarouselPosition((current) =>
+      Math.abs(current.scrollLeft - nextPosition.scrollLeft) < 1 &&
+      Math.abs(current.maxScroll - nextPosition.maxScroll) < 1
+        ? current
+        : nextPosition,
+    );
+  }, []);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (kind !== "mobile" || !carousel) return;
+    const frame = window.requestAnimationFrame(updateCarouselPosition);
+    const observer = new ResizeObserver(updateCarouselPosition);
+    observer.observe(carousel);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [items.length, kind, updateCarouselPosition]);
+
+  const scrollCarousel = (delta: -1 | 1) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+    const screen = carousel.querySelector<HTMLElement>("[data-gallery-screen]");
+    const gap = Number.parseFloat(getComputedStyle(carousel).columnGap) || 0;
+    carousel.scrollBy({
+      left: delta * ((screen?.getBoundingClientRect().width ?? 230) + gap),
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
+  };
+
   return (
     <section aria-label="Project screens" className="py-16 md:py-24">
       <Container>
@@ -96,32 +140,131 @@ export function ProjectGallery({
         </div>
 
         {kind === "mobile" ? (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {items.map((item, index) => (
-              <figure className="min-w-0" key={item.src}>
+          <div className="rounded-3xl bg-[rgb(var(--bg-alt))] p-4 sm:p-6">
+            <div
+              aria-label={`${projectName} screenshots`}
+              className="flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-2 touch-pan-y [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              onScroll={updateCarouselPosition}
+              ref={carouselRef}
+              role="region"
+            >
+              {items.map((item, index) => {
+                const hasGenericTitle = /^screen\s+\d+$/i.test(item.title);
+                const captionTitle = hasGenericTitle ? undefined : item.title;
+                const description = item.description ?? item.text;
+                const alt = [captionTitle, description].filter(Boolean).join(". ");
+
+                return (
+                  <motion.figure
+                    className="w-[230px] flex-none snap-start sm:w-[260px]"
+                    initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+                    key={item.src}
+                    transition={{
+                      duration: reducedMotion ? 0 : 0.35,
+                      delay: reducedMotion ? 0 : index * 0.04,
+                    }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                  >
+                    <button
+                      aria-label={
+                        captionTitle
+                          ? `Open ${captionTitle}, screen ${index + 1} of ${items.length}`
+                          : `Open screen ${index + 1} of ${items.length}`
+                      }
+                      className="relative block aspect-[390/844] w-full overflow-hidden rounded-[30px] border-[3px] border-line bg-card p-1 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      data-gallery-screen
+                      onClick={() => {
+                        setIndex(index);
+                        openLightbox();
+                      }}
+                      type="button"
+                    >
+                      <Image
+                        alt={alt}
+                        className="rounded-[24px] object-cover"
+                        fill
+                        loading={index < 2 ? "eager" : "lazy"}
+                        sizes="(min-width: 640px) 260px, 230px"
+                        src={item.src}
+                      />
+                    </button>
+                    {captionTitle || description ? (
+                      <figcaption className="mt-3 space-y-1 text-center">
+                        {captionTitle ? (
+                          <span className="block text-small font-semibold text-fg">
+                            {captionTitle}
+                          </span>
+                        ) : null}
+                        {description ? (
+                          <span className="block text-small text-muted">
+                            {description}
+                          </span>
+                        ) : null}
+                      </figcaption>
+                    ) : null}
+                  </motion.figure>
+                );
+              })}
+            </div>
+            <div className="mt-4 flex items-center gap-3">
+              {carouselPosition.maxScroll > 1 ? (
                 <button
-                  aria-label={`Open ${item.title}, screen ${index + 1} of ${items.length}`}
-                  className="relative block aspect-[390/844] w-full overflow-hidden rounded-2xl border border-line bg-card transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  onClick={() => {
-                    setIndex(index);
-                    openLightbox();
-                  }}
+                  aria-label="Previous screen"
+                  className="flex size-10 shrink-0 items-center justify-center rounded-full border border-line bg-card text-fg transition-colors hover:border-accent hover:text-accent disabled:opacity-40"
+                  disabled={carouselPosition.scrollLeft <= 1}
+                  onClick={() => scrollCarousel(-1)}
                   type="button"
                 >
-                  <Image
-                    alt={`${projectName}: ${item.title}`}
-                    className="object-cover"
-                    fill
-                    loading="lazy"
-                    sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 23vw, (min-width: 640px) 30vw, 45vw"
-                    src={item.src}
-                  />
+                  <ArrowLeft aria-hidden="true" size={17} />
                 </button>
-                <figcaption className="mt-2 text-small font-semibold text-fg">
-                  {item.title}
-                </figcaption>
-              </figure>
-            ))}
+              ) : null}
+              <div
+                aria-label="Gallery scroll progress"
+                aria-valuemax={100}
+                aria-valuemin={0}
+                aria-valuenow={
+                  carouselPosition.maxScroll > 0
+                    ? Math.round(
+                        (carouselPosition.scrollLeft /
+                          carouselPosition.maxScroll) *
+                          100,
+                      )
+                    : 100
+                }
+                className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-line"
+                role="progressbar"
+              >
+                <div
+                  className="h-full origin-left rounded-full bg-accent transition-transform duration-150"
+                  style={{
+                    transform: `scaleX(${
+                      carouselPosition.maxScroll > 0
+                        ? Math.min(
+                            1,
+                            carouselPosition.scrollLeft /
+                              carouselPosition.maxScroll,
+                          )
+                        : 1
+                    })`,
+                  }}
+                />
+              </div>
+              {carouselPosition.maxScroll > 1 ? (
+                <button
+                  aria-label="Next screen"
+                  className="flex size-10 shrink-0 items-center justify-center rounded-full border border-line bg-card text-fg transition-colors hover:border-accent hover:text-accent disabled:opacity-40"
+                  disabled={
+                    carouselPosition.scrollLeft >=
+                    carouselPosition.maxScroll - 1
+                  }
+                  onClick={() => scrollCarousel(1)}
+                  type="button"
+                >
+                  <ArrowRight aria-hidden="true" size={17} />
+                </button>
+              ) : null}
+            </div>
           </div>
         ) : (
           <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">

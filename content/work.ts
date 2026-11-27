@@ -68,7 +68,7 @@ export const workPageContent = {
     category: "Category",
     services: "Services",
     stack: "Technologies",
-    projectLink: "Explore Project →",
+    projectLink: "Explore project →",
     challenge: "Challenge",
     approach: "Approach",
     results: "Outcome",
@@ -84,8 +84,8 @@ export const workPageContent = {
     projectCover: "Project cover",
     projectStory: "Project story",
     liveDemo: "Live demo",
-    moreWebsites: "More Websites",
-    moreMobileApps: "More Mobile apps",
+    moreWebsites: "More websites",
+    moreMobileApps: "More mobile apps",
     moreProjects: "More projects",
     backToAllWork: "Back to all projects",
     keyFeatures: "Key features",
@@ -103,7 +103,7 @@ export const workPageContent = {
     primaryLabel: "Start a conversation",
     secondaryLabel: "Explore services",
     secondaryHref: "/services",
-    replyNote: "Reply by email · No obligation",
+    replyNote: "We reply by email within one working day.",
   },
 } as const;
 

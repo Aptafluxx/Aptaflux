@@ -123,7 +123,7 @@ export default async function ServicePage(props: ServicePageProps) {
           <>
             <p>{service.promise}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="/contact">Book a Discovery Call</Button>
+              <Button href="/contact">Book a discovery call</Button>
               <Button href="/services" variant="ghost">
                 All services
               </Button>

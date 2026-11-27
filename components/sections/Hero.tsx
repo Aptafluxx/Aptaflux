@@ -1,16 +1,20 @@
-import { HeroComposition } from "@/components/art/HeroComposition";
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { DotGrid } from "@/components/ui/DotGrid";
+import { DeviceFrame } from "@/components/work/DeviceFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { homeContent } from "@/content/home";
-import { Bot, Globe, PenTool, Smartphone } from "lucide-react";
+import { work } from "@/content/work";
+import { Globe, PenTool, Server, Smartphone } from "lucide-react";
 
-const capabilityIcons = [Globe, Smartphone, PenTool, Bot] as const;
+const capabilityIcons = [Globe, Smartphone, PenTool, Server] as const;
 
 export function Hero() {
   const { hero } = homeContent;
   const titleParts = hero.title.split(/(digital opportunities\.)/i);
+  const project = work.find(({ slug }) => slug === "ember-fig");
 
   return (
     <Section className="relative overflow-hidden !pt-28 md:!pt-32" tone="base">
@@ -21,10 +25,12 @@ export function Hero() {
             <p className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-brand">
               {hero.eyebrow}
             </p>
-            <h1 className="max-w-[15ch] font-display text-display-xl">
+            <h1 className="max-w-[15ch] font-body text-display-xl font-extrabold tracking-[-0.03em]">
               {titleParts.map((part, index) =>
                 /digital opportunities\./i.test(part) ? (
-                  <em className="text-brand" key={index}>{part}</em>
+                  <span className="block not-italic tracking-normal text-brand" key={index}>
+                    {part}
+                  </span>
                 ) : (
                   <span key={index}>{part}</span>
                 ),
@@ -56,9 +62,33 @@ export function Hero() {
             </ul>
           </div>
           <div className="relative min-w-0 md:col-span-6">
-            <div className="aspect-[19/16]">
-              <HeroComposition />
-            </div>
+            {project?.images?.cover && project.images.mobile ? (
+              <>
+                <div className="hero-mockup-float relative mx-auto aspect-[16/9] w-full overflow-hidden rounded-[24px] border border-accent/25 bg-band p-5 [container-type:size]">
+                  <DotGrid className="project-cover-dot-grid opacity-60" />
+                  <DeviceFrame
+                    device="laptop"
+                    mobileAlt={`${project.name} on mobile`}
+                    mobileImage={project.images.mobile}
+                  >
+                    <Image
+                      alt={`${project.name} cover`}
+                      className="h-full w-full object-cover object-top"
+                      fill
+                      priority
+                      sizes="(min-width: 768px) 45vw, 95vw"
+                      src={project.images.cover}
+                    />
+                  </DeviceFrame>
+                </div>
+                <Link
+                  className="mt-4 inline-flex text-small font-semibold text-muted transition-colors hover:text-brand"
+                  href={`/portfolio/${project.slug}`}
+                >
+                  {project.name} · {homeContent.work.portfolioBadge}
+                </Link>
+              </>
+            ) : null}
           </div>
         </div>
       </Reveal>

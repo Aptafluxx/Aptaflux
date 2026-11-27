@@ -1,5 +1,3 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
 
@@ -10,11 +8,7 @@ export const size = {
 };
 export const contentType = "image/png";
 
-export default async function OpenGraphImage() {
-  const fraunces = await readFile(
-    join(process.cwd(), "public", "fonts", "fraunces-700.ttf"),
-  );
-
+export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
@@ -37,7 +31,7 @@ export default async function OpenGraphImage() {
         <div
           style={{
             display: "flex",
-            fontFamily: "Fraunces, Georgia, serif",
+            fontFamily: "Arial, sans-serif",
             fontSize: 112,
             fontWeight: 700,
             letterSpacing: "-0.05em",
@@ -57,16 +51,6 @@ export default async function OpenGraphImage() {
         />
       </div>
     ),
-    {
-      ...size,
-      fonts: [
-        {
-          name: "Fraunces",
-          data: fraunces,
-          weight: 700,
-          style: "normal",
-        },
-      ],
-    },
+    size,
   );
 }

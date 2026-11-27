@@ -27,7 +27,7 @@ module.exports = {
         error: "rgb(var(--error) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["var(--font-display)", "serif"],
+        display: ["var(--font-body)", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
       },
       spacing: {

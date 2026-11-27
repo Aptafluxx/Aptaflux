@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { LenisProvider } from "@/components/providers/LenisProvider";
 import { PageTransition } from "@/components/providers/PageTransition";
 import { site } from "@/content/site";
-import { bodyFont, displayFont } from "@/lib/fonts";
+import { bodyFont } from "@/lib/fonts";
 import { allowIndexing } from "@/lib/metadata";
 import "./globals.css";
 
@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${displayFont.variable} ${bodyFont.variable}`}
+      className={bodyFont.variable}
       suppressHydrationWarning
     >
       <head>

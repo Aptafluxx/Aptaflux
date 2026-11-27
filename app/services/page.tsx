@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
+  ArrowRight,
   Bot,
   Code2,
   Compass,
@@ -73,7 +74,7 @@ export default function ServicesPage() {
                 key={solution.slug}
               >
                 <Link
-                  aria-label={`${solution.linkLabel}: ${solution.name}`}
+                  aria-label={`Explore ${solution.name}`}
                   className="group block h-full rounded-lg focus-visible:outline-offset-4"
                   href={`/services/${solution.slug}`}
                 >
@@ -97,13 +98,18 @@ export default function ServicesPage() {
                       <p className="text-small font-semibold text-muted">
                         {services.bestForLabel}
                       </p>
-                      <p className="mt-2 text-body leading-relaxed">
+                      <p className="mt-2 min-h-[4.8rem] text-body leading-relaxed">
                         {solution.bestFor}
                       </p>
+                      <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-brand transition-colors group-hover:text-fg">
+                        Explore {solution.name}
+                        <ArrowRight
+                          aria-hidden="true"
+                          className="transition-transform duration-200 group-hover:translate-x-0.5"
+                          size={16}
+                        />
+                      </span>
                     </div>
-                    <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-brand transition-colors group-hover:text-fg">
-                      {solution.linkLabel}
-                    </span>
                   </Card>
                 </Link>
               </Reveal>

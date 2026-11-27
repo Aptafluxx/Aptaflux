@@ -48,6 +48,8 @@ Resend and use an address on that verified domain for `CONTACT_FROM`. Add the
 domain to Vercel and configure its DNS records before making it the canonical
 `NEXT_PUBLIC_SITE_URL`.
 
+We reply by email within one working day.
+
 ## Routes
 
 - `/`

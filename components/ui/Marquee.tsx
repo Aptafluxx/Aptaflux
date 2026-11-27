@@ -1,11 +1,11 @@
 "use client";
 
 import {
+  siDart,
   siFirebase,
   siFlutter,
-  siGooglecloud,
   siNextdotjs,
-  siNodedotjs,
+  siReact,
   siTypescript,
 } from "simple-icons";
 import { useReducedMotion } from "framer-motion";
@@ -13,11 +13,11 @@ import { homeContent } from "@/content/home";
 
 const icons = [
   siFlutter,
+  siDart,
   siNextdotjs,
+  siReact,
   siTypescript,
   siFirebase,
-  siGooglecloud,
-  siNodedotjs,
 ] as const;
 const technologies = homeContent.technologies.names.map((name, index) => ({
   name,

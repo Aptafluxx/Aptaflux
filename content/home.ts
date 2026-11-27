@@ -10,14 +10,14 @@ export const homeContent = {
     eyebrow: "DIGITAL PARTNER FOR AMBITIOUS BUSINESSES",
     title: "We turn business challenges into digital opportunities.",
     intro:
-      "From high-converting websites to intelligent applications and AI-powered systems, we build solutions that help your business attract customers, work smarter, and grow confidently.",
-    primaryAction: "Book a Discovery Call",
-    secondaryAction: "Explore Our Solutions",
+      "From high-converting websites to mobile apps and connected business systems, we build solutions that help your business attract customers, work smarter and grow confidently.",
+    primaryAction: "Book a discovery call",
+    secondaryAction: "Explore our solutions",
     capabilities: [
-      "Web Development",
-      "Mobile Apps",
-      "Product Design",
-      "AI & Automation",
+      "Web development",
+      "Mobile apps",
+      "Product design",
+      "Backend & integrations",
     ],
   },
   problem: {
@@ -75,7 +75,6 @@ export const homeContent = {
         scope:
           "Websites, landing pages, SEO foundations, inquiry systems, and booking integrations.",
         bestFor: "Businesses that want more inquiries and bookings from their website.",
-        linkLabel: "Explore Conversion Engine →",
       },
       {
         slug: "business-automation",
@@ -85,7 +84,6 @@ export const homeContent = {
         scope:
           "AI assistants, workflow automation, API integrations, dashboards, and notifications.",
         bestFor: "Teams spending too much time on repetitive work.",
-        linkLabel: "Explore Business Automation →",
       },
       {
         slug: "digital-platforms",
@@ -95,7 +93,6 @@ export const homeContent = {
         scope:
           "Mobile applications, web portals, admin dashboards, backend systems, and integrations.",
         bestFor: "Businesses ready to run operations through their own app or portal.",
-        linkLabel: "Explore Digital Platforms →",
       },
     ],
     bestForLabel: "Best for",
@@ -118,17 +115,17 @@ export const homeContent = {
     title: "Technologies we work with",
     names: [
       "Flutter",
+      "Dart",
       "Next.js",
+      "React",
       "TypeScript",
       "Firebase",
-      "Google Cloud",
-      "Node.js",
     ],
   },
   work: {
     eyebrow: "IDEAS TURNED INTO DIGITAL PRODUCTS",
     title: "Real projects. Practical thinking. Purposeful execution.",
-    projectLink: "Explore Project →",
+    projectLink: "Explore project →",
     portfolioBadge: "Portfolio project",
   },
   process: {
@@ -220,15 +217,12 @@ export const homeContent = {
     ],
   },
   cta: {
-    eyebrow: "YOUR NEXT MOVE STARTS HERE",
+    eyebrow: "Let's build something",
     title: "Ready to make your business work smarter?",
     intro:
-      "Whether you're launching something new or improving what already exists, let's build a digital solution that moves your business forward.",
-    invitation: "Let's talk about your project.",
-    detail:
-      "Tell us what you're trying to achieve. We'll help identify the right solution.",
-    action: "Start a Project",
-    note: "No pressure. Just a conversation about what's possible.",
+      "Tell us what you want to build and we'll show you the best way to get there.",
+    action: "Start a project",
+    secondaryAction: "Explore services",
   },
   footer: {
     wordmark: "APTAFLUX.",

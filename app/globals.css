@@ -548,11 +548,6 @@ section[data-tone="brand"] {
   --section-line: var(--band-fg);
 }
 
-.cta-band .cta-band-eyebrow,
-.cta-band .cta-band-small-text {
-  color: rgb(var(--band-fg) / 0.75);
-}
-
 .site-footer {
   background: #04191e;
   border-top: 1px solid rgba(245, 241, 232, 0.1);
@@ -795,19 +790,7 @@ section[data-tone="raised"] .ui-icon-badge {
   );
 }
 
-.hero-art-float {
-  animation: hero-float 6s ease-in-out infinite;
-}
-
-.hero-art-phone {
-  animation: hero-float 6s ease-in-out -2s infinite;
-}
-
-.hero-art-notification {
-  animation: hero-float 6s ease-in-out -3s infinite;
-}
-
-.hero-art-chart {
+.hero-mockup-float {
   animation: hero-float 6s ease-in-out -1s infinite;
 }
 
@@ -905,10 +888,7 @@ section[data-tone="raised"] .ui-icon-badge {
   }
 
   .tech-marquee-track,
-  .hero-art-float,
-  .hero-art-phone,
-  .hero-art-notification,
-  .hero-art-chart {
+  .hero-mockup-float {
     animation: none;
   }
 

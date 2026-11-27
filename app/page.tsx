@@ -53,7 +53,17 @@ export default function HomePage() {
       <Hero />
       <div className="home-page-panels">
         <HomeSections />
-        <CtaBand />
+        <CtaBand
+          eyebrow={homeContent.cta.eyebrow}
+          title={homeContent.cta.title}
+          text={homeContent.cta.intro}
+          buttonLabel={homeContent.cta.action}
+          secondaryButtonLabel={homeContent.cta.secondaryAction}
+          email={site.email}
+          replyNote={site.contact.replyText}
+          steps={site.contact.whatHappensNext.steps}
+          stepsHeading={site.contact.whatHappensNext.heading}
+        />
       </div>
     </>
   );

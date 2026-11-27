@@ -38,7 +38,13 @@ export function CtaBand({
     <Section
       className="cta-band relative isolate overflow-hidden"
       containerClassName="relative z-10"
-      eyebrow={steps ? undefined : <span className="cta-band-eyebrow">{eyebrow ?? cta.eyebrow}</span>}
+      eyebrow={
+        steps ? undefined : (
+          <span className="text-eyebrow font-semibold uppercase text-band-fg">
+            {eyebrow ?? cta.eyebrow}
+          </span>
+        )
+      }
       intro={steps ? undefined : isCustom ? text : cta.intro}
       title={steps ? undefined : isCustom ? title : cta.title}
       tone="brand"
@@ -47,7 +53,9 @@ export function CtaBand({
         <div className="md:col-span-7">
           {steps ? (
             <>
-              <span className="cta-band-eyebrow">{eyebrow ?? cta.eyebrow}</span>
+              <span className="text-eyebrow font-semibold uppercase text-band-fg">
+                {eyebrow ?? cta.eyebrow}
+              </span>
               <h2 className="mt-3 font-body text-h2 font-bold tracking-[-0.02em]">{title ?? cta.title}</h2>
               <p className="mt-4 max-w-[48ch] text-body text-band-fg">{text ?? cta.intro}</p>
               <Button
@@ -82,26 +90,7 @@ export function CtaBand({
             >
               {buttonLabel ?? cta.action}
             </Button>
-          ) : (
-            <>
-              <p className="font-body text-h3 font-bold tracking-[-0.02em]">
-                {cta.invitation}
-              </p>
-              <p className="cta-band-small-text mt-3 max-w-[48ch] text-body text-band-fg">
-                {cta.detail}
-              </p>
-              <Button
-                className="mt-6 !border-band-button-bg !bg-band-button-bg !text-band-button-fg hover:!-translate-y-px hover:!border-band-button-bg hover:!bg-band-button-bg hover:!text-band-button-fg"
-                href="/contact"
-                tone="brand"
-              >
-                {cta.action}
-              </Button>
-              <p className="cta-band-small-text mt-4 text-small text-band-fg">
-                {cta.note}
-              </p>
-            </>
-          )}
+          ) : null}
         </div>
         {steps ? (
           <div className="rounded-[20px] border border-band-fg/18 bg-band-fg/8 p-7 md:col-span-5">

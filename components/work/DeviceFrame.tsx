@@ -18,12 +18,12 @@ export function DeviceFrame({
 }: DeviceFrameProps) {
   if (device === "phone") {
     return (
-      <div className={`absolute left-1/2 top-1/2 aspect-[9/19.5] h-[85%] -translate-x-1/2 -translate-y-1/2 rounded-[1.4rem] border-[3px] border-fg bg-bg md:border-[5px] ${className}`}>
+      <div className={`absolute left-1/2 top-1/2 aspect-[9/19.5] h-[85%] -translate-x-1/2 -translate-y-1/2 rounded-[14px] border-2 border-fg bg-bg ${className}`}>
         <span
           aria-hidden="true"
           className="absolute left-1/2 top-1.5 z-10 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-fg/60"
         />
-        <div className="relative h-full w-full overflow-hidden rounded-[1rem] bg-bg">
+        <div className="relative h-full w-full overflow-hidden rounded-[12px] bg-bg">
           {children}
         </div>
       </div>
@@ -44,12 +44,12 @@ export function DeviceFrame({
       <div aria-hidden="true" className="h-2 w-[106%] rounded-b-md bg-bg" />
       <div aria-hidden="true" className="h-1 w-[24%] rounded-b-lg bg-card" />
       {mobileImage ? (
-        <div className="absolute bottom-[3%] right-[-6%] z-30 aspect-[9/19.5] w-[17%] rounded-[1.1rem] border-[3px] border-fg bg-bg shadow-[0_8px_24px_rgba(0,0,0,0.3)] md:rounded-[1.4rem] md:border-[5px]">
+        <div className="absolute bottom-[3%] right-[-6%] z-30 aspect-[9/19.5] w-[17%] rounded-[14px] border-2 border-fg bg-bg shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
           <span
             aria-hidden="true"
             className="absolute left-1/2 top-1 z-10 h-1 w-1 -translate-x-1/2 rounded-full bg-fg/60"
           />
-          <div className="relative h-full w-full overflow-hidden rounded-[0.8rem] bg-bg md:rounded-[1rem]">
+          <div className="relative h-full w-full overflow-hidden rounded-[10px] bg-bg">
             <Image
               alt={mobileAlt ?? ""}
               className="object-cover object-top"

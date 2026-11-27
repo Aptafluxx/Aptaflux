@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
+  ArrowRight,
   Bot,
   Clock,
   Globe,
@@ -21,8 +22,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { WhyChecklist } from "@/components/art/WhyChecklist";
-import { AutomationFlow } from "@/components/art/AutomationFlow";
-import { CapabilityBrowser } from "@/components/art/CapabilityBrowser";
 import { ServiceAutomation } from "@/components/art/ServiceAutomation";
 import { ServiceConversion } from "@/components/art/ServiceConversion";
 import { ServicePlatform } from "@/components/art/ServicePlatform";
@@ -154,7 +153,7 @@ export function HomeSections() {
             return (
               <Reveal className="h-full" delay={index * 0.06} key={solution.slug}>
                 <Link
-                  aria-label={`${solution.linkLabel}: ${solution.name}`}
+                  aria-label={`Explore ${solution.name}`}
                   className="group block h-full rounded-lg focus-visible:outline-offset-4"
                   href={`/services/${solution.slug}`}
                 >
@@ -176,13 +175,18 @@ export function HomeSections() {
                       <p className="text-small font-semibold text-muted">
                         {services.bestForLabel}
                       </p>
-                      <p className="mt-2 text-body leading-relaxed">
+                      <p className="mt-2 min-h-[4.8rem] text-body leading-relaxed">
                         {solution.bestFor}
                       </p>
+                      <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-brand transition-colors group-hover:text-fg">
+                        Explore {solution.name}
+                        <ArrowRight
+                          aria-hidden="true"
+                          className="transition-transform duration-200 group-hover:translate-x-0.5"
+                          size={16}
+                        />
+                      </span>
                     </div>
-                    <span className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-brand transition-colors group-hover:text-fg">
-                      {solution.linkLabel}
-                    </span>
                   </Card>
                 </Link>
               </Reveal>
@@ -213,75 +217,17 @@ export function HomeSections() {
             {capabilities.title}
           </h2>
         </div>
-        <div className="space-y-4">
-          <div className="grid items-stretch gap-4 md:grid-cols-12">
-            {capabilities.rows.slice(0, 2).map((row, offset) => {
-              const index = offset;
-              return (
-                <Reveal
-                  className={`h-full md:col-span-6 ${index === 0 ? "lg:col-span-7" : "lg:col-span-5"}`}
-                  delay={index * 0.06}
-                  key={row.name}
-                >
-                  <Card className="relative h-full overflow-hidden p-6">
-                    <div className={index === 0 ? "max-w-[55%]" : ""}>
-                      <IconBadge icon={capabilityIcons[index]} />
-                      <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
-                        {row.name}
-                      </h3>
-                      <p className="mt-2 text-body leading-relaxed text-muted">
-                        {row.benefit}
-                      </p>
-                    </div>
-                    {index === 0 ? (
-                      <div aria-hidden="true" className="absolute bottom-6 right-6">
-                        <CapabilityBrowser />
-                      </div>
-                    ) : null}
-                  </Card>
-                </Reveal>
-              );
-            })}
-          </div>
-          <div className="grid items-stretch gap-4 md:grid-cols-12">
-            {capabilities.rows.slice(2, 5).map((row, offset) => {
-              const index = offset + 2;
-              return (
-                <Reveal
-                  className="h-full md:col-span-6 lg:col-span-4"
-                  delay={offset * 0.06}
-                  key={row.name}
-                >
-                  <Card className="h-full p-6">
-                    <IconBadge icon={capabilityIcons[index]} />
-                    <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
-                      {row.name}
-                    </h3>
-                    <p className="mt-2 text-body leading-relaxed text-muted">
-                      {row.benefit}
-                    </p>
-                  </Card>
-                </Reveal>
-              );
-            })}
-          </div>
-          {capabilities.rows.slice(5).map((row) => (
-            <Reveal className="h-full" key={row.name}>
-              <Card className="flex h-full flex-col gap-6 p-6 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex items-start gap-4">
-                  <IconBadge icon={capabilityIcons[5]} />
-                  <div>
-                    <h3 className="font-body text-h3 font-bold tracking-[-0.02em]">
-                      {row.name}
-                    </h3>
-                    <p className="mt-2 text-body leading-relaxed text-muted">
-                      {row.benefit}
-                    </p>
-                  </div>
-                </div>
-                <div aria-hidden="true" className="ml-auto">
-                  <AutomationFlow />
-                </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {capabilities.rows.map((row, index) => (
+            <Reveal className="h-full" delay={index * 0.06} key={row.name}>
+              <Card className="h-full p-6">
+                <IconBadge icon={capabilityIcons[index]} />
+                <h3 className="mt-4 font-body text-h3 font-bold tracking-[-0.02em]">
+                  {row.name}
+                </h3>
+                <p className="mt-2 text-body leading-relaxed text-muted">
+                  {row.benefit}
+                </p>
               </Card>
             </Reveal>
           ))}

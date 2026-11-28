@@ -26,7 +26,7 @@ export function Hero() {
           <h1 className="mx-auto w-full font-body text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.98] tracking-[-0.04em]">
             {titleParts.map((part, index) =>
               /digital opportunities\./i.test(part) ? (
-                <span className="hero-accent-text block not-italic text-brand lg:whitespace-nowrap" key={index}>
+                <span className="hero-accent-text block not-italic text-highlight lg:whitespace-nowrap" key={index}>
                   {part}
                 </span>
               ) : (

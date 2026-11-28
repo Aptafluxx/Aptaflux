@@ -56,7 +56,12 @@ export function CtaBand({
               <span className="text-eyebrow font-semibold uppercase text-band-fg">
                 {eyebrow ?? cta.eyebrow}
               </span>
-              <h2 className="mt-3 font-body text-h2 font-bold tracking-[-0.02em]">{title ?? cta.title}</h2>
+              <h2
+                className="mt-3 font-body text-h2 font-bold tracking-[-0.02em]"
+                data-theme="dark"
+              >
+                {title ?? cta.title}
+              </h2>
               <p className="mt-4 max-w-[48ch] text-body text-band-fg">{text ?? cta.intro}</p>
               <Button
                 className="mt-6 !border-band-button-bg !bg-band-button-bg !text-band-button-fg hover:!-translate-y-px hover:!border-band-button-bg hover:!bg-band-button-bg hover:!text-band-button-fg"
@@ -114,7 +119,9 @@ export function CtaBand({
         </div>
         {steps ? (
           <div className="rounded-[20px] border border-band-fg/18 bg-band-fg/8 p-7 md:col-span-5">
-            <h3 className="font-body text-h3 font-bold">{stepsHeading}</h3>
+            <h3 className="font-body text-h3 font-bold" data-theme="dark">
+              {stepsHeading}
+            </h3>
             <ol className="relative mt-5 space-y-5">
               <span aria-hidden="true" className="absolute bottom-5 left-[17px] top-5 w-0.5 bg-band-fg/25" />
               {steps.map((step, index) => (

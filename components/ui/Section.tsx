@@ -49,7 +49,12 @@ export function Section({
               </p>
             ) : null}
             {title ? (
-              <h2 className="font-body text-h2 font-bold tracking-[-0.02em]">{title}</h2>
+              <h2
+                className="font-body text-h2 font-bold tracking-[-0.02em]"
+                data-theme={tone === "brand" ? "dark" : undefined}
+              >
+                {title}
+              </h2>
             ) : null}
             {intro ? <div className="mt-4 max-w-[60ch] text-body text-[rgb(var(--section-muted))]">{intro}</div> : null}
           </div>

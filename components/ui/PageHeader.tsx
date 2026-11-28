@@ -60,7 +60,7 @@ export function PageHeader({
             {accentStart >= 0 ? (
               <>
                 {title.slice(0, accentStart)}
-                <em className="font-display font-medium italic text-brand">
+                <em className="font-display font-medium italic text-highlight">
                   {title.slice(accentStart, accentEnd)}
                 </em>
                 {title.slice(accentEnd)}

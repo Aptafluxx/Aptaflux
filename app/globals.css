@@ -18,6 +18,7 @@
   --brand: 1 59 70;
   --brand-fg: 245 241 232;
   --brand-hover: 2 79 89;
+  --highlight: var(--brand);
   --accent: 11 115 128;
   --band: 1 59 70;
   --band-fg: 245 241 232;
@@ -52,6 +53,7 @@
   --brand: 90 207 217;
   --brand-fg: 6 13 16;
   --brand-hover: 245 241 232;
+  --highlight: var(--brand);
   --accent: 90 207 217;
   --band: 1 59 70;
   --band-fg: 245 241 232;
@@ -70,6 +72,10 @@
 
 * {
   box-sizing: border-box;
+}
+
+.text-highlight {
+  color: rgb(var(--highlight));
 }
 
 html {

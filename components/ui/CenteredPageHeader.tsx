@@ -21,7 +21,7 @@ export function CenteredPageHeader({
         </span>
         <h1 className="mx-auto mt-6 max-w-3xl font-body text-display-xl font-extrabold tracking-[-0.04em]">
           <span className="block text-fg">{titleLineOne}</span>
-          <span className="block text-accent">{titleLineTwo}</span>
+          <span className="block text-highlight">{titleLineTwo}</span>
         </h1>
         <p className="mx-auto mt-6 max-w-[52ch] text-body leading-relaxed text-muted">
           {introduction}

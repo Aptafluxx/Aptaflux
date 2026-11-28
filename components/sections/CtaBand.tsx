@@ -83,13 +83,33 @@ export function CtaBand({
               ) : null}
             </>
           ) : isCustom ? (
-            <Button
-              className="mt-2 !border-band-button-bg !bg-band-button-bg !text-band-button-fg hover:!-translate-y-px hover:!border-band-button-bg hover:!bg-band-button-bg hover:!text-band-button-fg"
-              href={href ?? "/contact"}
-              tone="brand"
-            >
-              {buttonLabel ?? cta.action}
-            </Button>
+            <>
+              <Button
+                className="mt-2 !border-band-button-bg !bg-band-button-bg !text-band-button-fg hover:!-translate-y-px hover:!border-band-button-bg hover:!bg-band-button-bg hover:!text-band-button-fg"
+                href={href ?? "/contact"}
+                tone="brand"
+              >
+                {buttonLabel ?? cta.action}
+              </Button>
+              {secondaryButtonLabel ? (
+                <Button
+                  className="ml-2 !border-band-fg/40 !bg-transparent !text-band-fg hover:!border-band-fg hover:!bg-band-fg/10"
+                  href={secondaryHref ?? "/services"}
+                  variant="ghost"
+                >
+                  {secondaryButtonLabel}
+                </Button>
+              ) : null}
+              {email ? (
+                <div className="mt-6 flex flex-wrap items-center gap-3 text-small text-band-fg">
+                  <a className="inline-flex items-center gap-2 font-semibold" href={`mailto:${email}`}>
+                    <Mail aria-hidden="true" size={17} />
+                    {email}
+                  </a>
+                  <span>{replyNote}</span>
+                </div>
+              ) : null}
+            </>
           ) : null}
         </div>
         {steps ? (

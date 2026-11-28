@@ -61,8 +61,6 @@ export default function HomePage() {
           secondaryButtonLabel={homeContent.cta.secondaryAction}
           email={site.email}
           replyNote={site.contact.replyText}
-          steps={site.contact.whatHappensNext.steps}
-          stepsHeading={site.contact.whatHappensNext.heading}
         />
       </div>
     </>

@@ -310,7 +310,7 @@ export default function ServicesPage() {
             </h2>
           </div>
           <div className="space-y-4 lg:col-span-8">
-            <FAQAccordion items={homeContent.faq.items.slice(1, 5)} />
+            <FAQAccordion items={homeContent.faq.items} />
           </div>
         </div>
       </Section>

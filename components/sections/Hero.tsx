@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { DotGrid } from "@/components/ui/DotGrid";
 import { DeviceFrame } from "@/components/work/DeviceFrame";
@@ -14,7 +13,9 @@ const capabilityIcons = [Globe, Smartphone, PenTool, Server] as const;
 export function Hero() {
   const { hero } = homeContent;
   const titleParts = hero.title.split(/(digital opportunities\.)/i);
-  const project = work.find(({ slug }) => slug === "ember-fig");
+  const emberFig = work.find(({ slug }) => slug === "ember-fig");
+  const madang = work.find(({ slug }) => slug === "madang");
+  const wristSync = work.find(({ slug }) => slug === "wristsync");
 
   return (
     <Section className="relative overflow-hidden !pt-28 md:!pt-32" tone="base">
@@ -25,10 +26,10 @@ export function Hero() {
             <p className="mb-5 text-[12px] font-semibold uppercase tracking-wide text-brand">
               {hero.eyebrow}
             </p>
-            <h1 className="max-w-[15ch] font-body text-display-xl font-extrabold tracking-[-0.03em]">
+            <h1 className="max-w-[15ch] font-body text-display-xl font-extrabold tracking-[-0.03em] lg:max-w-none lg:text-[3rem]">
               {titleParts.map((part, index) =>
                 /digital opportunities\./i.test(part) ? (
-                  <span className="block not-italic tracking-normal text-brand" key={index}>
+                  <span className="block not-italic tracking-normal text-brand lg:whitespace-nowrap" key={index}>
                     {part}
                   </span>
                 ) : (
@@ -62,31 +63,50 @@ export function Hero() {
             </ul>
           </div>
           <div className="relative min-w-0 md:col-span-6">
-            {project?.images?.cover && project.images.mobile ? (
+            {emberFig?.images?.cover &&
+            madang?.images?.cover &&
+            wristSync?.images?.cover ? (
               <>
                 <div className="hero-mockup-float relative mx-auto aspect-[16/9] w-full overflow-hidden rounded-[24px] border border-accent/25 bg-band p-5 [container-type:size]">
                   <DotGrid className="project-cover-dot-grid opacity-60" />
-                  <DeviceFrame
-                    device="laptop"
-                    mobileAlt={`${project.name} on mobile`}
-                    mobileImage={project.images.mobile}
-                  >
+                  <DeviceFrame device="laptop" className="!w-[75%]">
                     <Image
-                      alt={`${project.name} cover`}
+                      alt={`${emberFig.name} cover`}
                       className="h-full w-full object-cover object-top"
                       fill
                       priority
                       sizes="(min-width: 768px) 45vw, 95vw"
-                      src={project.images.cover}
+                      src={emberFig.images.cover}
+                    />
+                  </DeviceFrame>
+                  <DeviceFrame
+                    className="!left-[19%] !top-[56%] !z-20 !h-[72%]"
+                    device="phone"
+                  >
+                    <Image
+                      alt={`${madang.name} app`}
+                      className="object-cover object-top"
+                      fill
+                      sizes="(min-width: 768px) 8vw, 18vw"
+                      src={madang.images.cover}
+                    />
+                  </DeviceFrame>
+                  <DeviceFrame
+                    className="!left-[81%] !top-[60%] !z-20 !h-[72%]"
+                    device="phone"
+                  >
+                    <Image
+                      alt={`${wristSync.name} app`}
+                      className="object-cover object-top"
+                      fill
+                      sizes="(min-width: 768px) 8vw, 18vw"
+                      src={wristSync.images.cover}
                     />
                   </DeviceFrame>
                 </div>
-                <Link
-                  className="mt-4 inline-flex text-small font-semibold text-muted transition-colors hover:text-brand"
-                  href={`/portfolio/${project.slug}`}
-                >
-                  {project.name} · {homeContent.work.portfolioBadge}
-                </Link>
+                <p className="mt-4 text-small font-semibold text-muted">
+                  Selected portfolio projects
+                </p>
               </>
             ) : null}
           </div>

@@ -20,47 +20,6 @@ export const homeContent = {
       "Backend & integrations",
     ],
   },
-  problem: {
-    eyebrow: "THE COST OF STANDING STILL",
-    title: "Growth introduces complexity.",
-    intro: "What worked when you started may now be slowing you down.",
-    points: [
-      {
-        title: "Customers aren't converting.",
-        text: "Your online presence doesn't communicate your value or make it easy for customers to take action",
-      },
-      {
-        title: "Your team is buried in manual work.",
-        text: "Repetitive inquiries, disconnected tools, and manual processes consume valuable time",
-      },
-      {
-        title: "Your technology can't scale with you.",
-        text: "Your business needs better systems, connected workflows, and a stronger digital foundation.",
-      },
-    ],
-  },
-  outcomes: {
-    eyebrow: "OUTCOMES OVER OUTPUTS",
-    title: "We don't just build digital products. We build better ways to do business.",
-    points: [
-      {
-        title: "Attract more customers",
-        text: "Digital experiences that communicate value and encourage action.",
-      },
-      {
-        title: "Save valuable time",
-        text: "Automation that removes repetitive tasks and unnecessary friction.",
-      },
-      {
-        title: "Improve customer experience",
-        text: "Intuitive applications and interfaces that make interactions easier.",
-      },
-      {
-        title: "Build for growth",
-        text: "Connected digital systems designed around your business operations.",
-      },
-    ],
-  },
   services: {
     eyebrow: "SOLUTIONS BUILT AROUND YOUR BUSINESS",
     title: "Different challenges. One digital partner.",
@@ -72,6 +31,7 @@ export const homeContent = {
         number: "01 /",
         name: "Conversion Engine",
         promise: "Turn your online presence into a customer acquisition channel.",
+        shortDescription: "Turn website visits into more enquiries.",
         scope:
           "Websites, landing pages, SEO foundations, inquiry systems, and booking integrations.",
         bestFor: "Businesses that want more inquiries and bookings from their website.",
@@ -81,6 +41,7 @@ export const homeContent = {
         number: "02 /",
         name: "Business Automation System",
         promise: "Spend less time on repetitive tasks and more time growing your business.",
+        shortDescription: "Automate repetitive work.",
         scope:
           "AI assistants, workflow automation, API integrations, dashboards, and notifications.",
         bestFor: "Teams spending too much time on repetitive work.",
@@ -90,14 +51,13 @@ export const homeContent = {
         number: "03 /",
         name: "Digital Operations Platform",
         promise: "Bring your business operations into one connected digital ecosystem.",
+        shortDescription: "Connect operations in one platform.",
         scope:
           "Mobile applications, web portals, admin dashboards, backend systems, and integrations.",
         bestFor: "Businesses ready to run operations through their own app or portal.",
       },
     ],
     bestForLabel: "Best for",
-    unsure: "Not sure what your business needs?",
-    contactLink: "Let's figure it out together.",
   },
   capabilities: {
     eyebrow: "WHAT WE BRING TO THE TABLE",
@@ -126,7 +86,6 @@ export const homeContent = {
     eyebrow: "IDEAS TURNED INTO DIGITAL PRODUCTS",
     title: "Real projects. Practical thinking. Purposeful execution.",
     projectLink: "Explore project →",
-    portfolioBadge: "Portfolio project",
   },
   process: {
     eyebrow: "FROM FIRST CONVERSATION TO LAUNCH",
@@ -154,32 +113,6 @@ export const homeContent = {
       },
     ],
   },
-  why: {
-    eyebrow: "WHY WORK WITH US",
-    title: "Technology should solve problems, not create new ones.",
-    points: [
-      {
-        name: "Business-first thinking",
-        text: "We start with your goals before recommending technology.",
-      },
-      {
-        name: "Purposeful design",
-        text: "Every interface should make an interaction easier.",
-      },
-      {
-        name: "Connected solutions",
-        text: "We consider how your website, app, backend, and workflows work together.",
-      },
-      {
-        name: "Transparent delivery",
-        text: "Clear scope, milestones, communication, and expectations.",
-      },
-      {
-        name: "Long-term mindset",
-        text: "We build with maintenance, performance, and future growth in mind.",
-      },
-    ],
-  },
   faq: {
     eyebrow: "FAQ",
     title: "Questions before you start",
@@ -195,11 +128,6 @@ export const homeContent = {
           "A focused website may take several weeks. Automation systems and custom applications generally require more time. We provide a timeline after discovery and scope definition.",
       },
       {
-        question: "Can I hire Aptaflux for just UI/UX design?",
-        answer:
-          "Yes. We can work on standalone interface design, UX audits, wireframes, prototypes, or design systems.",
-      },
-      {
         question: "Can you improve an existing website or app?",
         answer:
           "Yes. We can audit an existing product, identify usability or technical issues, and recommend improvements before starting development.",
@@ -208,11 +136,6 @@ export const homeContent = {
         question: "Do you provide ongoing support?",
         answer:
           "Yes. Maintenance, monitoring, bug fixes, and agreed feature improvements can be arranged through a monthly support agreement.",
-      },
-      {
-        question: "Do you work with international clients?",
-        answer:
-          "Yes. Aptaflux can work remotely with businesses beyond Pakistan, with project scope, payment terms, and communication agreed in advance.",
       },
     ],
   },

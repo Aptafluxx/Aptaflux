@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/Button";
-import { DotGrid } from "@/components/ui/DotGrid";
+import { HeroBackdrop } from "@/components/art/HeroBackdrop";
 import { LazyMarquee } from "@/components/ui/LazyMarquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { homeContent } from "@/content/home";
-import { Globe, PenTool, Server, Smartphone } from "lucide-react";
+import { ArrowRight, Globe, PenTool, Server, Smartphone } from "lucide-react";
 
 const capabilityIcons = [Globe, Smartphone, PenTool, Server] as const;
 
@@ -14,14 +14,11 @@ export function Hero() {
 
   return (
     <Section className="relative overflow-hidden !pt-24 md:!pt-28" tone="base">
-      <DotGrid className="dot-grid-hero" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[16%] z-0 size-[min(90vw,56rem)] -translate-x-1/2 rounded-full bg-accent/8 blur-3xl"
-      />
+      <HeroBackdrop />
       <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center pt-2.5 text-center">
         <Reveal delay={0}>
-          <p className="text-[12px] font-semibold uppercase tracking-wide text-brand">
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-card/70 px-3 py-1.5 text-[12px] font-semibold uppercase tracking-wide text-brand">
+            <span aria-hidden="true" className="hero-eyebrow-dot size-1.5 rounded-full bg-accent" />
             {hero.eyebrow}
           </p>
         </Reveal>
@@ -29,7 +26,7 @@ export function Hero() {
           <h1 className="mx-auto w-full font-body text-[clamp(2.5rem,6vw,5rem)] font-extrabold leading-[0.98] tracking-[-0.04em]">
             {titleParts.map((part, index) =>
               /digital opportunities\./i.test(part) ? (
-                <span className="block not-italic tracking-normal text-brand lg:whitespace-nowrap" key={index}>
+                <span className="hero-accent-text block not-italic text-brand lg:whitespace-nowrap" key={index}>
                   {part}
                 </span>
               ) : (
@@ -39,14 +36,19 @@ export function Hero() {
           </h1>
         </Reveal>
         <Reveal className="mt-5 w-full" delay={0.12}>
-          <p className="mx-auto max-w-2xl text-body leading-relaxed text-muted">
+          <p className="mx-auto max-w-2xl text-balance text-body leading-relaxed text-muted">
             {hero.intro}
           </p>
         </Reveal>
         <Reveal className="mt-7" delay={0.18}>
           <div className="flex flex-wrap justify-center gap-3">
-            <Button href="/contact">{hero.primaryAction}</Button>
-            <Button href="/services" variant="ghost">
+            <Button className="hero-primary-cta group !rounded-full gap-3 pr-2.5" href="/contact">
+              {hero.primaryAction}
+              <span className="inline-flex size-8 items-center justify-center rounded-full bg-brand-fg/15 text-brand-fg transition-transform duration-200 group-hover:translate-x-0.5">
+                <ArrowRight aria-hidden="true" size={16} />
+              </span>
+            </Button>
+            <Button className="!rounded-full" href="/services" variant="ghost">
               {hero.secondaryAction}
             </Button>
           </div>
@@ -68,9 +70,9 @@ export function Hero() {
             })}
           </ul>
         </Reveal>
-        <div className="mt-9 w-full max-w-5xl border-t border-line/60 pt-4">
+        <div className="mt-9 w-full max-w-4xl rounded-3xl border border-line bg-card/60 px-5 py-4 backdrop-blur-md">
           <p className="mb-3 text-small text-muted">Technologies we work with</p>
-          <div className="opacity-65 [&_.tech-marquee-reverse]:hidden">
+          <div className="tech-marquee-viewport hero-tech-marquee opacity-65 [&_.tech-marquee-reverse]:hidden">
             <LazyMarquee />
           </div>
         </div>

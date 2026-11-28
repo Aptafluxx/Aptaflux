@@ -7,7 +7,6 @@ import { ServicePlatform } from "@/components/art/ServicePlatform";
 import { FAQAccordion } from "@/components/sections/FAQAccordion";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { Card } from "@/components/ui/Card";
-import { LazyMarquee } from "@/components/ui/LazyMarquee";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { homeContent } from "@/content/home";
@@ -27,7 +26,7 @@ const serviceArt = {
 } as const;
 
 export function HomeSections() {
-  const { services, technologies, process, faq } = homeContent;
+  const { services, process, faq } = homeContent;
 
   return (
     <>
@@ -76,18 +75,6 @@ export function HomeSections() {
               </Reveal>
             );
           })}
-        </div>
-      </Section>
-
-      <Section
-        aria-label={technologies.title}
-        className="overflow-hidden"
-        eyebrow={technologies.title}
-        fullBleedContent
-        tone="base"
-      >
-        <div className="tech-marquee-viewport">
-          <LazyMarquee />
         </div>
       </Section>
 

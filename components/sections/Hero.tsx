@@ -1,11 +1,9 @@
-import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { DotGrid } from "@/components/ui/DotGrid";
-import { DeviceFrame } from "@/components/work/DeviceFrame";
+import { HeroSystem } from "@/components/art/HeroSystem";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { homeContent } from "@/content/home";
-import { work } from "@/content/work";
 import { Globe, PenTool, Server, Smartphone } from "lucide-react";
 
 const capabilityIcons = [Globe, Smartphone, PenTool, Server] as const;
@@ -13,9 +11,6 @@ const capabilityIcons = [Globe, Smartphone, PenTool, Server] as const;
 export function Hero() {
   const { hero } = homeContent;
   const titleParts = hero.title.split(/(digital opportunities\.)/i);
-  const emberFig = work.find(({ slug }) => slug === "ember-fig");
-  const madang = work.find(({ slug }) => slug === "madang");
-  const wristSync = work.find(({ slug }) => slug === "wristsync");
 
   return (
     <Section className="relative overflow-hidden !pt-28 md:!pt-32" tone="base">
@@ -63,52 +58,7 @@ export function Hero() {
             </ul>
           </div>
           <div className="relative min-w-0 md:col-span-6">
-            {emberFig?.images?.cover &&
-            madang?.images?.cover &&
-            wristSync?.images?.cover ? (
-              <>
-                <div className="hero-mockup-float relative mx-auto aspect-[16/9] w-full overflow-hidden rounded-[24px] border border-accent/25 bg-band p-5 [container-type:size]">
-                  <DotGrid className="project-cover-dot-grid opacity-60" />
-                  <DeviceFrame device="laptop" className="!w-[75%]">
-                    <Image
-                      alt={`${emberFig.name} cover`}
-                      className="h-full w-full object-cover object-top"
-                      fill
-                      priority
-                      sizes="(min-width: 768px) 45vw, 95vw"
-                      src={emberFig.images.cover}
-                    />
-                  </DeviceFrame>
-                  <DeviceFrame
-                    className="!left-[19%] !top-[56%] !z-20 !h-[72%]"
-                    device="phone"
-                  >
-                    <Image
-                      alt={`${madang.name} app`}
-                      className="object-cover object-top"
-                      fill
-                      sizes="(min-width: 768px) 8vw, 18vw"
-                      src={madang.images.cover}
-                    />
-                  </DeviceFrame>
-                  <DeviceFrame
-                    className="!left-[81%] !top-[60%] !z-20 !h-[72%]"
-                    device="phone"
-                  >
-                    <Image
-                      alt={`${wristSync.name} app`}
-                      className="object-cover object-top"
-                      fill
-                      sizes="(min-width: 768px) 8vw, 18vw"
-                      src={wristSync.images.cover}
-                    />
-                  </DeviceFrame>
-                </div>
-                <p className="mt-4 text-small font-semibold text-muted">
-                  Selected portfolio projects
-                </p>
-              </>
-            ) : null}
+            <HeroSystem />
           </div>
         </div>
       </Reveal>
